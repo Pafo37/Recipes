@@ -1,4 +1,4 @@
-package com.example.pavelkovachev.recipes.utils;
+package com.example.pavelkovachev.recipes.presenters;
 
 public interface BasePresenter {
     void start();

@@ -1,4 +1,4 @@
-package com.example.pavelkovachev.recipes.homescreen;
+package com.example.pavelkovachev.recipes.ui.activity.homescreen;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
