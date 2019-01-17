@@ -3,11 +3,14 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+
         <item name="colorPrimary">@color/redLight</item>
         <item name="colorPrimaryDark">@color/redDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <style name="AppTheme.Launcher" >
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
 
 
 </resources>
