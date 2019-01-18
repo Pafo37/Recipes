@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="margin_between_elements_default">8dp</dimen>
+    <dimen name="activity_horizontal_margin">16sp</dimen>
     <dimen name="no_dimens">0dp</dimen>
-    <dimen name="margin_6dp">6dp</dimen>
-    <dimen name="image_default_height">170dp</dimen>
-    <dimen name="padding_8dp">8dp</dimen>
-    <dimen name="margin_8dp">8dp</dimen>
-    <dimen name="title_text">18sp</dimen>
-    <dimen name="description_text">16sp</dimen>
-    <dimen name="margin_4dp">4dp</dimen>
-    <dimen name="homescreen_small_screens">180dp</dimen>
+
+    <!--Material Design Typography Default sizes-->
+    <dimen name="material_design_headline_txt_size">24sp</dimen>
+    <dimen name="material_design_app_bar_txt_size">20sp</dimen>
+    <dimen name="material_design_title_txt_size">20sp</dimen>
+    <dimen name="material_design_heading_txt_size">14sp</dimen>
+    <dimen name="material_design_subheading_txt_size">16sp</dimen>
+    <dimen name="material_design_btn_txt_size">14sp</dimen>
+    <dimen name="material_design_caption_txt_size">12sp</dimen>
+    <dimen name="material_design_body_txt_size">14sp</dimen>
+
+    <!--Home screen-->
+    <dimen name="home_screen_random_meal_cardview_margin">6dp</dimen>
+    <dimen name="home_screen_img_meals">170dp</dimen>
+    <dimen name="home_screen_img_width_height">180dp</dimen>
 </resources>

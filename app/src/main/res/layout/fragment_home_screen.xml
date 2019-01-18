@@ -8,7 +8,7 @@
         android:id="@+id/cardview_random_meal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_6dp">
+        android:layout_margin="@dimen/home_screen_random_meal_cardview_margin">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             <ImageView
                 android:id="@+id/id_random_meal"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/image_default_height"
+                android:layout_height="@dimen/home_screen_img_meals"
                 android:contentDescription="@string/homescreen_description_random_meal"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/cardview_random_meal" />
@@ -27,21 +27,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="@dimen/padding_8dp">
+                android:padding="@dimen/margin_between_elements_default">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_8dp"
+                    android:layout_marginBottom="@dimen/margin_between_elements_default"
                     android:text="@string/homescreen_random_meal"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/title_text" />
+                    android:textSize="@dimen/material_design_title_txt_size" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/color_gray"
-                    android:textSize="@dimen/description_text"
+                    android:textSize="@dimen/material_design_body_txt_size"
                     tools:text="It is really good" />
 
             </LinearLayout>
@@ -55,18 +55,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cardview_random_meal"
-        android:layout_margin="@dimen/margin_4dp">
+        android:layout_margin="@dimen/margin_between_elements_default">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/padding_8dp">
+            android:padding="@dimen/margin_between_elements_default">
 
             <ImageView
                 android:id="@+id/id_latest_meal_image"
-                android:layout_width="@dimen/homescreen_small_screens"
-                android:layout_height="@dimen/homescreen_small_screens"
+                android:layout_width="@dimen/home_screen_img_width_height"
+                android:layout_height="@dimen/home_screen_img_width_height"
                 android:contentDescription="@string/homescreen_description_latest_meal"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/cardview_random_meal" />
@@ -75,21 +75,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="@dimen/padding_8dp">
+                android:padding="@dimen/margin_between_elements_default">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_8dp"
+                    android:layout_marginBottom="@dimen/margin_between_elements_default"
                     android:text="@string/homescreen_latest_meal"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/title_text" />
+                    android:textSize="@dimen/material_design_title_txt_size" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/color_gray"
-                    android:textSize="@dimen/description_text"
+                    android:textSize="@dimen/material_design_body_txt_size"
                     tools:text="It is really good" />
 
             </LinearLayout>
@@ -102,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/cardview_random_meal"
-        android:layout_margin="@dimen/margin_4dp"
+        android:layout_margin="@dimen/margin_between_elements_default"
         android:layout_toEndOf="@id/id_latest_meal"
         android:layout_toRightOf="@+id/id_latest_meal">
 
@@ -110,12 +110,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/padding_8dp">
+            android:padding="@dimen/margin_between_elements_default">
 
             <ImageView
                 android:id="@+id/id_category"
-                android:layout_width="@dimen/homescreen_small_screens"
-                android:layout_height="@dimen/homescreen_small_screens"
+                android:layout_width="@dimen/home_screen_img_width_height"
+                android:layout_height="@dimen/home_screen_img_width_height"
                 android:contentDescription="@string/homescreen_description_category"
                 android:scaleType="centerCrop"
                 android:src="@drawable/category_icon" />
@@ -124,22 +124,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="@dimen/padding_8dp">
+                android:padding="@dimen/margin_between_elements_default">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_8dp"
+                    android:layout_marginBottom="@dimen/margin_between_elements_default"
                     android:text="@string/homescreen_category"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/title_text" />
+                    android:textSize="@dimen/material_design_title_txt_size" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/homescreen_browse_by_category"
                     android:textColor="@color/color_gray"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/material_design_body_txt_size" />
 
             </LinearLayout>
 
