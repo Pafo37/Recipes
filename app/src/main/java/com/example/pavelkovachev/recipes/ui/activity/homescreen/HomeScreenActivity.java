@@ -9,15 +9,18 @@ import android.view.Menu;
 
 import com.example.pavelkovachev.recipes.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class HomeScreenActivity extends AppCompatActivity {
-    private Toolbar toolbar;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homescreen);
-        toolbar = findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
     }

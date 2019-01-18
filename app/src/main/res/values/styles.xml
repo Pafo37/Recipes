@@ -4,8 +4,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
 
-        <item name="colorPrimary">@color/redLight</item>
-        <item name="colorPrimaryDark">@color/redDark</item>
+        <item name="colorPrimary">@color/toolbar_red_light</item>
+        <item name="colorPrimaryDark">@color/toolbar_red_dark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="AppTheme.Launcher" >
