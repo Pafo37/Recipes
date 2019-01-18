@@ -6,9 +6,9 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/no_dimens"
         android:layout_height="wrap_content"
-        android:background="@color/redLight"
+        android:background="@color/toolbar_red_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,8 +28,8 @@
 
     <FrameLayout
         android:id="@+id/content"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/no_dimens"
+        android:layout_height="@dimen/no_dimens"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

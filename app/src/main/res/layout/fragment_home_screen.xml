@@ -5,10 +5,10 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/rice1"
+        android:id="@+id/cardview_random_meal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp">
+        android:layout_margin="@dimen/margin_6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,30 +18,30 @@
             <ImageView
                 android:id="@+id/id_random_meal"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="@dimen/image_default_height"
                 android:contentDescription="@string/homescreen_description_random_meal"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/rice" />
+                tools:src="@drawable/cardview_random_meal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="@dimen/padding_8dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="@dimen/margin_8dp"
                     android:text="@string/homescreen_random_meal"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/title_text" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#555"
-                    android:textSize="16sp"
+                    android:textColor="@color/color_gray"
+                    android:textSize="@dimen/description_text"
                     tools:text="It is really good" />
 
             </LinearLayout>
@@ -51,45 +51,45 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/rice2"
+        android:id="@+id/id_latest_meal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rice1"
-        android:layout_margin="4dp">
+        android:layout_below="@+id/cardview_random_meal"
+        android:layout_margin="@dimen/margin_4dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="@dimen/padding_8dp">
 
             <ImageView
-                android:id="@+id/id_latest_meal"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
+                android:id="@+id/id_latest_meal_image"
+                android:layout_width="@dimen/homescreen_small_screens"
+                android:layout_height="@dimen/homescreen_small_screens"
                 android:contentDescription="@string/homescreen_description_latest_meal"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/rice" />
+                tools:src="@drawable/cardview_random_meal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="@dimen/padding_8dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="@dimen/margin_8dp"
                     android:text="@string/homescreen_latest_meal"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/title_text" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#555"
-                    android:textSize="16sp"
+                    android:textColor="@color/color_gray"
+                    android:textSize="@dimen/description_text"
                     tools:text="It is really good" />
 
             </LinearLayout>
@@ -101,21 +101,21 @@
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rice1"
-        android:layout_margin="4dp"
-        android:layout_toEndOf="@id/rice2"
-        android:layout_toRightOf="@+id/rice2">
+        android:layout_below="@id/cardview_random_meal"
+        android:layout_margin="@dimen/margin_4dp"
+        android:layout_toEndOf="@id/id_latest_meal"
+        android:layout_toRightOf="@+id/id_latest_meal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="@dimen/padding_8dp">
 
             <ImageView
                 android:id="@+id/id_category"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
+                android:layout_width="@dimen/homescreen_small_screens"
+                android:layout_height="@dimen/homescreen_small_screens"
                 android:contentDescription="@string/homescreen_description_category"
                 android:scaleType="centerCrop"
                 android:src="@drawable/category_icon" />
@@ -124,21 +124,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="@dimen/padding_8dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="@dimen/margin_8dp"
                     android:text="@string/homescreen_category"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/title_text" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/homescreen_browse_by_category"
-                    android:textColor="#555"
+                    android:textColor="@color/color_gray"
                     android:textSize="16sp" />
 
             </LinearLayout>

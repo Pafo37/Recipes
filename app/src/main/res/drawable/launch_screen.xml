@@ -9,7 +9,7 @@
     <item>
 
         <bitmap
-            android:src="@drawable/recipe_app_icon"
+            android:src="@drawable/ic_rice"
             android:gravity="center"/>
 
     </item>
