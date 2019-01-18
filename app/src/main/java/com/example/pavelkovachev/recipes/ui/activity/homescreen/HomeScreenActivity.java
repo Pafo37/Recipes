@@ -12,6 +12,6 @@ public class HomeScreenActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.fragment_home_screen);
     }
 }

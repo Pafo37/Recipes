@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Recipes</string>
+    <string name="homescreen_random_meal">Random meal</string>
+    <string name="homescreen_latest_meal">Latest meal</string>
+    <string name="homescreen_category">Categories</string>
+    <string name="homescreen_browse_by_category">Browse by category</string>
+    <string name="homescreen_description_random_meal">This image shows a random meal</string>
+    <string name="homescreen_description_latest_meal">This image shows the latest meal</string>
+    <string name="homescreen_description_category">This image shows category icon</string>
 </resources>
