@@ -7,4 +7,6 @@
     <string name="homescreen_description_random_meal">This image shows a random meal</string>
     <string name="homescreen_description_latest_meal">This image shows the latest meal</string>
     <string name="homescreen_description_category">This image shows category icon</string>
+    <string name="toolbar_home_title">Home</string>
+
 </resources>
