@@ -147,8 +147,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_local_grocery_store_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\Pavel.Kovachev" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_united_states" />
+                            <entry key="sourceFile" value="C:\Users\Pavel.Kovachev\Desktop\united-states.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -11,6 +11,14 @@ import android.view.ViewGroup;
 import com.example.pavelkovachev.recipes.R;
 
 public class MealTypeFragment extends Fragment {
+    public static MealTypeFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        MealTypeFragment fragment = new MealTypeFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

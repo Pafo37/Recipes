@@ -15,15 +15,14 @@ public class CategoriesAdapter extends FragmentPagerAdapter {
 
     public CategoriesAdapter(FragmentManager fm) {
         super(fm);
-
     }
 
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new CuisineFragment();
+            return CuisineFragment.newInstance();
         } else {
-            return new MealTypeFragment();
+            return MealTypeFragment.newInstance();
         }
     }
 
