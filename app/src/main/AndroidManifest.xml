@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Launcher"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activity.homescreen.HomeScreenActivity">
+        <activity android:name=".ui.activity.recipeslist.RecipesListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +22,7 @@
         <activity android:name=".MainActivity">
 
         </activity>
+
     </application>
 
 </manifest>
