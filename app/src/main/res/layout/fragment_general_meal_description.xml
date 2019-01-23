@@ -26,7 +26,6 @@
                 tools:src="@drawable/cardview_random_meal" />
 
             <LinearLayout
-                android:id="@+id/linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -87,7 +86,7 @@
         tools:text="This is a really long text.This is a really long text." />
 
     <TextView
-        android:id="@+id/instructions"
+        android:id="@+id/txt_instructions"
         android:layout_width="@dimen/no_dimens"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_between_elements_default"
@@ -106,7 +105,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/instructions"
+        app:layout_constraintTop_toBottomOf="@id/txt_instructions"
         tools:listitem="@layout/item_ingredients_measures">
 
     </android.support.v7.widget.RecyclerView>
