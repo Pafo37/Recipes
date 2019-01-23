@@ -46,6 +46,7 @@
                 android:layout_margin="@dimen/margin_between_elements_default"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/material_design_body_txt_size"
+                android:maxLines="3"
                 android:layout_below="@id/img_test_category_mealtype"
                 tools:text="This is another text and description.This is another text and descriptionThis is another text and descriptionThis is another text and descriptionThis is another text and description"
                 app:layout_constraintTop_toBottomOf="@id/img_test_category_mealtype"
