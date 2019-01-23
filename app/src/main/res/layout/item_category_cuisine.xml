@@ -22,8 +22,8 @@
 
     <ImageView
         android:id="@+id/img_test_category_cuisine"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="@dimen/default_image_category_icon_size"
+        android:layout_height="@dimen/default_image_category_icon_size"
         tools:srcCompat="@drawable/ic_united_states"
         app:layout_constraintBottom_toBottomOf="@id/txt_cuisine_category_name"
         app:layout_constraintEnd_toEndOf="parent"

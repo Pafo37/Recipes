@@ -18,10 +18,10 @@ import butterknife.ButterKnife;
 
 public class CategoriesFragment extends Fragment {
 
-    @BindView(R.id.viewpager)
-    ViewPager viewPager;
-    @BindView(R.id.sliding_tabs)
-    TabLayout tabLayout;
+    @BindView(R.id.viewpager_categories)
+    ViewPager viewPagerCategories;
+    @BindView(R.id.tab_layout_categories)
+    TabLayout tabLayoutCategories;
 
     public static CategoriesFragment newInstance() {
 
@@ -38,8 +38,8 @@ public class CategoriesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_categories_host, container, false);
         ButterKnife.bind(this, view);
         CategoriesAdapter adapter = new CategoriesAdapter(getActivity().getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        viewPagerCategories.setAdapter(adapter);
+        tabLayoutCategories.setupWithViewPager(viewPagerCategories);
         return view;
     }
 
