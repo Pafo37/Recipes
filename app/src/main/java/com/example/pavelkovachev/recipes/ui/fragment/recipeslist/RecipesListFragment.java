@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,4 +54,11 @@ public class RecipesListFragment extends Fragment implements RecipesListAdapter.
         //this is for testing purposes
         Toast.makeText(getContext(), item.text + " is clicked", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onTripleDotClicked(DataModel model) {
+        //TO DO: later
+    }
+
+
 }

@@ -10,7 +10,7 @@ import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.recipeslist.RecipesListAdapter;
 import com.example.pavelkovachev.recipes.ui.fragment.recipeslist.RecipesListFragment;
 
-public class RecipesListActivity extends AppCompatActivity implements RecipesListAdapter.ItemListener {
+public class RecipesListActivity extends AppCompatActivity  {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,10 +22,6 @@ public class RecipesListActivity extends AppCompatActivity implements RecipesLis
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void onItemClick(DataModel item) {
-
-    }
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {

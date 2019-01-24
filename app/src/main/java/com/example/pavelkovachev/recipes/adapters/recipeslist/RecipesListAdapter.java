@@ -2,11 +2,15 @@ package com.example.pavelkovachev.recipes.adapters.recipeslist;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.DataModel;
@@ -16,6 +20,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.ViewHolder> {
 
@@ -37,6 +42,14 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
         @BindView(R.id.img_gridlayout_categories)
         public ImageView imageView;
 
+        @OnClick(R.id.img_triple_vertical_dots)
+        void onTripleDotsClicked() {
+            PopupMenu popupMenu = new PopupMenu(mContext, this.itemView);
+            popupMenu.getMenuInflater().inflate(R.menu.menu_recipes_dropdown, popupMenu.getMenu());
+            popupMenu.show();
+        }
+
+
         DataModel item;
 
         public ViewHolder(View view) {
@@ -45,7 +58,7 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
             view.setOnClickListener(this);
 
-            ButterKnife.bind(this,view);
+            ButterKnife.bind(this, view);
 
 
         }
@@ -85,5 +98,6 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
     public interface ItemListener {
         void onItemClick(DataModel item);
+        void onTripleDotClicked(DataModel model);
     }
 }
