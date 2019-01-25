@@ -104,9 +104,7 @@
         android:layout_below="@id/cardview_random_meal"
         android:layout_margin="@dimen/margin_between_elements_default"
         android:layout_toEndOf="@id/id_latest_meal"
-        android:layout_toRightOf="@+id/id_latest_meal"
-
-        >
+        android:layout_toRightOf="@+id/id_latest_meal">
 
         <LinearLayout
             android:layout_width="wrap_content"
