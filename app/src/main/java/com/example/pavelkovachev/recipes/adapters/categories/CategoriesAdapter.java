@@ -12,9 +12,8 @@ import com.example.pavelkovachev.recipes.ui.fragment.mealtype.MealTypeFragment;
 
 public class CategoriesAdapter extends FragmentPagerAdapter {
 
-
-    public CategoriesAdapter(FragmentManager fm) {
-        super(fm);
+    public CategoriesAdapter(FragmentManager fragmentManager) {
+        super(fragmentManager);
     }
 
     @Override
@@ -25,6 +24,7 @@ public class CategoriesAdapter extends FragmentPagerAdapter {
             return MealTypeFragment.newInstance();
         }
     }
+
 
     @Override
     public int getCount() {

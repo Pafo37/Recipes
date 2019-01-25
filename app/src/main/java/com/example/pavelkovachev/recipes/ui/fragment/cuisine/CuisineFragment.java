@@ -23,7 +23,7 @@ public class CuisineFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_category_cuisine,container,false);
+        View view = inflater.inflate(R.layout.fragment_category_cuisine, container, false);
         return view;
     }
 }

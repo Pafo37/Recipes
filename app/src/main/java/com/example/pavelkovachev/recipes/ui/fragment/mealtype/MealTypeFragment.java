@@ -19,10 +19,11 @@ public class MealTypeFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_category_mealtype,container,false);
+        View view = inflater.inflate(R.layout.fragment_category_mealtype, container, false);
         return view;
     }
 }
