@@ -93,7 +93,7 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
     @Override
     public int getItemCount() {
-        return 8;
+        return 2;
     }
 
     public interface ItemListener {

@@ -33,12 +33,6 @@ public class RecipesListFragment extends Fragment implements RecipesListAdapter.
         arrayList = new ArrayList<>();
         arrayList.add(new DataModel("Caca", R.drawable.category_icon));
         arrayList.add(new DataModel("Caca2", R.drawable.cardview_random_meal));
-        arrayList.add(new DataModel("Caca3", R.drawable.cardview_random_meal));
-        arrayList.add(new DataModel("Caca4", R.drawable.cardview_random_meal));
-        arrayList.add(new DataModel("Caca5", R.drawable.cardview_random_meal));
-        arrayList.add(new DataModel("Caca6", R.drawable.cardview_random_meal));
-        arrayList.add(new DataModel("Caca7", R.drawable.cardview_random_meal));
-        arrayList.add(new DataModel("Caca8", R.drawable.cardview_random_meal));
         RecipesListAdapter adapter = new RecipesListAdapter(getContext(), arrayList, this);
         recyclerView.setAdapter(adapter);
 
