@@ -11,7 +11,7 @@
 
         <ImageView
             android:id="@+id/img_gridlayout_categories"
-            android:layout_width="182dp"
+            android:layout_width="@dimen/home_screen_img_width_height"
             android:layout_height="@dimen/home_screen_img_width_height"
             android:layout_margin="@dimen/margin_between_elements_default"
             tools:src="@drawable/cardview_random_meal"

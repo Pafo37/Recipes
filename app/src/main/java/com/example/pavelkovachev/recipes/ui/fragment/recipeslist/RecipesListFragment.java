@@ -17,11 +17,13 @@ import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.recipeslist.RecipesListAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecipesListFragment extends Fragment implements RecipesListAdapter.ItemListener {
 
     RecyclerView recyclerView;
-    ArrayList<DataModel> arrayList;
+    List<DataModel> arrayList;
+    private static final int SPAN_COUNT = 2;
 
     @Nullable
     @Override
@@ -36,7 +38,7 @@ public class RecipesListFragment extends Fragment implements RecipesListAdapter.
         RecipesListAdapter adapter = new RecipesListAdapter(getContext(), arrayList, this);
         recyclerView.setAdapter(adapter);
 
-        GridLayoutManager manager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+        GridLayoutManager manager = new GridLayoutManager(getContext(), SPAN_COUNT, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         return view;
     }
@@ -51,7 +53,7 @@ public class RecipesListFragment extends Fragment implements RecipesListAdapter.
 
     @Override
     public void onTripleDotClicked(DataModel model) {
-        //TO DO: later
+        //TODO: not implemented
     }
 
 

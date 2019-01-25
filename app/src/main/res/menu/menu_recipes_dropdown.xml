@@ -5,6 +5,9 @@
         android:id="@+id/id_menu_favorites"
         android:title="Add to Favorites"
         />
+    <item
+        android:id="@+id/id_menu_share"
+        android:title="Share"/>
 
 
 </menu>

@@ -22,9 +22,4 @@ public class RecipesListActivity extends AppCompatActivity  {
         fragmentTransaction.commit();
     }
 
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }
