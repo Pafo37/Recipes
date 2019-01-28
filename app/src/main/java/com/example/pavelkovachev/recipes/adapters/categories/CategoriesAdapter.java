@@ -11,6 +11,8 @@ import com.example.pavelkovachev.recipes.ui.fragment.cuisine.CuisineFragment;
 import com.example.pavelkovachev.recipes.ui.fragment.mealtype.MealTypeFragment;
 
 public class CategoriesAdapter extends FragmentPagerAdapter {
+    private static final int CUISINE_TAB = 0;
+    private static final int MEALTYPE_TAB = 1;
 
     public CategoriesAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -18,11 +20,15 @@ public class CategoriesAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) {
-            return CuisineFragment.newInstance();
-        } else {
-            return MealTypeFragment.newInstance();
+        switch (position) {
+            case CUISINE_TAB:
+                return CuisineFragment.newInstance();
+            case MEALTYPE_TAB:
+                return MealTypeFragment.newInstance();
+            default:
+                return null;
         }
+
     }
 
 
@@ -35,9 +41,9 @@ public class CategoriesAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
-            case 0:
+            case CUISINE_TAB:
                 return App.getInstance().getString(R.string.category_cuisine);
-            case 1:
+            case MEALTYPE_TAB:
                 return App.getInstance().getString(R.string.category_meal_type);
             default:
                 return null;
