@@ -17,6 +17,8 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.pavelkovachev.recipes.R;
@@ -186,7 +188,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
-            if (id == android.R.id.home) {
+            if (id == R.id.home) {
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
             }
@@ -252,5 +254,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
+
+
     }
 }
