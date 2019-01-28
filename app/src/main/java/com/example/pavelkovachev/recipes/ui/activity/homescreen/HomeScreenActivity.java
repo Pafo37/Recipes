@@ -26,7 +26,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, new HomeScreenFragment());
+                .replace(R.id.container, new HomeScreenFragment());
         fragmentTransaction.commit();
 
     }

@@ -12,7 +12,7 @@
 
     <string name="category_cuisine">Cuisine</string>
     <string name="category_meal_type">Meal Type</string>
-    <string name="txt_default_title_description">Descrption</string>
-    <string name="txt_default_instructions_title">Instructions</string>
+    <string name="general_meal_default_title_description">Description</string>
+    <string name="general_meal_default_instructions_title">Instructions</string>
 
 </resources>
