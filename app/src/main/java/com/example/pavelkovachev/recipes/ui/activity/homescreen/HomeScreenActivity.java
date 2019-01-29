@@ -2,6 +2,7 @@ package com.example.pavelkovachev.recipes.ui.activity.homescreen;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -23,6 +24,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
+
     }
 
     @Override

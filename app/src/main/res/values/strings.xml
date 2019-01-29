@@ -11,5 +11,6 @@
     <string name="menu_search_title">Search</string>
     <string name="txt_default_title_description">Descrption</string>
     <string name="txt_default_instructions_title">Instructions</string>
+    <string name="recipes_title">Recipes</string>
 
 </resources>
