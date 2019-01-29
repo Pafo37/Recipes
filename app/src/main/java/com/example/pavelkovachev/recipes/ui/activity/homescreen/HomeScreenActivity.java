@@ -26,8 +26,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_homescreen);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
-
+        getSupportActionBar().setTitle(R.string.toolbar_home_title);
     }
 
     @Override
