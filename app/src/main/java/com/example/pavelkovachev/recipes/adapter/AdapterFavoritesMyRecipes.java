@@ -10,11 +10,11 @@ import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.ui.fragment.favorites.FavoritesFragment;
 import com.example.pavelkovachev.recipes.ui.fragment.myrecipes.MyRecipesFragment;
 
-public class TabLayoutAdapter extends FragmentPagerAdapter {
+public class AdapterFavoritesMyRecipes extends FragmentPagerAdapter {
     private static final int TAB_FAVORITES = 0;
     private static final int TAB_MY_RECIPES = 1;
 
-    public TabLayoutAdapter(FragmentManager fragmentManager) {
+    public AdapterFavoritesMyRecipes(FragmentManager fragmentManager) {
         super(fragmentManager);
     }
 
