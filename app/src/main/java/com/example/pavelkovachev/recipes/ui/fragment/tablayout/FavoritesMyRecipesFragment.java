@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 
 public class FavoritesMyRecipesFragment extends Fragment {
     @BindView(R.id.viewpager_favorites_my_recipes)
-    ViewPager viewPagerTabLayoutFavoritesMyRecipes;
+    ViewPager viewPagerFavoritesMyRecipes;
     @BindView(R.id.tab_layout_favorites_my_recipes)
     TabLayout tabLayoutFavoritesMyRecipes;
 
@@ -35,8 +35,8 @@ public class FavoritesMyRecipesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favorites_my_recipes, container, false);
         ButterKnife.bind(this, view);
         AdapterFavoritesMyRecipes adapter = new AdapterFavoritesMyRecipes(getActivity().getSupportFragmentManager());
-        viewPagerTabLayoutFavoritesMyRecipes.setAdapter(adapter);
-        tabLayoutFavoritesMyRecipes.setupWithViewPager(viewPagerTabLayoutFavoritesMyRecipes);
+        viewPagerFavoritesMyRecipes.setAdapter(adapter);
+        tabLayoutFavoritesMyRecipes.setupWithViewPager(viewPagerFavoritesMyRecipes);
         return view;
     }
 }
