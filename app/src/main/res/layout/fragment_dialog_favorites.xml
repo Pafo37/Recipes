@@ -12,7 +12,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3" />
 
-
     <ImageView
         android:id="@+id/img_meal_favorites"
         android:layout_width="match_parent"
@@ -33,17 +32,20 @@
         app:layout_constraintTop_toBottomOf="@id/img_meal_favorites"
         app:srcCompat="@drawable/ic_photo_camera" />
 
-    <Button
+    <android.support.design.button.MaterialButton
         android:id="@+id/button_save"
+        style="@style/TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:textSize="@dimen/material_design_btn_txt_size"
         android:text="@string/button_save_favorites"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <android.support.design.button.MaterialButton
         android:id="@+id/button_cancel"
+        style="@style/TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -51,59 +53,54 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/button_save" />
 
-    <TextView
-        android:id="@+id/txt_favorites_meal_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_between_elements_default"
-        android:textSize="@dimen/material_design_title_txt_size"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline"
-        tools:text="Rice" />
-
-    <TextView
-        android:id="@+id/txt_favorites_description_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_between_elements_default"
-        android:text="@string/favorites_description_title"
-        android:textSize="@dimen/material_design_title_txt_size"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_favorites_meal_title" />
-
-    <EditText
-        android:id="@+id/txt_favorites_description_body"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/txt_input_layout_meal_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_between_elements_default"
-        android:layout_marginTop="@dimen/margin_between_elements_default"
-        android:inputType="text"
-        android:maxLines="3"
+        android:hint="@string/favorites_hint_recipe_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline">
+
+        <EditText
+            android:id="@+id/txt_favorites_meal_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_between_elements_default" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/txt_input_layout_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/favorites_hint_recipe_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_favorites_description_title" />
+        app:layout_constraintTop_toBottomOf="@id/txt_input_layout_meal_name">
 
-    <TextView
-        android:id="@+id/txt_favorites_ingredietns_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_between_elements_default"
-        android:text="@string/favorites_ingredients_title"
-        android:textSize="@dimen/material_design_title_txt_size"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_favorites_description_body" />
+        <EditText
+            android:id="@+id/txt_favorites_description_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_between_elements_default"
+            android:layout_marginTop="@dimen/margin_between_elements_default"
+            android:maxLines="3" />
+    </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/txt_favorites_ingredients_body"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/txt_input_layout_ingredietns"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/txt_favorites_ingredietns_title"
+        android:layout_height="@dimen/no_dimens"
+        android:hint="Enter recipe's ingredietns"
+        app:layout_constraintBottom_toTopOf="@id/button_cancel"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="@dimen/margin_between_elements_default"
-        />
+        app:layout_constraintTop_toBottomOf="@id/txt_input_layout_description">
 
+        <EditText
+            android:id="@+id/txt_favorites_ingredients_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_between_elements_default"
+            android:inputType="textMultiLine" />
+    </android.support.design.widget.TextInputLayout>
 
 </android.support.constraint.ConstraintLayout>
