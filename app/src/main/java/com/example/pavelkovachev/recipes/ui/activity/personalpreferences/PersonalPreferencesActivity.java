@@ -1,4 +1,4 @@
-package com.example.pavelkovachev.recipes.ui.activity.tablayout;
+package com.example.pavelkovachev.recipes.ui.activity.personalpreferences;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,24 +8,24 @@ import android.support.v7.widget.Toolbar;
 
 
 import com.example.pavelkovachev.recipes.R;
-import com.example.pavelkovachev.recipes.ui.fragment.tablayout.FavoritesFragment;
+import com.example.pavelkovachev.recipes.ui.fragment.personalpreferences.PersonalPreferencesFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FavoritesActivity extends AppCompatActivity {
-    @BindView(R.id.toolbar_favorites_my_recipes)
+public class PersonalPreferencesActivity extends AppCompatActivity {
+    @BindView(R.id.toolbar_personal_preferences)
     Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorites_my_recipes);
+        setContentView(R.layout.activity_personal_preferences);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         setTitle(R.string.your_recipes_title);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, FavoritesFragment.newInstance());
+        fragmentTransaction.add(R.id.fragment_container, PersonalPreferencesFragment.newInstance());
         fragmentTransaction.commit();
     }
 }

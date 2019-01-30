@@ -10,12 +10,12 @@ import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.ui.fragment.favorites.FavoritesFragment;
 import com.example.pavelkovachev.recipes.ui.fragment.myrecipes.MyRecipesFragment;
 
-public class FavoritesAdapter extends FragmentPagerAdapter {
+public class PersonalPreferencesAdapter extends FragmentPagerAdapter {
     private static final int TAB_FAVORITES = 0;
     private static final int TAB_MY_RECIPES = 1;
     private static final int TABS_COUNT = 2;
 
-    public FavoritesAdapter(FragmentManager fragmentManager) {
+    public PersonalPreferencesAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
     }
 
@@ -29,7 +29,6 @@ public class FavoritesAdapter extends FragmentPagerAdapter {
             default:
                 return null;
         }
-
     }
 
     @Override
@@ -48,6 +47,5 @@ public class FavoritesAdapter extends FragmentPagerAdapter {
             default:
                 return null;
         }
-
     }
 }
