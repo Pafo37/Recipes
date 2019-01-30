@@ -1,4 +1,6 @@
 package com.example.pavelkovachev.recipes.ui.activity.addrecipe;
 
-public class AddRecipeActivity {
+import android.support.v7.app.AppCompatActivity;
+
+public class AddRecipeActivity extends AppCompatActivity {
 }

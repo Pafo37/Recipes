@@ -1,4 +1,6 @@
 package com.example.pavelkovachev.recipes.ui.fragment.addrecipe;
 
-public class AddRecipeFragment {
+import android.support.v4.app.Fragment;
+
+public class AddRecipeFragment extends Fragment {
 }

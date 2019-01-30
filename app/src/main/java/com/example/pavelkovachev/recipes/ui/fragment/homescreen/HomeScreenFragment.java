@@ -20,7 +20,7 @@ public class HomeScreenFragment extends Fragment implements HomeScreenContract.V
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_home_screen,container,false);
+        View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
         return view;
     }
 }
