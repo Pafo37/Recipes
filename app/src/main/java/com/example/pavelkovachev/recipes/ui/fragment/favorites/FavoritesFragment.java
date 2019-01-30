@@ -15,7 +15,6 @@ public class FavoritesFragment extends Fragment {
     public static FavoritesFragment newInstance() {
 
         Bundle args = new Bundle();
-
         FavoritesFragment fragment = new FavoritesFragment();
         fragment.setArguments(args);
         return fragment;
@@ -24,7 +23,7 @@ public class FavoritesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_favorites,container,false);
+        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         return view;
     }
 }

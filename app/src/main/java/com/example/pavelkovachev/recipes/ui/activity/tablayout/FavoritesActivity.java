@@ -23,7 +23,7 @@ public class FavoritesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favorites_my_recipes);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        setTitle("Your Recipes");
+        setTitle(R.string.your_recipes_title);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, FavoritesFragment.newInstance());
         fragmentTransaction.commit();
