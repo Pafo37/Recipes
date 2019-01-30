@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.pavelkovachev.recipes.R;
-import com.example.pavelkovachev.recipes.adapter.PersonalPreferencesAdapter;
+import com.example.pavelkovachev.recipes.adapter.personalpreferences.PersonalPreferencesAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
