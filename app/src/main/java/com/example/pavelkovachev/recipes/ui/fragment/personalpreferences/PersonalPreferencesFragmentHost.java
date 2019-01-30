@@ -16,15 +16,15 @@ import com.example.pavelkovachev.recipes.adapter.PersonalPreferencesAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PersonalPreferencesFragment extends Fragment {
+public class PersonalPreferencesFragmentHost extends Fragment {
     @BindView(R.id.viewpager_personal_preferences)
     ViewPager viewPagerFavoritesMyRecipes;
     @BindView(R.id.tab_layout_personal_preferences)
     TabLayout tabLayoutFavoritesMyRecipes;
 
-    public static PersonalPreferencesFragment newInstance() {
+    public static PersonalPreferencesFragmentHost newInstance() {
         Bundle args = new Bundle();
-        PersonalPreferencesFragment fragment = new PersonalPreferencesFragment();
+        PersonalPreferencesFragmentHost fragment = new PersonalPreferencesFragmentHost();
         fragment.setArguments(args);
         return fragment;
     }

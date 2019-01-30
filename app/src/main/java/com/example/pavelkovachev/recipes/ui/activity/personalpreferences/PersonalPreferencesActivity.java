@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 
 import com.example.pavelkovachev.recipes.R;
-import com.example.pavelkovachev.recipes.ui.fragment.personalpreferences.PersonalPreferencesFragment;
+import com.example.pavelkovachev.recipes.ui.fragment.personalpreferences.PersonalPreferencesFragmentHost;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +25,7 @@ public class PersonalPreferencesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle(R.string.your_recipes_title);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, PersonalPreferencesFragment.newInstance());
+        fragmentTransaction.add(R.id.fragment_container, PersonalPreferencesFragmentHost.newInstance());
         fragmentTransaction.commit();
     }
 }
