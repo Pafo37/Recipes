@@ -67,6 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_between_elements_default" />
+
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -85,6 +86,7 @@
             android:layout_margin="@dimen/margin_between_elements_default"
             android:layout_marginTop="@dimen/margin_between_elements_default"
             android:maxLines="3" />
+
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -103,6 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_between_elements_default"
             android:inputType="textMultiLine" />
+
     </android.support.design.widget.TextInputLayout>
 
 </android.support.constraint.ConstraintLayout>
