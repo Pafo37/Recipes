@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ public class RecipesListFragment extends Fragment implements RecipesListAdapter.
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipes_list, container, false);
-
         //this is for testing purposes
         recyclerView = view.findViewById(R.id.id_recycler_view_recipes_list);
         arrayList = new ArrayList<>();
@@ -37,13 +35,10 @@ public class RecipesListFragment extends Fragment implements RecipesListAdapter.
         arrayList.add(new DataModel("Caca2", R.drawable.cardview_random_meal));
         RecipesListAdapter adapter = new RecipesListAdapter(getContext(), arrayList, this);
         recyclerView.setAdapter(adapter);
-
         GridLayoutManager manager = new GridLayoutManager(getContext(), SPAN_COUNT, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         return view;
     }
-
-
 
     @Override
     public void onItemClick(DataModel item) {

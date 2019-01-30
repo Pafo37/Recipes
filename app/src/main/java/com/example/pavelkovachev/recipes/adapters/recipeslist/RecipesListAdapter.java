@@ -46,18 +46,13 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
             popupMenu.show();
         }
 
-
         DataModel item;
 
         public ViewHolder(View view) {
 
             super(view);
-
             view.setOnClickListener(this);
-
             ButterKnife.bind(this, view);
-
-
         }
 
         public void setData(DataModel item) {
@@ -65,8 +60,6 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
             txtRecipeListTitle.setText(item.text);
             imgCategories.setImageResource(item.drawable);
-
-
         }
 
         @Override
