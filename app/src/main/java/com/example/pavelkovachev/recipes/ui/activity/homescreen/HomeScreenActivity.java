@@ -1,6 +1,5 @@
 package com.example.pavelkovachev.recipes.ui.activity.homescreen;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -38,9 +37,8 @@ public class HomeScreenActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.id_settings:
-                Intent intent=new Intent(this,SettingsActivity.class);
+        switch (item.getItemId()) {
+            case R.id.id_settings: Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
