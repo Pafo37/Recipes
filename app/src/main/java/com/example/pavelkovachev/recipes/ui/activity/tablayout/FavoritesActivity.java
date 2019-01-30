@@ -8,12 +8,12 @@ import android.support.v7.widget.Toolbar;
 
 
 import com.example.pavelkovachev.recipes.R;
-import com.example.pavelkovachev.recipes.ui.fragment.tablayout.FavoritesMyRecipesFragment;
+import com.example.pavelkovachev.recipes.ui.fragment.tablayout.FavoritesFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FavoritesMyRecipesActivity extends AppCompatActivity {
+public class FavoritesActivity extends AppCompatActivity {
     @BindView(R.id.toolbar_favorites_my_recipes)
     Toolbar toolbar;
 
@@ -25,7 +25,7 @@ public class FavoritesMyRecipesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle("Your Recipes");
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container_favorites_my_recipes, FavoritesMyRecipesFragment.newInstance());
+        fragmentTransaction.add(R.id.fragment_container, FavoritesFragment.newInstance());
         fragmentTransaction.commit();
     }
 }

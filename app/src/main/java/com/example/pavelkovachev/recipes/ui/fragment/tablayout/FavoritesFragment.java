@@ -11,20 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.pavelkovachev.recipes.R;
-import com.example.pavelkovachev.recipes.adapter.AdapterFavoritesMyRecipes;
+import com.example.pavelkovachev.recipes.adapter.FavoritesAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FavoritesMyRecipesFragment extends Fragment {
-    @BindView(R.id.viewpager_favorites_my_recipes)
+public class FavoritesFragment extends Fragment {
+    @BindView(R.id.viewpager_favorites)
     ViewPager viewPagerFavoritesMyRecipes;
-    @BindView(R.id.tab_layout_favorites_my_recipes)
+    @BindView(R.id.tab_layout_favorites)
     TabLayout tabLayoutFavoritesMyRecipes;
 
-    public static FavoritesMyRecipesFragment newInstance() {
+    public static FavoritesFragment newInstance() {
         Bundle args = new Bundle();
-        FavoritesMyRecipesFragment fragment = new FavoritesMyRecipesFragment();
+        FavoritesFragment fragment = new FavoritesFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -34,7 +34,7 @@ public class FavoritesMyRecipesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites_my_recipes, container, false);
         ButterKnife.bind(this, view);
-        AdapterFavoritesMyRecipes adapter = new AdapterFavoritesMyRecipes(getActivity().getSupportFragmentManager());
+        FavoritesAdapter adapter = new FavoritesAdapter(getActivity().getSupportFragmentManager());
         viewPagerFavoritesMyRecipes.setAdapter(adapter);
         tabLayoutFavoritesMyRecipes.setupWithViewPager(viewPagerFavoritesMyRecipes);
         return view;
