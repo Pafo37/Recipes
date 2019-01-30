@@ -39,13 +39,6 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
         @BindView(R.id.img_gridlayout_categories)
         public ImageView imgCategories;
 
-        @OnClick(R.id.img_triple_vertical_dots)
-        void onTripleDotsClicked() {
-            PopupMenu popupMenu = new PopupMenu(context, this.itemView);
-            popupMenu.getMenuInflater().inflate(R.menu.menu_recipes_dropdown, popupMenu.getMenu());
-            popupMenu.show();
-        }
-
         DataModel item;
 
         public ViewHolder(View view) {
@@ -53,6 +46,13 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
             super(view);
             view.setOnClickListener(this);
             ButterKnife.bind(this, view);
+        }
+
+        @OnClick(R.id.img_triple_vertical_dots)
+        void onTripleDotsClicked() {
+            PopupMenu popupMenu = new PopupMenu(context, this.itemView);
+            popupMenu.getMenuInflater().inflate(R.menu.menu_recipes_dropdown, popupMenu.getMenu());
+            popupMenu.show();
         }
 
         public void setData(DataModel item) {
