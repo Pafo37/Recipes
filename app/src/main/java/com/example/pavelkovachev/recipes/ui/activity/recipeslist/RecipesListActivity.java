@@ -27,5 +27,4 @@ public class RecipesListActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.container_recipes_list, new RecipesListFragment());
         fragmentTransaction.commit();
     }
-
 }

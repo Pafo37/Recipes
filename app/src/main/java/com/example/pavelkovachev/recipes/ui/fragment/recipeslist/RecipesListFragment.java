@@ -50,6 +50,4 @@ public class RecipesListFragment extends Fragment implements RecipesListAdapter.
     public void onTripleDotClicked(DataModel model) {
         //TODO: not implemented
     }
-
-
 }
