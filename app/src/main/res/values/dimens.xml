@@ -19,4 +19,6 @@
     <dimen name="home_screen_random_meal_cardview_margin">6dp</dimen>
     <dimen name="home_screen_img_meals">170dp</dimen>
     <dimen name="home_screen_img_width_height">180dp</dimen>
+    <dimen name="favorites_default_width_height">80dp</dimen>
+
 </resources>
