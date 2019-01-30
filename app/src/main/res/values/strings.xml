@@ -9,8 +9,18 @@
     <string name="homescreen_description_category">This image shows category icon</string>
     <string name="toolbar_home_title">Home</string>
     <string name="menu_search_title">Search</string>
-    <string name="txt_default_title_description">Descrption</string>
+    <string name="txt_default_title_description">Description</string>
     <string name="txt_default_instructions_title">Instructions</string>
     <string name="recipes_title">Recipes</string>
+    <string name="button_save_favorites">Save</string>
+    <string name="button_cancel_favorites">Cancel</string>
+    <string name="favorites_description_title">Description</string>
+    <string name="favorites_ingredients_title">Ingredients</string>
+    <string name="favorites_hint_recipe_description">Enter recipe\'s description</string>
+    <string name="favorites_hint_recipe_name">Enter recipe\'s name</string>
+    <string name="enter_recipe_ingredients">Enter recipe\'s ingredietns</string>
+    <string name="favorite_recipes">Favorite Recipes</string>
+    <string name="my_recipes">My Recipes</string>
+    <string name="your_recipes_title">Your Recipes</string>
 
 </resources>
