@@ -13,6 +13,7 @@ import com.example.pavelkovachev.recipes.ui.fragment.myrecipes.MyRecipesFragment
 public class FavoritesAdapter extends FragmentPagerAdapter {
     private static final int TAB_FAVORITES = 0;
     private static final int TAB_MY_RECIPES = 1;
+    private static final int TABS_COUNT = 2;
 
     public FavoritesAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -33,7 +34,7 @@ public class FavoritesAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return TABS_COUNT;
     }
 
     @Nullable
