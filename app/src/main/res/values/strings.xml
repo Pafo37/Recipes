@@ -10,6 +10,11 @@
     <string name="toolbar_home_title">Home</string>
     <string name="menu_search_title">Search</string>
     <string name="txt_default_title_description">Description</string>
+    <string name="category_cuisine">Cuisine</string>
+    <string name="category_meal_type">Meal Type</string>
+    <string name="general_meal_default_title_description">Description</string>
+    <string name="general_meal_default_instructions_title">Instructions</string>
+    <string name="categories_title">Categories</string>
     <string name="txt_default_instructions_title">Instructions</string>
     <string name="recipes_title">Recipes</string>
     <string name="title_activity_settings">Settings</string>
