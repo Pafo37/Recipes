@@ -43,5 +43,4 @@ public class HomeScreenActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
