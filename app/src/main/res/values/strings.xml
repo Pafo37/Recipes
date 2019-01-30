@@ -17,5 +17,6 @@
     <string name="favorites_ingredients_title">Ingredients</string>
     <string name="favorites_hint_recipe_description">Enter recipe\'s description</string>
     <string name="favorites_hint_recipe_name">Enter recipe\'s name</string>
+    <string name="enter_recipe_ingredients">Enter recipe\'s ingredietns</string>
 
 </resources>

@@ -91,7 +91,7 @@
         android:id="@+id/txt_input_layout_ingredietns"
         android:layout_width="@dimen/no_dimens"
         android:layout_height="@dimen/no_dimens"
-        android:hint="Enter recipe's ingredietns"
+        android:hint="@string/enter_recipe_ingredients"
         app:layout_constraintBottom_toTopOf="@id/button_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
