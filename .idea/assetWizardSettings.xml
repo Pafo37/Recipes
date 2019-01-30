@@ -147,8 +147,14 @@
                         </option>
                         <option name="values">
                           <map>
+<<<<<<< HEAD
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_breakfast" />
+                            <entry key="sourceFile" value="C:\Users\Pavel.Kovachev\Downloads\ic_breakfast.svg" />
+=======
                             <entry key="outputName" value="ic_photo_camera" />
                             <entry key="sourceFile" value="C:\Users\Pavel.Kovachev" />
+>>>>>>> developer-r1
                           </map>
                         </option>
                       </PersistentState>
