@@ -39,7 +39,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.id_settings:
-                startActivity( new Intent(this, SettingsActivity.class));
+                startActivity(new Intent(this, SettingsActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
