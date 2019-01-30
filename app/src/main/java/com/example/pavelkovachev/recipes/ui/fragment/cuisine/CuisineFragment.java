@@ -14,7 +14,6 @@ public class CuisineFragment extends Fragment {
     public static CuisineFragment newInstance() {
 
         Bundle args = new Bundle();
-
         CuisineFragment fragment = new CuisineFragment();
         fragment.setArguments(args);
         return fragment;

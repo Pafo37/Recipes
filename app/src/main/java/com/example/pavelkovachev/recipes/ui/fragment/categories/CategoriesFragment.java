@@ -23,7 +23,6 @@ public class CategoriesFragment extends Fragment {
     @BindView(R.id.tab_layout_categories)
     TabLayout tabLayoutCategories;
 
-
     public static CategoriesFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -43,5 +42,4 @@ public class CategoriesFragment extends Fragment {
         tabLayoutCategories.setupWithViewPager(viewPagerCategories);
         return view;
     }
-
 }

@@ -14,7 +14,6 @@ public class MealTypeFragment extends Fragment {
     public static MealTypeFragment newInstance() {
 
         Bundle args = new Bundle();
-
         MealTypeFragment fragment = new MealTypeFragment();
         fragment.setArguments(args);
         return fragment;

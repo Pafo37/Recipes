@@ -31,5 +31,4 @@
         app:layout_constraintTop_toTopOf="@id/txt_cuisine_category_name"
         tools:srcCompat="@drawable/ic_united_states" />
 
-
 </android.support.constraint.ConstraintLayout>
