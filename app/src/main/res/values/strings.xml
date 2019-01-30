@@ -11,7 +11,7 @@
     <string name="menu_search_title">Search</string>
     <string name="txt_default_title_description">Descrption</string>
     <string name="txt_default_instructions_title">Instructions</string>
-    <string name="title_activity_settings2">Settings</string>
+    <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
 
