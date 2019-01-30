@@ -13,6 +13,7 @@ import com.example.pavelkovachev.recipes.ui.fragment.mealtype.MealTypeFragment;
 public class CategoriesAdapter extends FragmentPagerAdapter {
     private static final int TAB_CUISINE = 0;
     private static final int TAB_MEALTYPE = 1;
+    private static final int TABS_CATEGORIES_COUNT = 2;
 
     public CategoriesAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -32,7 +33,7 @@ public class CategoriesAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return TABS_CATEGORIES_COUNT;
     }
 
     @Nullable
