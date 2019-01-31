@@ -22,10 +22,17 @@
         <activity android:name=".ui.activity.settings.SettingsActivity" />
         <activity
             android:name=".ui.activity.categories.CategoriesActivity"
-            android:parentActivityName=".ui.activity.homescreen.HomeScreenActivity" >
+            android:parentActivityName=".ui.activity.homescreen.HomeScreenActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.homescreen.HomeScreenActivity"/>
+                android:value=".ui.activity.homescreen.HomeScreenActivity" />
+        </activity>
+        <activity
+            android:name=".ui.activity.generalmealdescription.GeneralMealDescriptionActivity"
+            android:parentActivityName=".ui.activity.homescreen.HomeScreenActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.homescreen.HomeScreenActivity" />
         </activity>
     </application>
 </manifest>

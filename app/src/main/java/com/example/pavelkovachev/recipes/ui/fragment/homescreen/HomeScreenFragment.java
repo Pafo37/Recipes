@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenContract;
 import com.example.pavelkovachev.recipes.ui.activity.categories.CategoriesActivity;
+import com.example.pavelkovachev.recipes.ui.activity.generalmealdescription.GeneralMealDescriptionActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -34,6 +35,16 @@ public class HomeScreenFragment extends Fragment implements HomeScreenContract.V
     @OnClick(R.id.cardview_categories)
     void onCategoriesClicked(){
         startActivity(new Intent(getActivity(), CategoriesActivity.class));
+    }
+
+    @OnClick(R.id.cardview_random_meal)
+    void onRandomMealClicked(){
+        startActivity(new Intent(getActivity(), GeneralMealDescriptionActivity.class));
+    }
+
+    @OnClick(R.id.cardview_latest_meal)
+    void onLatestMealClicked(){
+        startActivity(new Intent(getActivity(),GeneralMealDescriptionActivity.class));
     }
 
 

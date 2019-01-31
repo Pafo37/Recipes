@@ -51,7 +51,7 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/id_latest_meal"
+        android:id="@+id/cardview_latest_meal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cardview_random_meal"
@@ -104,8 +104,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/cardview_random_meal"
         android:layout_margin="@dimen/margin_between_elements_default"
-        android:layout_toEndOf="@id/id_latest_meal"
-        android:layout_toRightOf="@+id/id_latest_meal">
+        android:layout_toEndOf="@id/cardview_latest_meal"
+        android:layout_toRightOf="@+id/cardview_latest_meal">
 
         <LinearLayout
             android:layout_width="wrap_content"
