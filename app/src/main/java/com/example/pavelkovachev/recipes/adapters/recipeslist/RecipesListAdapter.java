@@ -42,7 +42,6 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
         DataModel item;
 
         public ViewHolder(View view) {
-
             super(view);
             view.setOnClickListener(this);
             ButterKnife.bind(this, view);
@@ -57,7 +56,6 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
         public void setData(DataModel item) {
             this.item = item;
-
             txtRecipeListTitle.setText(item.text);
             imgCategories.setImageResource(item.drawable);
         }

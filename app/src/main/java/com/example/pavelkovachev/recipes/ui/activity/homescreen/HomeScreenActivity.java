@@ -5,16 +5,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.pavelkovachev.recipes.R;
+import com.example.pavelkovachev.recipes.ui.activity.categories.CategoriesActivity;
 import com.example.pavelkovachev.recipes.ui.activity.settings.SettingsActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.homescreen.HomeScreenFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class HomeScreenActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
@@ -32,6 +35,8 @@ public class HomeScreenActivity extends AppCompatActivity {
                 .replace(R.id.container, new HomeScreenFragment());
         fragmentTransaction.commit();
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

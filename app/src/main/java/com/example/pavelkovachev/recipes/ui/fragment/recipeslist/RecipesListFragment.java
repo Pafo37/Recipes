@@ -20,8 +20,8 @@ import java.util.List;
 
 public class RecipesListFragment extends Fragment implements RecipesListAdapter.ItemListener {
 
-    RecyclerView recyclerView;
-    List<DataModel> arrayList;
+    private RecyclerView recyclerView;
+    private List<DataModel> arrayList;
     private static final int SPAN_COUNT = 2;
 
     @Nullable
