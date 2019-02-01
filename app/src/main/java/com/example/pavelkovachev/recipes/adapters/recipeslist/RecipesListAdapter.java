@@ -43,8 +43,8 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
         public ViewHolder(View view) {
             super(view);
-            view.setOnClickListener(this);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
         }
 
         @OnClick(R.id.img_triple_vertical_dots)

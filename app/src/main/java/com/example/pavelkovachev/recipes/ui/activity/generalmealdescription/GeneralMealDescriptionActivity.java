@@ -24,8 +24,8 @@ public class GeneralMealDescriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_general_meal_description);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Recipe name");   //this is for testing only
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.container_general_meal_description, GeneralMealDescriptionFragment.newInstance());
         fragmentTransaction.commit();

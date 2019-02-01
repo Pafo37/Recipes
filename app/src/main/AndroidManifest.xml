@@ -34,5 +34,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.homescreen.HomeScreenActivity" />
         </activity>
+        <activity
+            android:name=".ui.activity.recipeslist.RecipesListActivity"
+            android:parentActivityName=".ui.activity.categories.CategoriesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.categories.CategoriesActivity" />
+        </activity>
     </application>
 </manifest>
