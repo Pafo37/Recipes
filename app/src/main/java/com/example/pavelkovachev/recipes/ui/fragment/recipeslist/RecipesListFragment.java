@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,11 +16,10 @@ import com.example.pavelkovachev.recipes.DataModel;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.recipeslist.RecipesListAdapter;
 import com.example.pavelkovachev.recipes.ui.activity.generalmealdescription.GeneralMealDescriptionActivity;
+import com.example.pavelkovachev.recipes.ui.activity.personalpreferences.PersonalPreferencesActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 public class RecipesListFragment extends Fragment implements RecipesListAdapter.ItemListener {
 
@@ -45,13 +45,20 @@ public class RecipesListFragment extends Fragment implements RecipesListAdapter.
 
     @Override
     public void onItemClick(DataModel item) {
-        Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
-        intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        startActivity(new Intent(getActivity(), GeneralMealDescriptionActivity.class));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.id_menu_favorites:
+                startActivity(new Intent(getActivity(), PersonalPreferencesActivity.class));
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
     public void onTripleDotClicked(DataModel model) {
-        //TODO: not implemented
     }
 }

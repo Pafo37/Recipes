@@ -5,19 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.pavelkovachev.recipes.R;
-import com.example.pavelkovachev.recipes.ui.activity.categories.CategoriesActivity;
+import com.example.pavelkovachev.recipes.ui.activity.personalpreferences.PersonalPreferencesActivity;
 import com.example.pavelkovachev.recipes.ui.activity.settings.SettingsActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.homescreen.HomeScreenFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class HomeScreenActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
@@ -42,6 +40,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         getMenuInflater().inflate(R.menu.menu_settings, menu);
+        getMenuInflater().inflate(R.menu.menu_favorites,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -50,6 +49,8 @@ public class HomeScreenActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.id_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
+            case R.id.id_favorites:
+                startActivity(new Intent(this, PersonalPreferencesActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

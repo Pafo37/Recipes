@@ -24,6 +24,7 @@ public class PersonalPreferencesActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         setTitle(R.string.your_recipes_title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, PersonalPreferencesFragmentHost.newInstance());
         fragmentTransaction.commit();
