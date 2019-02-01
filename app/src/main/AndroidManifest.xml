@@ -22,24 +22,10 @@
         <activity android:name=".ui.activity.settings.SettingsActivity" />
         <activity
             android:name=".ui.activity.categories.CategoriesActivity"
-            android:parentActivityName=".ui.activity.homescreen.HomeScreenActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.homescreen.HomeScreenActivity" />
-        </activity>
-        <activity
-            android:name=".ui.activity.generalmealdescription.GeneralMealDescriptionActivity"
-            android:parentActivityName=".ui.activity.homescreen.HomeScreenActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.homescreen.HomeScreenActivity" />
-        </activity>
+            android:parentActivityName=".ui.activity.homescreen.HomeScreenActivity" />
+        <activity android:name=".ui.activity.generalmealdescription.GeneralMealDescriptionActivity" />
         <activity
             android:name=".ui.activity.recipeslist.RecipesListActivity"
-            android:parentActivityName=".ui.activity.categories.CategoriesActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.categories.CategoriesActivity" />
-        </activity>
+            android:parentActivityName=".ui.activity.categories.CategoriesActivity" />
     </application>
 </manifest>

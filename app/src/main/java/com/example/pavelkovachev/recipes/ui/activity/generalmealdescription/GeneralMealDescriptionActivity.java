@@ -2,11 +2,9 @@ package com.example.pavelkovachev.recipes.ui.activity.generalmealdescription;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.ui.fragment.generalmealdescription.GeneralMealDescriptionFragment;
@@ -29,5 +27,11 @@ public class GeneralMealDescriptionActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.container_general_meal_description, GeneralMealDescriptionFragment.newInstance());
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }
