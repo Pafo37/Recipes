@@ -29,23 +29,22 @@ public class HomeScreenFragment extends Fragment implements HomeScreenContract.V
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         return view;
     }
+
     @OnClick(R.id.cardview_categories)
-    void onCategoriesClicked(){
+    void onCategoriesClicked() {
         startActivity(new Intent(getActivity(), CategoriesActivity.class));
     }
 
     @OnClick(R.id.cardview_random_meal)
-    void onRandomMealClicked(){
+    void onRandomMealClicked() {
         startActivity(new Intent(getActivity(), GeneralMealDescriptionActivity.class));
     }
 
     @OnClick(R.id.cardview_latest_meal)
-    void onLatestMealClicked(){
-        startActivity(new Intent(getActivity(),GeneralMealDescriptionActivity.class));
+    void onLatestMealClicked() {
+        startActivity(new Intent(getActivity(), GeneralMealDescriptionActivity.class));
     }
-
-
 }

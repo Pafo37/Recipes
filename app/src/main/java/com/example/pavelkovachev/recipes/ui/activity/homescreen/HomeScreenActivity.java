@@ -49,7 +49,7 @@ public class HomeScreenActivity extends AppCompatActivity {
             case R.id.id_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
-            case R.id.id_favorites:
+            case R.id.id_menu_favorites:
                 startActivity(new Intent(this, PersonalPreferencesActivity.class));
                 break;
         }

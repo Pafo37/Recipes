@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/id_menu_favorites"
+        android:id="@+id/id_menu_add_favorites"
         android:title="Add to Favorites" />
     <item
         android:id="@+id/id_menu_share"

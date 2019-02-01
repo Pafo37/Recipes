@@ -61,7 +61,6 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
         }
     }
 
-
     @NonNull
     @Override
     public ViewHolderMealType onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -73,7 +72,6 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolderMealType viewHolderMealType, int i) {
         viewHolderMealType.setMealtypeData((MealTypeModel) list.get(i));
     }
-
 
     @Override
     public int getItemCount() {

@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.categories.cuisine.CuisineAdapter;
@@ -43,7 +42,7 @@ public class CuisineFragment extends Fragment implements CuisineAdapter.cuisineI
         arrayList.add(new CuisineModel("America2", R.drawable.ic_united_states));
         CuisineAdapter cuisineAdapter = new CuisineAdapter(arrayList, getContext(), this);
         recyclerView.setAdapter(cuisineAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         return view;
     }

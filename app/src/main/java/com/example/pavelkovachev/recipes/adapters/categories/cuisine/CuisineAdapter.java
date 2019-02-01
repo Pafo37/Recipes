@@ -69,7 +69,6 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
         viewHolderCuisine.setCuisineData((CuisineModel) list.get(i));
     }
 
-
     @Override
     public int getItemCount() {
         return list.size();

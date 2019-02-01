@@ -13,17 +13,17 @@ import com.example.pavelkovachev.recipes.R;
 public class GeneralMealDescriptionFragment extends Fragment {
 
     public static GeneralMealDescriptionFragment newInstance() {
-        
+
         Bundle args = new Bundle();
         GeneralMealDescriptionFragment fragment = new GeneralMealDescriptionFragment();
         fragment.setArguments(args);
         return fragment;
     }
-    
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_general_meal_description,container,false);
+        View view = inflater.inflate(R.layout.fragment_general_meal_description, container, false);
         return view;
     }
 }
