@@ -9,7 +9,7 @@
         android:id="@+id/id_recycler_view_recipes_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin_between_elements_default"
+        android:layout_margin="@dimen/cardview_recipes_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_recipes_list">

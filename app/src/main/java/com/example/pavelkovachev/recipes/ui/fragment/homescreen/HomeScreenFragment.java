@@ -19,7 +19,6 @@ import butterknife.OnClick;
 
 public class HomeScreenFragment extends Fragment implements HomeScreenContract.View {
 
-
     @Override
     public void setPresenter(HomeScreenContract.Presenter presenter) {
 

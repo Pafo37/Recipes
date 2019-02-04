@@ -21,5 +21,6 @@
     <dimen name="home_screen_img_width_height">180dp</dimen>
     <dimen name="default_image_category_icon_size">64dp</dimen>
     <dimen name="favorites_default_width_height">80dp</dimen>
+    <dimen name="cardview_recipes_list">4dp</dimen>
 
 </resources>

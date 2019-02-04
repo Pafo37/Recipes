@@ -11,11 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.pavelkovachev.recipes.R;
-import com.vansuita.pickimage.bean.PickResult;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
-import com.vansuita.pickimage.listeners.IPickCancel;
-import com.vansuita.pickimage.listeners.IPickResult;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,17 +42,7 @@ public class AddRecipeDialogFragment extends DialogFragment {
     @OnClick(R.id.fab_camera)
     public void onCameraClicked() {
         PickImageDialog.build(new PickSetup())
-                .setOnPickResult(new IPickResult() {
-                    @Override
-                    public void onPickResult(PickResult pickResult) {
-                        imgPictureTaken.setImageBitmap(pickResult.getBitmap());
-                    }
-                })
-                .setOnPickCancel(new IPickCancel() {
-                    @Override
-                    public void onCancelClick() {
-                        Log.e("TAG", "Cancel");
-                    }
-                }).show(getFragmentManager());
+                .setOnPickResult(pickResult -> imgPictureTaken.setImageBitmap(pickResult.getBitmap()))
+                .setOnPickCancel(() -> Log.e("TAG", "Cancel")).show(getFragmentManager());
     }
 }
