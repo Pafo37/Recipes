@@ -21,7 +21,6 @@ public class HomeScreenFragment extends Fragment implements HomeScreenContract.V
 
     @Override
     public void setPresenter(HomeScreenContract.Presenter presenter) {
-
     }
 
     @Nullable

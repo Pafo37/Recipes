@@ -17,7 +17,6 @@ import butterknife.OnClick;
 public class MyRecipesFragment extends Fragment {
 
     public static MyRecipesFragment newInstance() {
-
         Bundle args = new Bundle();
         MyRecipesFragment fragment = new MyRecipesFragment();
         fragment.setArguments(args);

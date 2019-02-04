@@ -34,7 +34,6 @@ public class HomeScreenActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);

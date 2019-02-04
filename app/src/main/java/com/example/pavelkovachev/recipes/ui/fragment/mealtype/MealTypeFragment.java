@@ -25,7 +25,6 @@ public class MealTypeFragment extends Fragment implements MealTypeAdapter.mealTy
     private List<MealTypeModel> arrayList;
 
     public static MealTypeFragment newInstance() {
-
         Bundle args = new Bundle();
         MealTypeFragment fragment = new MealTypeFragment();
         fragment.setArguments(args);
