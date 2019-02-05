@@ -23,10 +23,7 @@ public class PersonalPreferencesFragmentHost extends Fragment {
     TabLayout tabLayoutFavoritesMyRecipes;
 
     public static PersonalPreferencesFragmentHost newInstance() {
-        Bundle args = new Bundle();
-        PersonalPreferencesFragmentHost fragment = new PersonalPreferencesFragmentHost();
-        fragment.setArguments(args);
-        return fragment;
+        return new PersonalPreferencesFragmentHost();
     }
 
     @Nullable

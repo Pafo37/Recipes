@@ -23,10 +23,7 @@ public class AddRecipeDialogFragment extends DialogFragment {
     ImageView imgPictureTaken;
 
     public static AddRecipeDialogFragment newInstance() {
-        Bundle args = new Bundle();
-        AddRecipeDialogFragment fragment = new AddRecipeDialogFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return new AddRecipeDialogFragment();
     }
 
     @Nullable
@@ -43,6 +40,6 @@ public class AddRecipeDialogFragment extends DialogFragment {
     public void onCameraClicked() {
         PickImageDialog.build(new PickSetup())
                 .setOnPickResult(pickResult -> imgPictureTaken.setImageBitmap(pickResult.getBitmap()))
-                .setOnPickCancel(() -> Log.e("TAG", "Cancel")).show(getFragmentManager());
+                .setOnPickCancel(() -> Log.d("TAG", "Cancel")).show(getFragmentManager());
     }
 }

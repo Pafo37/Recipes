@@ -25,10 +25,7 @@ public class MealTypeFragment extends Fragment implements MealTypeAdapter.mealTy
     private List<MealTypeModel> arrayList;
 
     public static MealTypeFragment newInstance() {
-        Bundle args = new Bundle();
-        MealTypeFragment fragment = new MealTypeFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return new MealTypeFragment();
     }
 
     @Nullable
@@ -37,14 +34,14 @@ public class MealTypeFragment extends Fragment implements MealTypeAdapter.mealTy
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category_mealtype, container, false);
-        recyclerView=view.findViewById(R.id.recyclerView_category_mealtype);
-        arrayList=new ArrayList<>();
-        arrayList.add(new MealTypeModel("Breakfast","This is the best breakfast",R.drawable.ic_breakfast));
-        arrayList.add(new MealTypeModel("Breakfast","This is the best breakfast",R.drawable.ic_breakfast));
-        MealTypeAdapter mealTypeAdapter=new MealTypeAdapter(arrayList,getContext(),this);
+        recyclerView = view.findViewById(R.id.recyclerView_category_mealtype);
+        arrayList = new ArrayList<>();
+        arrayList.add(new MealTypeModel("Breakfast", "This is the best breakfast", R.drawable.ic_breakfast));
+        arrayList.add(new MealTypeModel("Breakfast", "This is the best breakfast", R.drawable.ic_breakfast));
+        MealTypeAdapter mealTypeAdapter = new MealTypeAdapter(arrayList, getContext(), this);
         recyclerView.setAdapter(mealTypeAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
         return view;
     }
 

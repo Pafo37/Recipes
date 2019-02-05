@@ -13,10 +13,7 @@ import com.example.pavelkovachev.recipes.R;
 public class FavoritesFragment extends Fragment {
 
     public static FavoritesFragment newInstance() {
-        Bundle args = new Bundle();
-        FavoritesFragment fragment = new FavoritesFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return  new FavoritesFragment();
     }
 
     @Nullable

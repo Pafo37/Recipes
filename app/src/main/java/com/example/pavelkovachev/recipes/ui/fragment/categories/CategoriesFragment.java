@@ -24,10 +24,7 @@ public class CategoriesFragment extends Fragment {
     TabLayout tabLayoutCategories;
 
     public static CategoriesFragment newInstance() {
-        Bundle args = new Bundle();
-        CategoriesFragment fragment = new CategoriesFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return new CategoriesFragment();
     }
 
     @Nullable

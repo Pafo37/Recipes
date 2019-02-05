@@ -21,9 +21,9 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
     private List list;
     private Context context;
-    private cuisineItemListener cuisineItemListener;
+    private CuisineItemListener cuisineItemListener;
 
-    public CuisineAdapter(List list, Context context, CuisineAdapter.cuisineItemListener cuisineItemListener) {
+    public CuisineAdapter(List list, Context context, CuisineItemListener cuisineItemListener) {
         this.list = list;
         this.context = context;
         this.cuisineItemListener = cuisineItemListener;
@@ -74,7 +74,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
         return list.size();
     }
 
-    public interface cuisineItemListener {
+    public interface CuisineItemListener {
         void onItemClick(CuisineModel cuisineItem);
     }
 }

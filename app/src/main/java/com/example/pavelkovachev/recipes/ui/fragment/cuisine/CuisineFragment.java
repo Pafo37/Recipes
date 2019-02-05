@@ -20,16 +20,13 @@ import com.example.pavelkovachev.recipes.ui.activity.recipeslist.RecipesListActi
 import java.util.ArrayList;
 import java.util.List;
 
-public class CuisineFragment extends Fragment implements CuisineAdapter.cuisineItemListener {
+public class CuisineFragment extends Fragment implements CuisineAdapter.CuisineItemListener {
 
     private RecyclerView recyclerView;
     private List<CuisineModel> arrayList;
 
     public static CuisineFragment newInstance() {
-        Bundle args = new Bundle();
-        CuisineFragment fragment = new CuisineFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return new CuisineFragment();
     }
 
     @Nullable
@@ -42,8 +39,8 @@ public class CuisineFragment extends Fragment implements CuisineAdapter.cuisineI
         arrayList.add(new CuisineModel("America2", R.drawable.ic_united_states));
         CuisineAdapter cuisineAdapter = new CuisineAdapter(arrayList, getContext(), this);
         recyclerView.setAdapter(cuisineAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
         return view;
     }
 

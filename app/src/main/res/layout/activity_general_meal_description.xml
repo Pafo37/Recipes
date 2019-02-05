@@ -12,9 +12,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@android:color/white">
-
-    </android.support.v7.widget.Toolbar>
+        app:titleTextColor="@android:color/white" />
 
     <FrameLayout
         android:id="@+id/container_general_meal_description"

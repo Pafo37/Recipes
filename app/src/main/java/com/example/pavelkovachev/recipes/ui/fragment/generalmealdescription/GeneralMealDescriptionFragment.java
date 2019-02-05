@@ -13,10 +13,7 @@ import com.example.pavelkovachev.recipes.R;
 public class GeneralMealDescriptionFragment extends Fragment {
 
     public static GeneralMealDescriptionFragment newInstance() {
-        Bundle args = new Bundle();
-        GeneralMealDescriptionFragment fragment = new GeneralMealDescriptionFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return new GeneralMealDescriptionFragment();
     }
 
     @Nullable
