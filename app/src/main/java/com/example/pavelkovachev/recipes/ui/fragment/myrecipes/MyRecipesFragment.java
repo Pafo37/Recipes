@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.pavelkovachev.recipes.R;
+import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
+import com.example.pavelkovachev.recipes.persistence.database.model.RecipeDao;
 
 public class MyRecipesFragment extends Fragment {
 
@@ -24,6 +26,8 @@ public class MyRecipesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_recipes, container, false);
+        RecipeDao recipeDao= DatabaseCreator.getRecipeDatabase(getContext()).recipeDao();
+        recipeDao.insertAll();
         return view;
     }
 }
