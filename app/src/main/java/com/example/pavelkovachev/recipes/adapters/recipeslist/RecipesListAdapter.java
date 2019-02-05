@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -42,22 +43,26 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
         DataModel item;
 
         public ViewHolder(View view) {
-
             super(view);
-            view.setOnClickListener(this);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
         }
 
         @OnClick(R.id.img_triple_vertical_dots)
         void onTripleDotsClicked() {
             PopupMenu popupMenu = new PopupMenu(context, this.itemView);
             popupMenu.getMenuInflater().inflate(R.menu.menu_recipes_dropdown, popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    return false;
+                }
+            });
             popupMenu.show();
         }
 
         public void setData(DataModel item) {
             this.item = item;
-
             txtRecipeListTitle.setText(item.text);
             imgCategories.setImageResource(item.drawable);
         }

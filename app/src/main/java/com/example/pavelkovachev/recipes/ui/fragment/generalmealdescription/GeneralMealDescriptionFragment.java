@@ -1,4 +1,4 @@
-package com.example.pavelkovachev.recipes.ui.fragment.favorites;
+package com.example.pavelkovachev.recipes.ui.fragment.generalmealdescription;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 
 import com.example.pavelkovachev.recipes.R;
 
-public class FavoritesFragment extends Fragment {
+public class GeneralMealDescriptionFragment extends Fragment {
 
-    public static FavoritesFragment newInstance() {
-        return  new FavoritesFragment();
+    public static GeneralMealDescriptionFragment newInstance() {
+        return new GeneralMealDescriptionFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+        View view = inflater.inflate(R.layout.fragment_general_meal_description, container, false);
         return view;
     }
 }

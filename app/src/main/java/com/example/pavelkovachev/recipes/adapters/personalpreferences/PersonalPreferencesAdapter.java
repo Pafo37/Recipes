@@ -1,4 +1,4 @@
-package com.example.pavelkovachev.recipes.adapter.personalpreferences;
+package com.example.pavelkovachev.recipes.adapters.personalpreferences;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;

@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.pavelkovachev.recipes.R;
+import com.example.pavelkovachev.recipes.ui.activity.personalpreferences.PersonalPreferencesActivity;
 import com.example.pavelkovachev.recipes.ui.activity.settings.SettingsActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.homescreen.HomeScreenFragment;
 
@@ -37,6 +38,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         getMenuInflater().inflate(R.menu.menu_settings, menu);
+        getMenuInflater().inflate(R.menu.menu_favorites, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -45,6 +47,10 @@ public class HomeScreenActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.id_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
+                break;
+            case R.id.id_menu_favorites:
+                startActivity(new Intent(this, PersonalPreferencesActivity.class));
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

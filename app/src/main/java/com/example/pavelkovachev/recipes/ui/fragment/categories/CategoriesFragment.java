@@ -24,12 +24,7 @@ public class CategoriesFragment extends Fragment {
     TabLayout tabLayoutCategories;
 
     public static CategoriesFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        CategoriesFragment fragment = new CategoriesFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return new CategoriesFragment();
     }
 
     @Nullable
@@ -37,9 +32,14 @@ public class CategoriesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_categories_host, container, false);
         ButterKnife.bind(this, view);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         CategoriesAdapter adapter = new CategoriesAdapter(getActivity().getSupportFragmentManager());
         viewPagerCategories.setAdapter(adapter);
         tabLayoutCategories.setupWithViewPager(viewPagerCategories);
-        return view;
     }
 }
