@@ -23,6 +23,7 @@ public class RecipesListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         setTitle(R.string.recipes_title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.container_recipes_list, new RecipesListFragment());
         fragmentTransaction.commit();

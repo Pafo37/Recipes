@@ -24,6 +24,7 @@
         tools:src="@drawable/cardview_random_meal" />
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/margin_between_elements_default"

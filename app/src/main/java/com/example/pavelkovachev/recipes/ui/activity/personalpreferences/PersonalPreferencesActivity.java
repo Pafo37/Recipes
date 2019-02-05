@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.ui.fragment.personalpreferences.PersonalPreferencesFragmentHost;
 
@@ -24,6 +23,7 @@ public class PersonalPreferencesActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         setTitle(R.string.your_recipes_title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, PersonalPreferencesFragmentHost.newInstance());
         fragmentTransaction.commit();

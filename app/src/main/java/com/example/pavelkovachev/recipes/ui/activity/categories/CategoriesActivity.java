@@ -24,6 +24,7 @@ public class CategoriesActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         setTitle(R.string.categories_title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.container_categories, CategoriesFragment.newInstance());
         fragmentTransaction.commit();

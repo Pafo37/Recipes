@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 dependencies {
@@ -37,4 +41,11 @@ dependencies {
 
     //RecyclerView
     implementation 'com.android.support:recyclerview-v7:28.0.0'
+
+    //PickImage
+    implementation 'com.github.jrvansuita:PickImage:2.2.4'
+
+    //PermissionsDispatcher
+    implementation 'com.github.hotchemi:permissionsdispatcher:3.1.0'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
 }
