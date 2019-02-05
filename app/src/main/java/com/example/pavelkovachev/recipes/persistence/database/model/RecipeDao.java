@@ -18,6 +18,9 @@ public interface RecipeDao {
     @Insert
     void insertAll(Recipe... recipes);
 
+    @Insert
+    void insert(Recipe recipe);
+
     @Delete
     void delete (Recipe recipe);
 }
