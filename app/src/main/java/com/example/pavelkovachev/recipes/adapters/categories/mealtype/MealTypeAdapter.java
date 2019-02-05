@@ -38,7 +38,7 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
         @BindView(R.id.txt_mealtype_category_description)
         TextView txtCategoryMealTypeDescription;
 
-        MealTypeModel mealTypeItem;
+        private MealTypeModel mealTypeItem;
 
         public ViewHolderMealType(@NonNull View itemView) {
             super(itemView);
@@ -65,7 +65,6 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
     @Override
     public ViewHolderMealType onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new ViewHolderMealType(LayoutInflater.from(context).inflate(R.layout.item_category_mealtype, viewGroup, false));
-
     }
 
     @Override

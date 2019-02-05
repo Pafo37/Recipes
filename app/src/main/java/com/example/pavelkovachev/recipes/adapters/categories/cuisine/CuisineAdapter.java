@@ -36,7 +36,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
         @BindView(R.id.img_test_category_cuisine)
         ImageView imgCategoryCuisine;
 
-        CuisineModel cuisineItem;
+        private CuisineModel cuisineItem;
 
         public ViewHolderCuisine(@NonNull View itemView) {
             super(itemView);
