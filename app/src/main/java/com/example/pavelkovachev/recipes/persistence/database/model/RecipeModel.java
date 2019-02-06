@@ -5,7 +5,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity
-public class Recipe {
+public class RecipeModel {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
