@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@id/guideline">
 
         <EditText
-            android:id="@+id/txt_favorites_meal_title"
+            android:id="@+id/edt_favorites_meal_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_between_elements_default" />
@@ -81,7 +81,7 @@
         app:layout_constraintTop_toBottomOf="@id/txt_input_layout_meal_name">
 
         <EditText
-            android:id="@+id/txt_favorites_description_body"
+            android:id="@+id/edt_favorites_description_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_between_elements_default"
@@ -101,7 +101,7 @@
         app:layout_constraintTop_toBottomOf="@id/txt_input_layout_description">
 
         <EditText
-            android:id="@+id/txt_favorites_ingredients_body"
+            android:id="@+id/edt_favorites_ingredients_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_between_elements_default"
