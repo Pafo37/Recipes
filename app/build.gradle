@@ -22,7 +22,9 @@ android {
         targetCompatibility = '1.8'
     }
 }
-
+ext {
+    room_version = "1.1.1"
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -41,6 +43,10 @@ dependencies {
 
     //RecyclerView
     implementation 'com.android.support:recyclerview-v7:28.0.0'
+
+    //Room
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
 
     //PickImage
     implementation 'com.github.jrvansuita:PickImage:2.2.4'
