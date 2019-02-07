@@ -12,7 +12,7 @@ public interface RecipeModelDao {
     @Query("SELECT * FROM RecipeModel")
     List<RecipeModel> getAllRecipes();
 
-    @Query("SELECT * FROM RecipeModel WHERE name LIKE :recipeName")
+    @Query("SELECT * FROM RecipeModel WHERE name = :recipeName")
     List<RecipeModel> findByName(String recipeName);
 
     @Insert
