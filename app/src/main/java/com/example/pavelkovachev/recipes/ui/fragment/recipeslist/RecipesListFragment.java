@@ -20,7 +20,7 @@ import com.example.pavelkovachev.recipes.ui.activity.personalpreferences.Persona
 
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO: Will refactor when mock data is deleted
 public class RecipesListFragment extends Fragment implements RecipesListAdapter.ItemListener {
 
     private RecyclerView recyclerView;

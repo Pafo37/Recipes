@@ -19,7 +19,7 @@ import com.example.pavelkovachev.recipes.ui.activity.recipeslist.RecipesListActi
 
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO: Will refactor when mock data is deleted
 public class MealTypeFragment extends Fragment implements MealTypeAdapter.mealTypeItemListener {
     private RecyclerView recyclerView;
     private List<MealTypeModel> arrayList;
