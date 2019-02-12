@@ -20,7 +20,7 @@ public class PersonalPreferencesActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         setTitle(R.string.your_recipes_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        commitFragmentTranasction(R.id.fragment_container, PersonalPreferencesFragmentHost.newInstance());
+        commitFragmentTransaction(R.id.fragment_container, PersonalPreferencesFragmentHost.newInstance());
     }
 
     @Override

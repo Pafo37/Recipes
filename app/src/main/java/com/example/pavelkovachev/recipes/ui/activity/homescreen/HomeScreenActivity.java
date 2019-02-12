@@ -25,7 +25,7 @@ public class HomeScreenActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.toolbar_home_title);
-        commitFragmentTranasction(R.id.container, new HomeScreenFragment());
+        commitFragmentTransaction(R.id.container, new HomeScreenFragment());
     }
 
     @Override

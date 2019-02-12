@@ -20,7 +20,7 @@ public class GeneralMealDescriptionActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         setTitle("RecipeModel name"); // this is for testing only
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        commitFragmentTranasction(R.id.container_general_meal_description, GeneralMealDescriptionFragment.newInstance());
+        commitFragmentTransaction(R.id.container_general_meal_description, GeneralMealDescriptionFragment.newInstance());
     }
 
     @Override

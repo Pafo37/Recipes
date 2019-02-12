@@ -21,7 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @LayoutRes
     protected abstract int getLayoutResId();
 
-    protected void commitFragmentTranasction(int contentResId, Fragment target) {
+    protected void commitFragmentTransaction(int contentResId, Fragment target) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction()
                 .add(contentResId, target);
         fragmentTransaction.commit();

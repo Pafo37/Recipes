@@ -20,7 +20,7 @@ public class RecipesListActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         setTitle(R.string.recipes_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        commitFragmentTranasction(R.id.container_recipes_list, new RecipesListFragment());
+        commitFragmentTransaction(R.id.container_recipes_list, new RecipesListFragment());
     }
 
     @Override
