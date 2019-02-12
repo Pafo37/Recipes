@@ -1,4 +1,4 @@
-package com.example.pavelkovachev.recipes.persistence.recipe;
+package com.example.pavelkovachev.recipes.persistence.model.recipe;
 
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;

@@ -1,4 +1,4 @@
-package com.example.pavelkovachev.recipes.persistence.recipe;
+package com.example.pavelkovachev.recipes.persistence.model.recipe;
 
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
