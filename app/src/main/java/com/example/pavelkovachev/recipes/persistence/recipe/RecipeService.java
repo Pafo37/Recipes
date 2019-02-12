@@ -3,9 +3,9 @@ package com.example.pavelkovachev.recipes.persistence.recipe;
 import android.os.AsyncTask;
 
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
+import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
 public class RecipeService implements RecipeRepository {
@@ -29,30 +29,18 @@ public class RecipeService implements RecipeRepository {
     }
 
     @Override
-    public RecipeModel getByName(String recipeName) {
-        try {
-            return new getByNameAsyncTask().execute(recipeName).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public RecipeModel getByName(String recipeName, AsyncTaskResult result) {
+        new GetByNameAsyncTask(result).execute(recipeName);
         return null;
     }
 
     @Override
-    public List<RecipeModel> getAllRecipes() {
-        try {
-            return new getAllRecipesAsyncTask().execute().get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public List<RecipeModel> getAllRecipes(AsyncTaskResult result) {
+        new GetAllRecipesAsyncTask(result).execute();
         return null;
     }
 
-    private static class insertAsyncTask extends AsyncTask<RecipeModel, Void, Void> {
+    private static class InsertAsyncTask extends AsyncTask<RecipeModel, Void, Void> {
 
         @Override
         protected Void doInBackground(RecipeModel... recipeModels) {
@@ -61,19 +49,47 @@ public class RecipeService implements RecipeRepository {
         }
     }
 
-    private static class getByNameAsyncTask extends AsyncTask<String, Void, RecipeModel> {
+    private static class GetByNameAsyncTask extends AsyncTask<String, Void, RecipeModel> {
+
+        private AsyncTaskResult<RecipeModel> asyncTaskResult;
+
+        public GetByNameAsyncTask(AsyncTaskResult<RecipeModel> result) {
+            this.asyncTaskResult = result;
+        }
 
         @Override
         protected RecipeModel doInBackground(String... recipeName) {
             return recipeModelDao.getByName(recipeName[0]);
         }
+
+        @Override
+        protected void onPostExecute(RecipeModel recipeModel) {
+            super.onPostExecute(recipeModel);
+            if (asyncTaskResult != null) {
+                asyncTaskResult.onSuccess(recipeModel);
+            }
+        }
     }
 
-    private static class getAllRecipesAsyncTask extends AsyncTask<Void, Void, List<RecipeModel>> {
+    private static class GetAllRecipesAsyncTask extends AsyncTask<Void, Void, List<RecipeModel>> {
+
+        private AsyncTaskResult<List<RecipeModel>> asyncTaskResult;
+
+        public GetAllRecipesAsyncTask(AsyncTaskResult<List<RecipeModel>> asyncTaskResult) {
+            this.asyncTaskResult = asyncTaskResult;
+        }
 
         @Override
         protected List<RecipeModel> doInBackground(Void... voids) {
             return recipeModelDao.getAllRecipes();
+        }
+
+        @Override
+        protected void onPostExecute(List<RecipeModel> recipeModels) {
+            super.onPostExecute(recipeModels);
+            if (asyncTaskResult != null) {
+                asyncTaskResult.onSuccess(recipeModels);
+            }
         }
     }
 }
