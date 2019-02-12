@@ -1,4 +1,4 @@
-package com.example.pavelkovachev.recipes.persistence.database.model;
+package com.example.pavelkovachev.recipes.persistence.recipe;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
