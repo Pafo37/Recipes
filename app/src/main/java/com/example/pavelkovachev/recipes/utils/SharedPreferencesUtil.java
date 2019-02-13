@@ -5,19 +5,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharedPreferencesUtil {
-    private static SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil();
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
 
     private SharedPreferencesUtil() {
     }
 
-    public static SharedPreferencesUtil getInstance(Context context) {
+    public static void init(Context context) {
         if (sharedPreferences == null) {
             sharedPreferences = context.getSharedPreferences(context.getPackageName(), Activity.MODE_PRIVATE);
             editor = sharedPreferences.edit();
         }
-        return sharedPreferencesUtil;
     }
 
     public void savePreference(String key, String value) {
