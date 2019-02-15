@@ -26,6 +26,8 @@ public class AddRecipeDialogFragment extends DialogFragment {
     EditText edtMealDescription;
     @BindView(R.id.txt_favorites_meal_title)
     EditText edtMealTitle;
+    @BindView(R.id.edt_favorites_ingredients_body)
+    EditText edtMealIngredients;
 
     public static AddRecipeDialogFragment newInstance() {
         return new AddRecipeDialogFragment();

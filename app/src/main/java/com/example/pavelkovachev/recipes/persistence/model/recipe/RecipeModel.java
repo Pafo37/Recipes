@@ -1,4 +1,4 @@
-package com.example.pavelkovachev.recipes.persistence.database.model;
+package com.example.pavelkovachev.recipes.persistence.model.recipe;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -8,49 +8,49 @@ import android.arch.persistence.room.PrimaryKey;
 public class RecipeModel {
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    private int id;
 
     @ColumnInfo(name = "name")
-    public String recipeName;
+    private String recipeName;
 
     @ColumnInfo(name = "description")
-    public String recipeDescription;
+    private String recipeDescription;
 
     @ColumnInfo(name = "mealtype")
-    public String recipeMealType;
+    private String recipeMealType;
 
     @ColumnInfo(name = "cuisine")
-    public String recipeCuisine;
+    private String recipeCuisine;
 
     @ColumnInfo(name = "ingredient1")
-    public String recipeIngredient1;
+    private String recipeIngredient1;
 
     @ColumnInfo(name = "ingredient2")
-    public String recipeIngredient2;
+    private String recipeIngredient2;
 
     @ColumnInfo(name = "ingredient3")
-    public String recipeIngredient3;
+    private String recipeIngredient3;
 
     @ColumnInfo(name = "ingredient4")
-    public String recipeIngredient4;
+    private String recipeIngredient4;
 
     @ColumnInfo(name = "ingredient5")
-    public String recipeIngredient5;
+    private String recipeIngredient5;
 
     @ColumnInfo(name = "measure1")
-    public String recipeMeasure1;
+    private String recipeMeasure1;
 
     @ColumnInfo(name = "measure2")
-    public String recipeMeasure2;
+    private String recipeMeasure2;
 
     @ColumnInfo(name = "measure3")
-    public String recipeMeasure3;
+    private String recipeMeasure3;
 
     @ColumnInfo(name = "measure4")
-    public String recipeMeasure4;
+    private String recipeMeasure4;
 
     @ColumnInfo(name = "measure5")
-    public String recipeMeasure5;
+    private String recipeMeasure5;
 
     public int getId() {
         return id;
