@@ -4,19 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.personalpreferences.PersonalPreferencesAdapter;
+import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class PersonalPreferencesFragmentHost extends Fragment {
+public class PersonalPreferencesFragmentHost extends BaseFragment {
     @BindView(R.id.viewpager_personal_preferences)
     ViewPager viewPagerFavoritesMyRecipes;
     @BindView(R.id.tab_layout_personal_preferences)
@@ -26,14 +23,16 @@ public class PersonalPreferencesFragmentHost extends Fragment {
         return new PersonalPreferencesFragmentHost();
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_personal_preferences, container, false);
-        ButterKnife.bind(this, view);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         PersonalPreferencesAdapter adapter = new PersonalPreferencesAdapter(getActivity().getSupportFragmentManager());
         viewPagerFavoritesMyRecipes.setAdapter(adapter);
         tabLayoutFavoritesMyRecipes.setupWithViewPager(viewPagerFavoritesMyRecipes);
-        return view;
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_personal_preferences;
     }
 }

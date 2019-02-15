@@ -1,34 +1,24 @@
 package com.example.pavelkovachev.recipes.ui.fragment.homescreen;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenContract;
 import com.example.pavelkovachev.recipes.ui.activity.categories.CategoriesActivity;
 import com.example.pavelkovachev.recipes.ui.activity.generalmealdescription.GeneralMealDescriptionActivity;
+import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HomeScreenFragment extends Fragment implements HomeScreenContract.View {
+public class HomeScreenFragment extends BaseFragment implements HomeScreenContract.View {
 
     @Override
     public void setPresenter(HomeScreenContract.Presenter presenter) {
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+    protected int getLayoutResId() {
+        return R.layout.fragment_home_screen;
     }
 
     @OnClick(R.id.cardview_categories)
