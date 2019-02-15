@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 public class MainActivity extends FragmentActivity implements DownloadCallback {
 
     private TextView dataText;
-    private NetworkUtil networkFragment;
+    private NetworkUtil networkUtil;
     private boolean isDownloading = false;
     private FloatingActionButton fab1;
     private FloatingActionButton fab2;
@@ -27,8 +27,8 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_main);
         dataText = findViewById(R.id.data_text);
-        networkFragment = NetworkUtil.getInstance(getSupportFragmentManager(),
-                "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772");
+       // networkUtil = NetworkUtil.getInstance(getSupportFragmentManager(),
+        //        "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772");
         fab1 = findViewById(R.id.fab1);
         fab2 = findViewById(R.id.fab2);
         imageView = findViewById(R.id.imageTest);
@@ -41,16 +41,16 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishDownloading();
+             //   finishDownloading(recipeModel);
                 dataText.setText("");
             }
         });
     }
 
     private void startDownload() {
-        if (!isDownloading && networkFragment != null) {
+        if (!isDownloading && networkUtil != null) {
             // Execute the async download.
-            networkFragment.startDownload();
+            //networkUtil.startDownload();
             isDownloading = true;
         }
     }
@@ -72,10 +72,10 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
     }
 
     @Override
-    public void finishDownloading() {
+    public void finishDownloading(RecipeModel recipeModel) {
         isDownloading = false;
-        if (networkFragment != null) {
-            networkFragment.cancelDownload();
+        if (networkUtil != null) {
+            networkUtil.cancelDownload();
         }
     }
 }

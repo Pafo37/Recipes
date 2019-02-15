@@ -43,13 +43,13 @@
                 app:layout_constraintTop_toBottomOf="@id/img_random_meal" />
 
             <TextView
+                android:id="@+id/txt_random_meal_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_gray"
                 android:textSize="@dimen/material_design_body_txt_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_random_meal_title"
-                tools:text="It is really good" />
+                app:layout_constraintTop_toBottomOf="@id/txt_random_meal_title" />
 
         </android.support.constraint.ConstraintLayout>
 

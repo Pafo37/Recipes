@@ -1,13 +1,8 @@
 package com.example.pavelkovachev.recipes;
 
-import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.JsonReader;
 
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
@@ -19,65 +14,27 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class NetworkUtil extends Fragment {
-    private static final String TAG = "NetworkUtil";
-    private static final String URL_KEY = "UrlKey";
+public class NetworkUtil {
+    private static DownloadCallback downloadCallback;
+    private static DownloadTask downloadTask;
+    private static String urlString;
 
-    private DownloadCallback downloadCallback;
-    private DownloadTask downloadTask;
-    private String urlString;
-
-    public static NetworkUtil getInstance(FragmentManager fragmentManager, String url) {
-        NetworkUtil networkFragment = (NetworkUtil) fragmentManager.findFragmentByTag(NetworkUtil.TAG);
-        if (networkFragment == null) {
-            networkFragment = new NetworkUtil();
-            Bundle args = new Bundle();
-            args.putString(URL_KEY, url);
-            networkFragment.setArguments(args);
-            fragmentManager.beginTransaction().add(networkFragment, TAG).commit();
-        }
-        return networkFragment;
-    }
-
-    public void startDownload() {
+    public static void startDownload(DownloadCallback downloadCallback, String url) {
         cancelDownload();
+        NetworkUtil.downloadCallback = downloadCallback;
         downloadTask = new DownloadTask();
+        urlString = url;
         downloadTask.execute(urlString);
     }
 
-    public void cancelDownload() {
+    public static void cancelDownload() {
         if (downloadTask != null) {
             downloadTask.cancel(true);
             downloadTask = null;
         }
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-        urlString = getArguments().getString(URL_KEY);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        downloadCallback = (DownloadCallback) context;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        downloadCallback = null;
-    }
-
-    @Override
-    public void onDestroy() {
-        cancelDownload();
-        super.onDestroy();
-    }
-
-    private class DownloadTask extends AsyncTask<String, Integer, RecipeModel> {
+    private static class DownloadTask extends AsyncTask<String, Integer, RecipeModel> {
 
         @Override
         protected void onPreExecute() {
@@ -112,11 +69,11 @@ public class NetworkUtil extends Fragment {
             if (recipeModel != null && downloadCallback != null) {
                 downloadCallback.updateFromDownload(recipeModel);
             }
-            downloadCallback.finishDownloading();
+            downloadCallback.finishDownloading(recipeModel);
         }
     }
 
-    private RecipeModel downloadUrl(URL url) throws IOException {
+    private static RecipeModel downloadUrl(URL url) throws IOException {
         InputStream stream = null;
         HttpsURLConnection connection = null;
         RecipeModel recipeModel = null;

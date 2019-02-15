@@ -11,6 +11,6 @@ public interface DownloadCallback {
 
     NetworkInfo getActiveNetworkInfo();
 
-    void finishDownloading();
+    void finishDownloading(RecipeModel recipeModel);
 
 }
