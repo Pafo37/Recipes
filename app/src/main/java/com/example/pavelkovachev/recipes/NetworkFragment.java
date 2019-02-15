@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -153,7 +154,7 @@ public class NetworkFragment extends Fragment {
             }
             stream = connection.getInputStream();
             if (stream != null) {
-                result = readStream(stream, 500);
+                result = readStream(stream);
             }
         } finally {
             if (stream != null) {
@@ -166,20 +167,12 @@ public class NetworkFragment extends Fragment {
         return result;
     }
 
-    private String readStream(InputStream stream, int maxLength) throws IOException {
-        String result = null;
-        InputStreamReader reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[maxLength];
-        int numChars = 0;
-        int readSize = 0;
-        while (numChars < maxLength && readSize != -1) {
-            numChars += readSize;
-            int pct = (100 * numChars) / maxLength;
-            readSize = reader.read(buffer, numChars, buffer.length - numChars);
-        }
-        if (numChars != -1) {
-            numChars = Math.min(numChars, maxLength);
-            result = new String(buffer, 0, numChars);
+    private String readStream(InputStream stream) throws IOException {
+        String result = "";
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
+        String input = "";
+        while ((input = bufferedReader.readLine()) != null) {
+            result += input;
         }
         return result;
     }
