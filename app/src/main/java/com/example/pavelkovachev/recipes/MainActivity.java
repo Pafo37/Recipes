@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.persistence.database.model.RecipeModel;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends FragmentActivity implements DownloadCallback {
 
@@ -18,6 +20,7 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
     private boolean isDownloading = false;
     private FloatingActionButton fab1;
     private FloatingActionButton fab2;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,7 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
                 "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772");
         fab1 = findViewById(R.id.fab1);
         fab2 = findViewById(R.id.fab2);
+        imageView = findViewById(R.id.imageTest);
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,8 +58,9 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
 
     @Override
     public void updateFromDownload(RecipeModel result) {
-        if(result!=null){
+        if (result != null) {
             dataText.setText(result.getRecipeName());
+            Picasso.get().load(result.getRecipeImage()).into(imageView);
         }
     }
 

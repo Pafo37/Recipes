@@ -22,6 +22,9 @@ public class RecipeModel {
     @ColumnInfo(name = "cuisine")
     public String recipeCuisine;
 
+    @ColumnInfo(name = "recipeImage")
+    public String recipeImage;
+
     @ColumnInfo(name = "ingredient1")
     public String recipeIngredient1;
 
@@ -63,6 +66,15 @@ public class RecipeModel {
     public String getRecipeName() {
         return recipeName;
     }
+
+    public String getRecipeImage() {
+        return recipeImage;
+    }
+
+    public void setRecipeImage(String recipeImage) {
+        this.recipeImage = recipeImage;
+    }
+
 
     public void setRecipeName(String recipeName) {
         this.recipeName = recipeName;

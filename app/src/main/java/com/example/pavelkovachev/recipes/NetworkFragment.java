@@ -188,6 +188,9 @@ public class NetworkFragment extends Fragment {
                 case "strInstructions":
                     recipeModel.setRecipeDescription(reader.nextString());
                     break;
+                case "strMealThumb":
+                    recipeModel.setRecipeImage(reader.nextString());
+                    break;
                 case "strIngredient1":
                     recipeModel.setRecipeIngredient1(reader.nextString());
                     break;
@@ -220,7 +223,6 @@ public class NetworkFragment extends Fragment {
                     break;
                 default:
                     reader.skipValue();
-
             }
         }
         reader.endObject();
