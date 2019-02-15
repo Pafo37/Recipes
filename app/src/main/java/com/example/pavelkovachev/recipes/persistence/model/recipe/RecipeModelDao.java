@@ -1,4 +1,4 @@
-package com.example.pavelkovachev.recipes.persistence.database.model;
+package com.example.pavelkovachev.recipes.persistence.model.recipe;
 
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -13,17 +13,11 @@ public interface RecipeModelDao {
     List<RecipeModel> getAllRecipes();
 
     @Query("SELECT * FROM RecipeModel WHERE name = :recipeName")
-    List<RecipeModel> findByName(String recipeName);
-
-    @Insert
-    void insertAllRecipes(RecipeModel... recipes);
+    RecipeModel getByName(String recipeName);
 
     @Insert
     void insertRecipe(RecipeModel recipe);
 
     @Delete
     void deleteRecipe(RecipeModel recipe);
-
-    @Query("DELETE FROM RecipeModel WHERE description = :description")
-    void deleteByDescription(String description);
 }
