@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.pavelkovachev.recipes.persistence.database.model.RecipeModel;
+
 public class MainActivity extends FragmentActivity implements DownloadCallback {
 
     private TextView dataText;
@@ -22,9 +24,10 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_main);
         dataText = findViewById(R.id.data_text);
-        networkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://api.darksky.net/forecast/09ab310ab4796f158888f52a6b5fa900/42.69751,23.32415?exclude=alerts,minutely,hourly,daily,flags");
-        fab1=findViewById(R.id.fab1);
-        fab2=findViewById(R.id.fab2);
+        networkFragment = NetworkFragment.getInstance(getSupportFragmentManager(),
+                "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772");
+        fab1 = findViewById(R.id.fab1);
+        fab2 = findViewById(R.id.fab2);
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,14 +51,12 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
         }
     }
 
-    @Override
-    public void updateFromDownload(String result) {
-        if(result!=null){
-            dataText.setText(result);
-        } else{
-            dataText.setText("Connection error!");
-        }
 
+    @Override
+    public void updateFromDownload(RecipeModel result) {
+        if(result!=null){
+            dataText.setText(result.getRecipeName());
+        }
     }
 
     @Override
@@ -68,8 +69,8 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
 
     @Override
     public void finishDownloading() {
-        isDownloading=false;
-        if(networkFragment!=null){
+        isDownloading = false;
+        if (networkFragment != null) {
             networkFragment.cancelDownload();
         }
     }

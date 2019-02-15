@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.JsonReader;
+
+import com.example.pavelkovachev.recipes.persistence.database.model.RecipeModel;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -75,20 +78,7 @@ public class NetworkFragment extends Fragment {
         super.onDestroy();
     }
 
-    private class DownloadTask extends AsyncTask<String, Integer, DownloadTask.Result> {
-
-        class Result {
-            public String resultValue;
-            public Exception exception;
-
-            public Result(String resultValue) {
-                this.resultValue = resultValue;
-            }
-
-            public Result(Exception exception) {
-                this.exception = exception;
-            }
-        }
+    private class DownloadTask extends AsyncTask<String, Integer, RecipeModel> {
 
         @Override
         protected void onPreExecute() {
@@ -104,43 +94,33 @@ public class NetworkFragment extends Fragment {
         }
 
         @Override
-        protected Result doInBackground(String... urls) {
-            Result result = null;
+        protected RecipeModel doInBackground(String... urls) {
+            RecipeModel recipeModel = null;
             if (!isCancelled() && urls != null && urls.length > 0) {
                 String urlString = urls[0];
                 try {
                     URL url = new URL(urlString);
-                    String resultString = downloadUrl(url);
-                    if (resultString != null) {
-                        result = new Result(resultString);
-                    } else {
-                        throw new IOException("No response received");
-                    }
-                } catch (Exception e) {
-                    result = new Result(e);
+                    recipeModel = downloadUrl(url);
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            return result;
+            return recipeModel;
         }
 
         @Override
-        protected void onPostExecute(Result result) {
-            if (result != null && downloadCallback != null) {
-                if (result.exception != null) {
-                    downloadCallback.updateFromDownload(result.exception.getMessage());
-                } else if (result.resultValue != null) {
-                    downloadCallback.updateFromDownload(result.resultValue);
-                }
-                downloadCallback.finishDownloading();
+        protected void onPostExecute(RecipeModel recipeModel) {
+            if (recipeModel != null && downloadCallback != null) {
+                downloadCallback.updateFromDownload(recipeModel);
             }
+            downloadCallback.finishDownloading();
         }
     }
 
-    private String downloadUrl(URL url) throws IOException {
+    private RecipeModel downloadUrl(URL url) throws IOException {
         InputStream stream = null;
         HttpsURLConnection connection = null;
-        String result = null;
+        RecipeModel recipeModel = null;
         try {
             connection = (HttpsURLConnection) url.openConnection();
             connection.setReadTimeout(3000);
@@ -154,7 +134,7 @@ public class NetworkFragment extends Fragment {
             }
             stream = connection.getInputStream();
             if (stream != null) {
-                result = readStream(stream);
+                recipeModel = readJsonStream(stream);
             }
         } finally {
             if (stream != null) {
@@ -164,7 +144,7 @@ public class NetworkFragment extends Fragment {
                 connection.disconnect();
             }
         }
-        return result;
+        return recipeModel;
     }
 
     private String readStream(InputStream stream) throws IOException {
@@ -175,5 +155,87 @@ public class NetworkFragment extends Fragment {
             result += input;
         }
         return result;
+    }
+
+    private static RecipeModel readJsonStream(InputStream inputStream) throws IOException {
+        JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
+        return readRecipeData(reader);
+
+    }
+
+    private static RecipeModel readRecipeData(JsonReader reader) throws IOException {
+        RecipeModel recipeModel = new RecipeModel();
+        reader.beginObject();
+        while (reader.hasNext()) {
+            String token = reader.nextName();
+            switch (token) {
+                case "meals":
+                    recipeModel = readRecipeFields(reader);
+                    break;
+                default:
+                    reader.skipValue();
+            }
+        }
+        reader.endObject();
+        return recipeModel;
+    }
+
+    private static RecipeModel readRecipeFields(JsonReader reader) throws IOException {
+        RecipeModel recipeModel = new RecipeModel();
+        reader.beginArray();
+        reader.beginObject();
+        while (reader.hasNext()) {
+            String token = reader.nextName();
+            switch (token) {
+                case "strMeal":
+                    recipeModel.setRecipeName(reader.nextString());
+                    break;
+                case "strCategory":
+                    recipeModel.setRecipeMealType(reader.nextString());
+                    break;
+                case "strArea":
+                    recipeModel.setRecipeCuisine(reader.nextString());
+                    break;
+                case "strInstructions":
+                    recipeModel.setRecipeDescription(reader.nextString());
+                    break;
+                case "strIngredient1":
+                    recipeModel.setRecipeIngredient1(reader.nextString());
+                    break;
+                case "strIngredient2":
+                    recipeModel.setRecipeIngredient2(reader.nextString());
+                    break;
+                case "strIngredient3":
+                    recipeModel.setRecipeIngredient3(reader.nextString());
+                    break;
+                case "strIngredient4":
+                    recipeModel.setRecipeIngredient4(reader.nextString());
+                    break;
+                case "strIngredient5":
+                    recipeModel.setRecipeIngredient5(reader.nextString());
+                    break;
+                case "strMeasure1":
+                    recipeModel.setRecipeIngredient1(reader.nextString());
+                    break;
+                case "strMeasure2":
+                    recipeModel.setRecipeIngredient2(reader.nextString());
+                    break;
+                case "strMeasure3":
+                    recipeModel.setRecipeIngredient3(reader.nextString());
+                    break;
+                case "strMeasure4":
+                    recipeModel.setRecipeIngredient4(reader.nextString());
+                    break;
+                case "strMeasure5":
+                    recipeModel.setRecipeIngredient5(reader.nextString());
+                    break;
+                default:
+                    reader.skipValue();
+
+            }
+        }
+        reader.endObject();
+        reader.endArray();
+        return recipeModel;
     }
 }

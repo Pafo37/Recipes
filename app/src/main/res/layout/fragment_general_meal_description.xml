@@ -67,7 +67,7 @@
         android:layout_width="@dimen/no_dimens"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_between_elements_default"
-        android:text="@string/general_meal_default_instructions_title"
+        android:text="@string/favorites_description_title"
         android:textSize="@dimen/material_design_title_txt_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
