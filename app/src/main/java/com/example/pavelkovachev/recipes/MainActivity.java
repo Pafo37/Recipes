@@ -10,13 +10,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.pavelkovachev.recipes.persistence.database.model.RecipeModel;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends FragmentActivity implements DownloadCallback {
 
     private TextView dataText;
-    private NetworkFragment networkFragment;
+    private NetworkUtil networkFragment;
     private boolean isDownloading = false;
     private FloatingActionButton fab1;
     private FloatingActionButton fab2;
@@ -27,7 +27,7 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_main);
         dataText = findViewById(R.id.data_text);
-        networkFragment = NetworkFragment.getInstance(getSupportFragmentManager(),
+        networkFragment = NetworkUtil.getInstance(getSupportFragmentManager(),
                 "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772");
         fab1 = findViewById(R.id.fab1);
         fab2 = findViewById(R.id.fab2);
@@ -54,7 +54,6 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
             isDownloading = true;
         }
     }
-
 
     @Override
     public void updateFromDownload(RecipeModel result) {

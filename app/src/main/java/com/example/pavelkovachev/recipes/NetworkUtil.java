@@ -10,7 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.JsonReader;
 
-import com.example.pavelkovachev.recipes.persistence.database.model.RecipeModel;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,18 +19,18 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class NetworkFragment extends Fragment {
-    private static final String TAG = "NetworkFragment";
+public class NetworkUtil extends Fragment {
+    private static final String TAG = "NetworkUtil";
     private static final String URL_KEY = "UrlKey";
 
     private DownloadCallback downloadCallback;
     private DownloadTask downloadTask;
     private String urlString;
 
-    public static NetworkFragment getInstance(FragmentManager fragmentManager, String url) {
-        NetworkFragment networkFragment = (NetworkFragment) fragmentManager.findFragmentByTag(NetworkFragment.TAG);
+    public static NetworkUtil getInstance(FragmentManager fragmentManager, String url) {
+        NetworkUtil networkFragment = (NetworkUtil) fragmentManager.findFragmentByTag(NetworkUtil.TAG);
         if (networkFragment == null) {
-            networkFragment = new NetworkFragment();
+            networkFragment = new NetworkUtil();
             Bundle args = new Bundle();
             args.putString(URL_KEY, url);
             networkFragment.setArguments(args);
