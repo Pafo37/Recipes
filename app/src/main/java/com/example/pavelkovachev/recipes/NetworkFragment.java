@@ -12,7 +12,6 @@ import android.util.JsonReader;
 
 import com.example.pavelkovachev.recipes.persistence.database.model.RecipeModel;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -145,16 +144,6 @@ public class NetworkFragment extends Fragment {
             }
         }
         return recipeModel;
-    }
-
-    private String readStream(InputStream stream) throws IOException {
-        String result = "";
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
-        String input = "";
-        while ((input = bufferedReader.readLine()) != null) {
-            result += input;
-        }
-        return result;
     }
 
     private static RecipeModel readJsonStream(InputStream inputStream) throws IOException {
