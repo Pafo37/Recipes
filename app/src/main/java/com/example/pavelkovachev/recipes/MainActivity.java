@@ -50,7 +50,7 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
     private void startDownload() {
         if (!isDownloading && networkUtil != null) {
             // Execute the async download.
-            //networkUtil.startDownload();
+            //networkUtil.getRandomMeal();
             isDownloading = true;
         }
     }
@@ -77,5 +77,10 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
         if (networkUtil != null) {
             networkUtil.cancelDownload();
         }
+    }
+
+    @Override
+    public void updateFromDownload2(RecipeModel recipeModel) {
+
     }
 }

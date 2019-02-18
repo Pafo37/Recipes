@@ -13,4 +13,6 @@ public interface DownloadCallback {
 
     void finishDownloading(RecipeModel recipeModel);
 
+    void updateFromDownload2(RecipeModel recipeModel);
+
 }

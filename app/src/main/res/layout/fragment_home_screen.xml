@@ -76,14 +76,13 @@
                 android:layout_width="@dimen/home_screen_img_width_height"
                 android:layout_height="@dimen/home_screen_img_width_height"
                 android:contentDescription="@string/homescreen_description_latest_meal"
-                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/cardview_random_meal" />
 
             <TextView
-                android:id="@+id/txt_latest_meal_title"
+                android:id="@+id/txt_latest_meal_name"
                 android:layout_width="@dimen/no_dimens"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_between_elements_default"
@@ -101,7 +100,7 @@
                 android:textSize="@dimen/material_design_body_txt_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_latest_meal_title"
+                app:layout_constraintTop_toBottomOf="@id/txt_latest_meal_name"
                 tools:text="It is really good" />
 
 

@@ -16,13 +16,21 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class NetworkUtil {
     private static DownloadCallback downloadCallback;
-    private static DownloadTask downloadTask;
+    private static RandomMealTask downloadTask;
     private static String urlString;
 
-    public static void startDownload(DownloadCallback downloadCallback, String url) {
+    public static void getRandomMeal(DownloadCallback downloadCallback, String url) {
         cancelDownload();
         NetworkUtil.downloadCallback = downloadCallback;
-        downloadTask = new DownloadTask();
+        downloadTask = new RandomMealTask();
+        urlString = url;
+        downloadTask.execute(urlString);
+    }
+
+    public static void getLatestMeal(DownloadCallback downloadCallback, String url) {
+        cancelDownload();
+        NetworkUtil.downloadCallback = downloadCallback;
+        downloadTask = new RandomMealTask();
         urlString = url;
         downloadTask.execute(urlString);
     }
@@ -34,7 +42,7 @@ public class NetworkUtil {
         }
     }
 
-    private static class DownloadTask extends AsyncTask<String, Integer, RecipeModel> {
+    private static class RandomMealTask extends AsyncTask<String, Integer, RecipeModel> {
 
         @Override
         protected void onPreExecute() {
@@ -44,7 +52,7 @@ public class NetworkUtil {
                         (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
                                 && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
                     downloadCallback.updateFromDownload(null);
-                    cancel(true);
+                    // cancel(true);
                 }
             }
         }
@@ -102,6 +110,7 @@ public class NetworkUtil {
         }
         return recipeModel;
     }
+
 
     private static RecipeModel readJsonStream(InputStream inputStream) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));

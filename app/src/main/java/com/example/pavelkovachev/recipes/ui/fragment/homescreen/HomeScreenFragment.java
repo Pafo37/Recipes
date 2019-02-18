@@ -7,41 +7,60 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.pavelkovachev.recipes.NetworkUtil;
 import com.example.pavelkovachev.recipes.R;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenContract;
 import com.example.pavelkovachev.recipes.ui.activity.categories.CategoriesActivity;
 import com.example.pavelkovachev.recipes.ui.activity.generalmealdescription.GeneralMealDescriptionActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class HomeScreenFragment extends BaseFragment implements HomeScreenContract.View {
 
+    private HomeScreenContract.Presenter presenter;
+
     @BindView(R.id.txt_random_meal_name)
-    TextView textView;
-    private NetworkUtil networkUtil;
+    TextView txtRandomMealName;
+    @BindView(R.id.img_random_meal)
+    ImageView imgRandomMeal;
+    @BindView(R.id.txt_latest_meal_name)
+    TextView txtLatestMealName;
+    @BindView(R.id.img_latest_meal)
+    ImageView imgLatestMeal;
 
     public static HomeScreenFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        HomeScreenFragment fragment = new HomeScreenFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return new HomeScreenFragment();
     }
+
+    public HomeScreenFragment() {
+    }
+
+    ;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return super.onCreateView(inflater, container, savedInstanceState);
+
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        ButterKnife.bind(this, view);
+        presenter.start();
+    }
+
+
+    @Override
     public void setPresenter(HomeScreenContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override
@@ -64,5 +83,15 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
         startActivity(new Intent(getActivity(), GeneralMealDescriptionActivity.class));
     }
 
+    @Override
+    public void setRandomMeal(RecipeModel recipeModel) {
+        Picasso.get().load(recipeModel.getRecipeImage()).into(imgRandomMeal);
+        txtRandomMealName.setText(recipeModel.getRecipeName());
+    }
 
+    @Override
+    public void setLatestMeal(RecipeModel recipeModel) {
+        Picasso.get().load(recipeModel.getRecipeImage()).into(imgLatestMeal);
+        txtLatestMealName.setText(recipeModel.getRecipeName());
+    }
 }
