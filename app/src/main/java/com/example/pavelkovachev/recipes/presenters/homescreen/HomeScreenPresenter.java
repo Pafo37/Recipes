@@ -16,22 +16,20 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Downlo
     public HomeScreenPresenter(HomeScreenContract.View view) {
         this.view = view;
         view.setPresenter(this);
-        homeScreenFragment=HomeScreenFragment.newInstance();
+        homeScreenFragment = HomeScreenFragment.newInstance();
     }
 
     @Override
     public void start() {
         NetworkUtil.getRandomMeal(this,
                 "https://www.themealdb.com/api/json/v1/1/random.php");
-        //NetworkUtil.getLatestMeal(this,"https://www.themealdb.com/api/json/v1/1/latest.php");
+        NetworkUtil.getLatestMeal(this, "https://www.themealdb.com/api/json/v1/1/latest.php");
     }
 
     @Override
     public void updateFromDownload(RecipeModel result) {
         if (result != null) {
             view.setRandomMeal(result);
-
-
         }
     }
 

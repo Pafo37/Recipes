@@ -82,7 +82,7 @@
                 tools:src="@drawable/cardview_random_meal" />
 
             <TextView
-                android:id="@+id/txt_latest_meal_name"
+                android:id="@+id/txt_latest_meal_title"
                 android:layout_width="@dimen/no_dimens"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_between_elements_default"
@@ -94,13 +94,14 @@
                 app:layout_constraintTop_toBottomOf="@id/img_latest_meal" />
 
             <TextView
+                android:id="@+id/txt_latest_meal_name"
                 android:layout_width="@dimen/no_dimens"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_gray"
                 android:textSize="@dimen/material_design_body_txt_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_latest_meal_name"
+                app:layout_constraintTop_toBottomOf="@id/txt_latest_meal_title"
                 tools:text="It is really good" />
 
 

@@ -75,7 +75,7 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
     public void finishDownloading(RecipeModel recipeModel) {
         isDownloading = false;
         if (networkUtil != null) {
-            networkUtil.cancelDownload();
+            networkUtil.cancelRandomMealDownload();
         }
     }
 
