@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
+import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
+import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao;
 import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenContract;
 import com.example.pavelkovachev.recipes.ui.activity.categories.CategoriesActivity;
 import com.example.pavelkovachev.recipes.ui.activity.generalmealdescription.GeneralMealDescriptionActivity;
@@ -93,5 +96,11 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
     public void setLatestMeal(RecipeModel recipeModel) {
         Picasso.get().load(recipeModel.getRecipeImage()).into(imgLatestMeal);
         txtLatestMealName.setText(recipeModel.getRecipeName());
+    }
+
+    @Override
+    public void saveToDatabase(RecipeModel recipeModel) {
+        RecipeModelDao recipeModelDao = DatabaseCreator.getRecipeDatabase(getContext()).recipeDao();
+        AppExecutor.getInstance().execute(() -> recipeModelDao.insertRecipe(recipeModel));
     }
 }

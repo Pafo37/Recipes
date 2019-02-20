@@ -30,6 +30,7 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Downlo
     public void updateFromDownload(RecipeModel result) {
         if (result != null) {
             view.setRandomMeal(result);
+            view.saveToDatabase(result);
         }
     }
 

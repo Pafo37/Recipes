@@ -11,6 +11,8 @@ public interface HomeScreenContract {
 
         void setLatestMeal(RecipeModel recipeModel);
 
+        void saveToDatabase(RecipeModel recipeModel);
+
     }
 
     interface Presenter extends BasePresenter {

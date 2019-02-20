@@ -271,19 +271,19 @@ public class NetworkUtil {
                     recipeModel.setRecipeIngredient5(reader.nextString());
                     break;
                 case "strMeasure1":
-                    recipeModel.setRecipeIngredient1(reader.nextString());
+                    recipeModel.setRecipeMeasure1(reader.nextString());
                     break;
                 case "strMeasure2":
-                    recipeModel.setRecipeIngredient2(reader.nextString());
+                    recipeModel.setRecipeMeasure2(reader.nextString());
                     break;
                 case "strMeasure3":
-                    recipeModel.setRecipeIngredient3(reader.nextString());
+                    recipeModel.setRecipeMeasure3(reader.nextString());
                     break;
                 case "strMeasure4":
-                    recipeModel.setRecipeIngredient4(reader.nextString());
+                    recipeModel.setRecipeMeasure4(reader.nextString());
                     break;
                 case "strMeasure5":
-                    recipeModel.setRecipeIngredient5(reader.nextString());
+                    recipeModel.setRecipeMeasure5(reader.nextString());
                     break;
                 default:
                     reader.skipValue();
