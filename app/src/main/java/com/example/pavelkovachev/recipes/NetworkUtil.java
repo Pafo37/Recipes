@@ -240,6 +240,9 @@ public class NetworkUtil {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
+                case "idMeal":
+                    recipeModel.setId(reader.nextString());
+                    break;
                 case "strMeal":
                     recipeModel.setRecipeName(reader.nextString());
                     break;
@@ -250,7 +253,7 @@ public class NetworkUtil {
                     recipeModel.setRecipeCuisine(reader.nextString());
                     break;
                 case "strInstructions":
-                    recipeModel.setRecipeDescription(reader.nextString());
+                    recipeModel.setRecipeInstructions(reader.nextString());
                     break;
                 case "strMealThumb":
                     recipeModel.setRecipeImage(reader.nextString());
@@ -301,6 +304,9 @@ public class NetworkUtil {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
+                case "idMeal":
+                    recipeModel.setId(reader.nextString());
+                    break;
                 case "strMeal":
                     recipeModel.setRecipeName(reader.nextString());
                     break;
@@ -311,7 +317,7 @@ public class NetworkUtil {
                     recipeModel.setRecipeCuisine(reader.nextString());
                     break;
                 case "strInstructions":
-                    recipeModel.setRecipeDescription(reader.nextString());
+                    recipeModel.setRecipeInstructions(reader.nextString());
                     break;
                 case "strMealThumb":
                     recipeModel.setRecipeImage(reader.nextString());

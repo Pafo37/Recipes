@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
 import com.example.pavelkovachev.recipes.R;
+import com.example.pavelkovachev.recipes.presenters.generalmealdescription.GeneralMealDescriptionPresenter;
 import com.example.pavelkovachev.recipes.ui.activity.base.BaseActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.generalmealdescription.GeneralMealDescriptionFragment;
 
@@ -20,7 +21,9 @@ public class GeneralMealDescriptionActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         setTitle("RecipeModel name"); // this is for testing only
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        commitFragmentTransaction(R.id.container_general_meal_description, GeneralMealDescriptionFragment.newInstance());
+        GeneralMealDescriptionFragment fragment = GeneralMealDescriptionFragment.newInstance();
+        commitFragmentTransaction(R.id.container_general_meal_description, fragment);
+        new GeneralMealDescriptionPresenter(fragment);
     }
 
     @Override

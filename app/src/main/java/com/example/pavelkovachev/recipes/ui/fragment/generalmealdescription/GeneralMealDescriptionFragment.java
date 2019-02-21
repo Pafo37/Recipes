@@ -1,9 +1,49 @@
 package com.example.pavelkovachev.recipes.ui.fragment.generalmealdescription;
 
-import com.example.pavelkovachev.recipes.R;
-import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class GeneralMealDescriptionFragment extends BaseFragment {
+import com.example.pavelkovachev.recipes.R;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
+import com.example.pavelkovachev.recipes.presenters.generalmealdescription.GeneralMealDescriptionContract;
+import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenPresenter;
+import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
+import com.example.pavelkovachev.recipes.ui.fragment.homescreen.HomeScreenFragment;
+import com.squareup.picasso.Picasso;
+
+import butterknife.BindView;
+
+public class GeneralMealDescriptionFragment extends BaseFragment implements GeneralMealDescriptionContract.View {
+
+    @BindView(R.id.img_general_meal)
+    ImageView imgMeal;
+    @BindView(R.id.txt_meal_title)
+    TextView recipeName;
+    @BindView(R.id.txt_general_meal_type)
+    TextView recipeMealType;
+    @BindView(R.id.txt_general_meal_cuisine)
+    TextView recipeCuisine;
+    @BindView(R.id.txt_general_meal_instructions_body)
+    TextView recipeInstructions;
+
+    GeneralMealDescriptionContract.Presenter presenter;
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //FIXME
+        if (HomeScreenFragment.isLatestMealClicked) {
+            presenter.loadRecipe(HomeScreenPresenter.CURRENT_LATEST_MEAL_ID);
+        }
+        if (HomeScreenFragment.isRandomMealClicked) {
+            presenter.loadRecipe(HomeScreenPresenter.CURRENT_RANDOM_MEAL_ID);
+        }
+    }
 
     public static GeneralMealDescriptionFragment newInstance() {
         return new GeneralMealDescriptionFragment();
@@ -12,5 +52,22 @@ public class GeneralMealDescriptionFragment extends BaseFragment {
     @Override
     protected int getLayoutResId() {
         return R.layout.fragment_general_meal_description;
+    }
+
+    @Override
+    public void showRecipe(RecipeModel model) {
+        if (isAdded()) {
+            recipeName.setText(model.getRecipeName());
+            recipeMealType.setText("Meal Type: " + model.getRecipeMealType());
+            recipeCuisine.setText("Cusine: " + model.getRecipeCuisine());
+            recipeInstructions.setMovementMethod(new ScrollingMovementMethod());
+            recipeInstructions.setText(model.getRecipeInstructions());
+            Picasso.get().load(model.getRecipeImage()).into(imgMeal);
+        }
+    }
+
+    @Override
+    public void setPresenter(GeneralMealDescriptionContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 }

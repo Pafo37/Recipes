@@ -10,7 +10,7 @@ public interface RecipeRepository {
 
     void deleteRecipe(RecipeModel recipeModel);
 
-    RecipeModel getByName(String recipeName, AsyncTaskResult result);
+    RecipeModel getById(String recipeName, AsyncTaskResult result);
 
     List<RecipeModel> getAllRecipes(AsyncTaskResult result);
 }

@@ -29,8 +29,8 @@ public class RecipeService implements RecipeRepository {
     }
 
     @Override
-    public RecipeModel getByName(String recipeName, AsyncTaskResult result) {
-        new GetByNameAsyncTask(result).execute(recipeName);
+    public RecipeModel getById(String id, AsyncTaskResult result) {
+        new GetByIdAsyncTask(result).execute(id);
         return null;
     }
 
@@ -49,17 +49,17 @@ public class RecipeService implements RecipeRepository {
         }
     }
 
-    private static class GetByNameAsyncTask extends AsyncTask<String, Void, RecipeModel> {
+    private static class GetByIdAsyncTask extends AsyncTask<String, Void, RecipeModel> {
 
         private AsyncTaskResult<RecipeModel> asyncTaskResult;
 
-        public GetByNameAsyncTask(AsyncTaskResult<RecipeModel> result) {
+        private GetByIdAsyncTask(AsyncTaskResult<RecipeModel> result) {
             this.asyncTaskResult = result;
         }
 
         @Override
-        protected RecipeModel doInBackground(String... recipeName) {
-            return recipeModelDao.getByName(recipeName[0]);
+        protected RecipeModel doInBackground(String... recipeId) {
+            return recipeModelDao.getById(recipeId[0]);
         }
 
         @Override
@@ -75,7 +75,7 @@ public class RecipeService implements RecipeRepository {
 
         private AsyncTaskResult<List<RecipeModel>> asyncTaskResult;
 
-        public GetAllRecipesAsyncTask(AsyncTaskResult<List<RecipeModel>> asyncTaskResult) {
+        private GetAllRecipesAsyncTask(AsyncTaskResult<List<RecipeModel>> asyncTaskResult) {
             this.asyncTaskResult = asyncTaskResult;
         }
 

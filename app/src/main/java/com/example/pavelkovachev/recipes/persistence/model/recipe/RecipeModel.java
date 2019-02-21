@@ -3,18 +3,20 @@ package com.example.pavelkovachev.recipes.persistence.model.recipe;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity
 public class RecipeModel {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @NonNull
+    @PrimaryKey()
+    private String id;
 
     @ColumnInfo(name = "name")
     private String recipeName;
 
-    @ColumnInfo(name = "description")
-    private String recipeDescription;
+    @ColumnInfo(name = "instructions")
+    private String recipeInstructions;
 
     @ColumnInfo(name = "mealtype")
     private String recipeMealType;
@@ -55,11 +57,11 @@ public class RecipeModel {
     @ColumnInfo(name = "measure5")
     private String recipeMeasure5;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -80,12 +82,12 @@ public class RecipeModel {
         this.recipeName = recipeName;
     }
 
-    public String getRecipeDescription() {
-        return recipeDescription;
+    public String getRecipeInstructions() {
+        return recipeInstructions;
     }
 
-    public void setRecipeDescription(String recipeDescription) {
-        this.recipeDescription = recipeDescription;
+    public void setRecipeInstructions(String recipeInstructions) {
+        this.recipeInstructions = recipeInstructions;
     }
 
     public String getRecipeMealType() {

@@ -19,7 +19,6 @@ import butterknife.BindView;
 public class HomeScreenActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    private HomeScreenPresenter homeScreenPresenter;
     private HomeScreenFragment homeScreenFragment;
 
     @Override
@@ -30,7 +29,7 @@ public class HomeScreenActivity extends BaseActivity {
         getSupportActionBar().setTitle(R.string.toolbar_home_title);
         homeScreenFragment = HomeScreenFragment.newInstance();
         commitFragmentTransaction(R.id.container, homeScreenFragment);
-        homeScreenPresenter = new HomeScreenPresenter(homeScreenFragment);
+        new HomeScreenPresenter(homeScreenFragment);
     }
 
     @Override

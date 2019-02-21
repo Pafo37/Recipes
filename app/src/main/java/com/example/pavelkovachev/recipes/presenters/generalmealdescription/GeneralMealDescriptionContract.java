@@ -1,18 +1,16 @@
-package com.example.pavelkovachev.recipes.presenters.homescreen;
+package com.example.pavelkovachev.recipes.presenters.generalmealdescription;
 
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.BasePresenter;
 import com.example.pavelkovachev.recipes.presenters.BaseView;
 
-public interface HomeScreenContract {
+public interface GeneralMealDescriptionContract {
 
     interface View extends BaseView<Presenter> {
-        void setRandomMeal(RecipeModel recipeModel);
-
-        void setLatestMeal(RecipeModel recipeModel);
+        void showRecipe(RecipeModel model);
     }
 
     interface Presenter extends BasePresenter {
-        void loadRandomLatestMeals();
+        void loadRecipe(String id);
     }
 }
