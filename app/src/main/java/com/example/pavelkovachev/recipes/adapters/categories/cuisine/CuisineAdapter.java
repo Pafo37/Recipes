@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
@@ -33,21 +32,17 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
         @BindView(R.id.txt_cuisine_category_name)
         TextView txtCuisineCategoryName;
-        @BindView(R.id.img_test_category_cuisine)
-        ImageView imgCategoryCuisine;
-
         private CuisineModel cuisineItem;
 
-        public ViewHolderCuisine(@NonNull View itemView) {
+        private ViewHolderCuisine(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 
-        public void setCuisineData(CuisineModel cuisineItem) {
+        private void setCuisineData(CuisineModel cuisineItem) {
             this.cuisineItem = cuisineItem;
             txtCuisineCategoryName.setText(cuisineItem.getCountry());
-            imgCategoryCuisine.setImageResource(cuisineItem.getFlag());
         }
 
         @Override

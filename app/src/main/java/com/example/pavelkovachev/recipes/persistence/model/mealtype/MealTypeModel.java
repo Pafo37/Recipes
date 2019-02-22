@@ -1,14 +1,31 @@
 package com.example.pavelkovachev.recipes.persistence.model.mealtype;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+@Entity
 public class MealTypeModel {
+
+    @NonNull
+    @PrimaryKey
     private String title;
+
+    @ColumnInfo(name = "description")
     private String description;
-    private int imgMeal;
 
     public MealTypeModel(String title, String description, int imgMeal) {
         this.title = title;
         this.description = description;
-        this.imgMeal = imgMeal;
+    }
+
+    public void setTitle(@NonNull String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getTitle() {
@@ -17,9 +34,5 @@ public class MealTypeModel {
 
     public String getDescription() {
         return description;
-    }
-
-    public int getImgMeal() {
-        return imgMeal;
     }
 }

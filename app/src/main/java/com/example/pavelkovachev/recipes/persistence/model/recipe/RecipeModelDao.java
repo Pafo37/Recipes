@@ -21,5 +21,4 @@ public interface RecipeModelDao {
 
     @Delete
     void deleteRecipe(RecipeModel recipe);
-
 }

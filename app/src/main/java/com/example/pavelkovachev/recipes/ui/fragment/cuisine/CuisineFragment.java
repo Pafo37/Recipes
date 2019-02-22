@@ -19,9 +19,13 @@ import com.example.pavelkovachev.recipes.ui.activity.recipeslist.RecipesListActi
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+
 //TODO: Will refactor when mock data is deleted
 public class CuisineFragment extends Fragment implements CuisineAdapter.CuisineItemListener {
 
+    @BindView(R.id.recyclerview_category_cuisine)
     private RecyclerView recyclerView;
     private List<CuisineModel> arrayList;
 
@@ -33,15 +37,19 @@ public class CuisineFragment extends Fragment implements CuisineAdapter.CuisineI
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category_cuisine, container, false);
-        recyclerView = view.findViewById(R.id.recyclerview_category_cuisine);
         arrayList = new ArrayList<>();
-        arrayList.add(new CuisineModel("America", R.drawable.ic_united_states));
-        arrayList.add(new CuisineModel("America2", R.drawable.ic_united_states));
+        arrayList.add(new CuisineModel("America"));
+        arrayList.add(new CuisineModel("America2"));
         CuisineAdapter cuisineAdapter = new CuisineAdapter(arrayList, getContext(), this);
         recyclerView.setAdapter(cuisineAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

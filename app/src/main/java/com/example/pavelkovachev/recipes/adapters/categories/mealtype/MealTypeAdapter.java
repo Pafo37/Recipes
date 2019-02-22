@@ -48,7 +48,6 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
 
         public void setMealtypeData(MealTypeModel mealTypeItem) {
             this.mealTypeItem = mealTypeItem;
-            imgCategoryMealType.setImageResource(mealTypeItem.getImgMeal());
             txtCategoryMealTypeTitle.setText(mealTypeItem.getTitle());
             txtCategoryMealTypeDescription.setText(mealTypeItem.getDescription());
         }
