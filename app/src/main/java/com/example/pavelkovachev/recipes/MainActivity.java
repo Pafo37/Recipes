@@ -10,8 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
+import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class MainActivity extends FragmentActivity implements DownloadCallback {
 
@@ -56,7 +60,7 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
     }
 
     @Override
-    public void updateFromDownload(RecipeModel result) {
+    public void showRandomMealResult(RecipeModel result) {
         if (result != null) {
             dataText.setText(result.getRecipeName());
             Picasso.get().load(result.getRecipeImage()).into(imageView);
@@ -80,7 +84,22 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
     }
 
     @Override
-    public void updateFromDownload2(RecipeModel recipeModel) {
+    public void showLatestMealResult(RecipeModel recipeModel) {
+
+    }
+
+    @Override
+    public void showCuisineResult(List<CuisineModel> cuisineModel) {
+
+    }
+
+    @Override
+    public void showMealTypeResult(MealTypeModel mealTypeModel) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }

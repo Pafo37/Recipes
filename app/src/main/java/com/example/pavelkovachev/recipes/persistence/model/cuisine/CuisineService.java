@@ -19,7 +19,7 @@ public class CuisineService implements CuisineRepository {
     }
 
     @Override
-    public void insertCuisine(CuisineModel cuisineModel) {
+    public void insertCuisine(List<CuisineModel> cuisineModel) {
         appExecutor.execute(() -> cuisineModelDao.insertCuisine(cuisineModel));
     }
 

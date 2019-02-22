@@ -7,8 +7,12 @@ import com.example.pavelkovachev.recipes.DownloadCallback;
 import com.example.pavelkovachev.recipes.NetworkUtil;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
+import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
+import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao;
+
+import java.util.List;
 
 public class HomeScreenPresenter implements HomeScreenContract.Presenter, DownloadCallback {
 
@@ -27,7 +31,7 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Downlo
     }
 
     @Override
-    public void updateFromDownload(RecipeModel result) {
+    public void showRandomMealResult(RecipeModel result) {
         if (result != null) {
             view.setRandomMeal(result);
             saveToDatabase(result);
@@ -51,12 +55,22 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Downlo
     }
 
     @Override
-    public void updateFromDownload2(RecipeModel result) {
+    public void showLatestMealResult(RecipeModel result) {
         if (result != null) {
             view.setLatestMeal(result);
             saveToDatabase(result);
             CURRENT_LATEST_MEAL_ID = result.getId();
         }
+    }
+
+    @Override
+    public void showCuisineResult(List<CuisineModel> cuisineModel) {
+
+    }
+
+    @Override
+    public void showMealTypeResult(MealTypeModel mealTypeModel) {
+        //NOT USED
     }
 
     @Override

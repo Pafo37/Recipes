@@ -11,11 +11,6 @@ public class CuisineModel {
     @PrimaryKey()
     private String country;
 
-
-    public CuisineModel(String country) {
-        this.country = country;
-    }
-
     public String getCountry() {
         return country;
     }

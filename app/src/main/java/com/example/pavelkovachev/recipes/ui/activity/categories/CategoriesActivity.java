@@ -21,7 +21,9 @@ public class CategoriesActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         setTitle(R.string.categories_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        commitFragmentTransaction(R.id.container_categories, CategoriesFragment.newInstance());
+        CategoriesFragment categoriesFragment = new CategoriesFragment();
+        commitFragmentTransaction(R.id.container_categories, categoriesFragment);
+
     }
 
     @Override

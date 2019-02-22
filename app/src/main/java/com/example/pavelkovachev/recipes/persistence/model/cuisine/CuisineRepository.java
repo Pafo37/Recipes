@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CuisineRepository {
 
-    void insertCuisine(CuisineModel cuisineModel);
+    void insertCuisine(List<CuisineModel> cuisineModel);
 
     void deleteCuisine(CuisineModel cuisineModel);
 

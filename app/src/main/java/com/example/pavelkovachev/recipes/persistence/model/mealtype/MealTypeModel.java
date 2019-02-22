@@ -15,11 +15,6 @@ public class MealTypeModel {
     @ColumnInfo(name = "description")
     private String description;
 
-    public MealTypeModel(String title, String description, int imgMeal) {
-        this.title = title;
-        this.description = description;
-    }
-
     public void setTitle(@NonNull String title) {
         this.title = title;
     }

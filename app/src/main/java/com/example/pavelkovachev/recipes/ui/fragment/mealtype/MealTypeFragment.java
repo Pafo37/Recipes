@@ -36,8 +36,6 @@ public class MealTypeFragment extends Fragment implements MealTypeAdapter.mealTy
         View view = inflater.inflate(R.layout.fragment_category_mealtype, container, false);
         recyclerView = view.findViewById(R.id.recyclerView_category_mealtype);
         arrayList = new ArrayList<>();
-        arrayList.add(new MealTypeModel("Breakfast", "This is the best breakfast", R.drawable.ic_breakfast));
-        arrayList.add(new MealTypeModel("Breakfast", "This is the best breakfast", R.drawable.ic_breakfast));
         MealTypeAdapter mealTypeAdapter = new MealTypeAdapter(arrayList, getContext(), this);
         recyclerView.setAdapter(mealTypeAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
