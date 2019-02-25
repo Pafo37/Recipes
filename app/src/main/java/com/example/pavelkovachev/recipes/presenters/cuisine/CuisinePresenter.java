@@ -16,7 +16,8 @@ import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.List;
 
-public class CuisinePresenter implements CuisineContract.Presenter, DownloadCallback, AsyncTaskResult<List<CuisineModel>> {
+public class CuisinePresenter implements CuisineContract.Presenter, DownloadCallback,
+        AsyncTaskResult<List<CuisineModel>> {
 
     private final CuisineContract.View view;
 
@@ -37,13 +38,6 @@ public class CuisinePresenter implements CuisineContract.Presenter, DownloadCall
         AppExecutor.getInstance().execute(() -> cuisineModelDao.insertCuisine(cuisineModel));
     }
 
-
-
-    @Override
-    public void showMealTypeResult(MealTypeModel mealTypeModel) {
-        //NOT USED
-    }
-
     @Override
     public void showRandomMealResult(RecipeModel result) {
         //NOT USED
@@ -59,6 +53,11 @@ public class CuisinePresenter implements CuisineContract.Presenter, DownloadCall
         if (result != null) {
             saveToDatabase(result);
         }
+    }
+
+    @Override
+    public void showMealTypeResult(List<MealTypeModel> mealTypeModel) {
+        //NOT USED
     }
 
     @Override
@@ -83,7 +82,7 @@ public class CuisinePresenter implements CuisineContract.Presenter, DownloadCall
 
     @Override
     public void loadCuisine() {
-        NetworkUtil.getCuisine(this,"https://www.themealdb.com/api/json/v1/1/list.php?c=list");
+        NetworkUtil.getCuisine(this,"https://www.themealdb.com/api/json/v1/1/list.php?a=list");
     }
 
     @Override

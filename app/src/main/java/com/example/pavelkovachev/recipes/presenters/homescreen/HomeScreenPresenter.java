@@ -65,11 +65,11 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Downlo
 
     @Override
     public void showCuisineResult(List<CuisineModel> cuisineModel) {
-
+//NOT USED
     }
 
     @Override
-    public void showMealTypeResult(MealTypeModel mealTypeModel) {
+    public void showMealTypeResult(List<MealTypeModel> mealTypeModel) {
         //NOT USED
     }
 

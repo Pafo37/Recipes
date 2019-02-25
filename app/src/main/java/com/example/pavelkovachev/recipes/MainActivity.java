@@ -94,7 +94,7 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
     }
 
     @Override
-    public void showMealTypeResult(MealTypeModel mealTypeModel) {
+    public void showMealTypeResult(List<MealTypeModel> mealTypeModel) {
 
     }
 

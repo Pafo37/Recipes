@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
 
     public class ViewHolderMealType extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.img_test_category_mealtype)
+        @BindView(R.id.img_category_mealtype)
         ImageView imgCategoryMealType;
         @BindView(R.id.txt_mealtype_category_name)
         TextView txtCategoryMealTypeTitle;
@@ -50,6 +51,7 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
             this.mealTypeItem = mealTypeItem;
             txtCategoryMealTypeTitle.setText(mealTypeItem.getTitle());
             txtCategoryMealTypeDescription.setText(mealTypeItem.getDescription());
+            Picasso.get().load(mealTypeItem.getImage()).into(imgCategoryMealType);
         }
 
         @Override

@@ -15,6 +15,17 @@ public class MealTypeModel {
     @ColumnInfo(name = "description")
     private String description;
 
+    @ColumnInfo(name = "image")
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public void setTitle(@NonNull String title) {
         this.title = title;
     }

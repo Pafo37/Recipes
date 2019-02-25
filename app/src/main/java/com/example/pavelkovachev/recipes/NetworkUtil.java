@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.JsonReader;
 
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
+import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class NetworkUtil {
     private static RandomMealTask downloadTask;
     private static LatestMealTask latestMealTask;
     private static CuisineTask cuisineTask;
+    private static MealTypeTask mealTypeTask;
     private static String urlString;
 
     public static void getRandomMeal(DownloadCallback downloadCallback, String url) {
@@ -48,6 +50,14 @@ public class NetworkUtil {
         cuisineTask.execute(urlString);
     }
 
+    public static void getMealType(DownloadCallback downloadCallback, String url) {
+        cancelMealTypeDownload();
+        NetworkUtil.downloadCallback = downloadCallback;
+        mealTypeTask = new MealTypeTask();
+        urlString = url;
+        mealTypeTask.execute(urlString);
+    }
+
     public static void cancelRandomMealDownload() {
         if (downloadTask != null) {
             downloadTask.cancel(true);
@@ -66,6 +76,13 @@ public class NetworkUtil {
         if (cuisineTask != null) {
             cuisineTask.cancel(true);
             cuisineTask = null;
+        }
+    }
+
+    private static void cancelMealTypeDownload() {
+        if (mealTypeTask != null) {
+            mealTypeTask.cancel(true);
+            mealTypeTask = null;
         }
     }
 
@@ -183,6 +200,44 @@ public class NetworkUtil {
         }
     }
 
+    private static class MealTypeTask extends AsyncTask<String, Integer, List<MealTypeModel>> {
+
+        @Override
+        protected void onPreExecute() {
+            if (downloadCallback != null) {
+                NetworkInfo networkInfo = downloadCallback.getActiveNetworkInfo();
+                if (networkInfo == null || !networkInfo.isConnected() ||
+                        (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
+                                && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
+                    downloadCallback.showMealTypeResult(null);
+                }
+            }
+        }
+
+        @Override
+        protected List<MealTypeModel> doInBackground(String... urls) {
+            List<MealTypeModel> mealTypeModelList = null;
+            if (!isCancelled() && urls != null && urls.length > 0) {
+                String urlString = urls[0];
+                try {
+                    URL url = new URL(urlString);
+                    mealTypeModelList = mealTypeConnection(url);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return mealTypeModelList;
+        }
+
+        @Override
+        protected void onPostExecute(List<MealTypeModel> mealTypeModel) {
+            if (mealTypeModel != null && downloadCallback != null) {
+                downloadCallback.showMealTypeResult(mealTypeModel);
+            }
+        }
+    }
+
     private static RecipeModel randomMealConnection(URL url) throws IOException {
         InputStream stream = null;
         HttpsURLConnection connection = null;
@@ -273,9 +328,44 @@ public class NetworkUtil {
         return cuisineModelList;
     }
 
+    private static List<MealTypeModel> mealTypeConnection(URL url) throws IOException {
+        List<MealTypeModel> mealTypeModelList = null;
+        InputStream stream = null;
+        HttpsURLConnection connection = null;
+        try {
+            connection = (HttpsURLConnection) url.openConnection();
+            connection.setReadTimeout(3000);
+            connection.setConnectTimeout(3000);
+            connection.setRequestMethod("GET");
+            connection.setDoInput(true);
+            connection.connect();
+            int responseCode = connection.getResponseCode();
+            if (responseCode != HttpsURLConnection.HTTP_OK) {
+                throw new IOException("HTTP error code: " + responseCode);
+            }
+            stream = connection.getInputStream();
+            if (stream != null) {
+                mealTypeModelList = readMealTypeStream(stream);
+            }
+        } finally {
+            if (stream != null) {
+                stream.close();
+            }
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+        return mealTypeModelList;
+    }
+
     private static List<CuisineModel> readCuisineStream(InputStream inputStream) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
         return readCuisineData(reader);
+    }
+
+    private static List<MealTypeModel> readMealTypeStream(InputStream inputStream) throws IOException {
+        JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
+        return readMealTypeData(reader);
     }
 
     private static RecipeModel readRandomMealStream(InputStream inputStream) throws IOException {
@@ -304,6 +394,23 @@ public class NetworkUtil {
         }
         reader.endObject();
         return cuisineModelList;
+    }
+
+    private static List<MealTypeModel> readMealTypeData(JsonReader reader) throws IOException {
+        List<MealTypeModel> mealTypeModelList = null;
+        reader.beginObject();
+        while (reader.hasNext()) {
+            String token = reader.nextName();
+            switch (token) {
+                case "categories":
+                    mealTypeModelList = readMealTypeFields(reader);
+                    break;
+                default:
+                    reader.skipValue();
+            }
+        }
+        reader.endObject();
+        return mealTypeModelList;
     }
 
 
@@ -414,8 +521,8 @@ public class NetworkUtil {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case "strCategory":
-                    cuisineModel=new CuisineModel();
+                case "strArea":
+                    cuisineModel = new CuisineModel();
                     cuisineModel.setCountry(reader.nextString());
                     cuisineModelList.add(cuisineModel);
                     break;
@@ -431,6 +538,41 @@ public class NetworkUtil {
 
         reader.endArray();
         return cuisineModelList;
+    }
+
+    private static List<MealTypeModel> readMealTypeFields(JsonReader reader) throws IOException {
+        List<MealTypeModel> mealTypeModelList = new ArrayList<>();
+        MealTypeModel mealTypeModel = null;
+        reader.beginArray();
+        reader.beginObject();
+        while (reader.hasNext()) {
+            String token = reader.nextName();
+
+            switch (token) {
+                case "strCategory":
+                    mealTypeModel = new MealTypeModel();
+                    mealTypeModel.setTitle(reader.nextString());
+                    break;
+                case "strCategoryThumb":
+                    mealTypeModel.setImage(reader.nextString());
+                    break;
+                case "strCategoryDescription":
+                    mealTypeModel.setDescription(reader.nextString());
+                    break;
+                default:
+                    reader.skipValue();
+            }
+            if (!reader.hasNext()) {
+                mealTypeModelList.add(mealTypeModel);
+                reader.endObject();
+                if(reader.hasNext()){
+                    reader.beginObject();
+                }
+            }
+
+        }
+        reader.endArray();
+        return mealTypeModelList;
     }
 
     private static RecipeModel readLatestRecipeFields(JsonReader reader) throws IOException {

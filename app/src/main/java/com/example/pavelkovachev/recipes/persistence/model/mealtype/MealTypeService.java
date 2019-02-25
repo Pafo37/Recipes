@@ -19,7 +19,7 @@ public class MealTypeService implements MealTypeRepository {
     }
 
     @Override
-    public void insertCuisine(MealTypeModel mealTypeModel) {
+    public void insertCuisine(List<MealTypeModel> mealTypeModel) {
         appExecutor.execute(() -> mealTypeModelDao.insertCuisine(mealTypeModel));
     }
 

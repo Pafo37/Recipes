@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/img_test_category_mealtype"
+            android:id="@+id/img_category_mealtype"
             android:layout_width="@dimen/default_image_category_icon_size"
             android:layout_height="@dimen/default_image_category_icon_size"
             android:layout_marginTop="@dimen/margin_between_elements_default"
@@ -27,19 +27,19 @@
             android:gravity="center_vertical"
             android:textAlignment="center"
             android:textSize="@dimen/material_design_title_txt_size"
-            app:layout_constraintBottom_toBottomOf="@id/img_test_category_mealtype"
-            app:layout_constraintTop_toTopOf="@id/img_test_category_mealtype"
+            app:layout_constraintBottom_toBottomOf="@id/img_category_mealtype"
+            app:layout_constraintTop_toTopOf="@id/img_category_mealtype"
             tools:text="Breakfast" />
 
         <TextView
             android:id="@+id/txt_mealtype_category_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/img_test_category_mealtype"
+            android:layout_below="@id/img_category_mealtype"
             android:layout_margin="@dimen/margin_between_elements_default"
-            android:maxLines="3"
+            android:maxLines="4"
             android:textSize="@dimen/material_design_body_txt_size"
-            app:layout_constraintTop_toBottomOf="@id/img_test_category_mealtype"
+            app:layout_constraintTop_toBottomOf="@id/img_category_mealtype"
             tools:text="This is another text and description.This is another text and descriptionThis is another text and descriptionThis is another text and descriptionThis is another text and description" />
 
     </android.support.constraint.ConstraintLayout>

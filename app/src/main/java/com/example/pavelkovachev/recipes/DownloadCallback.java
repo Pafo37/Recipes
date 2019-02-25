@@ -21,6 +21,6 @@ public interface DownloadCallback {
 
     void showCuisineResult(List<CuisineModel> cuisineModel);
 
-    void showMealTypeResult(MealTypeModel mealTypeModel);
+    void showMealTypeResult(List<MealTypeModel> mealTypeModel);
 
 }
