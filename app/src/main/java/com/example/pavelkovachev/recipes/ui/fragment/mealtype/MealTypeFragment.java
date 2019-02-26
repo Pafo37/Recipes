@@ -28,7 +28,9 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
 
     @BindView(R.id.recyclerView_category_mealtype)
     RecyclerView recyclerView;
-    private List<MealTypeModel> arrayList;
+
+    private List<MealTypeModel> arrayList = new ArrayList<>();
+    private MealTypeAdapter mealTypeAdapter;
 
     public static MealTypeFragment newInstance() {
         return new MealTypeFragment();
@@ -43,8 +45,11 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter = new MealTypePresenter(this);
-        presenter.loadMealType();
         presenter.getMealType();
+        mealTypeAdapter = new MealTypeAdapter(arrayList, getContext(), this);
+        recyclerView.setAdapter(mealTypeAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
     }
 
     @Override
@@ -58,14 +63,21 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     }
 
     @Override
-    public void setMealType(List<MealTypeModel> mealTypeList) {
+    public void loadMealTypesFromApi(List<MealTypeModel> mealTypeList) {
         if (isAdded()) {
-            arrayList = new ArrayList<>();
             arrayList.addAll(mealTypeList);
-            MealTypeAdapter mealTypeAdapter = new MealTypeAdapter(arrayList, getContext(), this);
-            recyclerView.setAdapter(mealTypeAdapter);
-            recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
-            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+            mealTypeAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void showMealTypeFromDb(List<MealTypeModel> result) {
+        if(result.size()==0){
+            presenter.loadMealType();
+        }
+        else{
+            arrayList.addAll(result);
+            mealTypeAdapter.notifyDataSetChanged();
         }
     }
 }

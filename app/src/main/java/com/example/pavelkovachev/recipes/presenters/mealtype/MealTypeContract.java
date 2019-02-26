@@ -9,12 +9,17 @@ import java.util.List;
 public interface MealTypeContract {
 
     interface View extends BaseView<Presenter> {
-        void setMealType(List<MealTypeModel> mealTypeList);
+        void loadMealTypesFromApi(List<MealTypeModel> mealTypeList);
+
+        void showMealTypeFromDb(List<MealTypeModel> result);
 
     }
 
     interface Presenter extends BasePresenter {
         void loadMealType();
+
+        void showMealTypeResult(List<MealTypeModel> mealTypeModel);
+
         void getMealType();
     }
 }

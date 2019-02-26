@@ -23,7 +23,6 @@ public class CategoriesActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         CategoriesFragment categoriesFragment = new CategoriesFragment();
         commitFragmentTransaction(R.id.container_categories, categoriesFragment);
-
     }
 
     @Override

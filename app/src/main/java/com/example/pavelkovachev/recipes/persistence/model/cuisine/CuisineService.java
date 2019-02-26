@@ -26,7 +26,6 @@ public class CuisineService implements CuisineRepository {
     @Override
     public void deleteCuisine(CuisineModel cuisineModel) {
         appExecutor.execute(() -> cuisineModelDao.deleteCuisine(cuisineModel));
-
     }
 
     @Override

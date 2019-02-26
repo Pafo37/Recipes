@@ -1,22 +1,17 @@
 package com.example.pavelkovachev.recipes.presenters.mealtype;
 
-import android.net.NetworkInfo;
-
 import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.DownloadCallback;
 import com.example.pavelkovachev.recipes.NetworkUtil;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
-import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeService;
-import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.List;
 
-public class MealTypePresenter implements MealTypeContract.Presenter, DownloadCallback,
+public class MealTypePresenter implements MealTypeContract.Presenter,
         AsyncTaskResult<List<MealTypeModel>> {
 
     private final MealTypeContract.View view;
@@ -27,34 +22,10 @@ public class MealTypePresenter implements MealTypeContract.Presenter, DownloadCa
     }
 
     @Override
-    public void showRandomMealResult(RecipeModel result) {
-        //NOT USED
-    }
-
-    @Override
-    public NetworkInfo getActiveNetworkInfo() {
-        return null;
-    }
-
-    @Override
-    public void finishDownloading(RecipeModel recipeModel) {
-        //NOT USED
-    }
-
-    @Override
-    public void showLatestMealResult(RecipeModel recipeModel) {
-        //NOT USED
-    }
-
-    @Override
-    public void showCuisineResult(List<CuisineModel> cuisineModel) {
-        //NOT USED
-    }
-
-    @Override
     public void showMealTypeResult(List<MealTypeModel> result) {
         if (result != null) {
             saveToDatabase(result);
+            view.loadMealTypesFromApi(result);
         }
     }
 
@@ -77,9 +48,10 @@ public class MealTypePresenter implements MealTypeContract.Presenter, DownloadCa
     }
 
     @Override
-    public void onSuccess(List<MealTypeModel> response) {
-        view.setMealType(response);
-
+    public void onSuccess(List<MealTypeModel> result) {
+        if (view != null) {
+            view.showMealTypeFromDb(result);
+        }
     }
 
     @Override

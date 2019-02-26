@@ -8,13 +8,18 @@ import java.util.List;
 
 public interface CuisineContract {
 
-    interface View extends BaseView<Presenter>{
-        void setCuisine(List<CuisineModel> cuisineModel);
+    interface View extends BaseView<Presenter> {
+        void loadCuisinesFromApi(List<CuisineModel> cuisineModel);
+
+        void showCuisineTypesFromDb(List<CuisineModel> result);
     }
 
-    interface Presenter extends BasePresenter{
+    interface Presenter extends BasePresenter {
         void loadCuisine();
+
         void getCuisine();
+
+        void showCuisineResult(List<CuisineModel> cuisineModel);
     }
 }
 

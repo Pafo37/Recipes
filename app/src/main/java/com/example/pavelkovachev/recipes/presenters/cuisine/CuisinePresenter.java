@@ -1,22 +1,19 @@
 package com.example.pavelkovachev.recipes.presenters.cuisine;
 
-import android.net.NetworkInfo;
+import android.util.Log;
 
 import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.DownloadCallback;
 import com.example.pavelkovachev.recipes.NetworkUtil;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineService;
-import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
-import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.List;
 
-public class CuisinePresenter implements CuisineContract.Presenter, DownloadCallback,
+public class CuisinePresenter implements CuisineContract.Presenter,
         AsyncTaskResult<List<CuisineModel>> {
 
     private final CuisineContract.View view;
@@ -24,14 +21,7 @@ public class CuisinePresenter implements CuisineContract.Presenter, DownloadCall
     public CuisinePresenter(CuisineContract.View view) {
         this.view = view;
         view.setPresenter(this);
-
     }
-
-    @Override
-    public NetworkInfo getActiveNetworkInfo() {
-        return null;
-    }
-
 
     private void saveToDatabase(List<CuisineModel> cuisineModel) {
         CuisineModelDao cuisineModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).cuisineModelDao();
@@ -39,30 +29,11 @@ public class CuisinePresenter implements CuisineContract.Presenter, DownloadCall
     }
 
     @Override
-    public void showRandomMealResult(RecipeModel result) {
-        //NOT USED
-    }
-
-    @Override
-    public void showLatestMealResult(RecipeModel recipeModel) {
-        //NOT USED
-    }
-
-    @Override
     public void showCuisineResult(List<CuisineModel> result) {
         if (result != null) {
             saveToDatabase(result);
+            view.loadCuisinesFromApi(result);
         }
-    }
-
-    @Override
-    public void showMealTypeResult(List<MealTypeModel> mealTypeModel) {
-        //NOT USED
-    }
-
-    @Override
-    public void finishDownloading(RecipeModel recipeModel) {
-        //NOT USED
     }
 
     @Override
@@ -71,18 +42,20 @@ public class CuisinePresenter implements CuisineContract.Presenter, DownloadCall
     }
 
     @Override
-    public void onSuccess(List<CuisineModel> response) {
-        view.setCuisine(response);
+    public void onSuccess(List<CuisineModel> result) {
+        if (view != null) {
+            view.showCuisineTypesFromDb(result);
+        }
     }
 
     @Override
     public void onError(Exception throwable) {
-
+        Log.e("TAG", throwable.getMessage());
     }
 
     @Override
     public void loadCuisine() {
-        NetworkUtil.getCuisine(this,"https://www.themealdb.com/api/json/v1/1/list.php?a=list");
+        NetworkUtil.getCuisine(this, "https://www.themealdb.com/api/json/v1/1/list.php?a=list");
     }
 
     @Override

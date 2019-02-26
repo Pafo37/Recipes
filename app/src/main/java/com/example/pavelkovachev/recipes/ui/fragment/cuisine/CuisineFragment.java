@@ -29,7 +29,8 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     @BindView(R.id.recyclerview_category_cuisine)
     RecyclerView recyclerView;
 
-    private List<CuisineModel> arrayList;
+    private List<CuisineModel> arrayList = new ArrayList<>();
+    private CuisineAdapter cuisineAdapter;
 
     public static CuisineFragment newInstance() {
         return new CuisineFragment();
@@ -43,9 +44,14 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         presenter = new CuisinePresenter(this);
-        presenter.loadCuisine();
         presenter.getCuisine();
+
+        cuisineAdapter = new CuisineAdapter(arrayList, getContext(), this);
+        recyclerView.setAdapter(cuisineAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
     }
 
     @Override
@@ -59,14 +65,20 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     }
 
     @Override
-    public void setCuisine(List<CuisineModel> cuisineList) {
+    public void loadCuisinesFromApi(List<CuisineModel> cuisineList) {
         if (isAdded()) {
-            arrayList = new ArrayList<>();
             arrayList.addAll(cuisineList);
-            CuisineAdapter cuisineAdapter = new CuisineAdapter(arrayList, getContext(), this);
-            recyclerView.setAdapter(cuisineAdapter);
-            recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
-            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+            cuisineAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void showCuisineTypesFromDb(List<CuisineModel> result) {
+        if (result.size() == 0) {
+            presenter.loadCuisine();
+        } else {
+            arrayList.addAll(result);
+            cuisineAdapter.notifyDataSetChanged();
         }
     }
 }

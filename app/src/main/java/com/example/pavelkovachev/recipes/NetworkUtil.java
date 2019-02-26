@@ -8,6 +8,8 @@ import android.util.JsonReader;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
+import com.example.pavelkovachev.recipes.presenters.cuisine.CuisineContract;
+import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypeContract;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +22,8 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class NetworkUtil {
     private static DownloadCallback downloadCallback;
+    private static MealTypeContract.Presenter mealTypeContract;
+    private static CuisineContract.Presenter cuisineContract;
     private static RandomMealTask downloadTask;
     private static LatestMealTask latestMealTask;
     private static CuisineTask cuisineTask;
@@ -42,17 +46,17 @@ public class NetworkUtil {
         latestMealTask.execute(urlString);
     }
 
-    public static void getCuisine(DownloadCallback downloadCallback, String url) {
+    public static void getCuisine(CuisineContract.Presenter contract, String url) {
         cancelCuisineDownload();
-        NetworkUtil.downloadCallback = downloadCallback;
+        NetworkUtil.cuisineContract = contract;
         cuisineTask = new CuisineTask();
         urlString = url;
         cuisineTask.execute(urlString);
     }
 
-    public static void getMealType(DownloadCallback downloadCallback, String url) {
+    public static void getMealType(MealTypeContract.Presenter contract, String url) {
         cancelMealTypeDownload();
-        NetworkUtil.downloadCallback = downloadCallback;
+        NetworkUtil.mealTypeContract = contract;
         mealTypeTask = new MealTypeTask();
         urlString = url;
         mealTypeTask.execute(urlString);
@@ -158,7 +162,6 @@ public class NetworkUtil {
             if (recipeModel != null && downloadCallback != null) {
                 downloadCallback.showLatestMealResult(recipeModel);
             }
-            downloadCallback.finishDownloading(recipeModel);
         }
     }
 
@@ -166,13 +169,13 @@ public class NetworkUtil {
 
         @Override
         protected void onPreExecute() {
-            if (downloadCallback != null) {
-                NetworkInfo networkInfo = downloadCallback.getActiveNetworkInfo();
-                if (networkInfo == null || !networkInfo.isConnected() ||
-                        (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
-                                && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
-                    downloadCallback.showCuisineResult(null);
-                }
+            if (cuisineContract != null) {
+//                NetworkInfo networkInfo = cuisineContract.();
+//                if (networkInfo == null || !networkInfo.isConnected() ||
+//                        (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
+//                                && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
+//                    cuisineContract.showCuisineResult(null);
+//                }
             }
         }
 
@@ -194,8 +197,8 @@ public class NetworkUtil {
 
         @Override
         protected void onPostExecute(List<CuisineModel> cuisineModel) {
-            if (cuisineModel != null && downloadCallback != null) {
-                downloadCallback.showCuisineResult(cuisineModel);
+            if (cuisineModel != null && cuisineContract != null) {
+                cuisineContract.showCuisineResult(cuisineModel);
             }
         }
     }
@@ -204,13 +207,13 @@ public class NetworkUtil {
 
         @Override
         protected void onPreExecute() {
-            if (downloadCallback != null) {
-                NetworkInfo networkInfo = downloadCallback.getActiveNetworkInfo();
-                if (networkInfo == null || !networkInfo.isConnected() ||
-                        (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
-                                && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
-                    downloadCallback.showMealTypeResult(null);
-                }
+            if (mealTypeContract != null) {
+//                NetworkInfo networkInfo = downloadCallback.getActiveNetworkInfo();
+//                if (networkInfo == null || !networkInfo.isConnected() ||
+//                        (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
+//                                && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
+//                    downloadCallback.showMealTypeResult(null);
+//                }
             }
         }
 
@@ -233,7 +236,7 @@ public class NetworkUtil {
         @Override
         protected void onPostExecute(List<MealTypeModel> mealTypeModel) {
             if (mealTypeModel != null && downloadCallback != null) {
-                downloadCallback.showMealTypeResult(mealTypeModel);
+                mealTypeContract.showMealTypeResult(mealTypeModel);
             }
         }
     }
@@ -371,7 +374,6 @@ public class NetworkUtil {
     private static RecipeModel readRandomMealStream(InputStream inputStream) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
         return readRandomRecipeData(reader);
-
     }
 
     private static RecipeModel readLatestMealStream(InputStream inputStream) throws IOException {
@@ -412,7 +414,6 @@ public class NetworkUtil {
         reader.endObject();
         return mealTypeModelList;
     }
-
 
     private static RecipeModel readRandomRecipeData(JsonReader reader) throws IOException {
         RecipeModel recipeModel = new RecipeModel();
@@ -535,7 +536,6 @@ public class NetworkUtil {
                 reader.beginObject();
             }
         }
-
         reader.endArray();
         return cuisineModelList;
     }
@@ -565,11 +565,10 @@ public class NetworkUtil {
             if (!reader.hasNext()) {
                 mealTypeModelList.add(mealTypeModel);
                 reader.endObject();
-                if(reader.hasNext()){
+                if (reader.hasNext()) {
                     reader.beginObject();
                 }
             }
-
         }
         reader.endArray();
         return mealTypeModelList;
