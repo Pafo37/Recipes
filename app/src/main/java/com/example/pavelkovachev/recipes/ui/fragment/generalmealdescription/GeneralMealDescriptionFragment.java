@@ -3,12 +3,17 @@ package com.example.pavelkovachev.recipes.ui.fragment.generalmealdescription;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
+import com.example.pavelkovachev.recipes.adapters.ingredients.IngredientsAdapter;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.Ingredient;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.generalmealdescription.GeneralMealDescriptionContract;
 import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenPresenter;
@@ -16,9 +21,12 @@ import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 import com.example.pavelkovachev.recipes.ui.fragment.homescreen.HomeScreenFragment;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import butterknife.BindView;
 
-public class GeneralMealDescriptionFragment extends BaseFragment implements GeneralMealDescriptionContract.View {
+public class GeneralMealDescriptionFragment extends BaseFragment implements GeneralMealDescriptionContract.View
+        , IngredientsAdapter.ItemListener {
 
     @BindView(R.id.img_general_meal)
     ImageView imgMeal;
@@ -30,8 +38,11 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     TextView recipeCuisine;
     @BindView(R.id.txt_general_meal_instructions_body)
     TextView recipeInstructions;
+    @BindView(R.id.recycler_view_general_meal_ingredients)
+    RecyclerView recyclerView;
 
     GeneralMealDescriptionContract.Presenter presenter;
+    IngredientsAdapter ingredientsAdapter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -43,6 +54,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         if (HomeScreenFragment.isRandomMealClicked) {
             presenter.loadRecipe(HomeScreenPresenter.CURRENT_RANDOM_MEAL_ID);
         }
+
     }
 
     public static GeneralMealDescriptionFragment newInstance() {
@@ -59,15 +71,29 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         if (isAdded()) {
             recipeName.setText(model.getRecipeName());
             recipeMealType.setText("Meal Type: " + model.getRecipeMealType());
-            recipeCuisine.setText("Cusine: " + model.getRecipeCuisine());
+            recipeCuisine.setText("Cuisine: " + model.getRecipeCuisine());
             recipeInstructions.setMovementMethod(new ScrollingMovementMethod());
             recipeInstructions.setText(model.getRecipeInstructions());
             Picasso.get().load(model.getRecipeImage()).into(imgMeal);
+            ingredientsAdapter = new IngredientsAdapter(initIngredients(model), getContext(), this);
+            recyclerView.setAdapter(ingredientsAdapter);
+            recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+
         }
+    }
+
+    private List<Ingredient> initIngredients(RecipeModel recipeModel) {
+        return Ingredient.convertFromRecipeToList(recipeModel);
     }
 
     @Override
     public void setPresenter(GeneralMealDescriptionContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void onItemClick(Ingredient ingredientItem) {
+
     }
 }

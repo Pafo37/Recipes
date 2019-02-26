@@ -2,11 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/txt_measures"
+        android:id="@+id/txt_general_meal_measures"
         android:layout_width="@dimen/no_dimens"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_between_elements_default"
@@ -18,14 +18,14 @@
         tools:text="1 cup :" />
 
     <TextView
-        android:id="@+id/txt_ingredients"
+        android:id="@+id/txt_general_meal_ingredients"
         android:layout_width="@dimen/no_dimens"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_between_elements_default"
         android:layout_marginLeft="@dimen/margin_between_elements_default"
         android:layout_marginTop="@dimen/margin_between_elements_default"
         android:textSize="@dimen/material_design_body_txt_size"
-        app:layout_constraintStart_toEndOf="@+id/txt_measures"
+        app:layout_constraintStart_toEndOf="@+id/txt_general_meal_measures"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="soy souce" />
 

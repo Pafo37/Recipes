@@ -3,6 +3,7 @@ package com.example.pavelkovachev.recipes;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.JsonReader;
 
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
@@ -29,6 +30,7 @@ public class NetworkUtil {
     private static CuisineTask cuisineTask;
     private static MealTypeTask mealTypeTask;
     private static String urlString;
+    private static String currentValue;
 
     public static void getRandomMeal(DownloadCallback downloadCallback, String url) {
         cancelRandomMealDownload();
@@ -168,18 +170,6 @@ public class NetworkUtil {
     private static class CuisineTask extends AsyncTask<String, Integer, List<CuisineModel>> {
 
         @Override
-        protected void onPreExecute() {
-            if (cuisineContract != null) {
-//                NetworkInfo networkInfo = cuisineContract.();
-//                if (networkInfo == null || !networkInfo.isConnected() ||
-//                        (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
-//                                && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
-//                    cuisineContract.showCuisineResult(null);
-//                }
-            }
-        }
-
-        @Override
         protected List<CuisineModel> doInBackground(String... urls) {
             List<CuisineModel> cuisineModelList = null;
             if (!isCancelled() && urls != null && urls.length > 0) {
@@ -204,18 +194,6 @@ public class NetworkUtil {
     }
 
     private static class MealTypeTask extends AsyncTask<String, Integer, List<MealTypeModel>> {
-
-        @Override
-        protected void onPreExecute() {
-            if (mealTypeContract != null) {
-//                NetworkInfo networkInfo = downloadCallback.getActiveNetworkInfo();
-//                if (networkInfo == null || !networkInfo.isConnected() ||
-//                        (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
-//                                && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
-//                    downloadCallback.showMealTypeResult(null);
-//                }
-            }
-        }
 
         @Override
         protected List<MealTypeModel> doInBackground(String... urls) {
@@ -476,34 +454,244 @@ public class NetworkUtil {
                     recipeModel.setRecipeImage(reader.nextString());
                     break;
                 case "strIngredient1":
-                    recipeModel.setRecipeIngredient1(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient1(currentValue);
+                    }
                     break;
                 case "strIngredient2":
-                    recipeModel.setRecipeIngredient2(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient2(currentValue);
+                    }
                     break;
                 case "strIngredient3":
-                    recipeModel.setRecipeIngredient3(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient3(currentValue);
+                    }
                     break;
                 case "strIngredient4":
-                    recipeModel.setRecipeIngredient4(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient4(currentValue);
+                    }
                     break;
                 case "strIngredient5":
-                    recipeModel.setRecipeIngredient5(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient5(currentValue);
+                    }
+                    break;
+                case "strIngredient6":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient6(currentValue);
+                    }
+                    break;
+                case "strIngredient7":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient7(currentValue);
+                    }
+                    break;
+                case "strIngredient8":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient8(currentValue);
+                    }
+                    break;
+                case "strIngredient9":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient9(currentValue);
+                    }
+                    break;
+                case "strIngredient10":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient10(currentValue);
+                    }
+                    break;
+                case "strIngredient11":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient11(currentValue);
+                    }
+                    break;
+                case "strIngredient12":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient12(currentValue);
+                    }
+                    break;
+                case "strIngredient13":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient13(currentValue);
+                    }
+                    break;
+                case "strIngredient14":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient14(currentValue);
+                    }
+                    break;
+                case "strIngredient15":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient15(currentValue);
+                    }
+                    break;
+                case "strIngredient16":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient16(currentValue);
+                    }
+                    break;
+                case "strIngredient17":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient17(currentValue);
+                    }
+                    break;
+                case "strIngredient18":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient18(currentValue);
+                    }
+                    break;
+                case "strIngredient19":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient19(currentValue);
+                    }
+                    break;
+                case "strIngredient20":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient20(currentValue);
+                    }
                     break;
                 case "strMeasure1":
-                    recipeModel.setRecipeMeasure1(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure1(currentValue);
+                    }
                     break;
                 case "strMeasure2":
-                    recipeModel.setRecipeMeasure2(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure2(currentValue);
+                    }
                     break;
                 case "strMeasure3":
-                    recipeModel.setRecipeMeasure3(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure3(currentValue);
+                    }
                     break;
                 case "strMeasure4":
-                    recipeModel.setRecipeMeasure4(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure4(currentValue);
+                    }
                     break;
                 case "strMeasure5":
-                    recipeModel.setRecipeMeasure5(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure5(currentValue);
+                    }
+                    break;
+                case "strMeasure6":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure6(currentValue);
+                    }
+                    break;
+                case "strMeasure7":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure7(currentValue);
+                    }
+                    break;
+                case "strMeasure8":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure8(currentValue);
+                    }
+                    break;
+                case "strMeasure9":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure9(currentValue);
+                    }
+                    break;
+                case "strMeasure10":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure10(currentValue);
+                    }
+                    break;
+                case "strMeasure11":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure11(currentValue);
+                    }
+                    break;
+                case "strMeasure12":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure12(currentValue);
+                    }
+                    break;
+                case "strMeasure13":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure13(currentValue);
+                    }
+                    break;
+                case "strMeasure14":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure14(currentValue);
+                    }
+                    break;
+                case "strMeasure15":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure15(currentValue);
+                    }
+                    break;
+                case "strMeasure16":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure16(currentValue);
+                    }
+                    break;
+                case "strMeasure17":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure17(currentValue);
+                    }
+                    break;
+                case "strMeasure18":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure18(currentValue);
+                    }
+                    break;
+                case "strMeasure19":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure19(currentValue);
+                    }
+                    break;
+                case "strMeasure20":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure20(currentValue);
+                    }
                     break;
                 default:
                     reader.skipValue();
@@ -600,34 +788,244 @@ public class NetworkUtil {
                     recipeModel.setRecipeImage(reader.nextString());
                     break;
                 case "strIngredient1":
-                    recipeModel.setRecipeIngredient1(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient1(currentValue);
+                    }
                     break;
                 case "strIngredient2":
-                    recipeModel.setRecipeIngredient2(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient2(currentValue);
+                    }
                     break;
                 case "strIngredient3":
-                    recipeModel.setRecipeIngredient3(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient3(currentValue);
+                    }
                     break;
                 case "strIngredient4":
-                    recipeModel.setRecipeIngredient4(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient4(currentValue);
+                    }
                     break;
                 case "strIngredient5":
-                    recipeModel.setRecipeIngredient5(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient5(currentValue);
+                    }
+                    break;
+                case "strIngredient6":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient6(currentValue);
+                    }
+                    break;
+                case "strIngredient7":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient7(currentValue);
+                    }
+                    break;
+                case "strIngredient8":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient8(currentValue);
+                    }
+                    break;
+                case "strIngredient9":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient9(currentValue);
+                    }
+                    break;
+                case "strIngredient10":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient10(currentValue);
+                    }
+                    break;
+                case "strIngredient11":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient11(currentValue);
+                    }
+                    break;
+                case "strIngredient12":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient12(currentValue);
+                    }
+                    break;
+                case "strIngredient13":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient13(currentValue);
+                    }
+                    break;
+                case "strIngredient14":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient14(currentValue);
+                    }
+                    break;
+                case "strIngredient15":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient15(currentValue);
+                    }
+                    break;
+                case "strIngredient16":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient16(currentValue);
+                    }
+                    break;
+                case "strIngredient17":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient17(currentValue);
+                    }
+                    break;
+                case "strIngredient18":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient18(currentValue);
+                    }
+                    break;
+                case "strIngredient19":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient19(currentValue);
+                    }
+                    break;
+                case "strIngredient20":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeIngredient20(currentValue);
+                    }
                     break;
                 case "strMeasure1":
-                    recipeModel.setRecipeIngredient1(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure1(currentValue);
+                    }
                     break;
                 case "strMeasure2":
-                    recipeModel.setRecipeIngredient2(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure2(currentValue);
+                    }
                     break;
                 case "strMeasure3":
-                    recipeModel.setRecipeIngredient3(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure3(currentValue);
+                    }
                     break;
                 case "strMeasure4":
-                    recipeModel.setRecipeIngredient4(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure4(currentValue);
+                    }
                     break;
                 case "strMeasure5":
-                    recipeModel.setRecipeIngredient5(reader.nextString());
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure5(currentValue);
+                    }
+                    break;
+                case "strMeasure6":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure6(currentValue);
+                    }
+                    break;
+                case "strMeasure7":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure7(currentValue);
+                    }
+                    break;
+                case "strMeasure8":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure8(currentValue);
+                    }
+                    break;
+                case "strMeasure9":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure9(currentValue);
+                    }
+                    break;
+                case "strMeasure10":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure10(currentValue);
+                    }
+                    break;
+                case "strMeasure11":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure11(currentValue);
+                    }
+                    break;
+                case "strMeasure12":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure12(currentValue);
+                    }
+                    break;
+                case "strMeasure13":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure13(currentValue);
+                    }
+                    break;
+                case "strMeasure14":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure14(currentValue);
+                    }
+                    break;
+                case "strMeasure15":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure15(currentValue);
+                    }
+                    break;
+                case "strMeasure16":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure16(currentValue);
+                    }
+                    break;
+                case "strMeasure17":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure17(currentValue);
+                    }
+                    break;
+                case "strMeasure18":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure18(currentValue);
+                    }
+                    break;
+                case "strMeasure19":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure19(currentValue);
+                    }
+                    break;
+                case "strMeasure20":
+                    currentValue = reader.nextString();
+                    if (!TextUtils.isEmpty(currentValue)) {
+                        recipeModel.setRecipeMeasure20(currentValue);
+                    }
                     break;
                 default:
                     reader.skipValue();
