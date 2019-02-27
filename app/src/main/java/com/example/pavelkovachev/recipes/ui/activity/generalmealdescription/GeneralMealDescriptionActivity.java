@@ -19,7 +19,6 @@ public class GeneralMealDescriptionActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
-        setTitle("RecipeModel name"); // this is for testing only
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         GeneralMealDescriptionFragment fragment = GeneralMealDescriptionFragment.newInstance();
         commitFragmentTransaction(R.id.container_general_meal_description, fragment);

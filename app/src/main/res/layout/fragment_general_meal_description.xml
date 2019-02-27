@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<android.support.constraint.ConstraintLayout
+
     android:id="@+id/general_meal_description"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardview_general_meal1"
@@ -21,7 +28,7 @@
             <ImageView
                 android:id="@+id/img_general_meal"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/home_screen_img_meals"
+                android:layout_height="200dp"
                 android:contentDescription="@string/homescreen_description_random_meal"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/cardview_random_meal" />
@@ -80,8 +87,6 @@
         android:layout_width="@dimen/no_dimens"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_between_elements_default"
-        android:maxLines="6"
-        android:scrollbars="vertical"
         android:textSize="@dimen/material_design_body_txt_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +108,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_general_meal_ingredients"
         android:layout_width="@dimen/no_dimens"
-        android:layout_height="@dimen/no_dimens"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/margin_between_elements_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,3 +119,4 @@
     </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

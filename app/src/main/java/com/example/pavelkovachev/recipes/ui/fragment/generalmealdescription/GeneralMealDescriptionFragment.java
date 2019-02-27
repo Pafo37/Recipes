@@ -28,6 +28,8 @@ import butterknife.BindView;
 public class GeneralMealDescriptionFragment extends BaseFragment implements GeneralMealDescriptionContract.View
         , IngredientsAdapter.ItemListener {
 
+    public static String CURRENT_RECIPE_NAME;
+
     @BindView(R.id.img_general_meal)
     ImageView imgMeal;
     @BindView(R.id.txt_meal_title)
@@ -54,7 +56,6 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         if (HomeScreenFragment.isRandomMealClicked) {
             presenter.loadRecipe(HomeScreenPresenter.CURRENT_RANDOM_MEAL_ID);
         }
-
     }
 
     public static GeneralMealDescriptionFragment newInstance() {
@@ -69,6 +70,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @Override
     public void showRecipe(RecipeModel model) {
         if (isAdded()) {
+            getActivity().setTitle(model.getRecipeName());
             recipeName.setText(model.getRecipeName());
             recipeMealType.setText("Meal Type: " + model.getRecipeMealType());
             recipeCuisine.setText("Cuisine: " + model.getRecipeCuisine());
@@ -77,9 +79,9 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
             Picasso.get().load(model.getRecipeImage()).into(imgMeal);
             ingredientsAdapter = new IngredientsAdapter(initIngredients(model), getContext(), this);
             recyclerView.setAdapter(ingredientsAdapter);
+            recyclerView.setNestedScrollingEnabled(false);
             recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
             recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
-
         }
     }
 
