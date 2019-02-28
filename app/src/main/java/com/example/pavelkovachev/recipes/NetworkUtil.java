@@ -1055,33 +1055,54 @@ public class NetworkUtil {
                     }
                     break;
                 case "strIngredient16":
-                    currentValue = reader.nextString();
-                    if (!TextUtils.isEmpty(currentValue)) {
-                        recipeModel.setRecipeIngredient16(currentValue);
+                    if (reader.peek() != JsonToken.NULL) {
+                        currentValue = reader.nextString();
+                        if (!TextUtils.isEmpty(currentValue)) {
+                            recipeModel.setRecipeIngredient16(currentValue);
+                        }
+                    } else {
+                        reader.nextNull();
                     }
                     break;
                 case "strIngredient17":
-                    currentValue = reader.nextString();
-                    if (!TextUtils.isEmpty(currentValue)) {
-                        recipeModel.setRecipeIngredient17(currentValue);
+                    if (reader.peek() != JsonToken.NULL) {
+                        currentValue = reader.nextString();
+                        if (!TextUtils.isEmpty(currentValue)) {
+                            recipeModel.setRecipeIngredient17(currentValue);
+                        }
+                    } else {
+                        reader.nextNull();
                     }
                     break;
+
                 case "strIngredient18":
-                    currentValue = reader.nextString();
-                    if (!TextUtils.isEmpty(currentValue)) {
-                        recipeModel.setRecipeIngredient18(currentValue);
+                    if (reader.peek() != JsonToken.NULL) {
+                        currentValue = reader.nextString();
+                        if (!TextUtils.isEmpty(currentValue)) {
+                            recipeModel.setRecipeIngredient18(currentValue);
+                        }
+                    } else {
+                        reader.nextNull();
                     }
                     break;
                 case "strIngredient19":
-                    currentValue = reader.nextString();
-                    if (!TextUtils.isEmpty(currentValue)) {
-                        recipeModel.setRecipeIngredient19(currentValue);
+                    if (reader.peek() != JsonToken.NULL) {
+                        currentValue = reader.nextString();
+                        if (!TextUtils.isEmpty(currentValue)) {
+                            recipeModel.setRecipeIngredient19(currentValue);
+                        }
+                    } else {
+                        reader.nextNull();
                     }
                     break;
                 case "strIngredient20":
-                    currentValue = reader.nextString();
-                    if (!TextUtils.isEmpty(currentValue)) {
-                        recipeModel.setRecipeIngredient20(currentValue);
+                    if (reader.peek() != JsonToken.NULL) {
+                        currentValue = reader.nextString();
+                        if (!TextUtils.isEmpty(currentValue)) {
+                            recipeModel.setRecipeIngredient20(currentValue);
+                        }
+                    } else {
+                        reader.nextNull();
                     }
                     break;
                 case "strMeasure1":
@@ -1175,33 +1196,56 @@ public class NetworkUtil {
                     }
                     break;
                 case "strMeasure16":
-                    currentValue = reader.nextString();
-                    if (!TextUtils.isEmpty(currentValue)) {
-                        recipeModel.setRecipeMeasure16(currentValue);
+                    if (reader.peek() != JsonToken.NULL) {
+                        currentValue = reader.nextString();
+                        if (!TextUtils.isEmpty(currentValue)) {
+                            recipeModel.setRecipeMeasure16(currentValue);
+                        }
+                    } else {
+                        reader.nextNull();
                     }
                     break;
                 case "strMeasure17":
-                    currentValue = reader.nextString();
-                    if (!TextUtils.isEmpty(currentValue)) {
-                        recipeModel.setRecipeMeasure17(currentValue);
+                    if (reader.peek() != JsonToken.NULL) {
+                        currentValue = reader.nextString();
+                        if (!TextUtils.isEmpty(currentValue)) {
+                            recipeModel.setRecipeMeasure17(currentValue);
+                        }
+                    } else {
+                        reader.nextNull();
                     }
                     break;
+
                 case "strMeasure18":
-                    currentValue = reader.nextString();
-                    if (!TextUtils.isEmpty(currentValue)) {
-                        recipeModel.setRecipeMeasure18(currentValue);
+                    if (reader.peek() != JsonToken.NULL) {
+                        currentValue = reader.nextString();
+                        if (!TextUtils.isEmpty(currentValue)) {
+                            recipeModel.setRecipeMeasure18(currentValue);
+                        }
+                    } else {
+                        reader.nextNull();
                     }
                     break;
+
                 case "strMeasure19":
-                    currentValue = reader.nextString();
-                    if (!TextUtils.isEmpty(currentValue)) {
-                        recipeModel.setRecipeMeasure19(currentValue);
+                    if (reader.peek() != JsonToken.NULL) {
+                        currentValue = reader.nextString();
+                        if (!TextUtils.isEmpty(currentValue)) {
+                            recipeModel.setRecipeMeasure19(currentValue);
+                        }
+                    } else {
+                        reader.nextNull();
                     }
                     break;
+
                 case "strMeasure20":
-                    currentValue = reader.nextString();
-                    if (!TextUtils.isEmpty(currentValue)) {
-                        recipeModel.setRecipeMeasure20(currentValue);
+                    if (reader.peek() != JsonToken.NULL) {
+                        currentValue = reader.nextString();
+                        if (!TextUtils.isEmpty(currentValue)) {
+                            recipeModel.setRecipeMeasure20(currentValue);
+                        }
+                    } else {
+                        reader.nextNull();
                     }
                     break;
                 default:
