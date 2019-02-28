@@ -11,8 +11,9 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.example.pavelkovachev.recipes.DataModel;
+import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
 import com.example.pavelkovachev.recipes.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
         @BindView(R.id.img_gridlayout_categories)
         public ImageView imgCategories;
 
-        DataModel item;
+        RecipeListModel item;
 
         public ViewHolder(View view) {
             super(view);
@@ -61,10 +62,10 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
             popupMenu.show();
         }
 
-        public void setData(DataModel item) {
+        public void setData(RecipeListModel item) {
             this.item = item;
-            txtRecipeListTitle.setText(item.text);
-            imgCategories.setImageResource(item.drawable);
+            txtRecipeListTitle.setText(item.getRecipeName());
+            Picasso.get().load(item.getRecipeImage()).into(imgCategories);
         }
 
         @Override
@@ -83,7 +84,7 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.setData((DataModel) recipesList.get(i));
+        viewHolder.setData((RecipeListModel) recipesList.get(i));
     }
 
     @Override
@@ -92,8 +93,8 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
     }
 
     public interface ItemListener {
-        void onItemClick(DataModel item);
+        void onItemClick(RecipeListModel item);
 
-        void onTripleDotClicked(DataModel model);
+        void onTripleDotClicked(RecipeListModel model);
     }
 }

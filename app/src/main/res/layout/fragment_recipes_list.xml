@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/id_recycler_view_recipes_list"
+        android:id="@+id/recycler_view_recipes_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/cardview_recipes_list_margin"

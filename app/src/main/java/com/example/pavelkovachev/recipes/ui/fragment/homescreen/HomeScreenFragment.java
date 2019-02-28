@@ -22,8 +22,6 @@ import butterknife.OnClick;
 public class HomeScreenFragment extends BaseFragment implements HomeScreenContract.View {
 
     private HomeScreenContract.Presenter presenter;
-    public static boolean isRandomMealClicked = false;
-    public static boolean isLatestMealClicked = false;
 
     @BindView(R.id.txt_random_meal_name)
     TextView txtRandomMealName;
@@ -61,16 +59,16 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
 
     @OnClick(R.id.cardview_random_meal)
     void onRandomMealClicked() {
-        isRandomMealClicked = true;
-        isLatestMealClicked = false;
-        startActivity(new Intent(getActivity(), GeneralMealDescriptionActivity.class));
+        Intent intent=new Intent(getActivity(),GeneralMealDescriptionActivity.class);
+        intent.putExtra("id",presenter.onRandomCardViewClicked());
+        startActivity(intent);
     }
 
     @OnClick(R.id.cardview_latest_meal)
     void onLatestMealClicked() {
-        isRandomMealClicked = false;
-        isLatestMealClicked = true;
-        startActivity(new Intent(getActivity(), GeneralMealDescriptionActivity.class));
+        Intent intent=new Intent(getActivity(),GeneralMealDescriptionActivity.class);
+        intent.putExtra("id",presenter.onLatestCardViewClicked());
+        startActivity(intent);
     }
 
     @Override
@@ -88,4 +86,5 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
             txtLatestMealName.setText(recipeModel.getRecipeName());
         }
     }
+
 }

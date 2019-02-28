@@ -7,14 +7,13 @@
     android:layout_margin="@dimen/cardview_recipes_list_margin">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/img_gridlayout_categories"
             android:layout_width="@dimen/home_screen_img_width_height"
             android:layout_height="@dimen/home_screen_img_width_height"
-            android:layout_margin="@dimen/margin_between_elements_default"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -22,21 +21,30 @@
 
         <TextView
             android:id="@+id/txt_recipe_list_title"
-            android:layout_width="@dimen/home_screen_img_width_height"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_between_elements_default"
+            android:paddingLeft="@dimen/margin_between_elements_default"
+            android:paddingStart="@dimen/margin_between_elements_default"
+            android:paddingRight="@dimen/margin_between_elements_default"
+            android:paddingEnd="@dimen/margin_between_elements_default"
             android:layout_marginTop="@dimen/margin_between_elements_default"
+            android:layout_marginStart="@dimen/margin_between_elements_default"
+            android:layout_marginLeft="@dimen/margin_between_elements_default"
+            android:paddingBottom="@dimen/cardview_recipes_list_margin"
             android:textSize="@dimen/material_design_title_txt_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_gridlayout_categories"
-            tools:text="Rice" />
+            app:layout_constraintEnd_toStartOf="@id/img_triple_vertical_dots"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Rice is the best food" />
 
         <ImageView
             android:id="@+id/img_triple_vertical_dots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_between_elements_default"
             android:layout_marginTop="@dimen/margin_between_elements_default"
-            android:layout_marginRight="@dimen/margin_between_elements_default"
+            android:paddingBottom="@dimen/margin_between_elements_default"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_gridlayout_categories"
             app:srcCompat="@drawable/ic_triple_dot_vertical" />

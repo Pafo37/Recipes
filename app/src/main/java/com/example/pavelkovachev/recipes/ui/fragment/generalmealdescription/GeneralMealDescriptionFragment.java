@@ -16,9 +16,7 @@ import com.example.pavelkovachev.recipes.adapters.ingredients.IngredientsAdapter
 import com.example.pavelkovachev.recipes.persistence.model.recipe.Ingredient;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.generalmealdescription.GeneralMealDescriptionContract;
-import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenPresenter;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
-import com.example.pavelkovachev.recipes.ui.fragment.homescreen.HomeScreenFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -49,13 +47,8 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //FIXME
-        if (HomeScreenFragment.isLatestMealClicked) {
-            presenter.loadRecipe(HomeScreenPresenter.CURRENT_LATEST_MEAL_ID);
-        }
-        if (HomeScreenFragment.isRandomMealClicked) {
-            presenter.loadRecipe(HomeScreenPresenter.CURRENT_RANDOM_MEAL_ID);
-        }
+        String id=getArguments().getString("id");
+        presenter.loadRecipe(id);
     }
 
     public static GeneralMealDescriptionFragment newInstance() {

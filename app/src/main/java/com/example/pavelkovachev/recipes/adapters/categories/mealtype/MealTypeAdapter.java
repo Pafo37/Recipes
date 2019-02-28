@@ -47,7 +47,7 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
             itemView.setOnClickListener(this);
         }
 
-        public void setMealtypeData(MealTypeModel mealTypeItem) {
+        public void setMealTypeData(MealTypeModel mealTypeItem) {
             this.mealTypeItem = mealTypeItem;
             txtCategoryMealTypeTitle.setText(mealTypeItem.getTitle());
             txtCategoryMealTypeDescription.setText(mealTypeItem.getDescription());
@@ -70,7 +70,7 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderMealType viewHolderMealType, int i) {
-        viewHolderMealType.setMealtypeData((MealTypeModel) list.get(i));
+        viewHolderMealType.setMealTypeData((MealTypeModel) list.get(i));
     }
 
     @Override

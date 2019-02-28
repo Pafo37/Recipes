@@ -21,6 +21,8 @@ public class GeneralMealDescriptionActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         GeneralMealDescriptionFragment fragment = GeneralMealDescriptionFragment.newInstance();
+        Bundle bundle = getIntent().getExtras();
+        fragment.setArguments(bundle);
         commitFragmentTransaction(R.id.container_general_meal_description, fragment);
         new GeneralMealDescriptionPresenter(fragment);
     }

@@ -18,8 +18,8 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Downlo
 
     private final HomeScreenContract.View view;
 
-    public static String CURRENT_RANDOM_MEAL_ID;
-    public static String CURRENT_LATEST_MEAL_ID;
+    public String CURRENT_RANDOM_MEAL_ID;
+    public String CURRENT_LATEST_MEAL_ID;
 
     public HomeScreenPresenter(HomeScreenContract.View view) {
         this.view = view;
@@ -35,7 +35,7 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Downlo
         if (result != null) {
             view.setRandomMeal(result);
             saveToDatabase(result);
-            CURRENT_RANDOM_MEAL_ID = result.getId();
+            CURRENT_RANDOM_MEAL_ID=result.getId();
         }
     }
 
@@ -59,7 +59,7 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Downlo
         if (result != null) {
             view.setLatestMeal(result);
             saveToDatabase(result);
-            CURRENT_LATEST_MEAL_ID = result.getId();
+            CURRENT_LATEST_MEAL_ID=result.getId();
         }
     }
 
@@ -79,5 +79,15 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Downlo
                 "https://www.themealdb.com/api/json/v1/1/random.php");
         NetworkUtil.getLatestMeal(this, "https://www.themealdb.com/api/json/v1/1/latest.php");
 
+    }
+
+    @Override
+    public String onLatestCardViewClicked() {
+        return CURRENT_LATEST_MEAL_ID;
+    }
+
+    @Override
+    public String onRandomCardViewClicked() {
+        return CURRENT_RANDOM_MEAL_ID;
     }
 }

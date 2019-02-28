@@ -14,5 +14,8 @@ public interface HomeScreenContract {
 
     interface Presenter extends BasePresenter {
         void loadRandomLatestMeals();
+
+        String onLatestCardViewClicked();
+        String onRandomCardViewClicked();
     }
 }
