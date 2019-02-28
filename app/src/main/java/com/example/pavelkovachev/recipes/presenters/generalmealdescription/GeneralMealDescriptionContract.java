@@ -8,9 +8,12 @@ public interface GeneralMealDescriptionContract {
 
     interface View extends BaseView<Presenter> {
         void showRecipe(RecipeModel model);
+        String getRecipeId();
     }
 
     interface Presenter extends BasePresenter {
         void loadRecipe(String id);
+
+        void getRecipeByIdFromApi();
     }
 }

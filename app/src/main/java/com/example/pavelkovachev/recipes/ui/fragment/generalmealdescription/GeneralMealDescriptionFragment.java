@@ -43,11 +43,12 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     GeneralMealDescriptionContract.Presenter presenter;
     IngredientsAdapter ingredientsAdapter;
+    String id;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String id=getArguments().getString("id");
+        id = getArguments().getString("id");
         presenter.loadRecipe(id);
     }
 
@@ -78,6 +79,11 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         }
     }
 
+    @Override
+    public String getRecipeId() {
+        return id = getArguments().getString("id");
+    }
+
     private List<Ingredient> initIngredients(RecipeModel recipeModel) {
         return Ingredient.convertFromRecipeToList(recipeModel);
     }
@@ -91,4 +97,5 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     public void onItemClick(Ingredient ingredientItem) {
 
     }
+
 }

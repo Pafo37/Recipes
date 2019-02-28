@@ -7,7 +7,6 @@ import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListService;
-import com.example.pavelkovachev.recipes.ui.fragment.cuisine.CuisineFragment;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
     @Override
     public void loadRecipeList() {
         NetworkUtil.getRecipeList(this,
-                String.format("https://www.themealdb.com/api/json/v1/1/filter.php?a=%s", CuisineFragment.CURRENT_MEAL_CATEGORY));
+                String.format("https://www.themealdb.com/api/json/v1/1/filter.php?a=%s", view.getRecipeCuisineName()));
     }
 
     @Override

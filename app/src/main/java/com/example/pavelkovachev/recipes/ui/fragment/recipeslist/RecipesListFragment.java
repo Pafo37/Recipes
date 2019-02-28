@@ -35,12 +35,13 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     private static final int SPAN_COUNT = 2;
     private RecipesListAdapter recipesListAdapter;
 
+    public String cuisineName;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter = new RecipesListPresenter(this);
         presenter.loadRecipeList();
-       // presenter.getRecipeList();
         recipesListAdapter = new RecipesListAdapter(getContext(), arrayList, this);
         recyclerView.setAdapter(recipesListAdapter);
         GridLayoutManager manager = new GridLayoutManager(getContext(), SPAN_COUNT, GridLayoutManager.VERTICAL, false);
@@ -49,7 +50,9 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
 
     @Override
     public void onItemClick(RecipeListModel item) {
-        startActivity(new Intent(getActivity(), GeneralMealDescriptionActivity.class));
+        Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
+        intent.putExtra("id", item.getRecipeId());
+        startActivity(intent);
     }
 
     @Override
@@ -81,8 +84,13 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
 
     @Override
     public void showRecipeListFromDb(List<RecipeListModel> result) {
-            arrayList.addAll(result);
-            recipesListAdapter.notifyDataSetChanged();
+        arrayList.addAll(result);
+        recipesListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public String getRecipeCuisineName() {
+        return cuisineName = getArguments().getString("cuisineName");
     }
 
     @Override

@@ -10,12 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
-import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 public class MainActivity extends FragmentActivity implements DownloadCallback {
 
@@ -76,25 +72,7 @@ public class MainActivity extends FragmentActivity implements DownloadCallback {
     }
 
     @Override
-    public void finishDownloading(RecipeModel recipeModel) {
-        isDownloading = false;
-        if (networkUtil != null) {
-            networkUtil.cancelRandomMealDownload();
-        }
-    }
-
-    @Override
     public void showLatestMealResult(RecipeModel recipeModel) {
-
-    }
-
-    @Override
-    public void showCuisineResult(List<CuisineModel> cuisineModel) {
-
-    }
-
-    @Override
-    public void showMealTypeResult(List<MealTypeModel> mealTypeModel) {
 
     }
 

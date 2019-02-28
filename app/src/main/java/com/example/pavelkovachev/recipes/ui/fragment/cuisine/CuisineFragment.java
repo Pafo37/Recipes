@@ -25,7 +25,7 @@ import butterknife.BindView;
 public class CuisineFragment extends BaseFragment implements CuisineAdapter.CuisineItemListener, CuisineContract.View {
 
     private CuisineContract.Presenter presenter;
-    public static String CURRENT_MEAL_CATEGORY;
+    public static String currentCuisineName;
 
     @BindView(R.id.recyclerview_category_cuisine)
     RecyclerView recyclerView;
@@ -55,8 +55,10 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
 
     @Override
     public void onItemClick(CuisineModel cuisineItem) {
-        CURRENT_MEAL_CATEGORY = cuisineItem.getCountry();
-        startActivity(new Intent(getActivity(), RecipesListActivity.class));
+        currentCuisineName = cuisineItem.getCountry();
+        Intent intent = new Intent(getActivity(), RecipesListActivity.class);
+        intent.putExtra("cuisineName", currentCuisineName);
+        startActivity(intent);
     }
 
     @Override
