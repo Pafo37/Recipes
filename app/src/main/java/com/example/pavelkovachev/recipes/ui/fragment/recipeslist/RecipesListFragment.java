@@ -35,7 +35,8 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     private static final int SPAN_COUNT = 2;
     private RecipesListAdapter recipesListAdapter;
 
-    public String cuisineName;
+    public String categoryName;
+    public String categoryLetter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -89,8 +90,13 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     }
 
     @Override
-    public String getRecipeCuisineName() {
-        return cuisineName = getArguments().getString("cuisineName");
+    public String getCategoryName() {
+        return categoryName = getArguments().getString("categoryName");
+    }
+
+    @Override
+    public String getCategoryLetter() {
+        return categoryLetter=getArguments().getString("categoryLetter");
     }
 
     @Override

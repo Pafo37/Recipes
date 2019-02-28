@@ -12,7 +12,10 @@ public interface RecipesListContract {
         void loadRecipeListFromApi(List<RecipeListModel> recipeListModels);
 
         void showRecipeListFromDb(List<RecipeListModel> recipeListModels);
-        String getRecipeCuisineName();
+
+        String getCategoryName();
+
+        String getCategoryLetter();
     }
 
     interface Presenter extends BasePresenter {

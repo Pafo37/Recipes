@@ -31,6 +31,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
 
     private List<MealTypeModel> arrayList = new ArrayList<>();
     private MealTypeAdapter mealTypeAdapter;
+    public String currentMealTypeName;
 
     public static MealTypeFragment newInstance() {
         return new MealTypeFragment();
@@ -54,7 +55,11 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
 
     @Override
     public void onMealTypeClick(MealTypeModel mealTypeItem) {
-        startActivity(new Intent(getActivity(), RecipesListActivity.class));
+        currentMealTypeName=mealTypeItem.getTitle();
+        Intent intent=new Intent(getActivity(),RecipesListActivity.class);
+        intent.putExtra("categoryName",currentMealTypeName);
+        intent.putExtra("categoryLetter","c");
+        startActivity(intent);
     }
 
     @Override

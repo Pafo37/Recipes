@@ -57,7 +57,8 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     public void onItemClick(CuisineModel cuisineItem) {
         currentCuisineName = cuisineItem.getCountry();
         Intent intent = new Intent(getActivity(), RecipesListActivity.class);
-        intent.putExtra("cuisineName", currentCuisineName);
+        intent.putExtra("categoryName", currentCuisineName);
+        intent.putExtra("categoryLetter","a");
         startActivity(intent);
     }
 

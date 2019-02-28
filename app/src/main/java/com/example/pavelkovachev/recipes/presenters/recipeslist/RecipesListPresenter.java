@@ -29,7 +29,7 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
     @Override
     public void loadRecipeList() {
         NetworkUtil.getRecipeList(this,
-                String.format("https://www.themealdb.com/api/json/v1/1/filter.php?a=%s", view.getRecipeCuisineName()));
+                String.format("https://www.themealdb.com/api/json/v1/1/filter.php?%s=%s", view.getCategoryLetter(), view.getCategoryName()));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
 
     @Override
     public void onSuccess(List<RecipeListModel> result) {
-            if (view != null) {
+        if (view != null) {
             view.showRecipeListFromDb(result);
         }
     }
