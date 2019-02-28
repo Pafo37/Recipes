@@ -43,6 +43,7 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
         super.onViewCreated(view, savedInstanceState);
         presenter = new RecipesListPresenter(this);
         presenter.loadRecipeList();
+        getActivity().setTitle(getCategoryName());
         recipesListAdapter = new RecipesListAdapter(getContext(), arrayList, this);
         recyclerView.setAdapter(recipesListAdapter);
         GridLayoutManager manager = new GridLayoutManager(getContext(), SPAN_COUNT, GridLayoutManager.VERTICAL, false);
