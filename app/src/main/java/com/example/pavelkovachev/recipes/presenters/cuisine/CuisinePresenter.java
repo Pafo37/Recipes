@@ -3,7 +3,7 @@ package com.example.pavelkovachev.recipes.presenters.cuisine;
 import android.util.Log;
 
 import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.NetworkUtil;
+import com.example.pavelkovachev.recipes.network.CuisineApiService;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
@@ -37,11 +37,6 @@ public class CuisinePresenter implements CuisineContract.Presenter,
     }
 
     @Override
-    public void start() {
-
-    }
-
-    @Override
     public void onSuccess(List<CuisineModel> result) {
         if (view != null) {
             view.showCuisineTypesFromDb(result);
@@ -55,7 +50,7 @@ public class CuisinePresenter implements CuisineContract.Presenter,
 
     @Override
     public void loadCuisine() {
-        NetworkUtil.getCuisine(this, "https://www.themealdb.com/api/json/v1/1/list.php?a=list");
+        CuisineApiService.getCuisine(this, "https://www.themealdb.com/api/json/v1/1/list.php?a=list");
     }
 
     @Override

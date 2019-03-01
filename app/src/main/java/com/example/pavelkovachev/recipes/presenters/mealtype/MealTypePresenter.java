@@ -1,7 +1,7 @@
 package com.example.pavelkovachev.recipes.presenters.mealtype;
 
 import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.NetworkUtil;
+import com.example.pavelkovachev.recipes.network.MealTypeApiService;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
@@ -31,7 +31,7 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
 
     @Override
     public void loadMealType() {
-        NetworkUtil.getMealType(this, "https://www.themealdb.com/api/json/v1/1/categories.php");
+        MealTypeApiService.getMealType(this, "https://www.themealdb.com/api/json/v1/1/categories.php");
     }
 
     @Override
@@ -43,11 +43,6 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
     }
 
     @Override
-    public void start() {
-
-    }
-
-    @Override
     public void onSuccess(List<MealTypeModel> result) {
         if (view != null) {
             view.showMealTypeFromDb(result);
@@ -56,7 +51,6 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
 
     @Override
     public void onError(Exception throwable) {
-
     }
 
     private void saveToDatabase(List<MealTypeModel> mealTypeModel) {

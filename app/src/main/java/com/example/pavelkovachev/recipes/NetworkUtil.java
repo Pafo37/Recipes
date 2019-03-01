@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
-
+//WILL DELETE LATER, DO NOT REVIEW
 public class NetworkUtil {
     private static DownloadCallback downloadCallback;
     private static MealTypeContract.Presenter mealTypeContract;
@@ -146,7 +146,6 @@ public class NetworkUtil {
             if (recipeModel != null && downloadCallback != null) {
                 downloadCallback.showRandomMealResult(recipeModel);
             }
-            //downloadCallback.finishDownloading(recipeModel);
         }
     }
 
@@ -912,7 +911,6 @@ public class NetworkUtil {
         reader.beginObject();
         while (reader.hasNext()) {
             String token = reader.nextName();
-
             switch (token) {
                 case "strCategory":
                     mealTypeModel = new MealTypeModel();

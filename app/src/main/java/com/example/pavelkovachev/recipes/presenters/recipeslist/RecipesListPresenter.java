@@ -1,7 +1,7 @@
 package com.example.pavelkovachev.recipes.presenters.recipeslist;
 
 import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.NetworkUtil;
+import com.example.pavelkovachev.recipes.network.RecipeListApiService;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
@@ -28,7 +28,7 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
 
     @Override
     public void loadRecipeList() {
-        NetworkUtil.getRecipeList(this,
+        RecipeListApiService.getRecipeList(this,
                 String.format("https://www.themealdb.com/api/json/v1/1/filter.php?%s=%s", view.getCategoryLetter(), view.getCategoryName()));
     }
 
@@ -49,11 +49,6 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
     }
 
     @Override
-    public void start() {
-
-    }
-
-    @Override
     public void onSuccess(List<RecipeListModel> result) {
         if (view != null) {
             view.showRecipeListFromDb(result);
@@ -62,6 +57,5 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
 
     @Override
     public void onError(Exception throwable) {
-
     }
 }

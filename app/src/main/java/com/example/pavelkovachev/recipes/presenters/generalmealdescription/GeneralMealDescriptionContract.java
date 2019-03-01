@@ -8,11 +8,15 @@ public interface GeneralMealDescriptionContract {
 
     interface View extends BaseView<Presenter> {
         void showRecipe(RecipeModel model);
+
         String getRecipeId();
+
+        void showProgressBar(Boolean isShown);
     }
 
     interface Presenter extends BasePresenter {
-        void loadRecipe(String id);
+
+        void getRandomRecipe(String id);
 
         void getRecipeByIdFromApi();
     }

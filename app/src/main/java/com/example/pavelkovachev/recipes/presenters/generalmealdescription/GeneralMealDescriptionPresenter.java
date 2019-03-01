@@ -4,7 +4,7 @@ import android.net.NetworkInfo;
 
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.DownloadCallback;
-import com.example.pavelkovachev.recipes.NetworkUtil;
+import com.example.pavelkovachev.recipes.network.RandomMealApiService;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao;
@@ -22,49 +22,18 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     }
 
     @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void loadRecipe(String id) {
-
-        getRandomRecipe(id);
-//        switch () {
-//            case LATEST:
-//                getLatestRecipe();
-//                break;
-//            case RANDOM:
-//                getRandomRecipe();
-//                break;
-//            case CLICKED:
-//                getRecipe(id);
-//                break;
-//        }
-    }
-
-    @Override
     public void getRecipeByIdFromApi() {
-        String pesho=view.getRecipeId();
-        NetworkUtil.getRandomMeal(this,
-                String.format("https://www.themealdb.com/api/json/v1/1/lookup.php?i=%s", pesho));
-
+        RandomMealApiService.getRandomMeal(this,
+                String.format("https://www.themealdb.com/api/json/v1/1/lookup.php?i=%s", view.getRecipeId()));
     }
 
-    private void getRandomRecipe(String id) {
+    @Override
+    public void getRandomRecipe(String id) {
+        view.showProgressBar(true);
         RecipeModelDao recipeModelDao = DatabaseCreator.
                 getRecipeDatabase(App.getInstance().getApplicationContext()).recipeDao();
         RecipeService recipeService = new RecipeService(recipeModelDao);
         recipeService.getById(id, this);
-    }
-
-
-    private void getLatestRecipe() {
-
-    }
-
-    private void getRecipe(String id) {
-
     }
 
     @Override
@@ -78,7 +47,6 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
 
     @Override
     public void onError(Exception throwable) {
-
     }
 
     @Override

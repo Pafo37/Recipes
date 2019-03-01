@@ -4,7 +4,8 @@ import android.net.NetworkInfo;
 
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.DownloadCallback;
-import com.example.pavelkovachev.recipes.NetworkUtil;
+import com.example.pavelkovachev.recipes.network.LatestMealApiService;
+import com.example.pavelkovachev.recipes.network.RandomMealApiService;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
@@ -23,15 +24,11 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Downlo
     }
 
     @Override
-    public void start() {
-    }
-
-    @Override
     public void showRandomMealResult(RecipeModel result) {
         if (result != null) {
             view.setRandomMeal(result);
             saveToDatabase(result);
-            CURRENT_RANDOM_MEAL_ID=result.getId();
+            CURRENT_RANDOM_MEAL_ID = result.getId();
         }
     }
 
@@ -51,16 +48,15 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Downlo
         if (result != null) {
             view.setLatestMeal(result);
             saveToDatabase(result);
-            CURRENT_LATEST_MEAL_ID=result.getId();
+            CURRENT_LATEST_MEAL_ID = result.getId();
         }
     }
 
     @Override
     public void loadRandomLatestMeals() {
-        NetworkUtil.getRandomMeal(this,
+        RandomMealApiService.getRandomMeal(this,
                 "https://www.themealdb.com/api/json/v1/1/random.php");
-        NetworkUtil.getLatestMeal(this, "https://www.themealdb.com/api/json/v1/1/latest.php");
-
+        LatestMealApiService.getLatestMeal(this, "https://www.themealdb.com/api/json/v1/1/latest.php");
     }
 
     @Override
