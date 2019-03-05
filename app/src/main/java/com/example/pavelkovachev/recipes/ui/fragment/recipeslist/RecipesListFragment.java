@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.recipeslist.RecipesListAdapter;
@@ -33,9 +34,14 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     private List<RecipeListModel> arrayList = new ArrayList<>();
     private static final int SPAN_COUNT = 2;
     private RecipesListAdapter recipesListAdapter;
+    @BindView(R.id.progress_bar_recipes_list)
+    ProgressBar progressBar;
 
     public String categoryName;
     public String categoryLetter;
+    private static final String RECIPE_ID = "id";
+    private static final String CATEGORY_NAME = "categoryName";
+    private static final String CATEGORY_LETTER = "categoryLetter";
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -52,7 +58,7 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     @Override
     public void onItemClick(RecipeListModel item) {
         Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
-        intent.putExtra("id", item.getRecipeId());
+        intent.putExtra(RECIPE_ID, item.getRecipeId());
         startActivity(intent);
     }
 
@@ -78,6 +84,7 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     @Override
     public void loadRecipeListFromApi(List<RecipeListModel> recipeListModelList) {
         if (isAdded()) {
+            showProgressBar(false);
             arrayList.addAll(recipeListModelList);
             recipesListAdapter.notifyDataSetChanged();
         }
@@ -91,12 +98,17 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
 
     @Override
     public String getCategoryName() {
-        return categoryName = getArguments().getString("categoryName");
+        return categoryName = getArguments().getString(CATEGORY_NAME);
     }
 
     @Override
     public String getCategoryLetter() {
-        return categoryLetter=getArguments().getString("categoryLetter");
+        return categoryLetter = getArguments().getString(CATEGORY_LETTER);
+    }
+
+    @Override
+    public void showProgressBar(Boolean isVisible) {
+        progressBar.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     @Override

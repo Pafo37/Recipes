@@ -28,6 +28,7 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
 
     @Override
     public void loadRecipeList() {
+        view.showProgressBar(true);
         RecipeListApiService.getRecipeList(this,
                 String.format("https://www.themealdb.com/api/json/v1/1/filter.php?%s=%s", view.getCategoryLetter(), view.getCategoryName()));
     }

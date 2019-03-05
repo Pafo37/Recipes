@@ -44,13 +44,14 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     GeneralMealDescriptionContract.Presenter presenter;
     IngredientsAdapter ingredientsAdapter;
-    String id;
+    String recipeId;
+    private static final String RECIPE_ID = "id";
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        id = getArguments().getString("id");
-        presenter.getRandomRecipe(id);
+        recipeId = getArguments().getString(RECIPE_ID);
+        presenter.getRandomRecipe(recipeId);
     }
 
     public static GeneralMealDescriptionFragment newInstance() {
@@ -68,8 +69,8 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
             showProgressBar(false);
             getActivity().setTitle(model.getRecipeName());
             recipeName.setText(model.getRecipeName());
-            recipeMealType.setText("Meal Type: " + model.getRecipeMealType());
-            recipeCuisine.setText("Cuisine: " + model.getRecipeCuisine());
+            recipeMealType.setText(getString(R.string.general_meal_description_meal_type) + model.getRecipeMealType());
+            recipeCuisine.setText(getString(R.string.general_meal_description_cuisine) + model.getRecipeCuisine());
             recipeInstructions.setMovementMethod(new ScrollingMovementMethod());
             recipeInstructions.setText(model.getRecipeInstructions());
             Picasso.get().load(model.getRecipeImage()).into(imgMeal);
@@ -83,7 +84,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     @Override
     public String getRecipeId() {
-        return id = getArguments().getString("id");
+        return recipeId = getArguments().getString(RECIPE_ID);
     }
 
     @Override

@@ -102,5 +102,7 @@
     <string name="button_deny">Deny</string>
     <string name="permission_camera_denied">Permission denied</string>
     <string name="permission_camera_neverask">Never ask again</string>
+    <string name="general_meal_description_meal_type">Meal Type:</string>
+    <string name="general_meal_description_cuisine">Cuisine:</string>
 
 </resources>
