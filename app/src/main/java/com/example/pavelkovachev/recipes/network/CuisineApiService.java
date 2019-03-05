@@ -3,7 +3,6 @@ package com.example.pavelkovachev.recipes.network;
 import android.os.AsyncTask;
 import android.util.JsonReader;
 
-import com.example.pavelkovachev.recipes.DownloadCallback;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
 import com.example.pavelkovachev.recipes.presenters.cuisine.CuisineContract;
 
@@ -17,7 +16,6 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 public class CuisineApiService {
-    private static DownloadCallback downloadCallback;
     private static CuisineContract.Presenter cuisineContract;
     private static CuisineTask cuisineTask;
     private static String urlString;

@@ -3,9 +3,7 @@ package com.example.pavelkovachev.recipes.network;
 import android.os.AsyncTask;
 import android.util.JsonReader;
 
-import com.example.pavelkovachev.recipes.DownloadCallback;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
-import com.example.pavelkovachev.recipes.presenters.cuisine.CuisineContract;
 import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypeContract;
 
 import java.io.IOException;
@@ -18,8 +16,6 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 public class MealTypeApiService {
-    private static DownloadCallback downloadCallback;
-    private static CuisineContract.Presenter cuisineContract;
     private static MealTypeTask mealTypeTask;
     private static MealTypeContract.Presenter mealTypeContract;
     private static String urlString;
@@ -59,7 +55,7 @@ public class MealTypeApiService {
 
         @Override
         protected void onPostExecute(List<MealTypeModel> mealTypeModel) {
-            if (mealTypeModel != null && downloadCallback != null) {
+            if (mealTypeModel != null && mealTypeContract != null) {
                 mealTypeContract.showMealTypeResult(mealTypeModel);
             }
         }

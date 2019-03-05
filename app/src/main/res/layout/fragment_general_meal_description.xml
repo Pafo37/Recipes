@@ -25,7 +25,7 @@
                 <ImageView
                     android:id="@+id/img_general_meal"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="@dimen/general_meal_description_image_height"
                     android:contentDescription="@string/homescreen_description_random_meal"
                     android:scaleType="centerCrop"
                     tools:src="@drawable/cardview_random_meal" />
