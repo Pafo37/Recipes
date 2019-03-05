@@ -22,4 +22,3 @@ public interface CuisineContract {
         void showCuisineResult(List<CuisineModel> cuisineModel);
     }
 }
-

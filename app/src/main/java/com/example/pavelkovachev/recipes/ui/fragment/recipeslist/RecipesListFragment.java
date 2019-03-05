@@ -23,7 +23,6 @@ import java.util.List;
 
 import butterknife.BindView;
 
-
 public class RecipesListFragment extends BaseFragment implements RecipesListAdapter.ItemListener,
         RecipesListContract.View {
 

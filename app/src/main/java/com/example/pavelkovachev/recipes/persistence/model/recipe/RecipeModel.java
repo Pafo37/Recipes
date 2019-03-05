@@ -386,7 +386,6 @@ public class RecipeModel {
         this.recipeMeasure20 = recipeMeasure20;
     }
 
-
     public String getId() {
         return id;
     }
@@ -406,7 +405,6 @@ public class RecipeModel {
     public void setRecipeImage(String recipeImage) {
         this.recipeImage = recipeImage;
     }
-
 
     public void setRecipeName(String recipeName) {
         this.recipeName = recipeName;
