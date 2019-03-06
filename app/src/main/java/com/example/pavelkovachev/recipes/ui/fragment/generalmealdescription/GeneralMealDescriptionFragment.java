@@ -14,15 +14,22 @@ import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.ingredients.IngredientsAdapter;
+import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRecipesResponse;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.Ingredient;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.generalmealdescription.GeneralMealDescriptionContract;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
+import com.example.pavelkovachev.recipes.ui.interfaces.RecipesApi;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GeneralMealDescriptionFragment extends BaseFragment implements GeneralMealDescriptionContract.View
         , IngredientsAdapter.ItemListener {
@@ -51,7 +58,31 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recipeId = getArguments().getString(RECIPE_ID);
-        presenter.getRandomRecipe(recipeId);
+       // presenter.getRandomRecipe(recipeId);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://www.themealdb.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RecipesApi randomMealApi = retrofit.create(RecipesApi.class);
+
+        Call<RandomRecipesResponse> recipeModelCall = randomMealApi.getRandomRecipeResponse();
+
+        recipeModelCall.enqueue(new Callback<RandomRecipesResponse>() {
+            @Override
+            public void onResponse(Call<RandomRecipesResponse> call, Response<RandomRecipesResponse> response) {
+
+                int code=response.code();
+                RandomRecipesResponse recipeModel = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<RandomRecipesResponse> call, Throwable t) {
+
+            }
+        });
+
     }
 
     public static GeneralMealDescriptionFragment newInstance() {
