@@ -1,14 +1,11 @@
 package com.example.pavelkovachev.recipes.presenters.generalmealdescription;
 
-import android.net.NetworkInfo;
-
 import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.DownloadCallback;
 import com.example.pavelkovachev.recipes.converter.RecipeConverter;
 import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.RecipesService;
-import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
 import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
+import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
 import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
 import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRecipeListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
@@ -18,7 +15,7 @@ import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionContract.Presenter,
-        AsyncTaskResult<RecipeModel>, DownloadCallback, RandomMealCallback, LatestMealCallback {
+        AsyncTaskResult<RecipeModel>, RandomMealCallback, LatestMealCallback {
 
     private GeneralMealDescriptionContract.View view;
     private RecipesApiCreator recipesApiCreator;
@@ -62,21 +59,6 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     public void onError(Exception throwable) {
     }
 
-    @Override
-    public void showRandomMealResult(RecipeModel result) {
-       // view.showRecipe(result);
-    }
-
-    @Override
-    public NetworkInfo getActiveNetworkInfo() {
-        //NOT USED
-        return null;
-    }
-
-    @Override
-    public void showLatestMealResult(RecipeModel recipeModel) {
-        //NOT USED
-    }
 
     @Override
     public void onSuccessRandomRecipe(RandomRecipeListResponse randomRecipesResponse) {
