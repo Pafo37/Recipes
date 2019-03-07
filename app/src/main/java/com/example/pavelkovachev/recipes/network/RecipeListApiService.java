@@ -122,7 +122,7 @@ public class RecipeListApiService {
             String token = reader.nextName();
             switch (token) {
                 case "strMeal":
-                    recipeListModel = new RecipeListModel();
+                   // recipeListModel = new RecipeListModel();
                     recipeListModel.setRecipeName(reader.nextString());
                     break;
                 case "strMealThumb":

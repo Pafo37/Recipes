@@ -1,7 +1,11 @@
 package com.example.pavelkovachev.recipes.presenters.recipeslist;
 
 import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.network.RecipeListApiService;
+import com.example.pavelkovachev.recipes.converter.RecipesListConverter;
+import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
+import com.example.pavelkovachev.recipes.network.RecipesService;
+import com.example.pavelkovachev.recipes.network.callback.RecipesListCallback;
+import com.example.pavelkovachev.recipes.network.response.recipelist.RecipesListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
@@ -9,12 +13,14 @@ import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeList
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipesListPresenter implements RecipesListContract.Presenter,
-        AsyncTaskResult<List<RecipeListModel>> {
+        AsyncTaskResult<List<RecipeListModel>>, RecipesListCallback {
 
     private RecipesListContract.View view;
+    private RecipesApiCreator recipesApiCreator;
 
     public RecipesListPresenter(RecipesListContract.View view) {
         this.view = view;
@@ -29,8 +35,8 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
     @Override
     public void loadRecipeList() {
         view.showProgressBar(true);
-        RecipeListApiService.getRecipeList(this,
-                String.format("https://www.themealdb.com/api/json/v1/1/filter.php?%s=%s", view.getCategoryLetter(), view.getCategoryName()));
+        RecipesService recipesService = new RecipesService(recipesApiCreator, this);
+        recipesService.getRecipesList(view.getCategoryLetter(), view.getCategoryName());
     }
 
     @Override
@@ -58,5 +64,17 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
 
     @Override
     public void onError(Exception throwable) {
+    }
+
+    @Override
+    public void onSuccessRecipesList(RecipesListResponse recipesListResponse) {
+        List<RecipeListModel> recipeListModelList = new ArrayList<>();
+        for (int i = 0; i < recipesListResponse.getRecipeListResponses().size(); i++) {
+            recipeListModelList.add(RecipesListConverter.convertToRecipesList(recipesListResponse.getRecipeListResponses().get(i)));
+        }
+        recipeListModelList.add(RecipesListConverter.convertToRecipesList(recipesListResponse.getRecipeListResponses().get(0)));
+        saveToDatabase(recipeListModelList);
+        view.loadRecipeListFromApi(recipeListModelList);
+
     }
 }

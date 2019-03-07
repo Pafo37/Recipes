@@ -110,7 +110,7 @@ public class RandomMealApiService {
     }
 
     private static RecipeModel readRandomRecipeData(JsonReader reader) throws IOException {
-        RecipeModel recipeModel = new RecipeModel();
+        RecipeModel recipeModel=null;
         reader.beginObject();
         while (reader.hasNext()) {
             String token = reader.nextName();
@@ -128,7 +128,7 @@ public class RandomMealApiService {
     }
 
     private static RecipeModel readRandomRecipeFields(JsonReader reader) throws IOException {
-        RecipeModel recipeModel = new RecipeModel();
+        RecipeModel recipeModel = null;
         reader.beginArray();
         reader.beginObject();
         while (reader.hasNext()) {

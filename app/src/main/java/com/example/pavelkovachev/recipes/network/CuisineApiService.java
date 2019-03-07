@@ -122,7 +122,7 @@ public class CuisineApiService {
             String token = reader.nextName();
             switch (token) {
                 case "strArea":
-                    cuisineModel = new CuisineModel();
+                  //  cuisineModel = new CuisineModel();
                     cuisineModel.setCountry(reader.nextString());
                     cuisineModelList.add(cuisineModel);
                     break;

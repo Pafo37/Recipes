@@ -146,6 +146,67 @@ public class RecipeModel {
     @ColumnInfo(name = "measure20")
     private String recipeMeasure20;
 
+    public RecipeModel(@NonNull String id, String recipeName, String recipeInstructions, String recipeMealType,
+                       String recipeCuisine, String recipeImage, String recipeIngredient1, String recipeIngredient2,
+                       String recipeIngredient3, String recipeIngredient4, String recipeIngredient5,
+                       String recipeIngredient6, String recipeIngredient7, String recipeIngredient8,
+                       String recipeIngredient9, String recipeIngredient10, String recipeIngredient11,
+                       String recipeIngredient12, String recipeIngredient13, String recipeIngredient14,
+                       String recipeIngredient15, String recipeIngredient16, String recipeIngredient17,
+                       String recipeIngredient18, String recipeIngredient19, String recipeIngredient20,
+                       String recipeMeasure1, String recipeMeasure2, String recipeMeasure3,
+                       String recipeMeasure4, String recipeMeasure5, String recipeMeasure6, String recipeMeasure7,
+                       String recipeMeasure8, String recipeMeasure9, String recipeMeasure10, String recipeMeasure11,
+                       String recipeMeasure12, String recipeMeasure13, String recipeMeasure14, String recipeMeasure15,
+                       String recipeMeasure16, String recipeMeasure17, String recipeMeasure18, String recipeMeasure19, String recipeMeasure20) {
+        this.id = id;
+        this.recipeName = recipeName;
+        this.recipeInstructions = recipeInstructions;
+        this.recipeMealType = recipeMealType;
+        this.recipeCuisine = recipeCuisine;
+        this.recipeImage = recipeImage;
+        this.recipeIngredient1 = recipeIngredient1;
+        this.recipeIngredient2 = recipeIngredient2;
+        this.recipeIngredient3 = recipeIngredient3;
+        this.recipeIngredient4 = recipeIngredient4;
+        this.recipeIngredient5 = recipeIngredient5;
+        this.recipeIngredient6 = recipeIngredient6;
+        this.recipeIngredient7 = recipeIngredient7;
+        this.recipeIngredient8 = recipeIngredient8;
+        this.recipeIngredient9 = recipeIngredient9;
+        this.recipeIngredient10 = recipeIngredient10;
+        this.recipeIngredient11 = recipeIngredient11;
+        this.recipeIngredient12 = recipeIngredient12;
+        this.recipeIngredient13 = recipeIngredient13;
+        this.recipeIngredient14 = recipeIngredient14;
+        this.recipeIngredient15 = recipeIngredient15;
+        this.recipeIngredient16 = recipeIngredient16;
+        this.recipeIngredient17 = recipeIngredient17;
+        this.recipeIngredient18 = recipeIngredient18;
+        this.recipeIngredient19 = recipeIngredient19;
+        this.recipeIngredient20 = recipeIngredient20;
+        this.recipeMeasure1 = recipeMeasure1;
+        this.recipeMeasure2 = recipeMeasure2;
+        this.recipeMeasure3 = recipeMeasure3;
+        this.recipeMeasure4 = recipeMeasure4;
+        this.recipeMeasure5 = recipeMeasure5;
+        this.recipeMeasure6 = recipeMeasure6;
+        this.recipeMeasure7 = recipeMeasure7;
+        this.recipeMeasure8 = recipeMeasure8;
+        this.recipeMeasure9 = recipeMeasure9;
+        this.recipeMeasure10 = recipeMeasure10;
+        this.recipeMeasure11 = recipeMeasure11;
+        this.recipeMeasure12 = recipeMeasure12;
+        this.recipeMeasure13 = recipeMeasure13;
+        this.recipeMeasure14 = recipeMeasure14;
+        this.recipeMeasure15 = recipeMeasure15;
+        this.recipeMeasure16 = recipeMeasure16;
+        this.recipeMeasure17 = recipeMeasure17;
+        this.recipeMeasure18 = recipeMeasure18;
+        this.recipeMeasure19 = recipeMeasure19;
+        this.recipeMeasure20 = recipeMeasure20;
+    }
+
     public String getRecipeIngredient6() {
         return recipeIngredient6;
     }

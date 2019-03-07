@@ -3,7 +3,11 @@ package com.example.pavelkovachev.recipes.presenters.cuisine;
 import android.util.Log;
 
 import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.network.CuisineApiService;
+import com.example.pavelkovachev.recipes.converter.CuisineConverter;
+import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
+import com.example.pavelkovachev.recipes.network.RecipesService;
+import com.example.pavelkovachev.recipes.network.callback.CuisineCallback;
+import com.example.pavelkovachev.recipes.network.response.cuisine.CuisineListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
@@ -11,12 +15,14 @@ import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModelD
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CuisinePresenter implements CuisineContract.Presenter,
-        AsyncTaskResult<List<CuisineModel>> {
+        AsyncTaskResult<List<CuisineModel>>, CuisineCallback {
 
     private final CuisineContract.View view;
+    private RecipesApiCreator recipesApiCreator;
 
     public CuisinePresenter(CuisineContract.View view) {
         this.view = view;
@@ -50,7 +56,8 @@ public class CuisinePresenter implements CuisineContract.Presenter,
 
     @Override
     public void loadCuisine() {
-        CuisineApiService.getCuisine(this, "https://www.themealdb.com/api/json/v1/1/list.php?a=list");
+        RecipesService recipesService = new RecipesService(recipesApiCreator, this);
+        recipesService.getCuisine();
     }
 
     @Override
@@ -59,5 +66,15 @@ public class CuisinePresenter implements CuisineContract.Presenter,
                 .cuisineModelDao();
         CuisineService cuisineService = new CuisineService(cuisineModelDao);
         cuisineService.getAllCuisines(this);
+    }
+
+    @Override
+    public void onSuccessCuisine(CuisineListResponse cuisineListResponse) {
+        List<CuisineModel> cuisineModelList = new ArrayList<>();
+        cuisineModelList.add(CuisineConverter.
+                convertToCuisine(cuisineListResponse.getCuisinesResponseList().get(0)));
+        saveToDatabase(cuisineModelList);
+        view.loadCuisinesFromApi(cuisineModelList);
+
     }
 }

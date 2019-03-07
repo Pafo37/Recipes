@@ -15,6 +15,10 @@ public class CuisineModel {
     @SerializedName("strArea")
     private String country;
 
+    public CuisineModel(@NonNull String country) {
+        this.country = country;
+    }
+
     public String getCountry() {
         return country;
     }

@@ -23,6 +23,12 @@ public class MealTypeModel {
     @ColumnInfo(name = "image")
     private String image;
 
+    public MealTypeModel(@NonNull String title, String description, String image) {
+        this.title = title;
+        this.description = description;
+        this.image = image;
+    }
+
     public String getImage() {
         return image;
     }

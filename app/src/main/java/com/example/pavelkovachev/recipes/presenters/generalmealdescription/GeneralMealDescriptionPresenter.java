@@ -4,7 +4,13 @@ import android.net.NetworkInfo;
 
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.DownloadCallback;
-import com.example.pavelkovachev.recipes.network.RandomMealApiService;
+import com.example.pavelkovachev.recipes.converter.RecipeConverter;
+import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
+import com.example.pavelkovachev.recipes.network.RecipesService;
+import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
+import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
+import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
+import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRecipeListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao;
@@ -12,9 +18,10 @@ import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionContract.Presenter,
-        AsyncTaskResult<RecipeModel>, DownloadCallback {
+        AsyncTaskResult<RecipeModel>, DownloadCallback, RandomMealCallback, LatestMealCallback {
 
     private GeneralMealDescriptionContract.View view;
+    private RecipesApiCreator recipesApiCreator;
 
     public GeneralMealDescriptionPresenter(GeneralMealDescriptionContract.View view) {
         this.view = view;
@@ -23,8 +30,14 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
 
     @Override
     public void getRecipeByIdFromApi() {
-        RandomMealApiService.getRandomMeal(this,
-                String.format("https://www.themealdb.com/api/json/v1/1/lookup.php?i=%s", view.getRecipeId()));
+        RecipesService recipeService=new RecipesService(recipesApiCreator,this,this);
+        recipeService.getRecipeById(view.getRecipeId());
+    }
+
+    @Override
+    public void getRandomMealFromApi() {
+        RecipesService recipeService=new RecipesService(recipesApiCreator,this,this);
+        recipeService.getRandomRecipe();
     }
 
     @Override
@@ -39,7 +52,7 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     @Override
     public void onSuccess(RecipeModel result) {
         if (result != null) {
-            view.showRecipe(result);
+           view.showRecipe(result);
         } else {
             getRecipeByIdFromApi();
         }
@@ -51,7 +64,7 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
 
     @Override
     public void showRandomMealResult(RecipeModel result) {
-        view.showRecipe(result);
+       // view.showRecipe(result);
     }
 
     @Override
@@ -63,5 +76,15 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     @Override
     public void showLatestMealResult(RecipeModel recipeModel) {
         //NOT USED
+    }
+
+    @Override
+    public void onSuccessRandomRecipe(RandomRecipeListResponse randomRecipesResponse) {
+        view.showRecipe(RecipeConverter.convertRandomRecipe(randomRecipesResponse.getMeals().get(0)));
+    }
+
+    @Override
+    public void onSuccessLatestRecipe(LatestRecipeListResponse latestRecipesResponse) {
+        view.showRecipe(RecipeConverter.convertLatestRecipe(latestRecipesResponse.getLatestRecipeResponseList().get(0)));
     }
 }

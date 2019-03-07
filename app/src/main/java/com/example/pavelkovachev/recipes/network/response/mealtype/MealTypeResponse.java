@@ -1,20 +1,15 @@
 package com.example.pavelkovachev.recipes.network.response.mealtype;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class MealTypeResponse {
     @SerializedName("idCategory")
-    @Expose
     private String idCategory;
     @SerializedName("strCategory")
-    @Expose
     private String strCategory;
     @SerializedName("strCategoryThumb")
-    @Expose
     private String strCategoryThumb;
     @SerializedName("strCategoryDescription")
-    @Expose
     private String strCategoryDescription;
 
     public String getIdCategory() {

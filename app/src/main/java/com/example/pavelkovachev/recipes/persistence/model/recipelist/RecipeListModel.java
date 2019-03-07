@@ -23,6 +23,12 @@ public class RecipeListModel {
     @ColumnInfo(name = "recipe_image")
     private String recipeImage;
 
+    public RecipeListModel(@NonNull String recipeId, String recipeName, String recipeImage) {
+        this.recipeId = recipeId;
+        this.recipeName = recipeName;
+        this.recipeImage = recipeImage;
+    }
+
     public String getRecipeId() {
         return recipeId;
     }

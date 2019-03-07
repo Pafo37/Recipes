@@ -1,3 +1,4 @@
+/*
 package com.example.pavelkovachev.recipes.network;
 
 import android.net.ConnectivityManager;
@@ -439,4 +440,4 @@ public class LatestMealApiService {
         reader.endObject();
         return recipeModel;
     }
-}
+}*/

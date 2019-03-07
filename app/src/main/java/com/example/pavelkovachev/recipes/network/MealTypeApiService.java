@@ -1,3 +1,4 @@
+/*
 package com.example.pavelkovachev.recipes.network;
 
 import android.os.AsyncTask;
@@ -145,4 +146,4 @@ public class MealTypeApiService {
         reader.endArray();
         return mealTypeModelList;
     }
-}
+}*/

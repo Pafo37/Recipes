@@ -22,7 +22,6 @@ import butterknife.OnClick;
 public class HomeScreenFragment extends BaseFragment implements HomeScreenContract.View {
 
     private HomeScreenContract.Presenter presenter;
-    private final String INTENT_ID="id";
 
     @BindView(R.id.txt_random_meal_name)
     TextView txtRandomMealName;
