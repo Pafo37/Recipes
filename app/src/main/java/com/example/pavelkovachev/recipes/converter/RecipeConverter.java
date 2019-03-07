@@ -30,9 +30,7 @@ public class RecipeConverter {
                 randomRecipeResponse.getStrMeasure13(),randomRecipeResponse.getStrMeasure14(),
                 randomRecipeResponse.getStrMeasure15(),randomRecipeResponse.getStrMeasure16(),
                 randomRecipeResponse.getStrMeasure17(),randomRecipeResponse.getStrMeasure18(),
-                randomRecipeResponse.getStrMeasure19(),randomRecipeResponse.getStrMeasure20()
-
-                );
+                randomRecipeResponse.getStrMeasure19(),randomRecipeResponse.getStrMeasure20());
     }
 
     public static RecipeModel convertLatestRecipe(LatestRecipeResponse latestRecipeResponse){
@@ -59,8 +57,6 @@ public class RecipeConverter {
                 latestRecipeResponse.getStrMeasure13(),latestRecipeResponse.getStrMeasure14(),
                 latestRecipeResponse.getStrMeasure15(),latestRecipeResponse.getStrMeasure16(),
                 latestRecipeResponse.getStrMeasure17(),latestRecipeResponse.getStrMeasure18(),
-                latestRecipeResponse.getStrMeasure19(),latestRecipeResponse.getStrMeasure20()
-
-        );
+                latestRecipeResponse.getStrMeasure19(),latestRecipeResponse.getStrMeasure20());
     }
 }
