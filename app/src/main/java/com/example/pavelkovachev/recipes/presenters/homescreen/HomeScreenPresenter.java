@@ -18,6 +18,7 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Random
     private final HomeScreenContract.View view;
     private RecipesApiCreator recipesApiCreator;
 
+    //FIXME
     public String CURRENT_RANDOM_MEAL_ID;
     public String CURRENT_LATEST_MEAL_ID;
 

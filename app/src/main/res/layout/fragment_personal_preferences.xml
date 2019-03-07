@@ -11,7 +11,7 @@
         android:background="@color/toolbar_red_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_personal_preferences"
+        app:layout_constraintTop_toTopOf="parent"
         app:tabMode="fixed"
         app:tabTextColor="@color/color_white" />
 
