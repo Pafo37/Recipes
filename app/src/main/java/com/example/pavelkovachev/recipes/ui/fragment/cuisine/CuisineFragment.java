@@ -68,6 +68,11 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     }
 
     @Override
+    public void progressBarVisibility(boolean isVisible) {
+
+    }
+
+    @Override
     public void loadCuisinesFromApi(List<CuisineModel> cuisineList) {
         if (isAdded()) {
             arrayList.addAll(cuisineList);

@@ -8,13 +8,13 @@ import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-public class RecipeService implements RecipeRepository {
+public class RecipeDbService implements RecipeRepository {
 
     private static RecipeModelDao recipeModelDao;
     private Executor appExecutor;
 
-    public RecipeService(RecipeModelDao recipeModelDao) {
-        RecipeService.recipeModelDao = recipeModelDao;
+    public RecipeDbService(RecipeModelDao recipeModelDao) {
+        RecipeDbService.recipeModelDao = recipeModelDao;
         appExecutor = AppExecutor.getInstance();
     }
 

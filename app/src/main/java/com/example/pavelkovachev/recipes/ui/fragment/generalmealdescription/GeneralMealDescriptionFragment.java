@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
@@ -17,6 +16,7 @@ import com.example.pavelkovachev.recipes.adapters.ingredients.IngredientsAdapter
 import com.example.pavelkovachev.recipes.persistence.model.recipe.Ingredient;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.generalmealdescription.GeneralMealDescriptionContract;
+import com.example.pavelkovachev.recipes.ui.activity.base.BaseActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 import com.squareup.picasso.Picasso;
 
@@ -39,12 +39,10 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     TextView recipeInstructions;
     @BindView(R.id.recycler_view_general_meal_ingredients)
     RecyclerView recyclerView;
-    @BindView(R.id.progress_bar_general_meal_description)
-    ProgressBar progressBar;
 
-    GeneralMealDescriptionContract.Presenter presenter;
-    IngredientsAdapter ingredientsAdapter;
-    String recipeId;
+    private GeneralMealDescriptionContract.Presenter presenter;
+    private IngredientsAdapter ingredientsAdapter;
+    private String recipeId;
     private static final String RECIPE_ID = "id";
 
     @Override
@@ -52,7 +50,8 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         super.onViewCreated(view, savedInstanceState);
         recipeId = getArguments().getString(RECIPE_ID);
         presenter.getRandomRecipe(recipeId);
-       // presenter.getRandomMealFromApi();
+        // presenter.getRandomMealFromApi();
+        progressBarVisibility(true);
     }
 
     public static GeneralMealDescriptionFragment newInstance() {
@@ -67,8 +66,8 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @Override
     public void showRecipe(RecipeModel recipeModel) {
         if (isAdded()) {
-            showProgressBar(false);
-            getActivity().setTitle( recipeModel.getRecipeName());
+            progressBarVisibility(false);
+            getActivity().setTitle(recipeModel.getRecipeName());
             recipeName.setText(recipeModel.getRecipeName());
             recipeMealType.setText(getString(R.string.general_meal_description_meal_type) + recipeModel.getRecipeMealType());
             recipeCuisine.setText(getString(R.string.general_meal_description_cuisine) + recipeModel.getRecipeCuisine());
@@ -90,7 +89,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     @Override
     public void showProgressBar(Boolean isVisible) {
-        progressBar.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+
     }
 
     private List<Ingredient> initIngredients(RecipeModel recipeModel) {
@@ -100,6 +99,11 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @Override
     public void setPresenter(GeneralMealDescriptionContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void progressBarVisibility(boolean isVisible) {
+        ((BaseActivity) getActivity()).showProgressBar(isVisible);
     }
 
     @Override

@@ -8,13 +8,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.recipeslist.RecipesListAdapter;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
 import com.example.pavelkovachev.recipes.presenters.recipeslist.RecipesListContract;
 import com.example.pavelkovachev.recipes.presenters.recipeslist.RecipesListPresenter;
+import com.example.pavelkovachev.recipes.ui.activity.base.BaseActivity;
 import com.example.pavelkovachev.recipes.ui.activity.generalmealdescription.GeneralMealDescriptionActivity;
 import com.example.pavelkovachev.recipes.ui.activity.personalpreferences.PersonalPreferencesActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
@@ -34,8 +34,6 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     private List<RecipeListModel> arrayList = new ArrayList<>();
     private static final int SPAN_COUNT = 2;
     private RecipesListAdapter recipesListAdapter;
-    @BindView(R.id.progress_bar_recipes_list)
-    ProgressBar progressBar;
 
     public String categoryName;
     public String categoryLetter;
@@ -84,7 +82,7 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     @Override
     public void loadRecipeListFromApi(List<RecipeListModel> recipeListModelList) {
         if (isAdded()) {
-            showProgressBar(false);
+            progressBarVisibility(false);
             arrayList.addAll(recipeListModelList);
             recipesListAdapter.notifyDataSetChanged();
         }
@@ -108,11 +106,15 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
 
     @Override
     public void showProgressBar(Boolean isVisible) {
-        progressBar.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void setPresenter(RecipesListContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void progressBarVisibility(boolean isVisible) {
+        ((BaseActivity) getActivity()).showProgressBar(isVisible);
     }
 }

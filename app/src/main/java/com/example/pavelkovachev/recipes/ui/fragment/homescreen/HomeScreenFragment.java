@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenContract;
+import com.example.pavelkovachev.recipes.ui.activity.base.BaseActivity;
 import com.example.pavelkovachev.recipes.ui.activity.categories.CategoriesActivity;
 import com.example.pavelkovachev.recipes.ui.activity.generalmealdescription.GeneralMealDescriptionActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
@@ -43,8 +44,19 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        progressBarVisibility(false);
+    }
+
+    @Override
     public void setPresenter(HomeScreenContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void progressBarVisibility(boolean isVisible) {
+        ((BaseActivity) getActivity()).showProgressBar(isVisible);
     }
 
     @Override
@@ -59,15 +71,15 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
 
     @OnClick(R.id.cardview_random_meal)
     void onRandomMealClicked() {
-        Intent intent=new Intent(getActivity(),GeneralMealDescriptionActivity.class);
-        intent.putExtra("id",presenter.onRandomCardViewClicked());
+        Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
+        intent.putExtra("id", presenter.onRandomCardViewClicked());
         startActivity(intent);
     }
 
     @OnClick(R.id.cardview_latest_meal)
     void onLatestMealClicked() {
-        Intent intent=new Intent(getActivity(),GeneralMealDescriptionActivity.class);
-        intent.putExtra("id",presenter.onLatestCardViewClicked());
+        Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
+        intent.putExtra("id", presenter.onLatestCardViewClicked());
         startActivity(intent);
     }
 

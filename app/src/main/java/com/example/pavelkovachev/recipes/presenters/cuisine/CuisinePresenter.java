@@ -5,7 +5,7 @@ import android.util.Log;
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.CuisineConverter;
 import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
-import com.example.pavelkovachev.recipes.network.RecipesService;
+import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.CuisineCallback;
 import com.example.pavelkovachev.recipes.network.response.cuisine.CuisineListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
@@ -56,7 +56,7 @@ public class CuisinePresenter implements CuisineContract.Presenter,
 
     @Override
     public void loadCuisine() {
-        RecipesService recipesService = new RecipesService(recipesApiCreator, this);
+        RecipeApiService recipesService = new RecipeApiService(recipesApiCreator, this);
         recipesService.getCuisine();
     }
 

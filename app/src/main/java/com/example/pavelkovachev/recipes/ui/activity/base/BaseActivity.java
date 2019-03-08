@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.pavelkovachev.recipes.R;
 
@@ -17,6 +19,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,10 +28,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutResId());
         ButterKnife.bind(this, this);
         setSupportActionBar(toolbar);
+        showProgressBar(false);
+    }
+
+    public void showProgressBar(boolean isVisible) {
+        progressBar.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     @LayoutRes
-    protected int getLayoutResId(){
+    protected int getLayoutResId() {
         return R.layout.activity_main;
     }
 

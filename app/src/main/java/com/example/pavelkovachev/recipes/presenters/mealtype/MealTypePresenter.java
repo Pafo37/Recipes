@@ -3,7 +3,7 @@ package com.example.pavelkovachev.recipes.presenters.mealtype;
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.MealTypeConverter;
 import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
-import com.example.pavelkovachev.recipes.network.RecipesService;
+import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.MealTypeCallback;
 import com.example.pavelkovachev.recipes.network.response.mealtype.MealTypeListResponses;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
@@ -36,7 +36,7 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
 
     @Override
     public void loadMealType() {
-        RecipesService recipesService = new RecipesService(recipesApiCreator, this);
+        RecipeApiService recipesService = new RecipeApiService(recipesApiCreator, this);
         recipesService.getMealTypes();
     }
 

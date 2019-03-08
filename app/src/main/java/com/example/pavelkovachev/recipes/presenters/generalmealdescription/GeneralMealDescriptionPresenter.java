@@ -3,7 +3,7 @@ package com.example.pavelkovachev.recipes.presenters.generalmealdescription;
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.RecipeConverter;
 import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
-import com.example.pavelkovachev.recipes.network.RecipesService;
+import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
 import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
 import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
@@ -11,7 +11,7 @@ import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRec
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao;
-import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeService;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeDbService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionContract.Presenter,
@@ -27,22 +27,21 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
 
     @Override
     public void getRecipeByIdFromApi() {
-        RecipesService recipeService=new RecipesService(recipesApiCreator,this,this);
+        RecipeApiService recipeService=new RecipeApiService(recipesApiCreator,this,this);
         recipeService.getRecipeById(view.getRecipeId());
     }
 
     @Override
     public void getRandomMealFromApi() {
-        RecipesService recipeService=new RecipesService(recipesApiCreator,this,this);
+        RecipeApiService recipeService=new RecipeApiService(recipesApiCreator,this,this);
         recipeService.getRandomRecipe();
     }
 
     @Override
     public void getRandomRecipe(String id) {
-        view.showProgressBar(true);
         RecipeModelDao recipeModelDao = DatabaseCreator.
                 getRecipeDatabase(App.getInstance().getApplicationContext()).recipeDao();
-        RecipeService recipeService = new RecipeService(recipeModelDao);
+        RecipeDbService recipeService = new RecipeDbService(recipeModelDao);
         recipeService.getById(id, this);
     }
 

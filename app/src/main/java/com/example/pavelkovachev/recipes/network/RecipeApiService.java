@@ -18,7 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RecipesService {
+public class RecipeApiService {
 
     private RecipesApiCreator recipesApiCreator;
     private RandomMealCallback apiResultCallback;
@@ -27,23 +27,23 @@ public class RecipesService {
     private CuisineCallback cuisineCallback;
     private RecipesListCallback recipesListCallback;
 
-    public RecipesService(RecipesApiCreator recipesApiCreator, RandomMealCallback apiResultCallback, LatestMealCallback latestMealCallback) {
+    public RecipeApiService(RecipesApiCreator recipesApiCreator, RandomMealCallback apiResultCallback, LatestMealCallback latestMealCallback) {
         this.recipesApiCreator = new RecipesApiCreator();
         this.apiResultCallback = apiResultCallback;
         this.latestMealCallback = latestMealCallback;
     }
 
-    public RecipesService(RecipesApiCreator recipesApiCreator, MealTypeCallback mealTypeCallback) {
+    public RecipeApiService(RecipesApiCreator recipesApiCreator, MealTypeCallback mealTypeCallback) {
         this.recipesApiCreator = new RecipesApiCreator();
         this.mealTypeCallback = mealTypeCallback;
     }
 
-    public RecipesService(RecipesApiCreator recipesApiCreator, CuisineCallback cuisineCallback) {
+    public RecipeApiService(RecipesApiCreator recipesApiCreator, CuisineCallback cuisineCallback) {
         this.recipesApiCreator = new RecipesApiCreator();
         this.cuisineCallback = cuisineCallback;
     }
 
-    public RecipesService(RecipesApiCreator recipesApiCreator, RecipesListCallback recipesListCallback) {
+    public RecipeApiService(RecipesApiCreator recipesApiCreator, RecipesListCallback recipesListCallback) {
         this.recipesApiCreator = new RecipesApiCreator();
         this.recipesListCallback = recipesListCallback;
     }
@@ -128,15 +128,14 @@ public class RecipesService {
         });
     }
 
-    public void getRecipesList(String urlLetter,String category) {
-        Map<String,String> queryData=new HashMap<>();
-        queryData.put(urlLetter,category);
-
-        Call<RecipesListResponse> recipesListResponseCall= recipesApiCreator.getRecipesApi().getRecipesListResponse(queryData);
+    public void getRecipesList(String urlLetter, String category) {
+        Map<String, String> queryData = new HashMap<>();
+        queryData.put(urlLetter, category);
+        Call<RecipesListResponse> recipesListResponseCall = recipesApiCreator.getRecipesApi().getRecipesListResponse(queryData);
         recipesListResponseCall.enqueue(new Callback<RecipesListResponse>() {
             @Override
             public void onResponse(Call<RecipesListResponse> call, Response<RecipesListResponse> response) {
-                RecipesListResponse recipesListResponse=response.body();
+                RecipesListResponse recipesListResponse = response.body();
                 recipesListCallback.onSuccessRecipesList(recipesListResponse);
             }
 
@@ -145,6 +144,5 @@ public class RecipesService {
 
             }
         });
-
     }
 }

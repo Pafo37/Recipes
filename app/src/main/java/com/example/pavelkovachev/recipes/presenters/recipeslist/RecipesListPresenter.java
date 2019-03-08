@@ -3,7 +3,7 @@ package com.example.pavelkovachev.recipes.presenters.recipeslist;
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.RecipesListConverter;
 import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
-import com.example.pavelkovachev.recipes.network.RecipesService;
+import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.RecipesListCallback;
 import com.example.pavelkovachev.recipes.network.response.recipelist.RecipesListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
@@ -34,8 +34,8 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
 
     @Override
     public void loadRecipeList() {
-        view.showProgressBar(true);
-        RecipesService recipesService = new RecipesService(recipesApiCreator, this);
+        view.progressBarVisibility(true);
+        RecipeApiService recipesService = new RecipeApiService(recipesApiCreator, this);
         recipesService.getRecipesList(view.getCategoryLetter(), view.getCategoryName());
     }
 

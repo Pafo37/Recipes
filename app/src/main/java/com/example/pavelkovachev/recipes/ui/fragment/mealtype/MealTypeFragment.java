@@ -68,6 +68,11 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     }
 
     @Override
+    public void progressBarVisibility(boolean isVisible) {
+
+    }
+
+    @Override
     public void loadMealTypesFromApi(List<MealTypeModel> mealTypeList) {
         if (isAdded()) {
             arrayList.addAll(mealTypeList);
