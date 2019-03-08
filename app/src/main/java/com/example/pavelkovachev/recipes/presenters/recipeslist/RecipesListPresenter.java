@@ -2,8 +2,8 @@ package com.example.pavelkovachev.recipes.presenters.recipeslist;
 
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.RecipesListConverter;
-import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
+import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.callback.RecipesListCallback;
 import com.example.pavelkovachev.recipes.network.response.recipelist.RecipesListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
@@ -72,7 +72,6 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
         for (int i = 0; i < recipesListResponse.getRecipeListResponses().size(); i++) {
             recipeListModelList.add(RecipesListConverter.convertToRecipesList(recipesListResponse.getRecipeListResponses().get(i)));
         }
-        recipeListModelList.add(RecipesListConverter.convertToRecipesList(recipesListResponse.getRecipeListResponses().get(0)));
         saveToDatabase(recipeListModelList);
         view.loadRecipeListFromApi(recipeListModelList);
 
