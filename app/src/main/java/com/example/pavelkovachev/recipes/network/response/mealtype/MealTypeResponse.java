@@ -3,6 +3,7 @@ package com.example.pavelkovachev.recipes.network.response.mealtype;
 import com.google.gson.annotations.SerializedName;
 
 public class MealTypeResponse {
+
     @SerializedName("idCategory")
     private String idCategory;
     @SerializedName("strCategory")

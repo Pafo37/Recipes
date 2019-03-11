@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ingredient {
+
     private String measures;
     private String ingredient;
 

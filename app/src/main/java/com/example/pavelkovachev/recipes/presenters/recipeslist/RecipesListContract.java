@@ -16,8 +16,6 @@ public interface RecipesListContract {
         String getCategoryName();
 
         String getCategoryLetter();
-
-        void showProgressBar(Boolean isVisible);
     }
 
     interface Presenter extends BasePresenter {

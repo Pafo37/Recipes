@@ -32,6 +32,9 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
 
     private List<CuisineModel> arrayList = new ArrayList<>();
     private CuisineAdapter cuisineAdapter;
+    private static final String CATEGORY_NAME = "categoryName";
+    private static final String CATEGORY_LETTER = "categoryLetter";
+    private static final String CATEGORY_LETTER_VALUE = "a";
 
     public static CuisineFragment newInstance() {
         return new CuisineFragment();
@@ -57,8 +60,8 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     public void onItemClick(CuisineModel cuisineItem) {
         currentCuisineName = cuisineItem.getCountry();
         Intent intent = new Intent(getActivity(), RecipesListActivity.class);
-        intent.putExtra("categoryName", currentCuisineName);
-        intent.putExtra("categoryLetter","a");
+        intent.putExtra(CATEGORY_NAME, currentCuisineName);
+        intent.putExtra(CATEGORY_LETTER, CATEGORY_LETTER_VALUE);
         startActivity(intent);
     }
 
@@ -69,7 +72,7 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
 
     @Override
     public void progressBarVisibility(boolean isVisible) {
-
+        //NOT USED
     }
 
     @Override

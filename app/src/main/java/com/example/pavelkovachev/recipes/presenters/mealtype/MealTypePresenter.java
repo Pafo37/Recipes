@@ -2,8 +2,8 @@ package com.example.pavelkovachev.recipes.presenters.mealtype;
 
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.MealTypeConverter;
-import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
+import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.callback.MealTypeCallback;
 import com.example.pavelkovachev.recipes.network.response.mealtype.MealTypeListResponses;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MealTypePresenter implements MealTypeContract.Presenter,
-        AsyncTaskResult<List<MealTypeModel>>, MealTypeCallback{
+        AsyncTaskResult<List<MealTypeModel>>, MealTypeCallback {
+
     private final MealTypeContract.View view;
     private RecipesApiCreator recipesApiCreator;
 

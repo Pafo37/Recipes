@@ -12,7 +12,6 @@ public interface MealTypeContract {
         void loadMealTypesFromApi(List<MealTypeModel> mealTypeList);
 
         void showMealTypeFromDb(List<MealTypeModel> result);
-
     }
 
     interface Presenter extends BasePresenter {

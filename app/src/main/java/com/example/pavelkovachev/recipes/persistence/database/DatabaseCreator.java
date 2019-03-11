@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 public class DatabaseCreator {
+
     private static RecipeDatabase recipeDatabase;
     private static final Object LOCK = new Object();
 

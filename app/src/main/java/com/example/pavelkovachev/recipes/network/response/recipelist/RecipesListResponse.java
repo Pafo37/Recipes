@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class RecipesListResponse {
+
     @SerializedName("meals")
     private List<RecipeListResponse> recipeListResponses = null;
 

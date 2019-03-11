@@ -5,5 +5,4 @@ import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRec
 public interface LatestMealCallback {
 
     void onSuccessLatestRecipe(LatestRecipeListResponse recipesResponse);
-
 }

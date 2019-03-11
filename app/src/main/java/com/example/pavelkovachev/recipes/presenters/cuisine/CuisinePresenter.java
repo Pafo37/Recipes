@@ -4,8 +4,8 @@ import android.util.Log;
 
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.CuisineConverter;
-import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
+import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.callback.CuisineCallback;
 import com.example.pavelkovachev.recipes.network.response.cuisine.CuisineListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
@@ -75,6 +75,5 @@ public class CuisinePresenter implements CuisineContract.Presenter,
                 convertToCuisine(cuisineListResponse.getCuisinesResponseList().get(0)));
         saveToDatabase(cuisineModelList);
         view.loadCuisinesFromApi(cuisineModelList);
-
     }
 }

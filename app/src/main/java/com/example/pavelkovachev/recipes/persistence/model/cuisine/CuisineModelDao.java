@@ -10,6 +10,7 @@ import java.util.List;
 
 @Dao
 public interface CuisineModelDao {
+
     @Query("SELECT * FROM CuisineModel")
     List<CuisineModel> getAllCuisines();
 

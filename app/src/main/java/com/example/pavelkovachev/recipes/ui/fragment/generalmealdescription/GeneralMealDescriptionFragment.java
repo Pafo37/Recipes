@@ -87,11 +87,6 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         return recipeId = getArguments().getString(RECIPE_ID);
     }
 
-    @Override
-    public void showProgressBar(Boolean isVisible) {
-
-    }
-
     private List<Ingredient> initIngredients(RecipeModel recipeModel) {
         return Ingredient.convertFromRecipeToList(recipeModel);
     }

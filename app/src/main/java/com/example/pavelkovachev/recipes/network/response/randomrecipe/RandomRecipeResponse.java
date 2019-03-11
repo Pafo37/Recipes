@@ -3,6 +3,7 @@ package com.example.pavelkovachev.recipes.network.response.randomrecipe;
 import com.google.gson.annotations.SerializedName;
 
 public class RandomRecipeResponse {
+
     @SerializedName("idMeal")
     private String idMeal;
     @SerializedName("strMeal")

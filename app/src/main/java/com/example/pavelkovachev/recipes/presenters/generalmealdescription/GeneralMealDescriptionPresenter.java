@@ -2,16 +2,16 @@ package com.example.pavelkovachev.recipes.presenters.generalmealdescription;
 
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.RecipeConverter;
-import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
+import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
 import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
 import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
 import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRecipeListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeDbService;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao;
-import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeDbService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionContract.Presenter,
@@ -27,13 +27,13 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
 
     @Override
     public void getRecipeByIdFromApi() {
-        RecipeApiService recipeService=new RecipeApiService(recipesApiCreator,this,this);
+        RecipeApiService recipeService = new RecipeApiService(recipesApiCreator, this, this);
         recipeService.getRecipeById(view.getRecipeId());
     }
 
     @Override
     public void getRandomMealFromApi() {
-        RecipeApiService recipeService=new RecipeApiService(recipesApiCreator,this,this);
+        RecipeApiService recipeService = new RecipeApiService(recipesApiCreator, this, this);
         recipeService.getRandomRecipe();
     }
 
@@ -48,7 +48,7 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     @Override
     public void onSuccess(RecipeModel result) {
         if (result != null) {
-           view.showRecipe(result);
+            view.showRecipe(result);
         } else {
             getRecipeByIdFromApi();
         }

@@ -5,9 +5,9 @@ import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeList
 
 public class RecipesListConverter {
 
-    public static RecipeListModel convertToRecipesList(RecipeListResponse recipeListResponse){
+    public static RecipeListModel convertToRecipesList(RecipeListResponse recipeListResponse) {
 
-        return new RecipeListModel(recipeListResponse.getIdMeal(),recipeListResponse.getStrMeal(),
+        return new RecipeListModel(recipeListResponse.getIdMeal(), recipeListResponse.getStrMeal(),
                 recipeListResponse.getStrMealThumb());
     }
 }

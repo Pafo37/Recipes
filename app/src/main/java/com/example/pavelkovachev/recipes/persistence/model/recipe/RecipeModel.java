@@ -25,7 +25,7 @@ public class RecipeModel {
     private String recipeCuisine;
 
     @ColumnInfo(name = "recipeImage")
-    public String recipeImage;
+    private String recipeImage;
 
     @ColumnInfo(name = "ingredient1")
     private String recipeIngredient1;

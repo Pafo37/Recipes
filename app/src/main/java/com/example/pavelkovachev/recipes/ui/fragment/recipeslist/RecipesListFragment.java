@@ -105,10 +105,6 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     }
 
     @Override
-    public void showProgressBar(Boolean isVisible) {
-    }
-
-    @Override
     public void setPresenter(RecipesListContract.Presenter presenter) {
         this.presenter = presenter;
     }

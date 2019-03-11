@@ -5,9 +5,9 @@ import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeMode
 
 public class MealTypeConverter {
 
-    public static MealTypeModel convertToMealType(MealTypeResponse mealTypeResponse){
+    public static MealTypeModel convertToMealType(MealTypeResponse mealTypeResponse) {
 
-        return new MealTypeModel(mealTypeResponse.getStrCategory(),mealTypeResponse.getStrCategoryDescription(),
+        return new MealTypeModel(mealTypeResponse.getStrCategory(), mealTypeResponse.getStrCategoryDescription(),
                 mealTypeResponse.getStrCategoryThumb());
     }
 }

@@ -2,8 +2,8 @@ package com.example.pavelkovachev.recipes.presenters.homescreen;
 
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.RecipeConverter;
-import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
+import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
 import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
 import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
@@ -34,7 +34,7 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Random
 
     @Override
     public void loadRandomLatestMeals() {
-        RecipeApiService recipeService=new RecipeApiService(recipesApiCreator,this,this);
+        RecipeApiService recipeService = new RecipeApiService(recipesApiCreator, this, this);
         recipeService.getRandomRecipe();
         recipeService.getLatestRecipe();
     }

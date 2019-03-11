@@ -9,7 +9,6 @@ import com.google.gson.annotations.SerializedName;
 @Entity
 public class CuisineModel {
 
-
     @NonNull
     @PrimaryKey()
     @SerializedName("strArea")

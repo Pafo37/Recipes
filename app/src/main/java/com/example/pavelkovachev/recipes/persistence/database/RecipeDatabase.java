@@ -13,6 +13,7 @@ import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeList
 
 @android.arch.persistence.room.Database(entities = {RecipeModel.class, CuisineModel.class, MealTypeModel.class, RecipeListModel.class}, version = 1,exportSchema = false)
 public abstract class RecipeDatabase extends RoomDatabase {
+
     public abstract RecipeModelDao recipeDao();
 
     public abstract CuisineModelDao cuisineModelDao();

@@ -5,5 +5,4 @@ import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRec
 public interface RandomMealCallback {
 
     void onSuccessRandomRecipe(RandomRecipeListResponse randomRecipeResponse);
-
 }

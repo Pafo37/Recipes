@@ -10,8 +10,6 @@ public interface GeneralMealDescriptionContract {
         void showRecipe(RecipeModel recipeModel);
 
         String getRecipeId();
-
-        void showProgressBar(Boolean isShown);
     }
 
     interface Presenter extends BasePresenter {

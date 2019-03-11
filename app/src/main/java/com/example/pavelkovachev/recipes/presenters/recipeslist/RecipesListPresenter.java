@@ -74,6 +74,5 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
         }
         saveToDatabase(recipeListModelList);
         view.loadRecipeListFromApi(recipeListModelList);
-
     }
 }
