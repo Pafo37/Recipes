@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
 import com.example.pavelkovachev.recipes.R;
+import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

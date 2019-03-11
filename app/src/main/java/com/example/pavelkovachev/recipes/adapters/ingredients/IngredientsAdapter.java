@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder> {
+
     private List<Ingredient> ingredientsList;
     private Context context;
     private ItemListener itemListener;
@@ -43,7 +44,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
         @Override
         public void onClick(View view) {
-            if(itemListener!=null){
+            if (itemListener != null) {
                 itemListener.onItemClick(ingredientItem);
             }
         }
@@ -58,12 +59,12 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ingredients_measures,viewGroup,false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ingredients_measures, viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.setData((Ingredient)ingredientsList.get(i));
+        viewHolder.setData((Ingredient) ingredientsList.get(i));
     }
 
     @Override
