@@ -67,6 +67,8 @@ public class RecipeDbService implements RecipeRepository {
             super.onPostExecute(recipeModel);
             if (asyncTaskResult != null) {
                 asyncTaskResult.onSuccess(recipeModel);
+            } else {
+                asyncTaskResult.onError();
             }
         }
     }

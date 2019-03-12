@@ -50,7 +50,6 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         super.onViewCreated(view, savedInstanceState);
         recipeId = getArguments().getString(RECIPE_ID);
         presenter.getRandomRecipe(recipeId);
-        // presenter.getRandomMealFromApi();
         progressBarVisibility(true);
     }
 
@@ -85,6 +84,11 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @Override
     public String getRecipeId() {
         return recipeId = getArguments().getString(RECIPE_ID);
+    }
+
+    @Override
+    public void onError() {
+        showErrorDialog();
     }
 
     private List<Ingredient> initIngredients(RecipeModel recipeModel) {

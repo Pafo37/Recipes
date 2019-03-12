@@ -1,5 +1,6 @@
 package com.example.pavelkovachev.recipes.presenters.mealtype;
 
+import com.annimon.stream.Stream;
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.MealTypeConverter;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
@@ -21,6 +22,7 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
 
     private final MealTypeContract.View view;
     private RecipesApiCreator recipesApiCreator;
+    private List<MealTypeModel> mealTypeModelList = new ArrayList<>();
 
     public MealTypePresenter(MealTypeContract.View view) {
         this.view = view;
@@ -57,7 +59,8 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
     }
 
     @Override
-    public void onError(Exception throwable) {
+    public void onError() {
+        view.onError();
     }
 
     private void saveToDatabase(List<MealTypeModel> mealTypeModel) {
@@ -67,9 +70,15 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
 
     @Override
     public void onSuccessMealTypes(MealTypeListResponses mealTypesResponses) {
-        List<MealTypeModel> mealTypeModelList = new ArrayList<>();
-        mealTypeModelList.add(MealTypeConverter.convertToMealType(mealTypesResponses.getCategories().get(0)));
+        Stream.of(mealTypesResponses.getCategories()).forEach(
+                mealTypeModel ->
+                        mealTypeModelList.add(MealTypeConverter.convertToMealType(mealTypeModel)));
         saveToDatabase(mealTypeModelList);
         view.loadMealTypesFromApi(mealTypeModelList);
+    }
+
+    @Override
+    public void onErrorMealType() {
+        view.onError();
     }
 }

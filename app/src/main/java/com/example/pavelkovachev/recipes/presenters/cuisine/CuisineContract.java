@@ -12,6 +12,8 @@ public interface CuisineContract {
         void loadCuisinesFromApi(List<CuisineModel> cuisineModel);
 
         void showCuisineTypesFromDb(List<CuisineModel> result);
+
+        void onError();
     }
 
     interface Presenter extends BasePresenter {

@@ -72,7 +72,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
 
     @Override
     public void progressBarVisibility(boolean isVisible) {
-
+        //NOT USED
     }
 
     @Override
@@ -91,5 +91,10 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
             arrayList.addAll(result);
             mealTypeAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onError() {
+        showErrorDialog();
     }
 }

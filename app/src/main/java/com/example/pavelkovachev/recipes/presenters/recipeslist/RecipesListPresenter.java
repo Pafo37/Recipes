@@ -1,5 +1,6 @@
 package com.example.pavelkovachev.recipes.presenters.recipeslist;
 
+import com.annimon.stream.Stream;
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.RecipesListConverter;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
@@ -16,11 +17,13 @@ import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class RecipesListPresenter implements RecipesListContract.Presenter,
         AsyncTaskResult<List<RecipeListModel>>, RecipesListCallback {
 
     private RecipesListContract.View view;
     private RecipesApiCreator recipesApiCreator;
+    private List<RecipeListModel> recipeListModelList = new ArrayList<>();
 
     public RecipesListPresenter(RecipesListContract.View view) {
         this.view = view;
@@ -63,16 +66,21 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
     }
 
     @Override
-    public void onError(Exception throwable) {
+    public void onError() {
+        view.onError();
     }
 
     @Override
     public void onSuccessRecipesList(RecipesListResponse recipesListResponse) {
-        List<RecipeListModel> recipeListModelList = new ArrayList<>();
-        for (int i = 0; i < recipesListResponse.getRecipeListResponses().size(); i++) {
-            recipeListModelList.add(RecipesListConverter.convertToRecipesList(recipesListResponse.getRecipeListResponses().get(i)));
-        }
+        Stream.of(recipesListResponse.getRecipeListResponses()).forEach(
+                recipeList ->
+                        recipeListModelList.add(RecipesListConverter.convertToRecipesList(recipeList)));
         saveToDatabase(recipeListModelList);
         view.loadRecipeListFromApi(recipeListModelList);
+    }
+
+    @Override
+    public void onErrorRecipesList() {
+        view.onError();
     }
 }

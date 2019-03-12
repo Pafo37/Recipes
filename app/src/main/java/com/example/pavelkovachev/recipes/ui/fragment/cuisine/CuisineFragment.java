@@ -92,4 +92,9 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
             cuisineAdapter.notifyDataSetChanged();
         }
     }
+
+    @Override
+    public void onError() {
+        showErrorDialog();
+    }
 }

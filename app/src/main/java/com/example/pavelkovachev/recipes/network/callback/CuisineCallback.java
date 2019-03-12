@@ -5,4 +5,6 @@ import com.example.pavelkovachev.recipes.network.response.cuisine.CuisineListRes
 public interface CuisineCallback {
 
     void onSuccessCuisine(CuisineListResponse cuisineListResponse);
+
+    void onErrorCuisine();
 }

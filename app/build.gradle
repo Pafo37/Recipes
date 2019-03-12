@@ -18,7 +18,9 @@ android {
             buildConfigField("String", "BASE_URL", '"https://www.themealdb.com/"')
         }
         debug {
-            buildConfigField("String", "BASE_URL", "https://www.themealdb.com/")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", '"https://www.themealdb.com/"')
         }
     }
     compileOptions {
@@ -76,4 +78,7 @@ dependencies {
 
     //OkHttp
     implementation 'com.squareup.okhttp3:okhttp:3.13.1'
+
+    //Stream library
+    implementation 'com.annimon:stream:1.2.1'
 }

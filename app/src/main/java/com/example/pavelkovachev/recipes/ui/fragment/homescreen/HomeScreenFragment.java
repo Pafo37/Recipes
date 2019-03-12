@@ -99,4 +99,9 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
             txtLatestMealName.setText(recipeModel.getRecipeName());
         }
     }
+
+    @Override
+    public void onError() {
+        showErrorDialog();
+    }
 }

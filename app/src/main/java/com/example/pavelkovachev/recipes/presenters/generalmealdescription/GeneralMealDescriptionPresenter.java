@@ -32,12 +32,6 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     }
 
     @Override
-    public void getRandomMealFromApi() {
-        RecipeApiService recipeService = new RecipeApiService(recipesApiCreator, this, this);
-        recipeService.getRandomRecipe();
-    }
-
-    @Override
     public void getRandomRecipe(String id) {
         RecipeModelDao recipeModelDao = DatabaseCreator.
                 getRecipeDatabase(App.getInstance().getApplicationContext()).recipeDao();
@@ -55,9 +49,9 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     }
 
     @Override
-    public void onError(Exception throwable) {
+    public void onError() {
+        view.onError();
     }
-
 
     @Override
     public void onSuccessRandomRecipe(RandomRecipeListResponse randomRecipesResponse) {
@@ -65,7 +59,17 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     }
 
     @Override
+    public void onErrorRandomRecipe() {
+        view.onError();
+    }
+
+    @Override
     public void onSuccessLatestRecipe(LatestRecipeListResponse latestRecipesResponse) {
         view.showRecipe(RecipeConverter.convertLatestRecipe(latestRecipesResponse.getLatestRecipeResponseList().get(0)));
+    }
+
+    @Override
+    public void onErrorLatestRecipe() {
+        view.onError();
     }
 }

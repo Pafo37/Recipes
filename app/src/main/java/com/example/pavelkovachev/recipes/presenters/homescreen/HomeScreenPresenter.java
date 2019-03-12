@@ -55,9 +55,19 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Random
     }
 
     @Override
+    public void onErrorRandomRecipe() {
+        view.onError();
+    }
+
+    @Override
     public void onSuccessLatestRecipe(LatestRecipeListResponse recipesResponse) {
         view.setLatestMeal(RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)));
         saveToDatabase(RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)));
         CURRENT_LATEST_MEAL_ID = RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)).getId();
+    }
+
+    @Override
+    public void onErrorLatestRecipe() {
+        view.onError();
     }
 }

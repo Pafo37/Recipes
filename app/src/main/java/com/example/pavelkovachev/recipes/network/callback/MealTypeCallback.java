@@ -5,4 +5,6 @@ import com.example.pavelkovachev.recipes.network.response.mealtype.MealTypeListR
 public interface MealTypeCallback {
 
     void onSuccessMealTypes(MealTypeListResponses mealTypesResponses);
+
+    void onErrorMealType();
 }

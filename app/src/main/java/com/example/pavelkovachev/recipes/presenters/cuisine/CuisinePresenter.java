@@ -1,7 +1,6 @@
 package com.example.pavelkovachev.recipes.presenters.cuisine;
 
-import android.util.Log;
-
+import com.annimon.stream.Stream;
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.CuisineConverter;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
@@ -23,6 +22,8 @@ public class CuisinePresenter implements CuisineContract.Presenter,
 
     private final CuisineContract.View view;
     private RecipesApiCreator recipesApiCreator;
+    private List<CuisineModel> cuisineModelList = new ArrayList<>();
+
 
     public CuisinePresenter(CuisineContract.View view) {
         this.view = view;
@@ -50,8 +51,8 @@ public class CuisinePresenter implements CuisineContract.Presenter,
     }
 
     @Override
-    public void onError(Exception throwable) {
-        Log.e("TAG", throwable.getMessage());
+    public void onError() {
+        view.onError();
     }
 
     @Override
@@ -70,10 +71,15 @@ public class CuisinePresenter implements CuisineContract.Presenter,
 
     @Override
     public void onSuccessCuisine(CuisineListResponse cuisineListResponse) {
-        List<CuisineModel> cuisineModelList = new ArrayList<>();
-        cuisineModelList.add(CuisineConverter.
-                convertToCuisine(cuisineListResponse.getCuisinesResponseList().get(0)));
+        Stream.of(cuisineListResponse.getCuisinesResponseList()).forEach(
+                cuisineModel ->
+                        cuisineModelList.add(CuisineConverter.convertToCuisine(cuisineModel)));
         saveToDatabase(cuisineModelList);
         view.loadCuisinesFromApi(cuisineModelList);
+    }
+
+    @Override
+    public void onErrorCuisine() {
+        view.onError();
     }
 }

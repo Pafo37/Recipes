@@ -25,7 +25,7 @@ public interface RecipesApi {
     Call<RandomRecipeListResponse> getRecipeByIdResponse(@Query("i") String mealId);
 
     @GET("/api/json/v1/1/filter.php")
-    Call<RecipesListResponse> getRecipesListResponse(@QueryMap Map<String,String> queryMap);
+    Call<RecipesListResponse> getRecipesListResponse(@QueryMap Map<String, String> queryMap);
 
     @GET("/api/json/v1/1/list.php?a=list")
     Call<CuisineListResponse> getCuisineResponse();

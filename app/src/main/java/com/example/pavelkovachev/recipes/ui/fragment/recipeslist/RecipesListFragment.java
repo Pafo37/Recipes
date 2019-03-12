@@ -105,6 +105,11 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     }
 
     @Override
+    public void onError() {
+        showErrorDialog();
+    }
+
+    @Override
     public void setPresenter(RecipesListContract.Presenter presenter) {
         this.presenter = presenter;
     }

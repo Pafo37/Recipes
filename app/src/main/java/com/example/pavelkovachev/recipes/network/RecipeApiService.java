@@ -59,7 +59,7 @@ public class RecipeApiService {
 
             @Override
             public void onFailure(Call<RandomRecipeListResponse> call, Throwable t) {
-
+                //NOT USED
             }
         });
     }
@@ -75,7 +75,7 @@ public class RecipeApiService {
 
             @Override
             public void onFailure(Call<RandomRecipeListResponse> call, Throwable t) {
-
+                //NOT USED
             }
         });
     }
@@ -91,7 +91,7 @@ public class RecipeApiService {
 
             @Override
             public void onFailure(Call<LatestRecipeListResponse> call, Throwable t) {
-
+                //NOT USED
             }
         });
     }
@@ -101,13 +101,17 @@ public class RecipeApiService {
         mealTypesResponsesCall.enqueue(new Callback<MealTypeListResponses>() {
             @Override
             public void onResponse(Call<MealTypeListResponses> call, Response<MealTypeListResponses> response) {
-                MealTypeListResponses mealTypesResponses = response.body();
-                mealTypeCallback.onSuccessMealTypes(mealTypesResponses);
+                if (response.isSuccessful()) {
+                    MealTypeListResponses mealTypesResponses = response.body();
+                    mealTypeCallback.onSuccessMealTypes(mealTypesResponses);
+                } else {
+                    mealTypeCallback.onErrorMealType();
+                }
             }
 
             @Override
             public void onFailure(Call<MealTypeListResponses> call, Throwable t) {
-
+                //NOT USED
             }
         });
     }
@@ -117,13 +121,17 @@ public class RecipeApiService {
         cuisineListResponseCall.enqueue(new Callback<CuisineListResponse>() {
             @Override
             public void onResponse(Call<CuisineListResponse> call, Response<CuisineListResponse> response) {
-                CuisineListResponse cuisineListResponse = response.body();
-                cuisineCallback.onSuccessCuisine(cuisineListResponse);
+                if (response.isSuccessful()) {
+                    CuisineListResponse cuisineListResponse = response.body();
+                    cuisineCallback.onSuccessCuisine(cuisineListResponse);
+                } else {
+                    cuisineCallback.onErrorCuisine();
+                }
             }
 
             @Override
             public void onFailure(Call<CuisineListResponse> call, Throwable t) {
-
+                //NOT USED
             }
         });
     }
@@ -135,13 +143,17 @@ public class RecipeApiService {
         recipesListResponseCall.enqueue(new Callback<RecipesListResponse>() {
             @Override
             public void onResponse(Call<RecipesListResponse> call, Response<RecipesListResponse> response) {
-                RecipesListResponse recipesListResponse = response.body();
-                recipesListCallback.onSuccessRecipesList(recipesListResponse);
+                if (response.isSuccessful()) {
+                    RecipesListResponse recipesListResponse = response.body();
+                    recipesListCallback.onSuccessRecipesList(recipesListResponse);
+                } else {
+                    recipesListCallback.onErrorRecipesList();
+                }
             }
 
             @Override
             public void onFailure(Call<RecipesListResponse> call, Throwable t) {
-
+                //NOT USED
             }
         });
     }

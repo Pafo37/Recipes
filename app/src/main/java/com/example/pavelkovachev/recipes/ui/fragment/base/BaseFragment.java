@@ -1,5 +1,6 @@
 package com.example.pavelkovachev.recipes.ui.fragment.base;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -23,4 +24,12 @@ public abstract class BaseFragment extends Fragment {
 
     @LayoutRes
     protected abstract int getLayoutResId();
+
+    protected void showErrorDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                .setTitle("Error")
+                .setMessage("Not Found!");
+        builder.setNeutralButton("Ok", (dialog, which) -> dialog.dismiss());
+        builder.show();
+    }
 }

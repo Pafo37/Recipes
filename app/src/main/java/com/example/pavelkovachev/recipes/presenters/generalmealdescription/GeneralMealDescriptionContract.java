@@ -10,6 +10,8 @@ public interface GeneralMealDescriptionContract {
         void showRecipe(RecipeModel recipeModel);
 
         String getRecipeId();
+
+        void onError();
     }
 
     interface Presenter extends BasePresenter {
@@ -17,7 +19,5 @@ public interface GeneralMealDescriptionContract {
         void getRandomRecipe(String id);
 
         void getRecipeByIdFromApi();
-
-        void getRandomMealFromApi();
     }
 }
