@@ -2,6 +2,8 @@ package com.example.pavelkovachev.recipes.persistence.model.cuisine;
 
 import android.os.AsyncTask;
 
+import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
@@ -33,6 +35,12 @@ public class CuisineService implements CuisineRepository {
         new GetAllCuisinesAsyncTask(result).execute();
     }
 
+    private void saveToDatabase(List<CuisineModel> cuisineModel) {
+        CuisineModelDao cuisineModelDao = DatabaseCreator
+                .getRecipeDatabase(App.getInstance().getApplicationContext()).cuisineModelDao();
+        AppExecutor.getInstance().execute(() -> cuisineModelDao.insertCuisine(cuisineModel));
+    }
+
     private class GetAllCuisinesAsyncTask extends AsyncTask<Void, Void, List<CuisineModel>> {
 
         private AsyncTaskResult<List<CuisineModel>> asyncTaskResult;
@@ -50,6 +58,7 @@ public class CuisineService implements CuisineRepository {
         protected void onPostExecute(List<CuisineModel> cuisineModels) {
             super.onPostExecute(cuisineModels);
             if (asyncTaskResult != null) {
+                saveToDatabase(cuisineModels);
                 asyncTaskResult.onSuccess(cuisineModels);
             }
         }

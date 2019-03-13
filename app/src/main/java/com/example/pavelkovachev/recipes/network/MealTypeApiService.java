@@ -17,6 +17,7 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 public class MealTypeApiService {
+
     private MealTypeTask mealTypeTask;
     private MealTypeContract.Presenter mealTypeContract;
     private String urlString;

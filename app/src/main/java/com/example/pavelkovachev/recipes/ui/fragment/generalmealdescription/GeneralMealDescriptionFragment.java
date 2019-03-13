@@ -53,8 +53,10 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         presenter.getRandomRecipe(recipeId);
     }
 
-    public static GeneralMealDescriptionFragment newInstance() {
-        return new GeneralMealDescriptionFragment();
+    public static GeneralMealDescriptionFragment newInstance(Bundle bundle) {
+        GeneralMealDescriptionFragment fragment = new GeneralMealDescriptionFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override

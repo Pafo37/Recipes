@@ -17,6 +17,7 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 public class RandomMealApiService {
+
     private RecipesCallback recipesCallback;
     private RandomMealApiService.RandomMealTask randomMealTask;
     private String currentValue;

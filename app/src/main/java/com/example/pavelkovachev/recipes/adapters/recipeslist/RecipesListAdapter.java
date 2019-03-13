@@ -25,7 +25,7 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
     private Context context;
     private ItemListener itemListener;
 
-    public RecipesListAdapter(RecipesListContract.Presenter presenter,Context context, ItemListener itemListener) {
+    public RecipesListAdapter(RecipesListContract.Presenter presenter, Context context, ItemListener itemListener) {
         this.presenter = presenter;
         this.context = context;
         this.itemListener = itemListener;

@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder> {
+
     private List<Ingredient> ingredientsList;
     private Context context;
 
@@ -60,5 +61,4 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     public int getItemCount() {
         return ingredientsList.size();
     }
-
 }

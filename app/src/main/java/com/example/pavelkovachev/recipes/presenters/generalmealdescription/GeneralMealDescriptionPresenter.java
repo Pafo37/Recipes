@@ -24,7 +24,7 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
 
     @Override
     public void getRecipeByIdFromApi() {
-        RandomMealApiService randomMealApiService=new RandomMealApiService();
+        RandomMealApiService randomMealApiService = new RandomMealApiService();
         randomMealApiService.getRandomMeal(this,
                 String.format(URL, view.getRecipeId()));
     }

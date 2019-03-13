@@ -49,9 +49,9 @@ public class CuisinePresenter implements CuisineContract.Presenter,
     @Override
     public void onSuccess(List<CuisineModel> result) {
         if (view != null) {
-            if(result.size()==0){
+            if (result.size() == 0) {
                 loadCuisineFromApi();
-            } else{
+            } else {
                 getCuisineList().addAll(result);
                 view.showCuisineTypesFromDb(result);
             }

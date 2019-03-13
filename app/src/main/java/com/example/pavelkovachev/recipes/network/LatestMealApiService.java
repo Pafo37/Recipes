@@ -19,6 +19,7 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 public class LatestMealApiService {
+
     private RecipesCallback recipesCallback;
     private LatestMealApiService.LatestMealTask latestMealTask;
     private String currentValue;

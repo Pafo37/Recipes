@@ -22,7 +22,7 @@ import butterknife.OnClick;
 public class HomeScreenFragment extends BaseFragment implements HomeScreenContract.View {
 
     private HomeScreenContract.Presenter presenter;
-    private final String INTENT_ID="id";
+    private final String INTENT_ID = "id";
 
     @BindView(R.id.txt_random_meal_name)
     TextView txtRandomMealName;
@@ -60,15 +60,15 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
 
     @OnClick(R.id.cardview_random_meal)
     void onRandomMealClicked() {
-        Intent intent=new Intent(getActivity(),GeneralMealDescriptionActivity.class);
-        intent.putExtra("id",presenter.onRandomCardViewClicked());
+        Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
+        intent.putExtra(INTENT_ID, presenter.onRandomCardViewClicked());
         startActivity(intent);
     }
 
     @OnClick(R.id.cardview_latest_meal)
     void onLatestMealClicked() {
-        Intent intent=new Intent(getActivity(),GeneralMealDescriptionActivity.class);
-        intent.putExtra("id",presenter.onLatestCardViewClicked());
+        Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
+        intent.putExtra(INTENT_ID, presenter.onLatestCardViewClicked());
         startActivity(intent);
     }
 

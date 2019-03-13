@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AddRecipeDialogFragment extends DialogFragment {
+    
     @BindView(R.id.img_meal_favorites)
     ImageView imgPictureTaken;
     @BindView(R.id.edt_favorites_description_body)

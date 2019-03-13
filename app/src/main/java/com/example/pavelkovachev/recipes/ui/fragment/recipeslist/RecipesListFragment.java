@@ -33,10 +33,10 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
 
     public String categoryName;
     public String categoryLetter;
-    private RecipesListContract.Presenter presenter;
     private static final int SPAN_COUNT = 2;
-    private RecipesListAdapter recipesListAdapter;
     private static final String RECIPE_ID = "id";
+    private RecipesListAdapter recipesListAdapter;
+    private RecipesListContract.Presenter presenter;
     private static final String CATEGORY_NAME = "categoryName";
     private static final String CATEGORY_LETTER = "categoryLetter";
 
@@ -50,6 +50,12 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
         recyclerView.setAdapter(recipesListAdapter);
         GridLayoutManager manager = new GridLayoutManager(getContext(), SPAN_COUNT, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
+    }
+
+    public static RecipesListFragment newInstance(Bundle bundle) {
+        RecipesListFragment fragment = new RecipesListFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override

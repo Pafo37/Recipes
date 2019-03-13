@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 
 @Entity
 public class RecipeListModel {
+
     @NonNull
     @PrimaryKey
     private String recipeId;

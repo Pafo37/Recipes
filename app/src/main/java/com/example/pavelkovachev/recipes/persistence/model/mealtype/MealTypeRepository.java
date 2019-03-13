@@ -5,6 +5,7 @@ import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 import java.util.List;
 
 public interface MealTypeRepository {
+
     void insertCuisine(List<MealTypeModel> mealTypeModel);
 
     void deleteCuisine(MealTypeModel mealTypeModel);

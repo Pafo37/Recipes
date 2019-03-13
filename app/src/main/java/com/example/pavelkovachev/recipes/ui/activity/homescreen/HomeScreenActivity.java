@@ -17,6 +17,7 @@ import com.example.pavelkovachev.recipes.ui.fragment.homescreen.HomeScreenFragme
 import butterknife.BindView;
 
 public class HomeScreenActivity extends BaseActivity {
+    
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     private HomeScreenFragment homeScreenFragment;

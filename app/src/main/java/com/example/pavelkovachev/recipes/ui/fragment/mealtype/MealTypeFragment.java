@@ -23,13 +23,12 @@ import butterknife.BindView;
 
 public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.mealTypeItemListener, MealTypeContract.View {
 
-    private MealTypeContract.Presenter presenter;
-
     @BindView(R.id.recyclerView_category_mealtype)
     RecyclerView recyclerView;
 
-    private MealTypeAdapter mealTypeAdapter;
     private String currentMealTypeName;
+    private MealTypeAdapter mealTypeAdapter;
+    private MealTypeContract.Presenter presenter;
     private static final String CATEGORY_NAME = "categoryName";
     private static final String CATEGORY_LETTER = "categoryLetter";
     private static final String CATEGORY_LETTER_VALUE = "c";
@@ -77,6 +76,6 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
 
     @Override
     public void showMealTypeFromDb(List<MealTypeModel> result) {
-            mealTypeAdapter.notifyDataSetChanged();
+        mealTypeAdapter.notifyDataSetChanged();
     }
 }

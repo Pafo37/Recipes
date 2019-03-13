@@ -16,6 +16,7 @@ public interface HomeScreenContract {
         void loadRandomLatestMeals();
 
         String onLatestCardViewClicked();
+
         String onRandomCardViewClicked();
     }
 }

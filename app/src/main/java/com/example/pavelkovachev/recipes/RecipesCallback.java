@@ -11,5 +11,4 @@ public interface RecipesCallback {
     NetworkInfo getActiveNetworkInfo();
 
     void showLatestMealResult(RecipeModel recipeModel);
-
 }

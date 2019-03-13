@@ -12,6 +12,7 @@ import com.example.pavelkovachev.recipes.ui.fragment.generalmealdescription.Gene
 import butterknife.BindView;
 
 public class GeneralMealDescriptionActivity extends BaseActivity {
+
     @BindView(R.id.toolbar_general_meal_description)
     Toolbar toolbar;
 
@@ -20,9 +21,8 @@ public class GeneralMealDescriptionActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        GeneralMealDescriptionFragment fragment = GeneralMealDescriptionFragment.newInstance();
-        Bundle bundle = getIntent().getExtras();
-        fragment.setArguments(bundle);
+        GeneralMealDescriptionFragment fragment = GeneralMealDescriptionFragment.newInstance(
+                getIntent().getExtras());
         commitFragmentTransaction(R.id.container_general_meal_description, fragment);
         new GeneralMealDescriptionPresenter(fragment);
     }

@@ -24,5 +24,4 @@
         tools:listitem="@layout/item_recipes_list">
 
     </android.support.v7.widget.RecyclerView>
-
 </android.support.constraint.ConstraintLayout>

@@ -55,9 +55,9 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
     @Override
     public void onSuccess(List<MealTypeModel> result) {
         if (view != null) {
-            if(result.size()==0){
+            if (result.size() == 0) {
                 loadMealType();
-            } else{
+            } else {
                 getMealTypeList().addAll(result);
                 view.showMealTypeFromDb(result);
             }
