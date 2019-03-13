@@ -74,7 +74,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
             recipeCuisine.setText(getString(R.string.general_meal_description_cuisine) + model.getRecipeCuisine());
             recipeInstructions.setMovementMethod(new ScrollingMovementMethod());
             recipeInstructions.setText(model.getRecipeInstructions());
-            Picasso.get().load(model.getRecipeImage()).into(imgMeal);
+            Picasso.get().load(model.getRecipeImage()).placeholder(R.drawable.placeholder_recipe).into(imgMeal);
             ingredientsAdapter = new IngredientsAdapter(initIngredients(model), getContext());
             recyclerView.setAdapter(ingredientsAdapter);
             recyclerView.setNestedScrollingEnabled(false);
