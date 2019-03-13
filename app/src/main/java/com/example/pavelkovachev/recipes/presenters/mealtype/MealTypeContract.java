@@ -9,6 +9,7 @@ import java.util.List;
 public interface MealTypeContract {
 
     interface View extends BaseView<Presenter> {
+
         void loadMealTypesFromApi(List<MealTypeModel> mealTypeList);
 
         void showMealTypeFromDb(List<MealTypeModel> result);
@@ -16,10 +17,13 @@ public interface MealTypeContract {
     }
 
     interface Presenter extends BasePresenter {
+
         void loadMealType();
 
         void showMealTypeResult(List<MealTypeModel> mealTypeModel);
 
         void getMealType();
+
+        List<MealTypeModel> getMealTypeList();
     }
 }

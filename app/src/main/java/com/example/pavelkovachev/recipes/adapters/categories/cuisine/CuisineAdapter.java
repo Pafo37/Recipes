@@ -10,20 +10,19 @@ import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
-
-import java.util.List;
+import com.example.pavelkovachev.recipes.presenters.cuisine.CuisineContract;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHolderCuisine> {
 
-    private List list;
+    private CuisineContract.Presenter presenter;
     private Context context;
     private CuisineItemListener cuisineItemListener;
 
-    public CuisineAdapter(List list, Context context, CuisineItemListener cuisineItemListener) {
-        this.list = list;
+    public CuisineAdapter(CuisineContract.Presenter presenter, Context context, CuisineItemListener cuisineItemListener) {
+        this.presenter = presenter;
         this.context = context;
         this.cuisineItemListener = cuisineItemListener;
     }
@@ -61,12 +60,12 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCuisine viewHolderCuisine, int i) {
-        viewHolderCuisine.setCuisineData((CuisineModel) list.get(i));
+        viewHolderCuisine.setCuisineData(presenter.getCuisineList().get(i));
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return presenter.getCuisineList().size();
     }
 
     public interface CuisineItemListener {

@@ -17,7 +17,6 @@ import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypePresenter;
 import com.example.pavelkovachev.recipes.ui.activity.recipeslist.RecipesListActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,9 +28,11 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     @BindView(R.id.recyclerView_category_mealtype)
     RecyclerView recyclerView;
 
-    private List<MealTypeModel> arrayList = new ArrayList<>();
     private MealTypeAdapter mealTypeAdapter;
-    public String currentMealTypeName;
+    private String currentMealTypeName;
+    private static final String CATEGORY_NAME = "categoryName";
+    private static final String CATEGORY_LETTER = "categoryLetter";
+    private static final String CATEGORY_LETTER_VALUE = "c";
 
     public static MealTypeFragment newInstance() {
         return new MealTypeFragment();
@@ -47,7 +48,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
         super.onViewCreated(view, savedInstanceState);
         presenter = new MealTypePresenter(this);
         presenter.getMealType();
-        mealTypeAdapter = new MealTypeAdapter(arrayList, getContext(), this);
+        mealTypeAdapter = new MealTypeAdapter(presenter, getContext(), this);
         recyclerView.setAdapter(mealTypeAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
@@ -55,10 +56,10 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
 
     @Override
     public void onMealTypeClick(MealTypeModel mealTypeItem) {
-        currentMealTypeName=mealTypeItem.getTitle();
-        Intent intent=new Intent(getActivity(),RecipesListActivity.class);
-        intent.putExtra("categoryName",currentMealTypeName);
-        intent.putExtra("categoryLetter","c");
+        currentMealTypeName = mealTypeItem.getTitle();
+        Intent intent = new Intent(getActivity(), RecipesListActivity.class);
+        intent.putExtra(CATEGORY_NAME, currentMealTypeName);
+        intent.putExtra(CATEGORY_LETTER, CATEGORY_LETTER_VALUE);
         startActivity(intent);
     }
 
@@ -70,19 +71,12 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     @Override
     public void loadMealTypesFromApi(List<MealTypeModel> mealTypeList) {
         if (isAdded()) {
-            arrayList.addAll(mealTypeList);
             mealTypeAdapter.notifyDataSetChanged();
         }
     }
 
     @Override
     public void showMealTypeFromDb(List<MealTypeModel> result) {
-        if(result.size()==0){
-            presenter.loadMealType();
-        }
-        else{
-            arrayList.addAll(result);
             mealTypeAdapter.notifyDataSetChanged();
-        }
     }
 }

@@ -27,5 +27,7 @@ public interface RecipesListContract {
         void getRecipeList();
 
         void showRecipeListResult(List<RecipeListModel> recipeListModels);
+
+        List<RecipeListModel> getRecipeListArray();
     }
 }

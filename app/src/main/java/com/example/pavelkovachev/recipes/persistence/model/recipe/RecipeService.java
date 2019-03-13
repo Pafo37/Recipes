@@ -10,11 +10,11 @@ import java.util.concurrent.Executor;
 
 public class RecipeService implements RecipeRepository {
 
-    private static RecipeModelDao recipeModelDao;
+    private RecipeModelDao recipeModelDao;
     private Executor appExecutor;
 
     public RecipeService(RecipeModelDao recipeModelDao) {
-        RecipeService.recipeModelDao = recipeModelDao;
+        this.recipeModelDao = recipeModelDao;
         appExecutor = AppExecutor.getInstance();
     }
 
@@ -29,18 +29,17 @@ public class RecipeService implements RecipeRepository {
     }
 
     @Override
-    public RecipeModel getById(String id, AsyncTaskResult result) {
-        new GetByIdAsyncTask(result).execute(id);
+    public RecipeModel getById(String recipeId, AsyncTaskResult result) {
+        new GetByIdAsyncTask(result).execute(recipeId);
         return null;
     }
 
     @Override
-    public List<RecipeModel> getAllRecipes(AsyncTaskResult result) {
+    public void getAllRecipes(AsyncTaskResult result) {
         new GetAllRecipesAsyncTask(result).execute();
-        return null;
     }
 
-    private static class InsertAsyncTask extends AsyncTask<RecipeModel, Void, Void> {
+    private class InsertAsyncTask extends AsyncTask<RecipeModel, Void, Void> {
 
         @Override
         protected Void doInBackground(RecipeModel... recipeModels) {
@@ -49,7 +48,7 @@ public class RecipeService implements RecipeRepository {
         }
     }
 
-    private static class GetByIdAsyncTask extends AsyncTask<String, Void, RecipeModel> {
+    private class GetByIdAsyncTask extends AsyncTask<String, Void, RecipeModel> {
 
         private AsyncTaskResult<RecipeModel> asyncTaskResult;
 
@@ -71,7 +70,7 @@ public class RecipeService implements RecipeRepository {
         }
     }
 
-    private static class GetAllRecipesAsyncTask extends AsyncTask<Void, Void, List<RecipeModel>> {
+    private class GetAllRecipesAsyncTask extends AsyncTask<Void, Void, List<RecipeModel>> {
 
         private AsyncTaskResult<List<RecipeModel>> asyncTaskResult;
 

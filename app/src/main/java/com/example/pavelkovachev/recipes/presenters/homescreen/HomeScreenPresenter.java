@@ -3,7 +3,7 @@ package com.example.pavelkovachev.recipes.presenters.homescreen;
 import android.net.NetworkInfo;
 
 import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.DownloadCallback;
+import com.example.pavelkovachev.recipes.RecipesCallback;
 import com.example.pavelkovachev.recipes.network.LatestMealApiService;
 import com.example.pavelkovachev.recipes.network.RandomMealApiService;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
@@ -11,12 +11,13 @@ import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao;
 
-public class HomeScreenPresenter implements HomeScreenContract.Presenter, DownloadCallback {
+public class HomeScreenPresenter implements HomeScreenContract.Presenter, RecipesCallback {
 
     private final HomeScreenContract.View view;
-
-    public String CURRENT_RANDOM_MEAL_ID;
-    public String CURRENT_LATEST_MEAL_ID;
+    private static final String LATEST_MEAL_URL = "https://www.themealdb.com/api/json/v1/1/latest.php";
+    private static final String RANDOM_MEAL_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
+    private String CURRENT_RANDOM_MEAL_ID;
+    private String CURRENT_LATEST_MEAL_ID;
 
     public HomeScreenPresenter(HomeScreenContract.View view) {
         this.view = view;
@@ -54,9 +55,10 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Downlo
 
     @Override
     public void loadRandomLatestMeals() {
-        RandomMealApiService.getRandomMeal(this,
-                "https://www.themealdb.com/api/json/v1/1/random.php");
-        LatestMealApiService.getLatestMeal(this, "https://www.themealdb.com/api/json/v1/1/latest.php");
+        RandomMealApiService randomMealApiService = new RandomMealApiService();
+        randomMealApiService.getRandomMeal(this, RANDOM_MEAL_URL);
+        LatestMealApiService latestMealApiService = new LatestMealApiService();
+        latestMealApiService.getLatestMeal(this, LATEST_MEAL_URL);
     }
 
     @Override

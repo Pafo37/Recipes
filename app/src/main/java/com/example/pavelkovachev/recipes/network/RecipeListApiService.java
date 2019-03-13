@@ -2,6 +2,7 @@ package com.example.pavelkovachev.recipes.network;
 
 import android.os.AsyncTask;
 import android.util.JsonReader;
+import android.util.Log;
 
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
 import com.example.pavelkovachev.recipes.presenters.recipeslist.RecipesListContract;
@@ -16,26 +17,30 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 public class RecipeListApiService {
-    private static String urlString;
-    private static RecipeListTask recipeListTask;
-    private static RecipesListContract.Presenter recipeListContract;
+    private String urlString;
+    private RecipeListTask recipeListTask;
+    private RecipesListContract.Presenter recipeListContract;
+    private static final String MEALS_KEY = "meals";
+    private static final String NAME_KEY = "strMeal";
+    private static final String ID_KEY = "idMeal";
+    private static final String IMAGE_KEY = "strMealThumb";
 
-    public static void getRecipeList(RecipesListContract.Presenter contract, String url) {
+    public void getRecipeList(RecipesListContract.Presenter contract, String url) {
         cancelRecipeListDownload();
-        RecipeListApiService.recipeListContract = contract;
-        recipeListTask = new RecipeListTask();
-        urlString = url;
+        this.recipeListContract = contract;
+        this.recipeListTask = new RecipeListTask();
+        this.urlString = url;
         recipeListTask.execute(urlString);
     }
 
-    public static void cancelRecipeListDownload() {
+    private void cancelRecipeListDownload() {
         if (recipeListTask != null) {
             recipeListTask.cancel(true);
             recipeListTask = null;
         }
     }
 
-    private static class RecipeListTask extends AsyncTask<String, Integer, List<RecipeListModel>> {
+    private class RecipeListTask extends AsyncTask<String, Integer, List<RecipeListModel>> {
 
         @Override
         protected List<RecipeListModel> doInBackground(String... urls) {
@@ -47,7 +52,7 @@ public class RecipeListApiService {
                     recipeListModelList = recipeListConnection(url);
 
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.e("Error", e.getMessage());
                 }
             }
             return recipeListModelList;
@@ -61,7 +66,7 @@ public class RecipeListApiService {
         }
     }
 
-    private static List<RecipeListModel> recipeListConnection(URL url) throws IOException {
+    private List<RecipeListModel> recipeListConnection(URL url) throws IOException {
         InputStream stream = null;
         HttpsURLConnection connection = null;
         List<RecipeListModel> recipeListModelList = null;
@@ -91,18 +96,18 @@ public class RecipeListApiService {
         return recipeListModelList;
     }
 
-    private static List<RecipeListModel> readRecipeListStream(InputStream inputStream) throws IOException {
+    private List<RecipeListModel> readRecipeListStream(InputStream inputStream) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
         return readRecipeListData(reader);
     }
 
-    private static List<RecipeListModel> readRecipeListData(JsonReader reader) throws IOException {
+    private List<RecipeListModel> readRecipeListData(JsonReader reader) throws IOException {
         List<RecipeListModel> recipeListModelList = null;
         reader.beginObject();
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case "meals":
+                case MEALS_KEY:
                     recipeListModelList = readRecipeListFields(reader);
                     break;
                 default:
@@ -113,7 +118,7 @@ public class RecipeListApiService {
         return recipeListModelList;
     }
 
-    private static List<RecipeListModel> readRecipeListFields(JsonReader reader) throws IOException {
+    private List<RecipeListModel> readRecipeListFields(JsonReader reader) throws IOException {
         List<RecipeListModel> recipeListModelList = new ArrayList<>();
         RecipeListModel recipeListModel = null;
         reader.beginArray();
@@ -121,14 +126,14 @@ public class RecipeListApiService {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case "strMeal":
+                case NAME_KEY:
                     recipeListModel = new RecipeListModel();
                     recipeListModel.setRecipeName(reader.nextString());
                     break;
-                case "strMealThumb":
+                case IMAGE_KEY:
                     recipeListModel.setRecipeImage(reader.nextString());
                     break;
-                case "idMeal":
+                case ID_KEY:
                     recipeListModel.setRecipeId(reader.nextString());
                     break;
                 default:

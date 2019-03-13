@@ -10,11 +10,11 @@ import java.util.concurrent.Executor;
 
 public class MealTypeService implements MealTypeRepository {
 
-    private static MealTypeModelDao mealTypeModelDao;
+    private MealTypeModelDao mealTypeModelDao;
     private Executor appExecutor;
 
     public MealTypeService(MealTypeModelDao mealTypeModelDao) {
-        MealTypeService.mealTypeModelDao = mealTypeModelDao;
+        this.mealTypeModelDao = mealTypeModelDao;
         appExecutor = AppExecutor.getInstance();
     }
 
@@ -29,12 +29,11 @@ public class MealTypeService implements MealTypeRepository {
     }
 
     @Override
-    public List<MealTypeModel> getAllMealTypes(AsyncTaskResult result) {
+    public void getAllMealTypes(AsyncTaskResult result) {
         new GetAllMealTypesAsyncTask(result).execute();
-        return null;
     }
 
-    private static class GetAllMealTypesAsyncTask extends AsyncTask<Void, Void, List<MealTypeModel>> {
+    private class GetAllMealTypesAsyncTask extends AsyncTask<Void, Void, List<MealTypeModel>> {
 
         private AsyncTaskResult<List<MealTypeModel>> asyncTaskResult;
 

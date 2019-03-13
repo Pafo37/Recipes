@@ -24,8 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class GeneralMealDescriptionFragment extends BaseFragment implements GeneralMealDescriptionContract.View
-        , IngredientsAdapter.ItemListener {
+public class GeneralMealDescriptionFragment extends BaseFragment implements GeneralMealDescriptionContract.View {
 
     @BindView(R.id.img_general_meal)
     ImageView imgMeal;
@@ -42,9 +41,9 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @BindView(R.id.progress_bar_general_meal_description)
     ProgressBar progressBar;
 
-    GeneralMealDescriptionContract.Presenter presenter;
-    IngredientsAdapter ingredientsAdapter;
-    String recipeId;
+    private GeneralMealDescriptionContract.Presenter presenter;
+    private IngredientsAdapter ingredientsAdapter;
+    private String recipeId;
     private static final String RECIPE_ID = "id";
 
     @Override
@@ -74,7 +73,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
             recipeInstructions.setMovementMethod(new ScrollingMovementMethod());
             recipeInstructions.setText(model.getRecipeInstructions());
             Picasso.get().load(model.getRecipeImage()).into(imgMeal);
-            ingredientsAdapter = new IngredientsAdapter(initIngredients(model), getContext(), this);
+            ingredientsAdapter = new IngredientsAdapter(initIngredients(model), getContext());
             recyclerView.setAdapter(ingredientsAdapter);
             recyclerView.setNestedScrollingEnabled(false);
             recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
@@ -89,7 +88,9 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     @Override
     public void showProgressBar(Boolean isVisible) {
-        progressBar.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        if (isAdded()) {
+            progressBar.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        }
     }
 
     private List<Ingredient> initIngredients(RecipeModel recipeModel) {
@@ -99,10 +100,5 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @Override
     public void setPresenter(GeneralMealDescriptionContract.Presenter presenter) {
         this.presenter = presenter;
-    }
-
-    @Override
-    public void onItemClick(Ingredient ingredientItem) {
-        //NOT USED
     }
 }

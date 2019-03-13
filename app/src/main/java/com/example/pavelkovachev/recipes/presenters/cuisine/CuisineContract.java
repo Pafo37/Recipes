@@ -15,10 +15,12 @@ public interface CuisineContract {
     }
 
     interface Presenter extends BasePresenter {
-        void loadCuisine();
+        void loadCuisineFromApi();
 
-        void getCuisine();
+        void loadCuisineFromDb();
 
         void showCuisineResult(List<CuisineModel> cuisineModel);
+
+        List<CuisineModel> getCuisineList();
     }
 }

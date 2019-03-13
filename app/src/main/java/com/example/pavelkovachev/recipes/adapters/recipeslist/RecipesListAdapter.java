@@ -4,18 +4,16 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
 import com.example.pavelkovachev.recipes.R;
+import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
+import com.example.pavelkovachev.recipes.presenters.recipeslist.RecipesListContract;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,12 +21,12 @@ import butterknife.OnClick;
 
 public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.ViewHolder> {
 
-    private List recipesList;
+    private RecipesListContract.Presenter presenter;
     private Context context;
     private ItemListener itemListener;
 
-    public RecipesListAdapter(Context context, List values, ItemListener itemListener) {
-        recipesList = values;
+    public RecipesListAdapter(RecipesListContract.Presenter presenter,Context context, ItemListener itemListener) {
+        this.presenter = presenter;
         this.context = context;
         this.itemListener = itemListener;
     }
@@ -41,9 +39,9 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
         @BindView(R.id.img_gridlayout_categories)
         public ImageView imgCategories;
 
-        RecipeListModel item;
+        private RecipeListModel item;
 
-        public ViewHolder(View view) {
+        private ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
@@ -53,12 +51,7 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
         void onTripleDotsClicked() {
             PopupMenu popupMenu = new PopupMenu(context, this.itemView);
             popupMenu.getMenuInflater().inflate(R.menu.menu_recipes_dropdown, popupMenu.getMenu());
-            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    return false;
-                }
-            });
+            popupMenu.setOnMenuItemClickListener(item -> false);
             popupMenu.show();
         }
 
@@ -84,12 +77,12 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.setData((RecipeListModel) recipesList.get(i));
+        viewHolder.setData((RecipeListModel) presenter.getRecipeListArray().get(i));
     }
 
     @Override
     public int getItemCount() {
-        return recipesList.size();
+        return presenter.getRecipeListArray().size();
     }
 
     public interface ItemListener {

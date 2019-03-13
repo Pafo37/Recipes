@@ -4,7 +4,7 @@ import android.net.NetworkInfo;
 
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 
-public interface DownloadCallback {
+public interface RecipesCallback {
 
     void showRandomMealResult(RecipeModel result);
 

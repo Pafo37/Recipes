@@ -11,21 +11,20 @@ import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
+import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypeContract;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHolderMealType> {
 
-    private List list;
+    private MealTypeContract.Presenter presenter;
     private Context context;
     private mealTypeItemListener mealTypeItemListener;
 
-    public MealTypeAdapter(List list, Context context, MealTypeAdapter.mealTypeItemListener mealTypeItemListener) {
-        this.list = list;
+    public MealTypeAdapter(MealTypeContract.Presenter presenter, Context context, MealTypeAdapter.mealTypeItemListener mealTypeItemListener) {
+        this.presenter = presenter;
         this.context = context;
         this.mealTypeItemListener = mealTypeItemListener;
     }
@@ -41,13 +40,13 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
 
         private MealTypeModel mealTypeItem;
 
-        public ViewHolderMealType(@NonNull View itemView) {
+        private ViewHolderMealType(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 
-        public void setMealTypeData(MealTypeModel mealTypeItem) {
+        private void setMealTypeData(MealTypeModel mealTypeItem) {
             this.mealTypeItem = mealTypeItem;
             txtCategoryMealTypeTitle.setText(mealTypeItem.getTitle());
             txtCategoryMealTypeDescription.setText(mealTypeItem.getDescription());
@@ -70,12 +69,12 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderMealType viewHolderMealType, int i) {
-        viewHolderMealType.setMealTypeData((MealTypeModel) list.get(i));
+        viewHolderMealType.setMealTypeData((MealTypeModel) presenter.getMealTypeList().get(i));
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return presenter.getMealTypeList().size();
     }
 
     public interface mealTypeItemListener {

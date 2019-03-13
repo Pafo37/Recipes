@@ -2,6 +2,7 @@ package com.example.pavelkovachev.recipes.network;
 
 import android.os.AsyncTask;
 import android.util.JsonReader;
+import android.util.Log;
 
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
 import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypeContract;
@@ -16,26 +17,27 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 public class MealTypeApiService {
-    private static MealTypeTask mealTypeTask;
-    private static MealTypeContract.Presenter mealTypeContract;
-    private static String urlString;
+    private MealTypeTask mealTypeTask;
+    private MealTypeContract.Presenter mealTypeContract;
+    private String urlString;
+    private static final String CATEGORIES_KEY = "categories";
 
-    public static void getMealType(MealTypeContract.Presenter contract, String url) {
+    public void getMealType(MealTypeContract.Presenter contract, String url) {
         cancelMealTypeDownload();
-        MealTypeApiService.mealTypeContract = contract;
-        mealTypeTask = new MealTypeTask();
-        urlString = url;
+        this.mealTypeContract = contract;
+        this.mealTypeTask = new MealTypeTask();
+        this.urlString = url;
         mealTypeTask.execute(urlString);
     }
 
-    private static void cancelMealTypeDownload() {
+    private void cancelMealTypeDownload() {
         if (mealTypeTask != null) {
             mealTypeTask.cancel(true);
             mealTypeTask = null;
         }
     }
 
-    private static class MealTypeTask extends AsyncTask<String, Integer, List<MealTypeModel>> {
+    private class MealTypeTask extends AsyncTask<String, Integer, List<MealTypeModel>> {
 
         @Override
         protected List<MealTypeModel> doInBackground(String... urls) {
@@ -47,7 +49,7 @@ public class MealTypeApiService {
                     mealTypeModelList = mealTypeConnection(url);
 
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.e("Error", e.getMessage());
                 }
             }
             return mealTypeModelList;
@@ -61,7 +63,7 @@ public class MealTypeApiService {
         }
     }
 
-    private static List<MealTypeModel> mealTypeConnection(URL url) throws IOException {
+    private List<MealTypeModel> mealTypeConnection(URL url) throws IOException {
         List<MealTypeModel> mealTypeModelList = null;
         InputStream stream = null;
         HttpsURLConnection connection = null;
@@ -91,18 +93,18 @@ public class MealTypeApiService {
         return mealTypeModelList;
     }
 
-    private static List<MealTypeModel> readMealTypeStream(InputStream inputStream) throws IOException {
+    private List<MealTypeModel> readMealTypeStream(InputStream inputStream) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
         return readMealTypeData(reader);
     }
 
-    private static List<MealTypeModel> readMealTypeData(JsonReader reader) throws IOException {
+    private List<MealTypeModel> readMealTypeData(JsonReader reader) throws IOException {
         List<MealTypeModel> mealTypeModelList = null;
         reader.beginObject();
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case "categories":
+                case CATEGORIES_KEY:
                     mealTypeModelList = readMealTypeFields(reader);
                     break;
                 default:
@@ -113,7 +115,7 @@ public class MealTypeApiService {
         return mealTypeModelList;
     }
 
-    private static List<MealTypeModel> readMealTypeFields(JsonReader reader) throws IOException {
+    private List<MealTypeModel> readMealTypeFields(JsonReader reader) throws IOException {
         List<MealTypeModel> mealTypeModelList = new ArrayList<>();
         MealTypeModel mealTypeModel = null;
         reader.beginArray();

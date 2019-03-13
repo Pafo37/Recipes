@@ -2,6 +2,7 @@ package com.example.pavelkovachev.recipes.network;
 
 import android.os.AsyncTask;
 import android.util.JsonReader;
+import android.util.Log;
 
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
 import com.example.pavelkovachev.recipes.presenters.cuisine.CuisineContract;
@@ -16,26 +17,29 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 public class CuisineApiService {
-    private static CuisineContract.Presenter cuisineContract;
-    private static CuisineTask cuisineTask;
-    private static String urlString;
 
-    public static void getCuisine(CuisineContract.Presenter contract, String url) {
+    private CuisineContract.Presenter cuisineContract;
+    private CuisineTask cuisineTask;
+    private String urlString;
+    private static final String MEALS_KEY = "meals";
+    private static final String CUISINE_KEY = "strArea";
+
+    public void getCuisine(CuisineContract.Presenter contract, String url) {
         cancelCuisineDownload();
-        CuisineApiService.cuisineContract = contract;
-        cuisineTask = new CuisineTask();
-        urlString = url;
+        this.cuisineContract = contract;
+        this.cuisineTask = new CuisineTask();
+        this.urlString = url;
         cuisineTask.execute(urlString);
     }
 
-    private static void cancelCuisineDownload() {
+    private void cancelCuisineDownload() {
         if (cuisineTask != null) {
             cuisineTask.cancel(true);
             cuisineTask = null;
         }
     }
 
-    private static class CuisineTask extends AsyncTask<String, Integer, List<CuisineModel>> {
+    private class CuisineTask extends AsyncTask<String, Integer, List<CuisineModel>> {
 
         @Override
         protected List<CuisineModel> doInBackground(String... urls) {
@@ -47,7 +51,7 @@ public class CuisineApiService {
                     cuisineModelList = cuisineConnection(url);
 
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.e("Error", e.getMessage());
                 }
             }
             return cuisineModelList;
@@ -61,7 +65,7 @@ public class CuisineApiService {
         }
     }
 
-    private static List<CuisineModel> cuisineConnection(URL url) throws IOException {
+    private List<CuisineModel> cuisineConnection(URL url) throws IOException {
         List<CuisineModel> cuisineModelList = null;
         InputStream stream = null;
         HttpsURLConnection connection = null;
@@ -91,18 +95,18 @@ public class CuisineApiService {
         return cuisineModelList;
     }
 
-    private static List<CuisineModel> readCuisineStream(InputStream inputStream) throws IOException {
+    private List<CuisineModel> readCuisineStream(InputStream inputStream) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
         return readCuisineData(reader);
     }
 
-    private static List<CuisineModel> readCuisineData(JsonReader reader) throws IOException {
+    private List<CuisineModel> readCuisineData(JsonReader reader) throws IOException {
         List<CuisineModel> cuisineModelList = null;
         reader.beginObject();
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case "meals":
+                case MEALS_KEY:
                     cuisineModelList = readCuisineFields(reader);
                     break;
                 default:
@@ -113,7 +117,7 @@ public class CuisineApiService {
         return cuisineModelList;
     }
 
-    private static List<CuisineModel> readCuisineFields(JsonReader reader) throws IOException {
+    private List<CuisineModel> readCuisineFields(JsonReader reader) throws IOException {
         List<CuisineModel> cuisineModelList = new ArrayList<>();
         CuisineModel cuisineModel = null;
         reader.beginArray();
@@ -121,7 +125,7 @@ public class CuisineApiService {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case "strArea":
+                case CUISINE_KEY:
                     cuisineModel = new CuisineModel();
                     cuisineModel.setCountry(reader.nextString());
                     cuisineModelList.add(cuisineModel);

@@ -19,36 +19,26 @@ import butterknife.ButterKnife;
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder> {
     private List<Ingredient> ingredientsList;
     private Context context;
-    private ItemListener itemListener;
 
-    public IngredientsAdapter(List<Ingredient> ingredientsList, Context context, ItemListener itemListener) {
+    public IngredientsAdapter(List<Ingredient> ingredientsList, Context context) {
         this.ingredientsList = ingredientsList;
         this.context = context;
-        this.itemListener = itemListener;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.txt_general_meal_measures)
         TextView txtGeneralMealMeasures;
         @BindView(R.id.txt_general_meal_ingredients)
         TextView txtGeneralMealIngredients;
-        Ingredient ingredientItem;
+        private Ingredient ingredientItem;
 
-        public ViewHolder(@NonNull View view) {
+        private ViewHolder(@NonNull View view) {
             super(view);
             ButterKnife.bind(this, view);
-            view.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            if(itemListener!=null){
-                itemListener.onItemClick(ingredientItem);
-            }
-        }
-
-        public void setData(Ingredient ingredientItem) {
+        private void setData(Ingredient ingredientItem) {
             this.ingredientItem = ingredientItem;
             txtGeneralMealMeasures.setText(ingredientItem.getMeasures());
             txtGeneralMealIngredients.setText(ingredientItem.getIngredient());
@@ -58,12 +48,12 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ingredients_measures,viewGroup,false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ingredients_measures, viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.setData((Ingredient)ingredientsList.get(i));
+        viewHolder.setData(ingredientsList.get(i));
     }
 
     @Override
@@ -71,7 +61,4 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         return ingredientsList.size();
     }
 
-    public interface ItemListener {
-        void onItemClick(Ingredient ingredientItem);
-    }
 }

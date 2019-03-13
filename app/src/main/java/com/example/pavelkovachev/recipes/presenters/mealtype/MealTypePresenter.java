@@ -9,12 +9,15 @@ import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeMode
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MealTypePresenter implements MealTypeContract.Presenter,
         AsyncTaskResult<List<MealTypeModel>> {
 
     private final MealTypeContract.View view;
+    private String URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
+    private List<MealTypeModel> mealTypeModelList = new ArrayList<>();
 
     public MealTypePresenter(MealTypeContract.View view) {
         this.view = view;
@@ -25,13 +28,15 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
     public void showMealTypeResult(List<MealTypeModel> result) {
         if (result != null) {
             saveToDatabase(result);
+            getMealTypeList().addAll(result);
             view.loadMealTypesFromApi(result);
         }
     }
 
     @Override
     public void loadMealType() {
-        MealTypeApiService.getMealType(this, "https://www.themealdb.com/api/json/v1/1/categories.php");
+        MealTypeApiService mealTypeApiService = new MealTypeApiService();
+        mealTypeApiService.getMealType(this, URL);
     }
 
     @Override
@@ -43,9 +48,19 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
     }
 
     @Override
+    public List<MealTypeModel> getMealTypeList() {
+        return mealTypeModelList;
+    }
+
+    @Override
     public void onSuccess(List<MealTypeModel> result) {
         if (view != null) {
-            view.showMealTypeFromDb(result);
+            if(result.size()==0){
+                loadMealType();
+            } else{
+                getMealTypeList().addAll(result);
+                view.showMealTypeFromDb(result);
+            }
         }
     }
 
