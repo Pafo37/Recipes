@@ -47,10 +47,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
         super.onViewCreated(view, savedInstanceState);
         presenter = new MealTypePresenter(this);
         presenter.getMealType();
-        mealTypeAdapter = new MealTypeAdapter(presenter, getContext(), this);
-        recyclerView.setAdapter(mealTypeAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+        initRecyclerView(presenter);
     }
 
     @Override
@@ -77,5 +74,12 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     @Override
     public void showMealTypeFromDb(List<MealTypeModel> result) {
         mealTypeAdapter.notifyDataSetChanged();
+    }
+
+    private void initRecyclerView(MealTypeContract.Presenter presenter) {
+        mealTypeAdapter = new MealTypeAdapter(presenter, getContext(), this);
+        recyclerView.setAdapter(mealTypeAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
     }
 }

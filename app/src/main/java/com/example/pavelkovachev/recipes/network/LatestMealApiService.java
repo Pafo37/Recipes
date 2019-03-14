@@ -24,53 +24,7 @@ public class LatestMealApiService {
     private LatestMealApiService.LatestMealTask latestMealTask;
     private String currentValue;
     private String urlString;
-    private static final String MEALS_KEY = "meals";
-    private static final String NAME_KEY = "strMeal";
-    private static final String ID_KEY = "idMeal";
-    private static final String IMAGE_KEY = "strMealThumb";
-    private static final String CUISINE_KEY = "strArea";
-    private static final String MEAL_TYPE_KEY = "strCategory";
-    private static final String INSTRUCTIONS_KEY = "strInstructions";
-    private static final String INGREDIENT_1_KEY = "strIngredient1";
-    private static final String INGREDIENT_2_KEY = "strIngredient2";
-    private static final String INGREDIENT_3_KEY = "strIngredient3";
-    private static final String INGREDIENT_4_KEY = "strIngredient4";
-    private static final String INGREDIENT_5_KEY = "strIngredient5";
-    private static final String INGREDIENT_6_KEY = "strIngredient6";
-    private static final String INGREDIENT_7_KEY = "strIngredient7";
-    private static final String INGREDIENT_8_KEY = "strIngredient8";
-    private static final String INGREDIENT_9_KEY = "strIngredient9";
-    private static final String INGREDIENT_10_KEY = "strIngredient10";
-    private static final String INGREDIENT_11_KEY = "strIngredient11";
-    private static final String INGREDIENT_12_KEY = "strIngredient12";
-    private static final String INGREDIENT_13_KEY = "strIngredient13";
-    private static final String INGREDIENT_14_KEY = "strIngredient14";
-    private static final String INGREDIENT_15_KEY = "strIngredient15";
-    private static final String INGREDIENT_16_KEY = "strIngredient16";
-    private static final String INGREDIENT_17_KEY = "strIngredient17";
-    private static final String INGREDIENT_18_KEY = "strIngredient18";
-    private static final String INGREDIENT_19_KEY = "strIngredient19";
-    private static final String INGREDIENT_20_KEY = "strIngredient20";
-    private static final String MEASURE_1_KEY = "strMeasure1";
-    private static final String MEASURE_2_KEY = "strMeasure2";
-    private static final String MEASURE_3_KEY = "strMeasure3";
-    private static final String MEASURE_4_KEY = "strMeasure4";
-    private static final String MEASURE_5_KEY = "strMeasure5";
-    private static final String MEASURE_6_KEY = "strMeasure6";
-    private static final String MEASURE_7_KEY = "strMeasure7";
-    private static final String MEASURE_8_KEY = "strMeasure8";
-    private static final String MEASURE_9_KEY = "strMeasure9";
-    private static final String MEASURE_10_KEY = "strMeasure10";
-    private static final String MEASURE_11_KEY = "strMeasure11";
-    private static final String MEASURE_12_KEY = "strMeasure12";
-    private static final String MEASURE_13_KEY = "strMeasure13";
-    private static final String MEASURE_14_KEY = "strMeasure14";
-    private static final String MEASURE_15_KEY = "strMeasure15";
-    private static final String MEASURE_16_KEY = "strMeasure16";
-    private static final String MEASURE_17_KEY = "strMeasure17";
-    private static final String MEASURE_18_KEY = "strMeasure18";
-    private static final String MEASURE_19_KEY = "strMeasure19";
-    private static final String MEASURE_20_KEY = "strMeasure20";
+
 
     public void getLatestMeal(RecipesCallback recipesCallback, String url) {
         cancelLatestMealDownload();
@@ -165,7 +119,7 @@ public class LatestMealApiService {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case MEALS_KEY:
+                case JsonConstants.MEALS_KEY:
                     recipeModel = readLatestRecipeFields(reader);
                     break;
                 default:
@@ -183,115 +137,115 @@ public class LatestMealApiService {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case ID_KEY:
+                case JsonConstants.ID_KEY:
                     recipeModel.setId(reader.nextString());
                     break;
-                case NAME_KEY:
+                case JsonConstants.NAME_KEY:
                     recipeModel.setRecipeName(reader.nextString());
                     break;
-                case MEAL_TYPE_KEY:
+                case JsonConstants.MEAL_TYPE_KEY:
                     recipeModel.setRecipeMealType(reader.nextString());
                     break;
-                case CUISINE_KEY:
+                case JsonConstants.CUISINE_KEY:
                     recipeModel.setRecipeCuisine(reader.nextString());
                     break;
-                case INSTRUCTIONS_KEY:
+                case JsonConstants.INSTRUCTIONS_KEY:
                     recipeModel.setRecipeInstructions(reader.nextString());
                     break;
-                case IMAGE_KEY:
+                case JsonConstants.IMAGE_KEY:
                     recipeModel.setRecipeImage(reader.nextString());
                     break;
-                case INGREDIENT_1_KEY:
+                case JsonConstants.INGREDIENT_1_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient1(currentValue);
                     }
                     break;
-                case INGREDIENT_2_KEY:
+                case JsonConstants.INGREDIENT_2_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient2(currentValue);
                     }
                     break;
-                case INGREDIENT_3_KEY:
+                case JsonConstants.INGREDIENT_3_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient3(currentValue);
                     }
                     break;
-                case INGREDIENT_4_KEY:
+                case JsonConstants.INGREDIENT_4_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient4(currentValue);
                     }
                     break;
-                case INGREDIENT_5_KEY:
+                case JsonConstants.INGREDIENT_5_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient5(currentValue);
                     }
                     break;
-                case INGREDIENT_6_KEY:
+                case JsonConstants.INGREDIENT_6_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient6(currentValue);
                     }
                     break;
-                case INGREDIENT_7_KEY:
+                case JsonConstants.INGREDIENT_7_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient7(currentValue);
                     }
                     break;
-                case INGREDIENT_8_KEY:
+                case JsonConstants.INGREDIENT_8_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient8(currentValue);
                     }
                     break;
-                case INGREDIENT_9_KEY:
+                case JsonConstants.INGREDIENT_9_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient9(currentValue);
                     }
                     break;
-                case INGREDIENT_10_KEY:
+                case JsonConstants.INGREDIENT_10_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient10(currentValue);
                     }
                     break;
-                case INGREDIENT_11_KEY:
+                case JsonConstants.INGREDIENT_11_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient11(currentValue);
                     }
                     break;
-                case INGREDIENT_12_KEY:
+                case JsonConstants.INGREDIENT_12_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient12(currentValue);
                     }
                     break;
-                case INGREDIENT_13_KEY:
+                case JsonConstants.INGREDIENT_13_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient13(currentValue);
                     }
                     break;
-                case INGREDIENT_14_KEY:
+                case JsonConstants.INGREDIENT_14_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient14(currentValue);
                     }
                     break;
-                case INGREDIENT_15_KEY:
+                case JsonConstants.INGREDIENT_15_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeIngredient15(currentValue);
                     }
                     break;
-                case INGREDIENT_16_KEY:
+                case JsonConstants.INGREDIENT_16_KEY:
                     if (reader.peek() != JsonToken.NULL) {
                         currentValue = reader.nextString();
                         if (!TextUtils.isEmpty(currentValue)) {
@@ -301,7 +255,7 @@ public class LatestMealApiService {
                         reader.nextNull();
                     }
                     break;
-                case INGREDIENT_17_KEY:
+                case JsonConstants.INGREDIENT_17_KEY:
                     if (reader.peek() != JsonToken.NULL) {
                         currentValue = reader.nextString();
                         if (!TextUtils.isEmpty(currentValue)) {
@@ -311,7 +265,7 @@ public class LatestMealApiService {
                         reader.nextNull();
                     }
                     break;
-                case INGREDIENT_18_KEY:
+                case JsonConstants.INGREDIENT_18_KEY:
                     if (reader.peek() != JsonToken.NULL) {
                         currentValue = reader.nextString();
                         if (!TextUtils.isEmpty(currentValue)) {
@@ -321,7 +275,7 @@ public class LatestMealApiService {
                         reader.nextNull();
                     }
                     break;
-                case INGREDIENT_19_KEY:
+                case JsonConstants.INGREDIENT_19_KEY:
                     if (reader.peek() != JsonToken.NULL) {
                         currentValue = reader.nextString();
                         if (!TextUtils.isEmpty(currentValue)) {
@@ -331,7 +285,7 @@ public class LatestMealApiService {
                         reader.nextNull();
                     }
                     break;
-                case INGREDIENT_20_KEY:
+                case JsonConstants.INGREDIENT_20_KEY:
                     if (reader.peek() != JsonToken.NULL) {
                         currentValue = reader.nextString();
                         if (!TextUtils.isEmpty(currentValue)) {
@@ -341,97 +295,97 @@ public class LatestMealApiService {
                         reader.nextNull();
                     }
                     break;
-                case MEASURE_1_KEY:
+                case JsonConstants.MEASURE_1_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure1(currentValue);
                     }
                     break;
-                case MEASURE_2_KEY:
+                case JsonConstants.MEASURE_2_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure2(currentValue);
                     }
                     break;
-                case MEASURE_3_KEY:
+                case JsonConstants.MEASURE_3_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure3(currentValue);
                     }
                     break;
-                case MEASURE_4_KEY:
+                case JsonConstants.MEASURE_4_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure4(currentValue);
                     }
                     break;
-                case MEASURE_5_KEY:
+                case JsonConstants.MEASURE_5_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure5(currentValue);
                     }
                     break;
-                case MEASURE_6_KEY:
+                case JsonConstants.MEASURE_6_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure6(currentValue);
                     }
                     break;
-                case MEASURE_7_KEY:
+                case JsonConstants.MEASURE_7_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure7(currentValue);
                     }
                     break;
-                case MEASURE_8_KEY:
+                case JsonConstants.MEASURE_8_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure8(currentValue);
                     }
                     break;
-                case MEASURE_9_KEY:
+                case JsonConstants.MEASURE_9_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure9(currentValue);
                     }
                     break;
-                case MEASURE_10_KEY:
+                case JsonConstants.MEASURE_10_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure10(currentValue);
                     }
                     break;
-                case MEASURE_11_KEY:
+                case JsonConstants.MEASURE_11_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure11(currentValue);
                     }
                     break;
-                case MEASURE_12_KEY:
+                case JsonConstants.MEASURE_12_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure12(currentValue);
                     }
                     break;
-                case MEASURE_13_KEY:
+                case JsonConstants.MEASURE_13_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure13(currentValue);
                     }
                     break;
-                case MEASURE_14_KEY:
+                case JsonConstants.MEASURE_14_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure14(currentValue);
                     }
                     break;
-                case MEASURE_15_KEY:
+                case JsonConstants.MEASURE_15_KEY:
                     currentValue = reader.nextString();
                     if (!TextUtils.isEmpty(currentValue)) {
                         recipeModel.setRecipeMeasure15(currentValue);
                     }
                     break;
-                case MEASURE_16_KEY:
+                case JsonConstants.MEASURE_16_KEY:
                     if (reader.peek() != JsonToken.NULL) {
                         currentValue = reader.nextString();
                         if (!TextUtils.isEmpty(currentValue)) {
@@ -441,7 +395,7 @@ public class LatestMealApiService {
                         reader.nextNull();
                     }
                     break;
-                case MEASURE_17_KEY:
+                case JsonConstants.MEASURE_17_KEY:
                     if (reader.peek() != JsonToken.NULL) {
                         currentValue = reader.nextString();
                         if (!TextUtils.isEmpty(currentValue)) {
@@ -451,7 +405,7 @@ public class LatestMealApiService {
                         reader.nextNull();
                     }
                     break;
-                case MEASURE_18_KEY:
+                case JsonConstants.MEASURE_18_KEY:
                     if (reader.peek() != JsonToken.NULL) {
                         currentValue = reader.nextString();
                         if (!TextUtils.isEmpty(currentValue)) {
@@ -461,7 +415,7 @@ public class LatestMealApiService {
                         reader.nextNull();
                     }
                     break;
-                case MEASURE_19_KEY:
+                case JsonConstants.MEASURE_19_KEY:
                     if (reader.peek() != JsonToken.NULL) {
                         currentValue = reader.nextString();
                         if (!TextUtils.isEmpty(currentValue)) {
@@ -471,7 +425,7 @@ public class LatestMealApiService {
                         reader.nextNull();
                     }
                     break;
-                case MEASURE_20_KEY:
+                case JsonConstants.MEASURE_20_KEY:
                     if (reader.peek() != JsonToken.NULL) {
                         currentValue = reader.nextString();
                         if (!TextUtils.isEmpty(currentValue)) {

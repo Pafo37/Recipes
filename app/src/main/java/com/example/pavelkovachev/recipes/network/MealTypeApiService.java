@@ -21,7 +21,6 @@ public class MealTypeApiService {
     private MealTypeTask mealTypeTask;
     private MealTypeContract.Presenter mealTypeContract;
     private String urlString;
-    private static final String CATEGORIES_KEY = "categories";
 
     public void getMealType(MealTypeContract.Presenter contract, String url) {
         cancelMealTypeDownload();
@@ -105,7 +104,7 @@ public class MealTypeApiService {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case CATEGORIES_KEY:
+                case JsonConstants.CATEGORIES_KEY:
                     mealTypeModelList = readMealTypeFields(reader);
                     break;
                 default:

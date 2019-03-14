@@ -12,17 +12,19 @@ import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
 import com.example.pavelkovachev.recipes.presenters.cuisine.CuisineContract;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHolderCuisine> {
 
-    private CuisineContract.Presenter presenter;
+    private List list;
     private Context context;
     private CuisineItemListener cuisineItemListener;
 
     public CuisineAdapter(CuisineContract.Presenter presenter, Context context, CuisineItemListener cuisineItemListener) {
-        this.presenter = presenter;
+        this.list = presenter.getCuisineList();
         this.context = context;
         this.cuisineItemListener = cuisineItemListener;
     }
@@ -60,12 +62,12 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCuisine viewHolderCuisine, int i) {
-        viewHolderCuisine.setCuisineData(presenter.getCuisineList().get(i));
+        viewHolderCuisine.setCuisineData((CuisineModel)list.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return presenter.getCuisineList().size();
+        return list.size();
     }
 
     public interface CuisineItemListener {

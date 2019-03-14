@@ -35,7 +35,7 @@ public class CuisineService implements CuisineRepository {
         new GetAllCuisinesAsyncTask(result).execute();
     }
 
-    private void saveToDatabase(List<CuisineModel> cuisineModel) {
+    public static void saveToDatabase(List<CuisineModel> cuisineModel) {
         CuisineModelDao cuisineModelDao = DatabaseCreator
                 .getRecipeDatabase(App.getInstance().getApplicationContext()).cuisineModelDao();
         AppExecutor.getInstance().execute(() -> cuisineModelDao.insertCuisine(cuisineModel));

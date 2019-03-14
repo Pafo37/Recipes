@@ -75,11 +75,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
             recipeInstructions.setMovementMethod(new ScrollingMovementMethod());
             recipeInstructions.setText(model.getRecipeInstructions());
             Picasso.get().load(model.getRecipeImage()).placeholder(R.drawable.placeholder_recipe).into(imgMeal);
-            ingredientsAdapter = new IngredientsAdapter(initIngredients(model), getContext());
-            recyclerView.setAdapter(ingredientsAdapter);
-            recyclerView.setNestedScrollingEnabled(false);
-            recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
-            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+            initRecyclerView(model);
         }
     }
 
@@ -102,5 +98,13 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @Override
     public void setPresenter(GeneralMealDescriptionContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    private void initRecyclerView(RecipeModel model) {
+        ingredientsAdapter = new IngredientsAdapter(initIngredients(model), getContext());
+        recyclerView.setAdapter(ingredientsAdapter);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
     }
 }

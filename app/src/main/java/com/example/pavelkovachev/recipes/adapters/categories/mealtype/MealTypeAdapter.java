@@ -14,17 +14,19 @@ import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeMode
 import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypeContract;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHolderMealType> {
 
-    private MealTypeContract.Presenter presenter;
+    private List list;
     private Context context;
     private mealTypeItemListener mealTypeItemListener;
 
     public MealTypeAdapter(MealTypeContract.Presenter presenter, Context context, MealTypeAdapter.mealTypeItemListener mealTypeItemListener) {
-        this.presenter = presenter;
+        this.list = presenter.getMealTypeList();
         this.context = context;
         this.mealTypeItemListener = mealTypeItemListener;
     }
@@ -69,12 +71,12 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderMealType viewHolderMealType, int i) {
-        viewHolderMealType.setMealTypeData((MealTypeModel) presenter.getMealTypeList().get(i));
+        viewHolderMealType.setMealTypeData((MealTypeModel) list.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return presenter.getMealTypeList().size();
+        return list.size();
     }
 
     public interface mealTypeItemListener {

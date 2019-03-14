@@ -3,9 +3,9 @@ package com.example.pavelkovachev.recipes.presenters.cuisine;
 import android.util.Log;
 
 import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.BuildConfig;
 import com.example.pavelkovachev.recipes.network.CuisineApiService;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
-import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineService;
@@ -18,7 +18,6 @@ public class CuisinePresenter implements CuisineContract.Presenter,
         AsyncTaskResult<List<CuisineModel>> {
 
     private final CuisineContract.View view;
-    private static final String URL = "https://www.themealdb.com/api/json/v1/1/list.php?a=list";
     private List<CuisineModel> arrayList = new ArrayList<>();
 
     public CuisinePresenter(CuisineContract.View view) {
@@ -26,16 +25,10 @@ public class CuisinePresenter implements CuisineContract.Presenter,
         view.setPresenter(this);
     }
 
-    private void saveToDatabase(List<CuisineModel> cuisineModel) {
-        CuisineModelDao cuisineModelDao = DatabaseCreator
-                .getRecipeDatabase(App.getInstance().getApplicationContext()).cuisineModelDao();
-        AppExecutor.getInstance().execute(() -> cuisineModelDao.insertCuisine(cuisineModel));
-    }
-
     @Override
     public void showCuisineResult(List<CuisineModel> result) {
         if (result != null) {
-            saveToDatabase(result);
+            CuisineService.saveToDatabase(result);
             getCuisineList().addAll(result);
             view.loadCuisinesFromApi(result);
         }
@@ -66,7 +59,7 @@ public class CuisinePresenter implements CuisineContract.Presenter,
     @Override
     public void loadCuisineFromApi() {
         CuisineApiService cuisineApiService = new CuisineApiService();
-        cuisineApiService.getCuisine(this, URL);
+        cuisineApiService.getCuisine(this, BuildConfig.CUISINE_URL);
     }
 
     @Override

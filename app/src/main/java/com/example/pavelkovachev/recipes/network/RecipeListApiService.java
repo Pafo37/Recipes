@@ -21,10 +21,6 @@ public class RecipeListApiService {
     private String urlString;
     private RecipeListTask recipeListTask;
     private RecipesListContract.Presenter recipeListContract;
-    private static final String MEALS_KEY = "meals";
-    private static final String NAME_KEY = "strMeal";
-    private static final String ID_KEY = "idMeal";
-    private static final String IMAGE_KEY = "strMealThumb";
 
     public void getRecipeList(RecipesListContract.Presenter contract, String url) {
         cancelRecipeListDownload();
@@ -108,7 +104,7 @@ public class RecipeListApiService {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case MEALS_KEY:
+                case JsonConstants.MEALS_KEY:
                     recipeListModelList = readRecipeListFields(reader);
                     break;
                 default:
@@ -127,14 +123,14 @@ public class RecipeListApiService {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case NAME_KEY:
+                case JsonConstants.NAME_KEY:
                     recipeListModel = new RecipeListModel();
                     recipeListModel.setRecipeName(reader.nextString());
                     break;
-                case IMAGE_KEY:
+                case JsonConstants.IMAGE_KEY:
                     recipeListModel.setRecipeImage(reader.nextString());
                     break;
-                case ID_KEY:
+                case JsonConstants.ID_KEY:
                     recipeListModel.setRecipeId(reader.nextString());
                     break;
                 default:

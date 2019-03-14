@@ -46,10 +46,7 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
         presenter = new RecipesListPresenter(this);
         presenter.loadRecipeList();
         getActivity().setTitle(getCategoryName());
-        recipesListAdapter = new RecipesListAdapter(presenter, getContext(), this);
-        recyclerView.setAdapter(recipesListAdapter);
-        GridLayoutManager manager = new GridLayoutManager(getContext(), SPAN_COUNT, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(manager);
+        initRecyclerView(presenter);
     }
 
     public static RecipesListFragment newInstance(Bundle bundle) {
@@ -119,5 +116,12 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     @Override
     public void setPresenter(RecipesListContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    private void initRecyclerView(RecipesListContract.Presenter presenter) {
+        recipesListAdapter = new RecipesListAdapter(presenter, getContext(), this);
+        recyclerView.setAdapter(recipesListAdapter);
+        GridLayoutManager manager = new GridLayoutManager(getContext(), SPAN_COUNT, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(manager);
     }
 }

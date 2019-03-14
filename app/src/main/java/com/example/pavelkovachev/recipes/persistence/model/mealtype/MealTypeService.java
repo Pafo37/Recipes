@@ -2,6 +2,8 @@ package com.example.pavelkovachev.recipes.persistence.model.mealtype;
 
 import android.os.AsyncTask;
 
+import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
@@ -31,6 +33,11 @@ public class MealTypeService implements MealTypeRepository {
     @Override
     public void getAllMealTypes(AsyncTaskResult result) {
         new GetAllMealTypesAsyncTask(result).execute();
+    }
+
+    public static void saveToDatabase(List<MealTypeModel> mealTypeModel) {
+        MealTypeModelDao mealTypeModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).mealTypeModelDao();
+        AppExecutor.getInstance().execute(() -> mealTypeModelDao.insertCuisine(mealTypeModel));
     }
 
     private class GetAllMealTypesAsyncTask extends AsyncTask<Void, Void, List<MealTypeModel>> {

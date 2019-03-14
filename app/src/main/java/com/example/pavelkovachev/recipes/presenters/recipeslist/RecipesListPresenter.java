@@ -1,9 +1,9 @@
 package com.example.pavelkovachev.recipes.presenters.recipeslist;
 
 import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.BuildConfig;
 import com.example.pavelkovachev.recipes.network.RecipeListApiService;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
-import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListService;
@@ -16,7 +16,6 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
         AsyncTaskResult<List<RecipeListModel>> {
 
     private RecipesListContract.View view;
-    private String URL = "https://www.themealdb.com/api/json/v1/1/filter.php?%s=%s";
     private List<RecipeListModel> recipeListArray = new ArrayList<>();
 
     public RecipesListPresenter(RecipesListContract.View view) {
@@ -24,17 +23,12 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
         view.setPresenter(this);
     }
 
-    private void saveToDatabase(List<RecipeListModel> recipeListModels) {
-        RecipeListModelDao recipeListModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).recipeListModelDao();
-        AppExecutor.getInstance().execute(() -> recipeListModelDao.insertRecipeList(recipeListModels));
-    }
-
     @Override
     public void loadRecipeList() {
         view.showProgressBar(true);
         RecipeListApiService recipeListApiService = new RecipeListApiService();
         recipeListApiService.getRecipeList(this,
-                String.format(URL, view.getCategoryLetter(), view.getCategoryName()));
+                String.format(BuildConfig.RECIPES_LIST_URL, view.getCategoryLetter(), view.getCategoryName()));
     }
 
     @Override
@@ -48,7 +42,7 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
     @Override
     public void showRecipeListResult(List<RecipeListModel> result) {
         if (result != null) {
-            saveToDatabase(result);
+            RecipeListService.saveToDatabase(result);
             getRecipeListArray().addAll(result);
             view.loadRecipeListFromApi(result);
         }

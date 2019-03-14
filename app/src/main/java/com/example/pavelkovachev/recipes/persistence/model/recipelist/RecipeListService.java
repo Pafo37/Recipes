@@ -2,6 +2,8 @@ package com.example.pavelkovachev.recipes.persistence.model.recipelist;
 
 import android.os.AsyncTask;
 
+import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
@@ -31,6 +33,11 @@ public class RecipeListService implements RecipeListRepository {
     @Override
     public void getAllRecipesList(AsyncTaskResult result) {
         new GetAllRecipeListAsyncTask(result).execute();
+    }
+
+    public static void saveToDatabase(List<RecipeListModel> recipeListModels) {
+        RecipeListModelDao recipeListModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).recipeListModelDao();
+        AppExecutor.getInstance().execute(() -> recipeListModelDao.insertRecipeList(recipeListModels));
     }
 
     private class GetAllRecipeListAsyncTask extends AsyncTask<Void, Void, List<RecipeListModel>> {

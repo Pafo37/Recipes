@@ -21,8 +21,6 @@ public class CuisineApiService {
     private CuisineContract.Presenter cuisineContract;
     private CuisineTask cuisineTask;
     private String urlString;
-    private static final String MEALS_KEY = "meals";
-    private static final String CUISINE_KEY = "strArea";
 
     public void getCuisine(CuisineContract.Presenter contract, String url) {
         cancelCuisineDownload();
@@ -106,7 +104,7 @@ public class CuisineApiService {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case MEALS_KEY:
+                case JsonConstants.MEALS_KEY:
                     cuisineModelList = readCuisineFields(reader);
                     break;
                 default:
@@ -125,7 +123,7 @@ public class CuisineApiService {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case CUISINE_KEY:
+                case JsonConstants.CUISINE_KEY:
                     cuisineModel = new CuisineModel();
                     cuisineModel.setCountry(reader.nextString());
                     cuisineModelList.add(cuisineModel);

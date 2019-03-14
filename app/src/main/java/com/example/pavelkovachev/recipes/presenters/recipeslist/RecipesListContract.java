@@ -9,6 +9,7 @@ import java.util.List;
 public interface RecipesListContract {
 
     interface View extends BaseView<Presenter> {
+
         void loadRecipeListFromApi(List<RecipeListModel> recipeListModels);
 
         void showRecipeListFromDb(List<RecipeListModel> recipeListModels);
