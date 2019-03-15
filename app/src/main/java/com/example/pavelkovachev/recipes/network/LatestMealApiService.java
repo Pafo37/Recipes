@@ -25,7 +25,6 @@ public class LatestMealApiService {
     private String currentValue;
     private String urlString;
 
-
     public void getLatestMeal(RecipesCallback recipesCallback, String url) {
         cancelLatestMealDownload();
         this.recipesCallback = recipesCallback;

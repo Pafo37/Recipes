@@ -7,6 +7,7 @@ import com.example.pavelkovachev.recipes.presenters.BaseView;
 public interface GeneralMealDescriptionContract {
 
     interface View extends BaseView<Presenter> {
+
         void showRecipe(RecipeModel model);
 
         String getRecipeId();

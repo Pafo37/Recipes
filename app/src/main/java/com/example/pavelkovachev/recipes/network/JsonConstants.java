@@ -9,6 +9,7 @@ public class JsonConstants {
     public static final String IMAGE_KEY = "strMealThumb";
     public static final String CUISINE_KEY = "strArea";
     public static final String MEAL_TYPE_KEY = "strCategory";
+    public static final String MEAL_TYPE_DESCRIPTION_KEY = "strCategoryDescription";
     public static final String INSTRUCTIONS_KEY = "strInstructions";
     public static final String INGREDIENT_1_KEY = "strIngredient1";
     public static final String INGREDIENT_2_KEY = "strIngredient2";

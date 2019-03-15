@@ -123,14 +123,14 @@ public class MealTypeApiService {
         while (reader.hasNext()) {
             String token = reader.nextName();
             switch (token) {
-                case "strCategory":
+                case JsonConstants.MEAL_TYPE_KEY:
                     mealTypeModel = new MealTypeModel();
                     mealTypeModel.setTitle(reader.nextString());
                     break;
-                case "strCategoryThumb":
+                case JsonConstants.IMAGE_KEY:
                     mealTypeModel.setImage(reader.nextString());
                     break;
-                case "strCategoryDescription":
+                case JsonConstants.MEAL_TYPE_DESCRIPTION_KEY:
                     mealTypeModel.setDescription(reader.nextString());
                     break;
                 default:
