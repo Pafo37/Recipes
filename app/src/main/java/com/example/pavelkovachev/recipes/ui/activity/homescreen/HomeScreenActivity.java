@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.pavelkovachev.recipes.R;
+import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenPresenter;
 import com.example.pavelkovachev.recipes.ui.activity.base.BaseActivity;
 import com.example.pavelkovachev.recipes.ui.activity.personalpreferences.PersonalPreferencesActivity;
 import com.example.pavelkovachev.recipes.ui.activity.settings.SettingsActivity;
@@ -16,8 +17,10 @@ import com.example.pavelkovachev.recipes.ui.fragment.homescreen.HomeScreenFragme
 import butterknife.BindView;
 
 public class HomeScreenActivity extends BaseActivity {
+    
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    private HomeScreenFragment homeScreenFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,7 +28,9 @@ public class HomeScreenActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.toolbar_home_title);
-        commitFragmentTransaction(R.id.container, new HomeScreenFragment());
+        homeScreenFragment = HomeScreenFragment.newInstance();
+        commitFragmentTransaction(R.id.container, homeScreenFragment);
+        new HomeScreenPresenter(homeScreenFragment);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.example.pavelkovachev.recipes.persistence.model.recipe;
 
 import android.os.AsyncTask;
 
+import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
@@ -10,11 +12,11 @@ import java.util.concurrent.Executor;
 
 public class RecipeService implements RecipeRepository {
 
-    private static RecipeModelDao recipeModelDao;
+    private RecipeModelDao recipeModelDao;
     private Executor appExecutor;
 
     public RecipeService(RecipeModelDao recipeModelDao) {
-        RecipeService.recipeModelDao = recipeModelDao;
+        this.recipeModelDao = recipeModelDao;
         appExecutor = AppExecutor.getInstance();
     }
 
@@ -29,18 +31,21 @@ public class RecipeService implements RecipeRepository {
     }
 
     @Override
-    public RecipeModel getByName(String recipeName, AsyncTaskResult result) {
-        new GetByNameAsyncTask(result).execute(recipeName);
-        return null;
+    public void getById(String recipeId, AsyncTaskResult result) {
+        new GetByIdAsyncTask(result).execute(recipeId);
     }
 
     @Override
-    public List<RecipeModel> getAllRecipes(AsyncTaskResult result) {
+    public void getAllRecipes(AsyncTaskResult result) {
         new GetAllRecipesAsyncTask(result).execute();
-        return null;
     }
 
-    private static class InsertAsyncTask extends AsyncTask<RecipeModel, Void, Void> {
+    public static void saveToDatabase(RecipeModel recipeModel) {
+        RecipeModelDao recipeModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).recipeDao();
+        AppExecutor.getInstance().execute(() -> recipeModelDao.insertRecipe(recipeModel));
+    }
+
+    private class InsertAsyncTask extends AsyncTask<RecipeModel, Void, Void> {
 
         @Override
         protected Void doInBackground(RecipeModel... recipeModels) {
@@ -49,17 +54,17 @@ public class RecipeService implements RecipeRepository {
         }
     }
 
-    private static class GetByNameAsyncTask extends AsyncTask<String, Void, RecipeModel> {
+    private class GetByIdAsyncTask extends AsyncTask<String, Void, RecipeModel> {
 
         private AsyncTaskResult<RecipeModel> asyncTaskResult;
 
-        public GetByNameAsyncTask(AsyncTaskResult<RecipeModel> result) {
+        private GetByIdAsyncTask(AsyncTaskResult<RecipeModel> result) {
             this.asyncTaskResult = result;
         }
 
         @Override
-        protected RecipeModel doInBackground(String... recipeName) {
-            return recipeModelDao.getByName(recipeName[0]);
+        protected RecipeModel doInBackground(String... recipeId) {
+            return recipeModelDao.getById(recipeId[0]);
         }
 
         @Override
@@ -71,11 +76,11 @@ public class RecipeService implements RecipeRepository {
         }
     }
 
-    private static class GetAllRecipesAsyncTask extends AsyncTask<Void, Void, List<RecipeModel>> {
+    private class GetAllRecipesAsyncTask extends AsyncTask<Void, Void, List<RecipeModel>> {
 
         private AsyncTaskResult<List<RecipeModel>> asyncTaskResult;
 
-        public GetAllRecipesAsyncTask(AsyncTaskResult<List<RecipeModel>> asyncTaskResult) {
+        private GetAllRecipesAsyncTask(AsyncTaskResult<List<RecipeModel>> asyncTaskResult) {
             this.asyncTaskResult = asyncTaskResult;
         }
 

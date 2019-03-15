@@ -11,6 +11,7 @@ import com.example.pavelkovachev.recipes.ui.fragment.favorites.FavoritesFragment
 import com.example.pavelkovachev.recipes.ui.fragment.myrecipes.MyRecipesFragment;
 
 public class PersonalPreferencesAdapter extends FragmentPagerAdapter {
+
     private static final int TAB_FAVORITES = 0;
     private static final int TAB_MY_RECIPES = 1;
     private static final int TABS_COUNT = 2;

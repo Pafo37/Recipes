@@ -11,6 +11,7 @@ import com.example.pavelkovachev.recipes.ui.fragment.recipeslist.RecipesListFrag
 import butterknife.BindView;
 
 public class RecipesListActivity extends BaseActivity {
+
     @BindView(R.id.toolbar_recipes_list)
     Toolbar toolbar;
 
@@ -20,7 +21,8 @@ public class RecipesListActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         setTitle(R.string.recipes_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        commitFragmentTransaction(R.id.container_recipes_list, new RecipesListFragment());
+        commitFragmentTransaction(R.id.container_recipes_list, RecipesListFragment.newInstance(
+                getIntent().getExtras()));
     }
 
     @Override

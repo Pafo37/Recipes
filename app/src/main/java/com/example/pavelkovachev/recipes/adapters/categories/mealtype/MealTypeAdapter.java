@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
+import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypeContract;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -23,15 +25,15 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
     private Context context;
     private mealTypeItemListener mealTypeItemListener;
 
-    public MealTypeAdapter(List list, Context context, MealTypeAdapter.mealTypeItemListener mealTypeItemListener) {
-        this.list = list;
+    public MealTypeAdapter(MealTypeContract.Presenter presenter, Context context, MealTypeAdapter.mealTypeItemListener mealTypeItemListener) {
+        this.list = presenter.getMealTypeList();
         this.context = context;
         this.mealTypeItemListener = mealTypeItemListener;
     }
 
     public class ViewHolderMealType extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.img_test_category_mealtype)
+        @BindView(R.id.img_category_mealtype)
         ImageView imgCategoryMealType;
         @BindView(R.id.txt_mealtype_category_name)
         TextView txtCategoryMealTypeTitle;
@@ -40,17 +42,17 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
 
         private MealTypeModel mealTypeItem;
 
-        public ViewHolderMealType(@NonNull View itemView) {
+        private ViewHolderMealType(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 
-        public void setMealtypeData(MealTypeModel mealTypeItem) {
+        private void setMealTypeData(MealTypeModel mealTypeItem) {
             this.mealTypeItem = mealTypeItem;
-            imgCategoryMealType.setImageResource(mealTypeItem.getImgMeal());
             txtCategoryMealTypeTitle.setText(mealTypeItem.getTitle());
             txtCategoryMealTypeDescription.setText(mealTypeItem.getDescription());
+            Picasso.get().load(mealTypeItem.getImage()).into(imgCategoryMealType);
         }
 
         @Override
@@ -69,7 +71,7 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderMealType viewHolderMealType, int i) {
-        viewHolderMealType.setMealtypeData((MealTypeModel) list.get(i));
+        viewHolderMealType.setMealTypeData((MealTypeModel) list.get(i));
     }
 
     @Override

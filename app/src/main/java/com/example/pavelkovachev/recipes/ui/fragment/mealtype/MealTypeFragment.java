@@ -4,49 +4,82 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.categories.mealtype.MealTypeAdapter;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
+import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypeContract;
+import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypePresenter;
 import com.example.pavelkovachev.recipes.ui.activity.recipeslist.RecipesListActivity;
+import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 
-import java.util.ArrayList;
 import java.util.List;
-//TODO: Will refactor when mock data is deleted
-public class MealTypeFragment extends Fragment implements MealTypeAdapter.mealTypeItemListener {
-    private RecyclerView recyclerView;
-    private List<MealTypeModel> arrayList;
+
+import butterknife.BindView;
+
+public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.mealTypeItemListener, MealTypeContract.View {
+
+    @BindView(R.id.recyclerView_category_mealtype)
+    RecyclerView recyclerView;
+
+    private String currentMealTypeName;
+    private MealTypeAdapter mealTypeAdapter;
+    private MealTypeContract.Presenter presenter;
+    private static final String CATEGORY_NAME = "categoryName";
+    private static final String CATEGORY_LETTER = "categoryLetter";
+    private static final String CATEGORY_LETTER_VALUE = "c";
 
     public static MealTypeFragment newInstance() {
         return new MealTypeFragment();
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_category_mealtype, container, false);
-        recyclerView = view.findViewById(R.id.recyclerView_category_mealtype);
-        arrayList = new ArrayList<>();
-        arrayList.add(new MealTypeModel("Breakfast", "This is the best breakfast", R.drawable.ic_breakfast));
-        arrayList.add(new MealTypeModel("Breakfast", "This is the best breakfast", R.drawable.ic_breakfast));
-        MealTypeAdapter mealTypeAdapter = new MealTypeAdapter(arrayList, getContext(), this);
-        recyclerView.setAdapter(mealTypeAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
-        return view;
+    protected int getLayoutResId() {
+        return (R.layout.fragment_category_mealtype);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter = new MealTypePresenter(this);
+        presenter.getMealType();
+        initRecyclerView(presenter);
     }
 
     @Override
     public void onMealTypeClick(MealTypeModel mealTypeItem) {
-        startActivity(new Intent(getActivity(), RecipesListActivity.class));
+        currentMealTypeName = mealTypeItem.getTitle();
+        Intent intent = new Intent(getActivity(), RecipesListActivity.class);
+        intent.putExtra(CATEGORY_NAME, currentMealTypeName);
+        intent.putExtra(CATEGORY_LETTER, CATEGORY_LETTER_VALUE);
+        startActivity(intent);
+    }
+
+    @Override
+    public void setPresenter(MealTypeContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void loadMealTypesFromApi(List<MealTypeModel> mealTypeList) {
+        if (isAdded()) {
+            mealTypeAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void showMealTypeFromDb(List<MealTypeModel> result) {
+        mealTypeAdapter.notifyDataSetChanged();
+    }
+
+    private void initRecyclerView(MealTypeContract.Presenter presenter) {
+        mealTypeAdapter = new MealTypeAdapter(presenter, getContext(), this);
+        recyclerView.setAdapter(mealTypeAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
     }
 }

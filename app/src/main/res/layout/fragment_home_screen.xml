@@ -21,7 +21,7 @@
             android:padding="@dimen/margin_between_elements_default">
 
             <ImageView
-                android:id="@+id/img_random_meal"
+                android:id="@+id/img_general_meal"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/home_screen_img_meals"
                 android:contentDescription="@string/homescreen_description_random_meal"
@@ -40,16 +40,16 @@
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/material_design_title_txt_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/img_random_meal" />
+                app:layout_constraintTop_toBottomOf="@id/img_general_meal" />
 
             <TextView
+                android:id="@+id/txt_random_meal_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_gray"
                 android:textSize="@dimen/material_design_body_txt_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_random_meal_title"
-                tools:text="It is really good" />
+                app:layout_constraintTop_toBottomOf="@id/txt_random_meal_title" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -76,7 +76,6 @@
                 android:layout_width="@dimen/home_screen_img_width_height"
                 android:layout_height="@dimen/home_screen_img_width_height"
                 android:contentDescription="@string/homescreen_description_latest_meal"
-                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -95,6 +94,7 @@
                 app:layout_constraintTop_toBottomOf="@id/img_latest_meal" />
 
             <TextView
+                android:id="@+id/txt_latest_meal_name"
                 android:layout_width="@dimen/no_dimens"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_gray"
@@ -103,7 +103,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_latest_meal_title"
                 tools:text="It is really good" />
-
 
         </android.support.constraint.ConstraintLayout>
 
