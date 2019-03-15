@@ -29,8 +29,8 @@ public class LatestMealApiService {
     public void getLatestMeal(RecipesCallback recipesCallback, String url) {
         cancelLatestMealDownload();
         this.recipesCallback = recipesCallback;
-        latestMealTask = new LatestMealTask();
-        urlString = url;
+        this.latestMealTask = new LatestMealTask();
+        this.urlString = url;
         latestMealTask.execute(urlString);
     }
 

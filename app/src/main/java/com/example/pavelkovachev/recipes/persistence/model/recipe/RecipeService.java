@@ -31,9 +31,8 @@ public class RecipeService implements RecipeRepository {
     }
 
     @Override
-    public RecipeModel getById(String recipeId, AsyncTaskResult result) {
+    public void getById(String recipeId, AsyncTaskResult result) {
         new GetByIdAsyncTask(result).execute(recipeId);
-        return null;
     }
 
     @Override

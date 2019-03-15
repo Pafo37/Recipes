@@ -8,7 +8,7 @@ public interface RecipeRepository {
 
     void deleteRecipe(RecipeModel recipeModel);
 
-    RecipeModel getById(String recipeId, AsyncTaskResult result);
+    void getById(String recipeId, AsyncTaskResult result);
 
     void getAllRecipes(AsyncTaskResult result);
 }

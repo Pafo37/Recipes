@@ -3,6 +3,7 @@ package com.example.pavelkovachev.recipes.presenters.generalmealdescription;
 import android.net.NetworkInfo;
 
 import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.BuildConfig;
 import com.example.pavelkovachev.recipes.RecipesCallback;
 import com.example.pavelkovachev.recipes.network.RandomMealApiService;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
@@ -15,7 +16,6 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
         AsyncTaskResult<RecipeModel>, RecipesCallback {
 
     private GeneralMealDescriptionContract.View view;
-    private String URL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=%s";
 
     public GeneralMealDescriptionPresenter(GeneralMealDescriptionContract.View view) {
         this.view = view;
@@ -26,7 +26,7 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     public void getRecipeByIdFromApi() {
         RandomMealApiService randomMealApiService = new RandomMealApiService();
         randomMealApiService.getRandomMeal(this,
-                String.format(URL, view.getRecipeId()));
+                String.format(BuildConfig.GENERAL_DESCRIPTION_URL, view.getRecipeId()));
     }
 
     @Override
