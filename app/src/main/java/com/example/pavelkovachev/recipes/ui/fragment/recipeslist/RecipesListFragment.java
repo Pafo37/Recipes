@@ -90,7 +90,7 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     }
 
     @Override
-    public void showRecipeListFromDb(List<RecipeListModel> result) {
+    public void loadRecipeListFromDb(List<RecipeListModel> result) {
         if (isAdded()) {
             recipesListAdapter.notifyDataSetChanged();
         }

@@ -16,6 +16,7 @@ public interface CuisineContract {
     }
 
     interface Presenter extends BasePresenter {
+
         void loadCuisineFromApi();
 
         void loadCuisineFromDb();
