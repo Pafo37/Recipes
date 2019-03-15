@@ -38,13 +38,13 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
     }
 
     @Override
-    public void loadMealType() {
+    public void loadMealTypeFromApi() {
         RecipeApiService recipesService = new RecipeApiService(recipesApiCreator, this);
         recipesService.getMealTypes();
     }
 
     @Override
-    public void getMealType() {
+    public void loadMealTypeFromDb() {
         MealTypeModelDao mealTypeModelDao = DatabaseCreator.
                 getRecipeDatabase(App.getInstance().getApplicationContext()).mealTypeModelDao();
         MealTypeService mealTypeService = new MealTypeService(mealTypeModelDao);

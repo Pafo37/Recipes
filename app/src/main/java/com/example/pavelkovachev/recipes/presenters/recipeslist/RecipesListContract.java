@@ -25,8 +25,5 @@ public interface RecipesListContract {
 
         void loadRecipeList();
 
-        void getRecipeList();
-
-        void showRecipeListResult(List<RecipeListModel> recipeListModels);
     }
 }

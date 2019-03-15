@@ -49,7 +49,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recipeId = getArguments().getString(RECIPE_ID);
-        presenter.getRandomRecipe(recipeId);
+        presenter.getRandomRecipeFromDb(recipeId);
         progressBarVisibility(true);
     }
 

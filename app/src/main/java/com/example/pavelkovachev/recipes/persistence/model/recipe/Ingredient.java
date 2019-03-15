@@ -8,7 +8,7 @@ public class Ingredient {
     private String measures;
     private String ingredient;
 
-    public Ingredient(String measures, String ingredient) {
+    private Ingredient(String measures, String ingredient) {
         this.measures = measures;
         this.ingredient = ingredient;
     }

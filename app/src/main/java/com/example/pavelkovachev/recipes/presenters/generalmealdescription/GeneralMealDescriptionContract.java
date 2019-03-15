@@ -7,6 +7,7 @@ import com.example.pavelkovachev.recipes.presenters.BaseView;
 public interface GeneralMealDescriptionContract {
 
     interface View extends BaseView<Presenter> {
+
         void showRecipe(RecipeModel recipeModel);
 
         String getRecipeId();
@@ -16,7 +17,7 @@ public interface GeneralMealDescriptionContract {
 
     interface Presenter extends BasePresenter {
 
-        void getRandomRecipe(String id);
+        void getRandomRecipeFromDb(String id);
 
         void getRecipeByIdFromApi();
     }

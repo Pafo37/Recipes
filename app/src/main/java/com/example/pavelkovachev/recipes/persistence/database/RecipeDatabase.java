@@ -11,7 +11,8 @@ import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModelDao;
 
-@android.arch.persistence.room.Database(entities = {RecipeModel.class, CuisineModel.class, MealTypeModel.class, RecipeListModel.class}, version = 1, exportSchema = false)
+@android.arch.persistence.room.Database(entities = {RecipeModel.class, CuisineModel.class,
+        MealTypeModel.class, RecipeListModel.class}, version = 1, exportSchema = false)
 public abstract class RecipeDatabase extends RoomDatabase {
 
     public abstract RecipeModelDao recipeDao();

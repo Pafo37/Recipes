@@ -32,7 +32,7 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     }
 
     @Override
-    public void getRandomRecipe(String id) {
+    public void getRandomRecipeFromDb(String id) {
         RecipeModelDao recipeModelDao = DatabaseCreator.
                 getRecipeDatabase(App.getInstance().getApplicationContext()).recipeDao();
         RecipeDbService recipeService = new RecipeDbService(recipeModelDao);

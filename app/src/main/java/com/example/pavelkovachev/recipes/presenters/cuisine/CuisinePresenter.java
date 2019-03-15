@@ -56,13 +56,13 @@ public class CuisinePresenter implements CuisineContract.Presenter,
     }
 
     @Override
-    public void loadCuisine() {
+    public void loadCuisineFromApi() {
         RecipeApiService recipesService = new RecipeApiService(recipesApiCreator, this);
         recipesService.getCuisine();
     }
 
     @Override
-    public void getCuisine() {
+    public void loadCuisineFromDb() {
         CuisineModelDao cuisineModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext())
                 .cuisineModelDao();
         CuisineService cuisineService = new CuisineService(cuisineModelDao);

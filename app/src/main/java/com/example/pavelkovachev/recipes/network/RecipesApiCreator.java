@@ -14,7 +14,7 @@ public class RecipesApiCreator extends BaseService {
     private RecipesApi recipesApi;
     private static final int DEFAULT_TIMEOUT = 60;
 
-    public RecipesApi getRecipesApi() {
+    private RecipesApi getRecipesApi() {
         if (recipesApi == null) {
             String baseUrl = BuildConfig.BASE_URL;
             Retrofit retrofit = initRetrofit(baseUrl, createOkHttpClient());
@@ -23,7 +23,7 @@ public class RecipesApiCreator extends BaseService {
         return recipesApi;
     }
 
-    public OkHttpClient createOkHttpClient() {
+    private OkHttpClient createOkHttpClient() {
         return new OkHttpClient.Builder()
                 .addInterceptor(new ChuckInterceptor(App.getInstance()))
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)

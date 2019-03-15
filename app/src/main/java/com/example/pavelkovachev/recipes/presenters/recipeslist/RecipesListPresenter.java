@@ -11,7 +11,6 @@ import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModelDao;
-import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.ArrayList;
@@ -40,22 +39,6 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
         view.progressBarVisibility(true);
         RecipeApiService recipesService = new RecipeApiService(recipesApiCreator, this);
         recipesService.getRecipesList(view.getCategoryLetter(), view.getCategoryName());
-    }
-
-    @Override
-    public void getRecipeList() {
-        RecipeListModelDao recipeListModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext())
-                .recipeListModelDao();
-        RecipeListService recipeListService = new RecipeListService(recipeListModelDao);
-        recipeListService.getAllRecipesList(this);
-    }
-
-    @Override
-    public void showRecipeListResult(List<RecipeListModel> result) {
-        if (result != null) {
-            saveToDatabase(result);
-            view.loadRecipeListFromApi(result);
-        }
     }
 
     @Override

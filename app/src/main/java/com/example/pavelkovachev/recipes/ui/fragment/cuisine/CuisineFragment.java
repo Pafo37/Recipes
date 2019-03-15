@@ -49,7 +49,7 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter = new CuisinePresenter(this);
-        presenter.getCuisine();
+        presenter.loadCuisineFromDb();
         cuisineAdapter = new CuisineAdapter(arrayList, getContext(), this);
         recyclerView.setAdapter(cuisineAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
@@ -86,7 +86,7 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     @Override
     public void showCuisineTypesFromDb(List<CuisineModel> result) {
         if (result.size() == 0) {
-            presenter.loadCuisine();
+            presenter.loadCuisineFromApi();
         } else {
             arrayList.addAll(result);
             cuisineAdapter.notifyDataSetChanged();
