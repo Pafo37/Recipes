@@ -79,7 +79,6 @@ public class RecipeApiService {
                 } else {
                     randomMealCallback.onErrorRandomRecipe();
                 }
-
             }
 
             @Override
