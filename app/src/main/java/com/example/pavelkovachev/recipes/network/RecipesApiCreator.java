@@ -14,7 +14,7 @@ public class RecipesApiCreator extends BaseService {
     private RecipesApi recipesApi;
     private static final int DEFAULT_TIMEOUT = 60;
 
-    private RecipesApi getRecipesApi() {
+    public RecipesApi getRecipesApi() {
         if (recipesApi == null) {
             String baseUrl = BuildConfig.BASE_URL;
             Retrofit retrofit = initRetrofit(baseUrl, createOkHttpClient());

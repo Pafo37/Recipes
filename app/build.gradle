@@ -18,19 +18,10 @@ android {
             buildConfigField("String", "BASE_URL", '"https://www.themealdb.com/"')
         }
         debug {
+            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", '"https://www.themealdb.com/"')
-        }
-        debug {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "CUISINE_URL", '"https://www.themealdb.com/api/json/v1/1/list.php?a=list"')
-            buildConfigField("String", "MEAL_TYPE_URL", '"https://www.themealdb.com/api/json/v1/1/categories.php"')
-            buildConfigField("String", "LATEST_MEAL_URL", '"https://www.themealdb.com/api/json/v1/1/latest.php"')
-            buildConfigField("String", "RANDOM_MEAL_URL", '"https://www.themealdb.com/api/json/v1/1/random.php"')
-            buildConfigField("String", "RECIPES_LIST_URL", '"https://www.themealdb.com/api/json/v1/1/filter.php?%s=%s"')
-            buildConfigField("String", "GENERAL_DESCRIPTION_URL", '"https://www.themealdb.com/api/json/v1/1/lookup.php?i=%s"')
         }
     }
     compileOptions {
