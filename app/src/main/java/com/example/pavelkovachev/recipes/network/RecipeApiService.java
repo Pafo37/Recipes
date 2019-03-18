@@ -73,8 +73,13 @@ public class RecipeApiService {
         recipesResponseCall.enqueue(new Callback<RandomRecipeListResponse>() {
             @Override
             public void onResponse(Call<RandomRecipeListResponse> call, Response<RandomRecipeListResponse> response) {
-                RandomRecipeListResponse randomRecipesResponse = response.body();
-                randomMealCallback.onSuccessRandomRecipe(randomRecipesResponse);
+                if (response.isSuccessful()) {
+                    RandomRecipeListResponse randomRecipesResponse = response.body();
+                    randomMealCallback.onSuccessRandomRecipe(randomRecipesResponse);
+                } else {
+                    randomMealCallback.onErrorRandomRecipe();
+                }
+
             }
 
             @Override
