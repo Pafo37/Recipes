@@ -7,7 +7,9 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,8 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class GeneralMealDescriptionFragment extends BaseFragment implements GeneralMealDescriptionContract.View
-        , IngredientsAdapter.ItemListener {
+public class GeneralMealDescriptionFragment extends BaseFragment implements GeneralMealDescriptionContract.View {
 
     @BindView(R.id.img_general_meal)
     ImageView imgMeal;
@@ -53,8 +54,16 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         progressBarVisibility(true);
     }
 
-    public static GeneralMealDescriptionFragment newInstance() {
-        return new GeneralMealDescriptionFragment();
+    @Override
+    public void onResume() {
+        super.onResume();
+        progressBarVisibility(true);
+    }
+
+    public static GeneralMealDescriptionFragment newInstance(Bundle bundle) {
+        GeneralMealDescriptionFragment fragment = new GeneralMealDescriptionFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -72,12 +81,8 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
             recipeCuisine.setText(getString(R.string.general_meal_description_cuisine) + recipeModel.getRecipeCuisine());
             recipeInstructions.setMovementMethod(new ScrollingMovementMethod());
             recipeInstructions.setText(recipeModel.getRecipeInstructions());
-            Picasso.get().load(recipeModel.getRecipeImage()).into(imgMeal);
-            ingredientsAdapter = new IngredientsAdapter(initIngredients(recipeModel), getContext(), this);
-            recyclerView.setAdapter(ingredientsAdapter);
-            recyclerView.setNestedScrollingEnabled(false);
-            recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
-            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+            Picasso.get().load(recipeModel.getRecipeImage()).placeholder(R.drawable.placeholder_recipe).into(imgMeal);
+            initRecyclerView(recipeModel);
         }
     }
 
@@ -105,8 +110,11 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         ((BaseActivity) getActivity()).showProgressBar(isVisible);
     }
 
-    @Override
-    public void onItemClick(Ingredient ingredientItem) {
-        //NOT USED
+    private void initRecyclerView(RecipeModel model) {
+        ingredientsAdapter = new IngredientsAdapter(initIngredients(model), getContext());
+        recyclerView.setAdapter(ingredientsAdapter);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
     }
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
+import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypeContract;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
     private Context context;
     private mealTypeItemListener mealTypeItemListener;
 
-    public MealTypeAdapter(List list, Context context, MealTypeAdapter.mealTypeItemListener mealTypeItemListener) {
-        this.list = list;
+    public MealTypeAdapter(MealTypeContract.Presenter presenter, Context context, MealTypeAdapter.mealTypeItemListener mealTypeItemListener) {
+        this.list = presenter.getMealTypeList();
         this.context = context;
         this.mealTypeItemListener = mealTypeItemListener;
     }
@@ -41,13 +42,13 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
 
         private MealTypeModel mealTypeItem;
 
-        public ViewHolderMealType(@NonNull View itemView) {
+        private ViewHolderMealType(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 
-        public void setMealTypeData(MealTypeModel mealTypeItem) {
+        private void setMealTypeData(MealTypeModel mealTypeItem) {
             this.mealTypeItem = mealTypeItem;
             txtCategoryMealTypeTitle.setText(mealTypeItem.getTitle());
             txtCategoryMealTypeDescription.setText(mealTypeItem.getDescription());

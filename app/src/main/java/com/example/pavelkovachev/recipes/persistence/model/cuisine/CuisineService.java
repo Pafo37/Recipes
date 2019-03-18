@@ -2,6 +2,8 @@ package com.example.pavelkovachev.recipes.persistence.model.cuisine;
 
 import android.os.AsyncTask;
 
+import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
@@ -10,11 +12,11 @@ import java.util.concurrent.Executor;
 
 public class CuisineService implements CuisineRepository {
 
-    private static CuisineModelDao cuisineModelDao;
+    private CuisineModelDao cuisineModelDao;
     private Executor appExecutor;
 
     public CuisineService(CuisineModelDao cuisineModelDao) {
-        CuisineService.cuisineModelDao = cuisineModelDao;
+        this.cuisineModelDao = cuisineModelDao;
         appExecutor = AppExecutor.getInstance();
     }
 
@@ -29,12 +31,17 @@ public class CuisineService implements CuisineRepository {
     }
 
     @Override
-    public List<CuisineModel> getAllCuisines(AsyncTaskResult result) {
+    public void getAllCuisines(AsyncTaskResult result) {
         new GetAllCuisinesAsyncTask(result).execute();
-        return null;
     }
 
-    private static class GetAllCuisinesAsyncTask extends AsyncTask<Void, Void, List<CuisineModel>> {
+    public static void saveToDatabase(List<CuisineModel> cuisineModel) {
+        CuisineModelDao cuisineModelDao = DatabaseCreator
+                .getRecipeDatabase(App.getInstance().getApplicationContext()).cuisineModelDao();
+        AppExecutor.getInstance().execute(() -> cuisineModelDao.insertCuisine(cuisineModel));
+    }
+
+    private class GetAllCuisinesAsyncTask extends AsyncTask<Void, Void, List<CuisineModel>> {
 
         private AsyncTaskResult<List<CuisineModel>> asyncTaskResult;
 
@@ -51,6 +58,7 @@ public class CuisineService implements CuisineRepository {
         protected void onPostExecute(List<CuisineModel> cuisineModels) {
             super.onPostExecute(cuisineModels);
             if (asyncTaskResult != null) {
+                saveToDatabase(cuisineModels);
                 asyncTaskResult.onSuccess(cuisineModels);
             }
         }

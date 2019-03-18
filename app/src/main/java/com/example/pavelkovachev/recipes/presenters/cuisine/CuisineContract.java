@@ -24,5 +24,7 @@ public interface CuisineContract {
         void loadCuisineFromDb();
 
         void showCuisineResult(List<CuisineModel> cuisineModel);
+
+        List<CuisineModel> getCuisineList();
     }
 }

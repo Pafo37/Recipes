@@ -10,5 +10,5 @@ public interface MealTypeRepository {
 
     void deleteCuisine(MealTypeModel mealTypeModel);
 
-    List<MealTypeModel> getAllMealTypes(AsyncTaskResult result);
+    void getAllMealTypes(AsyncTaskResult result);
 }

@@ -10,5 +10,5 @@ public interface CuisineRepository {
 
     void deleteCuisine(CuisineModel cuisineModel);
 
-    List<CuisineModel> getAllCuisines(AsyncTaskResult result);
+    void getAllCuisines(AsyncTaskResult result);
 }

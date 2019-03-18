@@ -21,8 +21,8 @@ public interface MealTypeContract {
 
         void loadMealTypeFromApi();
 
-        void showMealTypeResult(List<MealTypeModel> mealTypeModel);
-
         void loadMealTypeFromDb();
+
+        List<MealTypeModel> getMealTypeList();
     }
 }

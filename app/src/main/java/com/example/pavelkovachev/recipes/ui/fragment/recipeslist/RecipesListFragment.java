@@ -27,17 +27,16 @@ import butterknife.BindView;
 public class RecipesListFragment extends BaseFragment implements RecipesListAdapter.ItemListener,
         RecipesListContract.View {
 
-    RecipesListContract.Presenter presenter;
-
     @BindView(R.id.recycler_view_recipes_list)
     RecyclerView recyclerView;
+
     private List<RecipeListModel> arrayList = new ArrayList<>();
     private static final int SPAN_COUNT = 2;
     private RecipesListAdapter recipesListAdapter;
-
     public String categoryName;
     public String categoryLetter;
     private static final String RECIPE_ID = "id";
+    private RecipesListContract.Presenter presenter;
     private static final String CATEGORY_NAME = "categoryName";
     private static final String CATEGORY_LETTER = "categoryLetter";
 
@@ -47,10 +46,13 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
         presenter = new RecipesListPresenter(this);
         presenter.loadRecipeList();
         getActivity().setTitle(getCategoryName());
-        recipesListAdapter = new RecipesListAdapter(getContext(), arrayList, this);
-        recyclerView.setAdapter(recipesListAdapter);
-        GridLayoutManager manager = new GridLayoutManager(getContext(), SPAN_COUNT, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(manager);
+        initRecyclerView(presenter);
+    }
+
+    public static RecipesListFragment newInstance(Bundle bundle) {
+        RecipesListFragment fragment = new RecipesListFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -83,15 +85,16 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     public void loadRecipeListFromApi(List<RecipeListModel> recipeListModelList) {
         if (isAdded()) {
             progressBarVisibility(false);
-            arrayList.addAll(recipeListModelList);
+            //arrayList.addAll(recipeListModelList);
             recipesListAdapter.notifyDataSetChanged();
         }
     }
 
     @Override
-    public void showRecipeListFromDb(List<RecipeListModel> result) {
-        arrayList.addAll(result);
-        recipesListAdapter.notifyDataSetChanged();
+    public void loadRecipeListFromDb(List<RecipeListModel> result) {
+        if (isAdded()) {
+            recipesListAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -117,5 +120,12 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     @Override
     public void progressBarVisibility(boolean isVisible) {
         ((BaseActivity) getActivity()).showProgressBar(isVisible);
+    }
+
+    private void initRecyclerView(RecipesListContract.Presenter presenter) {
+        recipesListAdapter = new RecipesListAdapter(presenter, getContext(), this);
+        recyclerView.setAdapter(recipesListAdapter);
+        GridLayoutManager manager = new GridLayoutManager(getContext(), SPAN_COUNT, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(manager);
     }
 }

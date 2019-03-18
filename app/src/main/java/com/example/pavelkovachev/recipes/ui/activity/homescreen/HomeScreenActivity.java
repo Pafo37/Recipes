@@ -15,14 +15,12 @@ import com.example.pavelkovachev.recipes.ui.fragment.homescreen.HomeScreenFragme
 
 public class HomeScreenActivity extends BaseActivity {
 
-    private HomeScreenFragment homeScreenFragment;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle(R.string.toolbar_home_title);
-        homeScreenFragment = HomeScreenFragment.newInstance();
+        HomeScreenFragment homeScreenFragment = HomeScreenFragment.newInstance();
         commitFragmentTransaction(homeScreenFragment);
         new HomeScreenPresenter(homeScreenFragment);
     }

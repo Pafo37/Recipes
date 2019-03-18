@@ -30,14 +30,6 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
     }
 
     @Override
-    public void showMealTypeResult(List<MealTypeModel> result) {
-        if (result != null) {
-            saveToDatabase(result);
-            view.loadMealTypesFromApi(result);
-        }
-    }
-
-    @Override
     public void loadMealTypeFromApi() {
         RecipeApiService recipesService = new RecipeApiService(recipesApiCreator, this);
         recipesService.getMealTypes();
@@ -52,9 +44,19 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
     }
 
     @Override
+    public List<MealTypeModel> getMealTypeList() {
+        return mealTypeModelList;
+    }
+
+    @Override
     public void onSuccess(List<MealTypeModel> result) {
         if (view != null) {
-            view.showMealTypeFromDb(result);
+            if (result.size() == 0) {
+                loadMealTypeFromApi();
+            } else {
+                getMealTypeList().addAll(result);
+                view.showMealTypeFromDb(result);
+            }
         }
     }
 
@@ -62,7 +64,6 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
     public void onError() {
         view.onError();
     }
-
     private void saveToDatabase(List<MealTypeModel> mealTypeModel) {
         MealTypeModelDao mealTypeModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).mealTypeModelDao();
         AppExecutor.getInstance().execute(() -> mealTypeModelDao.insertCuisine(mealTypeModel));
@@ -81,4 +82,5 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
     public void onErrorMealType() {
         view.onError();
     }
+
 }

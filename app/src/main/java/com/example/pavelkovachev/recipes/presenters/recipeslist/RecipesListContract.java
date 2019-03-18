@@ -12,7 +12,7 @@ public interface RecipesListContract {
 
         void loadRecipeListFromApi(List<RecipeListModel> recipeListModels);
 
-        void showRecipeListFromDb(List<RecipeListModel> recipeListModels);
+        void loadRecipeListFromDb(List<RecipeListModel> recipeListModels);
 
         String getCategoryName();
 
@@ -25,5 +25,8 @@ public interface RecipesListContract {
 
         void loadRecipeList();
 
+        void showRecipeListResult(List<RecipeListModel> recipeListModels);
+
+        List<RecipeListModel> getRecipeListArray();
     }
 }

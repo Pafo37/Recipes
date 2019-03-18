@@ -10,5 +10,5 @@ public interface RecipeListRepository {
 
     void deleteRecipeList(RecipeListModel recipeListModel);
 
-    List<RecipeListModel> getAllRecipesList(AsyncTaskResult result);
+    void getAllRecipesList(AsyncTaskResult result);
 }

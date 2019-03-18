@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
+import com.example.pavelkovachev.recipes.presenters.cuisine.CuisineContract;
 
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
     private Context context;
     private CuisineItemListener cuisineItemListener;
 
-    public CuisineAdapter(List list, Context context, CuisineItemListener cuisineItemListener) {
-        this.list = list;
+    public CuisineAdapter(CuisineContract.Presenter presenter, Context context, CuisineItemListener cuisineItemListener) {
+        this.list = presenter.getCuisineList();
         this.context = context;
         this.cuisineItemListener = cuisineItemListener;
     }
@@ -61,7 +62,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCuisine viewHolderCuisine, int i) {
-        viewHolderCuisine.setCuisineData((CuisineModel) list.get(i));
+        viewHolderCuisine.setCuisineData((CuisineModel)list.get(i));
     }
 
     @Override

@@ -8,7 +8,6 @@ import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.callback.CuisineCallback;
 import com.example.pavelkovachev.recipes.network.response.cuisine.CuisineListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
-import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineService;
@@ -24,29 +23,25 @@ public class CuisinePresenter implements CuisineContract.Presenter,
     private RecipesApiCreator recipesApiCreator;
     private List<CuisineModel> cuisineModelList = new ArrayList<>();
 
-
     public CuisinePresenter(CuisineContract.View view) {
         this.view = view;
         view.setPresenter(this);
     }
 
-    private void saveToDatabase(List<CuisineModel> cuisineModel) {
-        CuisineModelDao cuisineModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).cuisineModelDao();
-        AppExecutor.getInstance().execute(() -> cuisineModelDao.insertCuisine(cuisineModel));
-    }
-
     @Override
-    public void showCuisineResult(List<CuisineModel> result) {
-        if (result != null) {
-            saveToDatabase(result);
-            view.loadCuisinesFromApi(result);
-        }
+    public List<CuisineModel> getCuisineList() {
+        return cuisineModelList;
     }
 
     @Override
     public void onSuccess(List<CuisineModel> result) {
         if (view != null) {
-            view.showCuisineTypesFromDb(result);
+            if (result.size() == 0) {
+                loadCuisineFromApi();
+            } else {
+                getCuisineList().addAll(result);
+                view.showCuisineTypesFromDb(result);
+            }
         }
     }
 
@@ -63,8 +58,8 @@ public class CuisinePresenter implements CuisineContract.Presenter,
 
     @Override
     public void loadCuisineFromDb() {
-        CuisineModelDao cuisineModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext())
-                .cuisineModelDao();
+        CuisineModelDao cuisineModelDao = DatabaseCreator
+                .getRecipeDatabase(App.getInstance().getApplicationContext()).cuisineModelDao();
         CuisineService cuisineService = new CuisineService(cuisineModelDao);
         cuisineService.getAllCuisines(this);
     }
@@ -74,7 +69,7 @@ public class CuisinePresenter implements CuisineContract.Presenter,
         Stream.of(cuisineListResponse.getCuisinesResponseList()).forEach(
                 cuisineModel ->
                         cuisineModelList.add(CuisineConverter.convertToCuisine(cuisineModel)));
-        saveToDatabase(cuisineModelList);
+        CuisineService.saveToDatabase(cuisineModelList);
         view.loadCuisinesFromApi(cuisineModelList);
     }
 

@@ -18,5 +18,6 @@ public class RecipesListActivity extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
         recipesListFragment.setArguments(bundle);
         commitFragmentTransaction(recipesListFragment);
+
     }
 }

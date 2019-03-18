@@ -17,24 +17,20 @@ import com.example.pavelkovachev.recipes.presenters.cuisine.CuisinePresenter;
 import com.example.pavelkovachev.recipes.ui.activity.recipeslist.RecipesListActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 
 public class CuisineFragment extends BaseFragment implements CuisineAdapter.CuisineItemListener, CuisineContract.View {
 
-    private CuisineContract.Presenter presenter;
-    public static String currentCuisineName;
-
     @BindView(R.id.recyclerview_category_cuisine)
     RecyclerView recyclerView;
 
-    private List<CuisineModel> arrayList = new ArrayList<>();
-    private CuisineAdapter cuisineAdapter;
     private static final String CATEGORY_NAME = "categoryName";
     private static final String CATEGORY_LETTER = "categoryLetter";
     private static final String CATEGORY_LETTER_VALUE = "a";
+    private CuisineContract.Presenter presenter;
+    private CuisineAdapter cuisineAdapter;
 
     public static CuisineFragment newInstance() {
         return new CuisineFragment();
@@ -50,17 +46,14 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
         super.onViewCreated(view, savedInstanceState);
         presenter = new CuisinePresenter(this);
         presenter.loadCuisineFromDb();
-        cuisineAdapter = new CuisineAdapter(arrayList, getContext(), this);
-        recyclerView.setAdapter(cuisineAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+        cuisineAdapter = new CuisineAdapter(presenter, getContext(), this);
+        initRecyclerView(presenter);
     }
 
     @Override
     public void onItemClick(CuisineModel cuisineItem) {
-        currentCuisineName = cuisineItem.getCountry();
         Intent intent = new Intent(getActivity(), RecipesListActivity.class);
-        intent.putExtra(CATEGORY_NAME, currentCuisineName);
+        intent.putExtra(CATEGORY_NAME, cuisineItem.getCountry());
         intent.putExtra(CATEGORY_LETTER, CATEGORY_LETTER_VALUE);
         startActivity(intent);
     }
@@ -78,19 +71,20 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     @Override
     public void loadCuisinesFromApi(List<CuisineModel> cuisineList) {
         if (isAdded()) {
-            arrayList.addAll(cuisineList);
             cuisineAdapter.notifyDataSetChanged();
         }
     }
 
     @Override
     public void showCuisineTypesFromDb(List<CuisineModel> result) {
-        if (result.size() == 0) {
-            presenter.loadCuisineFromApi();
-        } else {
-            arrayList.addAll(result);
-            cuisineAdapter.notifyDataSetChanged();
-        }
+        cuisineAdapter.notifyDataSetChanged();
+    }
+
+    private void initRecyclerView(CuisineContract.Presenter presenter){
+        cuisineAdapter = new CuisineAdapter(presenter, getContext(), this);
+        recyclerView.setAdapter(cuisineAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
     }
 
     @Override

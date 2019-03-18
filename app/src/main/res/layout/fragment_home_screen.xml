@@ -104,7 +104,6 @@
                 app:layout_constraintTop_toBottomOf="@id/txt_latest_meal_title"
                 tools:text="It is really good" />
 
-
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>

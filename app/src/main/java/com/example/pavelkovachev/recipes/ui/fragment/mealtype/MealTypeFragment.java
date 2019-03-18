@@ -17,21 +17,19 @@ import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypePresenter;
 import com.example.pavelkovachev.recipes.ui.activity.recipeslist.RecipesListActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 
 public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.mealTypeItemListener, MealTypeContract.View {
 
-    private MealTypeContract.Presenter presenter;
-
     @BindView(R.id.recyclerView_category_mealtype)
     RecyclerView recyclerView;
 
-    private List<MealTypeModel> arrayList = new ArrayList<>();
+    private String currentMealTypeName;
     private MealTypeAdapter mealTypeAdapter;
-    public String currentMealTypeName;
+
+    private MealTypeContract.Presenter presenter;
     private static final String CATEGORY_NAME = "categoryName";
     private static final String CATEGORY_LETTER = "categoryLetter";
     private static final String CATEGORY_LETTER_VALUE = "c";
@@ -50,10 +48,8 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
         super.onViewCreated(view, savedInstanceState);
         presenter = new MealTypePresenter(this);
         presenter.loadMealTypeFromDb();
-        mealTypeAdapter = new MealTypeAdapter(arrayList, getContext(), this);
-        recyclerView.setAdapter(mealTypeAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+        mealTypeAdapter = new MealTypeAdapter(presenter, getContext(), this);
+        initRecyclerView(presenter);
     }
 
     @Override
@@ -78,19 +74,20 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     @Override
     public void loadMealTypesFromApi(List<MealTypeModel> mealTypeList) {
         if (isAdded()) {
-            arrayList.addAll(mealTypeList);
             mealTypeAdapter.notifyDataSetChanged();
         }
     }
 
     @Override
     public void showMealTypeFromDb(List<MealTypeModel> result) {
-        if (result.size() == 0) {
-            presenter.loadMealTypeFromApi();
-        } else {
-            arrayList.addAll(result);
-            mealTypeAdapter.notifyDataSetChanged();
-        }
+        mealTypeAdapter.notifyDataSetChanged();
+    }
+
+    private void initRecyclerView(MealTypeContract.Presenter presenter) {
+        mealTypeAdapter = new MealTypeAdapter(presenter, getContext(), this);
+        recyclerView.setAdapter(mealTypeAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
     }
 
     @Override

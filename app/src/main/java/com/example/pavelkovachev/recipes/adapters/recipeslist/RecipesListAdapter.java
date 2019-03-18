@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
+
+import com.example.pavelkovachev.recipes.presenters.recipeslist.RecipesListContract;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,12 +24,12 @@ import butterknife.OnClick;
 
 public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.ViewHolder> {
 
-    private List recipesList;
+    private List list;
     private Context context;
     private ItemListener itemListener;
 
-    public RecipesListAdapter(Context context, List values, ItemListener itemListener) {
-        recipesList = values;
+    public RecipesListAdapter(RecipesListContract.Presenter presenter, Context context, ItemListener itemListener) {
+        this.list = presenter.getRecipeListArray();
         this.context = context;
         this.itemListener = itemListener;
     }
@@ -40,9 +42,9 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
         @BindView(R.id.img_gridlayout_categories)
         public ImageView imgCategories;
 
-        RecipeListModel item;
+        private RecipeListModel item;
 
-        public ViewHolder(View view) {
+        private ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
@@ -78,12 +80,12 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.setData((RecipeListModel) recipesList.get(i));
+        viewHolder.setData((RecipeListModel) list.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return recipesList.size();
+        return list.size();
     }
 
     public interface ItemListener {

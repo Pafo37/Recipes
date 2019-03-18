@@ -2,6 +2,8 @@ package com.example.pavelkovachev.recipes.persistence.model.mealtype;
 
 import android.os.AsyncTask;
 
+import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
@@ -10,11 +12,11 @@ import java.util.concurrent.Executor;
 
 public class MealTypeService implements MealTypeRepository {
 
-    private static MealTypeModelDao mealTypeModelDao;
+    private MealTypeModelDao mealTypeModelDao;
     private Executor appExecutor;
 
     public MealTypeService(MealTypeModelDao mealTypeModelDao) {
-        MealTypeService.mealTypeModelDao = mealTypeModelDao;
+        this.mealTypeModelDao = mealTypeModelDao;
         appExecutor = AppExecutor.getInstance();
     }
 
@@ -29,12 +31,16 @@ public class MealTypeService implements MealTypeRepository {
     }
 
     @Override
-    public List<MealTypeModel> getAllMealTypes(AsyncTaskResult result) {
+    public void getAllMealTypes(AsyncTaskResult result) {
         new GetAllMealTypesAsyncTask(result).execute();
-        return null;
     }
 
-    private static class GetAllMealTypesAsyncTask extends AsyncTask<Void, Void, List<MealTypeModel>> {
+    public static void saveToDatabase(List<MealTypeModel> mealTypeModel) {
+        MealTypeModelDao mealTypeModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).mealTypeModelDao();
+        AppExecutor.getInstance().execute(() -> mealTypeModelDao.insertCuisine(mealTypeModel));
+    }
+
+    private class GetAllMealTypesAsyncTask extends AsyncTask<Void, Void, List<MealTypeModel>> {
 
         private AsyncTaskResult<List<MealTypeModel>> asyncTaskResult;
 

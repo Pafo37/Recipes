@@ -33,8 +33,8 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
 
     @Override
     public void getRandomRecipeFromDb(String id) {
-        RecipeModelDao recipeModelDao = DatabaseCreator.
-                getRecipeDatabase(App.getInstance().getApplicationContext()).recipeDao();
+        view.progressBarVisibility(true);
+        RecipeModelDao recipeModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).recipeDao();
         RecipeDbService recipeService = new RecipeDbService(recipeModelDao);
         recipeService.getById(id, this);
     }
@@ -72,4 +72,5 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     public void onErrorLatestRecipe() {
         view.onError();
     }
+
 }
