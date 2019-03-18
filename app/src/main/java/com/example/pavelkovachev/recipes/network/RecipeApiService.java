@@ -99,7 +99,6 @@ public class RecipeApiService {
                 } else {
                     latestMealCallback.onErrorLatestRecipe();
                 }
-
             }
 
             @Override
