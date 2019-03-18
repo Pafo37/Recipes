@@ -61,8 +61,8 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderCuisine viewHolderCuisine, int i) {
-        viewHolderCuisine.setCuisineData((CuisineModel) list.get(i));
+    public void onBindViewHolder(@NonNull ViewHolderCuisine viewHolderCuisine, int position) {
+        viewHolderCuisine.setCuisineData((CuisineModel) list.get(position));
     }
 
     @Override

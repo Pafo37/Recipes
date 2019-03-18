@@ -45,12 +45,6 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        progressBarVisibility(false);
-    }
-
-    @Override
     public void setPresenter(HomeScreenContract.Presenter presenter) {
         this.presenter = presenter;
     }

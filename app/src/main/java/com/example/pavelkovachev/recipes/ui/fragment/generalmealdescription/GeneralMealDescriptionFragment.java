@@ -52,12 +52,6 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         progressBarVisibility(true);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        progressBarVisibility(true);
-    }
-
     public static GeneralMealDescriptionFragment newInstance(Bundle bundle) {
         GeneralMealDescriptionFragment fragment = new GeneralMealDescriptionFragment();
         fragment.setArguments(bundle);

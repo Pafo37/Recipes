@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
-
 import com.example.pavelkovachev.recipes.presenters.recipeslist.RecipesListContract;
 import com.squareup.picasso.Picasso;
 
@@ -79,8 +78,8 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.setData((RecipeListModel) list.get(i));
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        viewHolder.setData((RecipeListModel) list.get(position));
     }
 
     @Override
