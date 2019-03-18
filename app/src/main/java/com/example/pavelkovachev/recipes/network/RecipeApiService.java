@@ -21,7 +21,7 @@ import retrofit2.Response;
 public class RecipeApiService {
 
     private RecipesApiCreator recipesApiCreator;
-    private RandomMealCallback apiResultCallback;
+    private RandomMealCallback randomMealCallback;
     private LatestMealCallback latestMealCallback;
     private MealTypeCallback mealTypeCallback;
     private CuisineCallback cuisineCallback;
@@ -29,7 +29,7 @@ public class RecipeApiService {
 
     public RecipeApiService(RecipesApiCreator recipesApiCreator, RandomMealCallback apiResultCallback, LatestMealCallback latestMealCallback) {
         this.recipesApiCreator = new RecipesApiCreator();
-        this.apiResultCallback = apiResultCallback;
+        this.randomMealCallback = apiResultCallback;
         this.latestMealCallback = latestMealCallback;
     }
 
@@ -53,8 +53,12 @@ public class RecipeApiService {
         recipesResponseCall.enqueue(new Callback<RandomRecipeListResponse>() {
             @Override
             public void onResponse(Call<RandomRecipeListResponse> call, Response<RandomRecipeListResponse> response) {
-                RandomRecipeListResponse randomRecipesResponse = response.body();
-                apiResultCallback.onSuccessRandomRecipe(randomRecipesResponse);
+                if (response.isSuccessful()) {
+                    RandomRecipeListResponse randomRecipesResponse = response.body();
+                    randomMealCallback.onSuccessRandomRecipe(randomRecipesResponse);
+                } else {
+                    randomMealCallback.onErrorRandomRecipe();
+                }
             }
 
             @Override
@@ -70,7 +74,7 @@ public class RecipeApiService {
             @Override
             public void onResponse(Call<RandomRecipeListResponse> call, Response<RandomRecipeListResponse> response) {
                 RandomRecipeListResponse randomRecipesResponse = response.body();
-                apiResultCallback.onSuccessRandomRecipe(randomRecipesResponse);
+                randomMealCallback.onSuccessRandomRecipe(randomRecipesResponse);
             }
 
             @Override
@@ -85,8 +89,13 @@ public class RecipeApiService {
         recipesResponseCall.enqueue(new Callback<LatestRecipeListResponse>() {
             @Override
             public void onResponse(Call<LatestRecipeListResponse> call, Response<LatestRecipeListResponse> response) {
-                LatestRecipeListResponse latestRecipesResponse = response.body();
-                latestMealCallback.onSuccessLatestRecipe(latestRecipesResponse);
+                if (response.isSuccessful()) {
+                    LatestRecipeListResponse latestRecipesResponse = response.body();
+                    latestMealCallback.onSuccessLatestRecipe(latestRecipesResponse);
+                } else {
+                    latestMealCallback.onErrorLatestRecipe();
+                }
+
             }
 
             @Override

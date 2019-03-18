@@ -25,5 +25,4 @@ public class CuisineModel {
     public void setCountry(String country) {
         this.country = country;
     }
-
 }

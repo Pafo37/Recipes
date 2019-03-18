@@ -10,7 +10,7 @@ public interface MealTypeContract {
 
     interface View extends BaseView<Presenter> {
 
-        void loadMealTypesFromApi(List<MealTypeModel> mealTypeList);
+        void showMealTypesFromApi(List<MealTypeModel> mealTypeList);
 
         void showMealTypeFromDb(List<MealTypeModel> result);
 

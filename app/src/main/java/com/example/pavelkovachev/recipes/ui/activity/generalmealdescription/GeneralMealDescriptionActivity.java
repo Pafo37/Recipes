@@ -3,7 +3,6 @@ package com.example.pavelkovachev.recipes.ui.activity.generalmealdescription;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.presenters.generalmealdescription.GeneralMealDescriptionPresenter;
 import com.example.pavelkovachev.recipes.ui.activity.base.BaseActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.generalmealdescription.GeneralMealDescriptionFragment;

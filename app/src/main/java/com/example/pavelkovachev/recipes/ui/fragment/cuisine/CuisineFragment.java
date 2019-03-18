@@ -80,7 +80,7 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
         cuisineAdapter.notifyDataSetChanged();
     }
 
-    private void initRecyclerView(CuisineContract.Presenter presenter){
+    private void initRecyclerView(CuisineContract.Presenter presenter) {
         cuisineAdapter = new CuisineAdapter(presenter, getContext(), this);
         recyclerView.setAdapter(cuisineAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));

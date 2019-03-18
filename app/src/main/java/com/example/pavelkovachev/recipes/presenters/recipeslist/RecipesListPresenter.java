@@ -19,7 +19,6 @@ public class RecipesListPresenter implements RecipesListContract.Presenter
     private RecipesListContract.View view;
     private RecipesApiCreator recipesApiCreator;
     private List<RecipeListModel> recipeListModelList = new ArrayList<>();
-    private List<RecipeListModel> recipeListArray = new ArrayList<>();
 
     public RecipesListPresenter(RecipesListContract.View view) {
         this.view = view;
@@ -41,16 +40,6 @@ public class RecipesListPresenter implements RecipesListContract.Presenter
         RecipeListService.saveToDatabase(recipeListModelList);
         getRecipeListArray().addAll(recipeListModelList);
         view.loadRecipeListFromApi(recipeListModelList);
-
-    }
-
-    @Override
-    public void showRecipeListResult(List<RecipeListModel> result) {
-        if (result != null) {
-            RecipeListService.saveToDatabase(result);
-            getRecipeListArray().addAll(result);
-            view.loadRecipeListFromApi(result);
-        }
     }
 
     @Override

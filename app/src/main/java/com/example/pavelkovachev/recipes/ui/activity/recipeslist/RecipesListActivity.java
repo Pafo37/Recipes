@@ -14,10 +14,8 @@ public class RecipesListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.recipes_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        RecipesListFragment recipesListFragment = new RecipesListFragment();
-        Bundle bundle = getIntent().getExtras();
-        recipesListFragment.setArguments(bundle);
+        RecipesListFragment recipesListFragment = RecipesListFragment.newInstance(
+                getIntent().getExtras());
         commitFragmentTransaction(recipesListFragment);
-
     }
 }

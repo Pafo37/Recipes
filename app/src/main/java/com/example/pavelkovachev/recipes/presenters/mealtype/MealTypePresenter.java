@@ -8,7 +8,6 @@ import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.callback.MealTypeCallback;
 import com.example.pavelkovachev.recipes.network.response.mealtype.MealTypeListResponses;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
-import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeService;
@@ -64,18 +63,14 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
     public void onError() {
         view.onError();
     }
-    private void saveToDatabase(List<MealTypeModel> mealTypeModel) {
-        MealTypeModelDao mealTypeModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).mealTypeModelDao();
-        AppExecutor.getInstance().execute(() -> mealTypeModelDao.insertCuisine(mealTypeModel));
-    }
 
     @Override
     public void onSuccessMealTypes(MealTypeListResponses mealTypesResponses) {
         Stream.of(mealTypesResponses.getCategories()).forEach(
                 mealTypeModel ->
                         mealTypeModelList.add(MealTypeConverter.convertToMealType(mealTypeModel)));
-        saveToDatabase(mealTypeModelList);
-        view.loadMealTypesFromApi(mealTypeModelList);
+        MealTypeService.saveToDatabase(mealTypeModelList);
+        view.showMealTypesFromApi(mealTypeModelList);
     }
 
     @Override

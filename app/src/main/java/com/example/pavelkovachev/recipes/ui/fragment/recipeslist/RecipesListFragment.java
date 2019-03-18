@@ -19,7 +19,6 @@ import com.example.pavelkovachev.recipes.ui.activity.generalmealdescription.Gene
 import com.example.pavelkovachev.recipes.ui.activity.personalpreferences.PersonalPreferencesActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,7 +29,6 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     @BindView(R.id.recycler_view_recipes_list)
     RecyclerView recyclerView;
 
-    private List<RecipeListModel> arrayList = new ArrayList<>();
     private static final int SPAN_COUNT = 2;
     private RecipesListAdapter recipesListAdapter;
     public String categoryName;
@@ -85,14 +83,6 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     public void loadRecipeListFromApi(List<RecipeListModel> recipeListModelList) {
         if (isAdded()) {
             progressBarVisibility(false);
-            //arrayList.addAll(recipeListModelList);
-            recipesListAdapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void loadRecipeListFromDb(List<RecipeListModel> result) {
-        if (isAdded()) {
             recipesListAdapter.notifyDataSetChanged();
         }
     }

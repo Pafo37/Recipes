@@ -72,7 +72,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     }
 
     @Override
-    public void loadMealTypesFromApi(List<MealTypeModel> mealTypeList) {
+    public void showMealTypesFromApi(List<MealTypeModel> mealTypeList) {
         if (isAdded()) {
             mealTypeAdapter.notifyDataSetChanged();
         }
