@@ -31,86 +31,75 @@ public class Ingredient {
 
     public static List<Ingredient> convertFromRecipeToList(RecipeModel recipeModel) {
         List<Ingredient> result = new ArrayList<>();
-        if (recipeModel.getRecipeIngredient1() != null && recipeModel.getRecipeMeasure1() != null
-                && !recipeModel.getRecipeIngredient1().isEmpty() && !recipeModel.getRecipeMeasure1().isEmpty()) {
+
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient1(), recipeModel.getRecipeMeasure1())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure1(), recipeModel.getRecipeIngredient1()));
         }
-        if (recipeModel.getRecipeIngredient2() != null && recipeModel.getRecipeMeasure2() != null
-                && !recipeModel.getRecipeIngredient2().isEmpty() && !recipeModel.getRecipeMeasure2().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient2(), recipeModel.getRecipeMeasure2())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure2(), recipeModel.getRecipeIngredient2()));
         }
-        if (recipeModel.getRecipeIngredient3() != null && recipeModel.getRecipeMeasure3() != null
-                && !recipeModel.getRecipeIngredient3().isEmpty() && !recipeModel.getRecipeMeasure3().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient3(), recipeModel.getRecipeMeasure3())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure3(), recipeModel.getRecipeIngredient3()));
         }
-        if (recipeModel.getRecipeIngredient4() != null && recipeModel.getRecipeMeasure4() != null
-                && !recipeModel.getRecipeIngredient4().isEmpty() && !recipeModel.getRecipeMeasure4().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient4(), recipeModel.getRecipeMeasure4())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure4(), recipeModel.getRecipeIngredient4()));
         }
-        if (recipeModel.getRecipeIngredient5() != null && recipeModel.getRecipeMeasure5() != null
-                && !recipeModel.getRecipeIngredient5().isEmpty() && !recipeModel.getRecipeMeasure5().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient5(), recipeModel.getRecipeMeasure5())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure5(), recipeModel.getRecipeIngredient5()));
         }
-        if (recipeModel.getRecipeIngredient6() != null && recipeModel.getRecipeMeasure6() != null
-                && !recipeModel.getRecipeIngredient6().isEmpty() && !recipeModel.getRecipeMeasure6().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient6(), recipeModel.getRecipeMeasure6())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure6(), recipeModel.getRecipeIngredient6()));
         }
-        if (recipeModel.getRecipeIngredient7() != null && recipeModel.getRecipeMeasure7() != null
-                && !recipeModel.getRecipeIngredient7().isEmpty() && !recipeModel.getRecipeMeasure7().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient7(), recipeModel.getRecipeMeasure7())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure7(), recipeModel.getRecipeIngredient7()));
         }
-        if (recipeModel.getRecipeIngredient8() != null && recipeModel.getRecipeMeasure8() != null
-                && !recipeModel.getRecipeIngredient8().isEmpty() && !recipeModel.getRecipeMeasure8().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient8(), recipeModel.getRecipeMeasure8())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure8(), recipeModel.getRecipeIngredient8()));
         }
-        if (recipeModel.getRecipeIngredient9() != null && recipeModel.getRecipeMeasure9() != null
-                && !recipeModel.getRecipeIngredient9().isEmpty() && !recipeModel.getRecipeMeasure9().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient9(), recipeModel.getRecipeMeasure9())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure9(), recipeModel.getRecipeIngredient9()));
         }
-        if (recipeModel.getRecipeIngredient10() != null && recipeModel.getRecipeMeasure10() != null
-                && !recipeModel.getRecipeIngredient10().isEmpty() && !recipeModel.getRecipeMeasure10().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient10(), recipeModel.getRecipeMeasure10())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure10(), recipeModel.getRecipeIngredient10()));
         }
-        if (recipeModel.getRecipeIngredient11() != null && recipeModel.getRecipeMeasure11() != null
-                && !recipeModel.getRecipeIngredient11().isEmpty() && !recipeModel.getRecipeMeasure11().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient11(), recipeModel.getRecipeMeasure11())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure11(), recipeModel.getRecipeIngredient11()));
         }
-        if (recipeModel.getRecipeIngredient12() != null && recipeModel.getRecipeMeasure12() != null
-                && !recipeModel.getRecipeIngredient12().isEmpty() && !recipeModel.getRecipeMeasure12().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient12(), recipeModel.getRecipeMeasure12())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure12(), recipeModel.getRecipeIngredient12()));
         }
-        if (recipeModel.getRecipeIngredient13() != null && recipeModel.getRecipeMeasure13() != null
-                && !recipeModel.getRecipeIngredient13().isEmpty() && !recipeModel.getRecipeMeasure13().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient13(), recipeModel.getRecipeMeasure13())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure13(), recipeModel.getRecipeIngredient13()));
         }
-        if (recipeModel.getRecipeIngredient14() != null && recipeModel.getRecipeMeasure14() != null
-                && !recipeModel.getRecipeIngredient14().isEmpty() && !recipeModel.getRecipeMeasure14().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient14(), recipeModel.getRecipeMeasure14())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure14(), recipeModel.getRecipeIngredient14()));
         }
-        if (recipeModel.getRecipeIngredient15() != null && recipeModel.getRecipeMeasure15() != null
-                && !recipeModel.getRecipeIngredient15().isEmpty() && !recipeModel.getRecipeMeasure15().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient15(), recipeModel.getRecipeMeasure15())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure15(), recipeModel.getRecipeIngredient15()));
         }
-        if (recipeModel.getRecipeIngredient16() != null && recipeModel.getRecipeMeasure16() != null
-                && !recipeModel.getRecipeIngredient16().isEmpty() && !recipeModel.getRecipeMeasure16().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient16(), recipeModel.getRecipeMeasure16())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure16(), recipeModel.getRecipeIngredient16()));
         }
-        if (recipeModel.getRecipeIngredient17() != null && recipeModel.getRecipeMeasure17() != null
-                && !recipeModel.getRecipeIngredient17().isEmpty() && !recipeModel.getRecipeMeasure17().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient17(), recipeModel.getRecipeMeasure17())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure17(), recipeModel.getRecipeIngredient17()));
         }
-        if (recipeModel.getRecipeIngredient18() != null && recipeModel.getRecipeMeasure18() != null
-                && !recipeModel.getRecipeIngredient18().isEmpty() && !recipeModel.getRecipeMeasure18().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient18(), recipeModel.getRecipeMeasure18())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure18(), recipeModel.getRecipeIngredient18()));
         }
-        if (recipeModel.getRecipeIngredient19() != null && recipeModel.getRecipeMeasure19() != null
-                && !recipeModel.getRecipeIngredient19().isEmpty() && !recipeModel.getRecipeMeasure19().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient19(), recipeModel.getRecipeMeasure19())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure19(), recipeModel.getRecipeIngredient19()));
         }
-        if (recipeModel.getRecipeIngredient20() != null && recipeModel.getRecipeMeasure20() != null
-                && !recipeModel.getRecipeIngredient20().isEmpty() && !recipeModel.getRecipeMeasure20().isEmpty()) {
+        if (isIngredientEmpty(recipeModel.getRecipeIngredient20(), recipeModel.getRecipeMeasure20())) {
             result.add(new Ingredient(recipeModel.getRecipeMeasure20(), recipeModel.getRecipeIngredient20()));
         }
         return result;
+    }
+
+    private static boolean isIngredientEmpty(String ingredient, String measure) {
+        if (ingredient != null && !ingredient.isEmpty() && measure != null && !measure.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

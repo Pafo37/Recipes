@@ -67,7 +67,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     }
 
     @Override
-    public void progressBarVisibility(boolean isVisible) {
+    public void setProgressBarVisibility(boolean isVisible) {
         //NOT USED
     }
 

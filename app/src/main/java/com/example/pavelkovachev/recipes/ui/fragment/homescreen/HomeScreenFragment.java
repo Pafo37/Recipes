@@ -50,7 +50,7 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
     }
 
     @Override
-    public void progressBarVisibility(boolean isVisible) {
+    public void setProgressBarVisibility(boolean isVisible) {
         ((BaseActivity) getActivity()).showProgressBar(isVisible);
     }
 

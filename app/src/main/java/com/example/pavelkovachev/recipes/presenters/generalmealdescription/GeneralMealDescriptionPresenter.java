@@ -3,7 +3,6 @@ package com.example.pavelkovachev.recipes.presenters.generalmealdescription;
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.RecipeConverter;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
-import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
 import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
 import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
@@ -18,7 +17,6 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
         AsyncTaskResult<RecipeModel>, RandomMealCallback, LatestMealCallback {
 
     private GeneralMealDescriptionContract.View view;
-    private RecipesApiCreator recipesApiCreator;
 
     public GeneralMealDescriptionPresenter(GeneralMealDescriptionContract.View view) {
         this.view = view;
@@ -27,13 +25,17 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
 
     @Override
     public void getRecipeByIdFromApi() {
-        RecipeApiService recipeService = new RecipeApiService(recipesApiCreator, this, this);
-        recipeService.getRecipeById(view.getRecipeId());
+        if (view.getRecipeId() != null) {
+            RecipeApiService recipeService = RecipeApiService.getRecipeApiService();
+            recipeService.getRecipeById(view.getRecipeId(), this);
+        } else {
+            view.showErrorNoArguments();
+        }
     }
 
     @Override
     public void getRandomRecipeFromDb(String id) {
-        view.progressBarVisibility(true);
+        view.setProgressBarVisibility(true);
         RecipeModelDao recipeModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).recipeDao();
         RecipeDbService recipeService = new RecipeDbService(recipeModelDao);
         recipeService.getById(id, this);

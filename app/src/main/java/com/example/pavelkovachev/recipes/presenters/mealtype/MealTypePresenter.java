@@ -4,7 +4,6 @@ import com.annimon.stream.Stream;
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.MealTypeConverter;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
-import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.callback.MealTypeCallback;
 import com.example.pavelkovachev.recipes.network.response.mealtype.MealTypeListResponses;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
@@ -20,7 +19,6 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
         AsyncTaskResult<List<MealTypeModel>>, MealTypeCallback {
 
     private final MealTypeContract.View view;
-    private RecipesApiCreator recipesApiCreator;
     private List<MealTypeModel> mealTypeModelList = new ArrayList<>();
 
     public MealTypePresenter(MealTypeContract.View view) {
@@ -30,8 +28,8 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
 
     @Override
     public void loadMealTypeFromApi() {
-        RecipeApiService recipesService = new RecipeApiService(recipesApiCreator, this);
-        recipesService.getMealTypes();
+        RecipeApiService recipeApiService = RecipeApiService.getRecipeApiService();
+        recipeApiService.getMealTypes(this);
     }
 
     @Override

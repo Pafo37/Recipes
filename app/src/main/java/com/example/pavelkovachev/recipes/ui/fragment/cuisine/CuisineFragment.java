@@ -64,7 +64,7 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     }
 
     @Override
-    public void progressBarVisibility(boolean isVisible) {
+    public void setProgressBarVisibility(boolean isVisible) {
         //NOT USED
     }
 

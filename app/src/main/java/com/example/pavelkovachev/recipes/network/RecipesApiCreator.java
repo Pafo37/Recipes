@@ -11,19 +11,21 @@ import retrofit2.Retrofit;
 
 public class RecipesApiCreator extends BaseService {
 
-    private RecipesApi recipesApi;
+    private static RecipesApi recipesApi;
     private static final int DEFAULT_TIMEOUT = 60;
+    private static final Object LOCK = new Object();
 
-    public RecipesApi getRecipesApi() {
+    public static RecipesApi getRecipesApi() {
         if (recipesApi == null) {
-            String baseUrl = BuildConfig.BASE_URL;
-            Retrofit retrofit = initRetrofit(baseUrl, createOkHttpClient());
-            recipesApi = retrofit.create(RecipesApi.class);
+            synchronized (LOCK) {
+                Retrofit retrofit = initRetrofit(BuildConfig.BASE_URL, createOkHttpClient());
+                recipesApi = retrofit.create(RecipesApi.class);
+            }
         }
         return recipesApi;
     }
 
-    private OkHttpClient createOkHttpClient() {
+    private static OkHttpClient createOkHttpClient() {
         return new OkHttpClient.Builder()
                 .addInterceptor(new ChuckInterceptor(App.getInstance()))
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)

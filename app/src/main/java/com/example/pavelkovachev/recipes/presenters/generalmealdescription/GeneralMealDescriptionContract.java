@@ -13,6 +13,8 @@ public interface GeneralMealDescriptionContract {
         String getRecipeId();
 
         void onError();
+
+        void showErrorNoArguments();
     }
 
     interface Presenter extends BasePresenter {

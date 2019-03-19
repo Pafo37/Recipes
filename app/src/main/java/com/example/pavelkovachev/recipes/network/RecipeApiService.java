@@ -20,36 +20,20 @@ import retrofit2.Response;
 
 public class RecipeApiService {
 
-    private RecipesApiCreator recipesApiCreator;
-    private RandomMealCallback randomMealCallback;
-    private LatestMealCallback latestMealCallback;
-    private MealTypeCallback mealTypeCallback;
-    private CuisineCallback cuisineCallback;
-    private RecipesListCallback recipesListCallback;
+    private static RecipeApiService recipeApiService;
+    private static final Object LOCK = new Object();
 
-    public RecipeApiService(RecipesApiCreator recipesApiCreator, RandomMealCallback apiResultCallback, LatestMealCallback latestMealCallback) {
-        this.recipesApiCreator = new RecipesApiCreator();
-        this.randomMealCallback = apiResultCallback;
-        this.latestMealCallback = latestMealCallback;
+    public static RecipeApiService getRecipeApiService() {
+        if (recipeApiService == null) {
+            synchronized (LOCK) {
+                recipeApiService = new RecipeApiService();
+            }
+        }
+        return recipeApiService;
     }
 
-    public RecipeApiService(RecipesApiCreator recipesApiCreator, MealTypeCallback mealTypeCallback) {
-        this.recipesApiCreator = new RecipesApiCreator();
-        this.mealTypeCallback = mealTypeCallback;
-    }
-
-    public RecipeApiService(RecipesApiCreator recipesApiCreator, CuisineCallback cuisineCallback) {
-        this.recipesApiCreator = new RecipesApiCreator();
-        this.cuisineCallback = cuisineCallback;
-    }
-
-    public RecipeApiService(RecipesApiCreator recipesApiCreator, RecipesListCallback recipesListCallback) {
-        this.recipesApiCreator = new RecipesApiCreator();
-        this.recipesListCallback = recipesListCallback;
-    }
-
-    public void getRandomRecipe() {
-        Call<RandomRecipeListResponse> recipesResponseCall = recipesApiCreator.getRecipesApi().getRandomRecipeResponse();
+    public void getRandomRecipe(RandomMealCallback randomMealCallback) {
+        Call<RandomRecipeListResponse> recipesResponseCall = RecipesApiCreator.getRecipesApi().getRandomRecipeResponse();
         recipesResponseCall.enqueue(new Callback<RandomRecipeListResponse>() {
             @Override
             public void onResponse(Call<RandomRecipeListResponse> call, Response<RandomRecipeListResponse> response) {
@@ -68,8 +52,8 @@ public class RecipeApiService {
         });
     }
 
-    public void getRecipeById(String mealId) {
-        Call<RandomRecipeListResponse> recipesResponseCall = recipesApiCreator.getRecipesApi().getRecipeByIdResponse(mealId);
+    public void getRecipeById(String mealId, RandomMealCallback randomMealCallback) {
+        Call<RandomRecipeListResponse> recipesResponseCall = RecipesApiCreator.getRecipesApi().getRecipeByIdResponse(mealId);
         recipesResponseCall.enqueue(new Callback<RandomRecipeListResponse>() {
             @Override
             public void onResponse(Call<RandomRecipeListResponse> call, Response<RandomRecipeListResponse> response) {
@@ -88,8 +72,8 @@ public class RecipeApiService {
         });
     }
 
-    public void getLatestRecipe() {
-        Call<LatestRecipeListResponse> recipesResponseCall = recipesApiCreator.getRecipesApi().getLatestRecipeResponse();
+    public void getLatestRecipe(LatestMealCallback latestMealCallback) {
+        Call<LatestRecipeListResponse> recipesResponseCall = RecipesApiCreator.getRecipesApi().getLatestRecipeResponse();
         recipesResponseCall.enqueue(new Callback<LatestRecipeListResponse>() {
             @Override
             public void onResponse(Call<LatestRecipeListResponse> call, Response<LatestRecipeListResponse> response) {
@@ -108,8 +92,8 @@ public class RecipeApiService {
         });
     }
 
-    public void getMealTypes() {
-        Call<MealTypeListResponses> mealTypesResponsesCall = recipesApiCreator.getRecipesApi().getMealTypesResponse();
+    public void getMealTypes(MealTypeCallback mealTypeCallback) {
+        Call<MealTypeListResponses> mealTypesResponsesCall = RecipesApiCreator.getRecipesApi().getMealTypesResponse();
         mealTypesResponsesCall.enqueue(new Callback<MealTypeListResponses>() {
             @Override
             public void onResponse(Call<MealTypeListResponses> call, Response<MealTypeListResponses> response) {
@@ -128,8 +112,8 @@ public class RecipeApiService {
         });
     }
 
-    public void getCuisine() {
-        Call<CuisineListResponse> cuisineListResponseCall = recipesApiCreator.getRecipesApi().getCuisineResponse();
+    public void getCuisine(CuisineCallback cuisineCallback) {
+        Call<CuisineListResponse> cuisineListResponseCall = RecipesApiCreator.getRecipesApi().getCuisineResponse();
         cuisineListResponseCall.enqueue(new Callback<CuisineListResponse>() {
             @Override
             public void onResponse(Call<CuisineListResponse> call, Response<CuisineListResponse> response) {
@@ -148,10 +132,10 @@ public class RecipeApiService {
         });
     }
 
-    public void getRecipesList(String urlLetter, String category) {
+    public void getRecipesList(String urlLetter, String category, RecipesListCallback recipesListCallback) {
         Map<String, String> queryData = new HashMap<>();
         queryData.put(urlLetter, category);
-        Call<RecipesListResponse> recipesListResponseCall = recipesApiCreator.getRecipesApi().getRecipesListResponse(queryData);
+        Call<RecipesListResponse> recipesListResponseCall = RecipesApiCreator.getRecipesApi().getRecipesListResponse(queryData);
         recipesListResponseCall.enqueue(new Callback<RecipesListResponse>() {
             @Override
             public void onResponse(Call<RecipesListResponse> call, Response<RecipesListResponse> response) {

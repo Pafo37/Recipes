@@ -4,7 +4,6 @@ import com.annimon.stream.Stream;
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.CuisineConverter;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
-import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.callback.CuisineCallback;
 import com.example.pavelkovachev.recipes.network.response.cuisine.CuisineListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
@@ -20,7 +19,6 @@ public class CuisinePresenter implements CuisineContract.Presenter,
         AsyncTaskResult<List<CuisineModel>>, CuisineCallback {
 
     private final CuisineContract.View view;
-    private RecipesApiCreator recipesApiCreator;
     private List<CuisineModel> cuisineModelList = new ArrayList<>();
 
     public CuisinePresenter(CuisineContract.View view) {
@@ -52,8 +50,8 @@ public class CuisinePresenter implements CuisineContract.Presenter,
 
     @Override
     public void loadCuisineFromApi() {
-        RecipeApiService recipesService = new RecipeApiService(recipesApiCreator, this);
-        recipesService.getCuisine();
+        RecipeApiService recipesService = RecipeApiService.getRecipeApiService();
+        recipesService.getCuisine(this);
     }
 
     @Override

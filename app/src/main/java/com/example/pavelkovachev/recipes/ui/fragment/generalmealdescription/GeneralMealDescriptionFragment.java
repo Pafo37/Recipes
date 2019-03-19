@@ -1,5 +1,6 @@
 package com.example.pavelkovachev.recipes.ui.fragment.generalmealdescription;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -49,7 +50,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         super.onViewCreated(view, savedInstanceState);
         recipeId = getArguments().getString(RECIPE_ID);
         presenter.getRandomRecipeFromDb(recipeId);
-        progressBarVisibility(true);
+        setProgressBarVisibility(true);
     }
 
     public static GeneralMealDescriptionFragment newInstance(Bundle bundle) {
@@ -66,7 +67,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @Override
     public void showRecipe(RecipeModel recipeModel) {
         if (isAdded()) {
-            progressBarVisibility(false);
+            setProgressBarVisibility(false);
             getActivity().setTitle(recipeModel.getRecipeName());
             recipeName.setText(recipeModel.getRecipeName());
             recipeMealType.setText(getString(R.string.general_meal_description_meal_type) + recipeModel.getRecipeMealType());
@@ -80,12 +81,25 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     @Override
     public String getRecipeId() {
-        return recipeId = getArguments().getString(RECIPE_ID);
+        if (getArguments() != null && getArguments().containsKey(RECIPE_ID)) {
+            return getArguments().getString(RECIPE_ID);
+        } else {
+            return null;
+        }
     }
 
     @Override
     public void onError() {
         showErrorDialog();
+    }
+
+    @Override
+    public void showErrorNoArguments() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.error_message))
+                .setMessage(getString(R.string.not_found_message));
+        builder.setNeutralButton(getString(R.string.ok_message), (dialog, which) -> dialog.dismiss());
+        builder.show();
     }
 
     private List<Ingredient> initIngredients(RecipeModel recipeModel) {
@@ -98,7 +112,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     }
 
     @Override
-    public void progressBarVisibility(boolean isVisible) {
+    public void setProgressBarVisibility(boolean isVisible) {
         ((BaseActivity) getActivity()).showProgressBar(isVisible);
     }
 

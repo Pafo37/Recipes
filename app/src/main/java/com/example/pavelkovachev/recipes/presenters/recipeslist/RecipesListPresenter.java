@@ -3,7 +3,6 @@ package com.example.pavelkovachev.recipes.presenters.recipeslist;
 import com.annimon.stream.Stream;
 import com.example.pavelkovachev.recipes.converter.RecipesListConverter;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
-import com.example.pavelkovachev.recipes.network.RecipesApiCreator;
 import com.example.pavelkovachev.recipes.network.callback.RecipesListCallback;
 import com.example.pavelkovachev.recipes.network.response.recipelist.RecipesListResponse;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
@@ -17,7 +16,6 @@ public class RecipesListPresenter implements RecipesListContract.Presenter
         , RecipesListCallback {
 
     private RecipesListContract.View view;
-    private RecipesApiCreator recipesApiCreator;
     private List<RecipeListModel> recipeListModelList = new ArrayList<>();
 
     public RecipesListPresenter(RecipesListContract.View view) {
@@ -27,9 +25,13 @@ public class RecipesListPresenter implements RecipesListContract.Presenter
 
     @Override
     public void loadRecipeList() {
-        view.progressBarVisibility(true);
-        RecipeApiService recipesService = new RecipeApiService(recipesApiCreator, this);
-        recipesService.getRecipesList(view.getCategoryLetter(), view.getCategoryName());
+        view.setProgressBarVisibility(true);
+        if (view.getCategoryName() != null && view.getCategoryLetter() != null) {
+            RecipeApiService.getRecipeApiService()
+                    .getRecipesList(view.getCategoryLetter(), view.getCategoryName(), this);
+        } else {
+            view.showErrorNoArguments();
+        }
     }
 
     @Override
@@ -43,12 +45,12 @@ public class RecipesListPresenter implements RecipesListContract.Presenter
     }
 
     @Override
-    public List<RecipeListModel> getRecipeListArray() {
-        return recipeListModelList;
+    public void onErrorRecipesList() {
+        view.onError();
     }
 
     @Override
-    public void onErrorRecipesList() {
-        view.onError();
+    public List<RecipeListModel> getRecipeListArray() {
+        return recipeListModelList;
     }
 }

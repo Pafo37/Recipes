@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.pavelkovachev.recipes.R;
+
 import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment {
@@ -27,9 +29,9 @@ public abstract class BaseFragment extends Fragment {
 
     protected void showErrorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
-                .setTitle("Error")
-                .setMessage("Not Found!");
-        builder.setNeutralButton("Ok", (dialog, which) -> dialog.dismiss());
+                .setTitle(getString(R.string.error_message))
+                .setMessage(getString(R.string.not_found_message));
+        builder.setNeutralButton(getString(R.string.ok_message), (dialog, which) -> dialog.dismiss());
         builder.show();
     }
 }

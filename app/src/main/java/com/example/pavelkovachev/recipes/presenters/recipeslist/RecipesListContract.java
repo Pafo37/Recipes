@@ -17,6 +17,8 @@ public interface RecipesListContract {
         String getCategoryLetter();
 
         void onError();
+
+        void showErrorNoArguments();
     }
 
     interface Presenter extends BasePresenter {

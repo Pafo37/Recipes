@@ -1,5 +1,6 @@
 package com.example.pavelkovachev.recipes.ui.fragment.recipeslist;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -29,7 +30,6 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     @BindView(R.id.recycler_view_recipes_list)
     RecyclerView recyclerView;
 
-    private static final int SPAN_COUNT = 2;
     private RecipesListAdapter recipesListAdapter;
     public String categoryName;
     public String categoryLetter;
@@ -42,9 +42,9 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter = new RecipesListPresenter(this);
-        presenter.loadRecipeList();
-        getActivity().setTitle(getCategoryName());
         initRecyclerView(presenter);
+        getActivity().setTitle(getCategoryName());
+        presenter.loadRecipeList();
     }
 
     public static RecipesListFragment newInstance(Bundle bundle) {
@@ -82,19 +82,25 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     @Override
     public void loadRecipeListFromApi(List<RecipeListModel> recipeListModelList) {
         if (isAdded()) {
-            progressBarVisibility(false);
+            setProgressBarVisibility(false);
             recipesListAdapter.notifyDataSetChanged();
         }
     }
 
     @Override
     public String getCategoryName() {
-        return categoryName = getArguments().getString(CATEGORY_NAME);
+        if (getArguments() != null && getArguments().containsKey(CATEGORY_NAME)) {
+            return getArguments().getString(CATEGORY_NAME);
+        }
+        return null;
     }
 
     @Override
     public String getCategoryLetter() {
-        return categoryLetter = getArguments().getString(CATEGORY_LETTER);
+        if (getArguments() != null && getArguments().containsKey(CATEGORY_LETTER)) {
+            return categoryLetter = getArguments().getString(CATEGORY_LETTER);
+        }
+        return null;
     }
 
     @Override
@@ -103,19 +109,31 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     }
 
     @Override
+    public void showErrorNoArguments() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.error_message))
+                .setMessage(getString(R.string.not_found_message));
+        builder.setNeutralButton(getString(R.string.ok_message), (dialog, which) -> dialog.dismiss());
+        builder.show();
+    }
+
+    @Override
     public void setPresenter(RecipesListContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
     @Override
-    public void progressBarVisibility(boolean isVisible) {
+    public void setProgressBarVisibility(boolean isVisible) {
         ((BaseActivity) getActivity()).showProgressBar(isVisible);
     }
 
     private void initRecyclerView(RecipesListContract.Presenter presenter) {
         recipesListAdapter = new RecipesListAdapter(presenter, getContext(), this);
+        recyclerView.setLayoutManager(new GridLayoutManager(
+                getContext(),
+                getResources().getInteger(R.integer.grid_layout_size),
+                GridLayoutManager.VERTICAL,
+                false));
         recyclerView.setAdapter(recipesListAdapter);
-        GridLayoutManager manager = new GridLayoutManager(getContext(), SPAN_COUNT, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(manager);
     }
 }
