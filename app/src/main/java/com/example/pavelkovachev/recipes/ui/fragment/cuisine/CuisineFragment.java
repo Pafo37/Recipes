@@ -29,7 +29,6 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     private static final String CATEGORY_NAME = "categoryName";
     private static final String CATEGORY_LETTER = "categoryLetter";
     private static final String CATEGORY_LETTER_VALUE = "a";
-
     private CuisineContract.Presenter presenter;
     private CuisineAdapter cuisineAdapter;
 
@@ -47,6 +46,7 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
         super.onViewCreated(view, savedInstanceState);
         presenter = new CuisinePresenter(this);
         presenter.loadCuisineFromDb();
+        cuisineAdapter = new CuisineAdapter(presenter, getContext(), this);
         initRecyclerView(presenter);
     }
 
@@ -64,6 +64,11 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     }
 
     @Override
+    public void setProgressBarVisibility(boolean isVisible) {
+        //NOT USED
+    }
+
+    @Override
     public void loadCuisinesFromApi(List<CuisineModel> cuisineList) {
         if (isAdded()) {
             cuisineAdapter.notifyDataSetChanged();
@@ -75,10 +80,15 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
         cuisineAdapter.notifyDataSetChanged();
     }
 
-    private void initRecyclerView(CuisineContract.Presenter presenter){
+    private void initRecyclerView(CuisineContract.Presenter presenter) {
         cuisineAdapter = new CuisineAdapter(presenter, getContext(), this);
         recyclerView.setAdapter(cuisineAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+    }
+
+    @Override
+    public void onError() {
+        showErrorDialog();
     }
 }

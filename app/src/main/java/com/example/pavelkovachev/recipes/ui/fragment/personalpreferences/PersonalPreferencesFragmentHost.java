@@ -14,6 +14,7 @@ import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 import butterknife.BindView;
 
 public class PersonalPreferencesFragmentHost extends BaseFragment {
+
     @BindView(R.id.viewpager_personal_preferences)
     ViewPager viewPagerFavoritesMyRecipes;
     @BindView(R.id.tab_layout_personal_preferences)

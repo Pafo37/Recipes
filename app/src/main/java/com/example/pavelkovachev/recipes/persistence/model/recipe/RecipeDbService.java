@@ -10,13 +10,14 @@ import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-public class RecipeService implements RecipeRepository {
+public class RecipeDbService implements RecipeRepository {
 
     private RecipeModelDao recipeModelDao;
     private Executor appExecutor;
 
-    public RecipeService(RecipeModelDao recipeModelDao) {
+    public RecipeDbService(RecipeModelDao recipeModelDao) {
         this.recipeModelDao = recipeModelDao;
+
         appExecutor = AppExecutor.getInstance();
     }
 
@@ -72,6 +73,8 @@ public class RecipeService implements RecipeRepository {
             super.onPostExecute(recipeModel);
             if (asyncTaskResult != null) {
                 asyncTaskResult.onSuccess(recipeModel);
+            } else {
+                asyncTaskResult.onError();
             }
         }
     }

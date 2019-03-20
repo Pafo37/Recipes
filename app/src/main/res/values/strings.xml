@@ -104,5 +104,9 @@
     <string name="permission_camera_neverask">Never ask again</string>
     <string name="general_meal_description_meal_type">Meal Type:</string>
     <string name="general_meal_description_cuisine">Cuisine:</string>
+    <string name="error_message">Error</string>
+    <string name="not_found_message">Not Found!</string>
+    <string name="no_arguments_found">No Arguments Found!</string>
+    <string name="ok_message">OK</string>
 
 </resources>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenContract;
+import com.example.pavelkovachev.recipes.ui.activity.base.BaseActivity;
 import com.example.pavelkovachev.recipes.ui.activity.categories.CategoriesActivity;
 import com.example.pavelkovachev.recipes.ui.activity.generalmealdescription.GeneralMealDescriptionActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
@@ -46,6 +47,11 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
     @Override
     public void setPresenter(HomeScreenContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void setProgressBarVisibility(boolean isVisible) {
+        ((BaseActivity) getActivity()).showProgressBar(isVisible);
     }
 
     @Override
@@ -86,5 +92,10 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
             Picasso.get().load(recipeModel.getRecipeImage()).into(imgLatestMeal);
             txtLatestMealName.setText(recipeModel.getRecipeName());
         }
+    }
+
+    @Override
+    public void onError() {
+        showErrorDialog();
     }
 }

@@ -70,8 +70,8 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderMealType viewHolderMealType, int i) {
-        viewHolderMealType.setMealTypeData((MealTypeModel) list.get(i));
+    public void onBindViewHolder(@NonNull ViewHolderMealType viewHolderMealType, int position) {
+        viewHolderMealType.setMealTypeData((MealTypeModel) list.get(position));
     }
 
     @Override

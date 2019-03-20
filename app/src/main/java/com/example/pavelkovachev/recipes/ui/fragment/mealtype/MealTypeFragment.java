@@ -28,6 +28,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
 
     private String currentMealTypeName;
     private MealTypeAdapter mealTypeAdapter;
+
     private MealTypeContract.Presenter presenter;
     private static final String CATEGORY_NAME = "categoryName";
     private static final String CATEGORY_LETTER = "categoryLetter";
@@ -46,7 +47,8 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter = new MealTypePresenter(this);
-        presenter.getMealType();
+        presenter.loadMealTypeFromDb();
+        mealTypeAdapter = new MealTypeAdapter(presenter, getContext(), this);
         initRecyclerView(presenter);
     }
 
@@ -65,7 +67,12 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     }
 
     @Override
-    public void loadMealTypesFromApi(List<MealTypeModel> mealTypeList) {
+    public void setProgressBarVisibility(boolean isVisible) {
+        //NOT USED
+    }
+
+    @Override
+    public void showMealTypesFromApi(List<MealTypeModel> mealTypeList) {
         if (isAdded()) {
             mealTypeAdapter.notifyDataSetChanged();
         }
@@ -81,5 +88,10 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
         recyclerView.setAdapter(mealTypeAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+    }
+
+    @Override
+    public void onError() {
+        showErrorDialog();
     }
 }

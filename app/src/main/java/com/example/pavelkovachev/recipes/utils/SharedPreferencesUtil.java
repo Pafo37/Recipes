@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharedPreferencesUtil {
+
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
 

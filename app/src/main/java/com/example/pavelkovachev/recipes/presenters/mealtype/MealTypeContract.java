@@ -10,19 +10,18 @@ public interface MealTypeContract {
 
     interface View extends BaseView<Presenter> {
 
-        void loadMealTypesFromApi(List<MealTypeModel> mealTypeList);
+        void showMealTypesFromApi(List<MealTypeModel> mealTypeList);
 
         void showMealTypeFromDb(List<MealTypeModel> result);
 
+        void onError();
     }
 
     interface Presenter extends BasePresenter {
 
-        void loadMealType();
+        void loadMealTypeFromApi();
 
-        void showMealTypeResult(List<MealTypeModel> mealTypeModel);
-
-        void getMealType();
+        void loadMealTypeFromDb();
 
         List<MealTypeModel> getMealTypeList();
     }

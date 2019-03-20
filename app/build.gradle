@@ -15,16 +15,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", '"https://www.themealdb.com/"')
         }
         debug {
+            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "CUISINE_URL", '"https://www.themealdb.com/api/json/v1/1/list.php?a=list"')
-            buildConfigField("String", "MEAL_TYPE_URL", '"https://www.themealdb.com/api/json/v1/1/categories.php"')
-            buildConfigField("String", "LATEST_MEAL_URL", '"https://www.themealdb.com/api/json/v1/1/latest.php"')
-            buildConfigField("String", "RANDOM_MEAL_URL", '"https://www.themealdb.com/api/json/v1/1/random.php"')
-            buildConfigField("String", "RECIPES_LIST_URL", '"https://www.themealdb.com/api/json/v1/1/filter.php?%s=%s"')
-            buildConfigField("String", "GENERAL_DESCRIPTION_URL", '"https://www.themealdb.com/api/json/v1/1/lookup.php?i=%s"')
+            buildConfigField("String", "BASE_URL", '"https://www.themealdb.com/"')
         }
     }
     compileOptions {
@@ -68,4 +65,21 @@ dependencies {
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    //Chuck
+    debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
+    releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
+
+    //OkHttp
+    implementation 'com.squareup.okhttp3:okhttp:3.13.1'
+
+    //Stream library
+    implementation 'com.annimon:stream:1.2.1'
 }

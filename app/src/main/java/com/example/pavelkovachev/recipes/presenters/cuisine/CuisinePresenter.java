@@ -1,10 +1,11 @@
 package com.example.pavelkovachev.recipes.presenters.cuisine;
 
-import android.util.Log;
-
+import com.annimon.stream.Stream;
 import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.BuildConfig;
-import com.example.pavelkovachev.recipes.network.CuisineApiService;
+import com.example.pavelkovachev.recipes.converter.CuisineConverter;
+import com.example.pavelkovachev.recipes.network.RecipeApiService;
+import com.example.pavelkovachev.recipes.network.callback.CuisineCallback;
+import com.example.pavelkovachev.recipes.network.response.cuisine.CuisineListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModelDao;
@@ -15,10 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CuisinePresenter implements CuisineContract.Presenter,
-        AsyncTaskResult<List<CuisineModel>> {
+        AsyncTaskResult<List<CuisineModel>>, CuisineCallback {
 
     private final CuisineContract.View view;
-    private List<CuisineModel> arrayList = new ArrayList<>();
+    private List<CuisineModel> cuisineModelList = new ArrayList<>();
 
     public CuisinePresenter(CuisineContract.View view) {
         this.view = view;
@@ -26,17 +27,8 @@ public class CuisinePresenter implements CuisineContract.Presenter,
     }
 
     @Override
-    public void showCuisineResult(List<CuisineModel> result) {
-        if (result != null) {
-            CuisineService.saveToDatabase(result);
-            getCuisineList().addAll(result);
-            view.loadCuisinesFromApi(result);
-        }
-    }
-
-    @Override
     public List<CuisineModel> getCuisineList() {
-        return arrayList;
+        return cuisineModelList;
     }
 
     @Override
@@ -52,14 +44,14 @@ public class CuisinePresenter implements CuisineContract.Presenter,
     }
 
     @Override
-    public void onError(Exception throwable) {
-        Log.e("TAG", throwable.getMessage());
+    public void onError() {
+        view.onError();
     }
 
     @Override
     public void loadCuisineFromApi() {
-        CuisineApiService cuisineApiService = new CuisineApiService();
-        cuisineApiService.getCuisine(this, BuildConfig.CUISINE_URL);
+        RecipeApiService recipesService = RecipeApiService.getRecipeApiService();
+        recipesService.getCuisine(this);
     }
 
     @Override
@@ -68,5 +60,19 @@ public class CuisinePresenter implements CuisineContract.Presenter,
                 .getRecipeDatabase(App.getInstance().getApplicationContext()).cuisineModelDao();
         CuisineService cuisineService = new CuisineService(cuisineModelDao);
         cuisineService.getAllCuisines(this);
+    }
+
+    @Override
+    public void onSuccessCuisine(CuisineListResponse cuisineListResponse) {
+        Stream.of(cuisineListResponse.getCuisinesResponseList()).forEach(
+                cuisineModel ->
+                        cuisineModelList.add(CuisineConverter.convertToCuisine(cuisineModel)));
+        CuisineService.saveToDatabase(cuisineModelList);
+        view.loadCuisinesFromApi(cuisineModelList);
+    }
+
+    @Override
+    public void onErrorCuisine() {
+        view.onError();
     }
 }

@@ -1,19 +1,20 @@
 package com.example.pavelkovachev.recipes.presenters.generalmealdescription;
 
-import android.net.NetworkInfo;
-
 import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.BuildConfig;
-import com.example.pavelkovachev.recipes.RecipesCallback;
-import com.example.pavelkovachev.recipes.network.RandomMealApiService;
+import com.example.pavelkovachev.recipes.converter.RecipeConverter;
+import com.example.pavelkovachev.recipes.network.RecipeApiService;
+import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
+import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
+import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
+import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRecipeListResponse;
 import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeDbService;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao;
-import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionContract.Presenter,
-        AsyncTaskResult<RecipeModel>, RecipesCallback {
+        AsyncTaskResult<RecipeModel>, RandomMealCallback, LatestMealCallback {
 
     private GeneralMealDescriptionContract.View view;
 
@@ -24,17 +25,19 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
 
     @Override
     public void getRecipeByIdFromApi() {
-        RandomMealApiService randomMealApiService = new RandomMealApiService();
-        randomMealApiService.getRandomMeal(this,
-                String.format(BuildConfig.GENERAL_DESCRIPTION_URL, view.getRecipeId()));
+        if (view.getRecipeId() != null) {
+            RecipeApiService recipeService = RecipeApiService.getRecipeApiService();
+            recipeService.getRecipeById(view.getRecipeId(), this);
+        } else {
+            view.showErrorNoArguments();
+        }
     }
 
     @Override
-    public void getRandomRecipe(String id) {
-        view.showProgressBar(true);
-        RecipeModelDao recipeModelDao = DatabaseCreator.
-                getRecipeDatabase(App.getInstance().getApplicationContext()).recipeDao();
-        RecipeService recipeService = new RecipeService(recipeModelDao);
+    public void getRandomRecipeFromDb(String id) {
+        view.setProgressBarVisibility(true);
+        RecipeModelDao recipeModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).recipeDao();
+        RecipeDbService recipeService = new RecipeDbService(recipeModelDao);
         recipeService.getById(id, this);
     }
 
@@ -48,22 +51,28 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     }
 
     @Override
-    public void onError(Exception throwable) {
+    public void onError() {
+        view.onError();
     }
 
     @Override
-    public void showRandomMealResult(RecipeModel result) {
-        view.showRecipe(result);
+    public void onSuccessRandomRecipe(RandomRecipeListResponse randomRecipesResponse) {
+        view.showRecipe(RecipeConverter.convertRandomRecipe(randomRecipesResponse.getMeals().get(0)));
     }
 
     @Override
-    public NetworkInfo getActiveNetworkInfo() {
-        //NOT USED
-        return null;
+    public void onErrorRandomRecipe() {
+        view.onError();
     }
 
     @Override
-    public void showLatestMealResult(RecipeModel recipeModel) {
-        //NOT USED
+    public void onSuccessLatestRecipe(LatestRecipeListResponse latestRecipesResponse) {
+        view.showRecipe(RecipeConverter.convertLatestRecipe(latestRecipesResponse.getLatestRecipeResponseList().get(0)));
     }
+
+    @Override
+    public void onErrorLatestRecipe() {
+        view.onError();
+    }
+
 }

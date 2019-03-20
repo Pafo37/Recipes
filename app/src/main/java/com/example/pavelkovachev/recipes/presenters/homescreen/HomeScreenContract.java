@@ -11,6 +11,8 @@ public interface HomeScreenContract {
         void setRandomMeal(RecipeModel recipeModel);
 
         void setLatestMeal(RecipeModel recipeModel);
+
+        void onError();
     }
 
     interface Presenter extends BasePresenter {

@@ -1,5 +1,6 @@
 package com.example.pavelkovachev.recipes.ui.fragment.generalmealdescription;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
@@ -17,6 +17,7 @@ import com.example.pavelkovachev.recipes.adapters.ingredients.IngredientsAdapter
 import com.example.pavelkovachev.recipes.persistence.model.recipe.Ingredient;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.generalmealdescription.GeneralMealDescriptionContract;
+import com.example.pavelkovachev.recipes.ui.activity.base.BaseActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 import com.squareup.picasso.Picasso;
 
@@ -38,8 +39,6 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     TextView recipeInstructions;
     @BindView(R.id.recycler_view_general_meal_ingredients)
     RecyclerView recyclerView;
-    @BindView(R.id.progress_bar_general_meal_description)
-    ProgressBar progressBar;
 
     private GeneralMealDescriptionContract.Presenter presenter;
     private IngredientsAdapter ingredientsAdapter;
@@ -50,7 +49,8 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recipeId = getArguments().getString(RECIPE_ID);
-        presenter.getRandomRecipe(recipeId);
+        presenter.getRandomRecipeFromDb(recipeId);
+        setProgressBarVisibility(true);
     }
 
     public static GeneralMealDescriptionFragment newInstance(Bundle bundle) {
@@ -65,30 +65,41 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     }
 
     @Override
-    public void showRecipe(RecipeModel model) {
+    public void showRecipe(RecipeModel recipeModel) {
         if (isAdded()) {
-            showProgressBar(false);
-            getActivity().setTitle(model.getRecipeName());
-            recipeName.setText(model.getRecipeName());
-            recipeMealType.setText(getString(R.string.general_meal_description_meal_type) + model.getRecipeMealType());
-            recipeCuisine.setText(getString(R.string.general_meal_description_cuisine) + model.getRecipeCuisine());
+            setProgressBarVisibility(false);
+            getActivity().setTitle(recipeModel.getRecipeName());
+            recipeName.setText(recipeModel.getRecipeName());
+            recipeMealType.setText(getString(R.string.general_meal_description_meal_type) + recipeModel.getRecipeMealType());
+            recipeCuisine.setText(getString(R.string.general_meal_description_cuisine) + recipeModel.getRecipeCuisine());
             recipeInstructions.setMovementMethod(new ScrollingMovementMethod());
-            recipeInstructions.setText(model.getRecipeInstructions());
-            Picasso.get().load(model.getRecipeImage()).placeholder(R.drawable.placeholder_recipe).into(imgMeal);
-            initRecyclerView(model);
+            recipeInstructions.setText(recipeModel.getRecipeInstructions());
+            Picasso.get().load(recipeModel.getRecipeImage()).placeholder(R.drawable.placeholder_recipe).into(imgMeal);
+            initRecyclerView(recipeModel);
         }
     }
 
     @Override
     public String getRecipeId() {
-        return recipeId = getArguments().getString(RECIPE_ID);
+        if (getArguments() != null && getArguments().containsKey(RECIPE_ID)) {
+            return getArguments().getString(RECIPE_ID);
+        } else {
+            return null;
+        }
     }
 
     @Override
-    public void showProgressBar(Boolean isVisible) {
-        if (isAdded()) {
-            progressBar.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-        }
+    public void onError() {
+        showErrorDialog();
+    }
+
+    @Override
+    public void showErrorNoArguments() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.error_message))
+                .setMessage(getString(R.string.not_found_message));
+        builder.setNeutralButton(getString(R.string.ok_message), (dialog, which) -> dialog.dismiss());
+        builder.show();
     }
 
     private List<Ingredient> initIngredients(RecipeModel recipeModel) {
@@ -98,6 +109,11 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @Override
     public void setPresenter(GeneralMealDescriptionContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void setProgressBarVisibility(boolean isVisible) {
+        ((BaseActivity) getActivity()).showProgressBar(isVisible);
     }
 
     private void initRecyclerView(RecipeModel model) {

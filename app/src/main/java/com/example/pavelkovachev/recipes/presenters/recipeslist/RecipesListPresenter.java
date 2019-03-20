@@ -1,19 +1,22 @@
 package com.example.pavelkovachev.recipes.presenters.recipeslist;
 
-import com.example.pavelkovachev.recipes.BuildConfig;
-import com.example.pavelkovachev.recipes.network.RecipeListApiService;
+import com.annimon.stream.Stream;
+import com.example.pavelkovachev.recipes.converter.RecipesListConverter;
+import com.example.pavelkovachev.recipes.network.RecipeApiService;
+import com.example.pavelkovachev.recipes.network.callback.RecipesListCallback;
+import com.example.pavelkovachev.recipes.network.response.recipelist.RecipesListResponse;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListService;
-import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipesListPresenter implements RecipesListContract.Presenter,
-        AsyncTaskResult<List<RecipeListModel>> {
+
+public class RecipesListPresenter implements RecipesListContract.Presenter
+        , RecipesListCallback {
 
     private RecipesListContract.View view;
-    private List<RecipeListModel> recipeListArray = new ArrayList<>();
+    private List<RecipeListModel> recipeListModelList = new ArrayList<>();
 
     public RecipesListPresenter(RecipesListContract.View view) {
         this.view = view;
@@ -22,35 +25,32 @@ public class RecipesListPresenter implements RecipesListContract.Presenter,
 
     @Override
     public void loadRecipeList() {
-        view.showProgressBar(true);
-        RecipeListApiService recipeListApiService = new RecipeListApiService();
-        recipeListApiService.getRecipeList(this,
-                String.format(BuildConfig.RECIPES_LIST_URL, view.getCategoryLetter(), view.getCategoryName()));
+        view.setProgressBarVisibility(true);
+        if (view.getCategoryName() != null && view.getCategoryLetter() != null) {
+            RecipeApiService.getRecipeApiService()
+                    .getRecipesList(view.getCategoryLetter(), view.getCategoryName(), this);
+        } else {
+            view.showErrorNoArguments();
+        }
     }
 
     @Override
-    public void showRecipeListResult(List<RecipeListModel> result) {
-        if (result != null) {
-            RecipeListService.saveToDatabase(result);
-            getRecipeListArray().addAll(result);
-            view.loadRecipeListFromApi(result);
-        }
+    public void onSuccessRecipesList(RecipesListResponse recipesListResponse) {
+        Stream.of(recipesListResponse.getRecipeListResponses()).forEach(
+                recipeList ->
+                        recipeListModelList.add(RecipesListConverter.convertToRecipesList(recipeList)));
+        RecipeListService.saveToDatabase(recipeListModelList);
+        getRecipeListArray().addAll(recipeListModelList);
+        view.loadRecipeListFromApi(recipeListModelList);
+    }
+
+    @Override
+    public void onErrorRecipesList() {
+        view.onError();
     }
 
     @Override
     public List<RecipeListModel> getRecipeListArray() {
-        return recipeListArray;
-    }
-
-    @Override
-    public void onSuccess(List<RecipeListModel> result) {
-        if (view != null) {
-            getRecipeListArray().addAll(result);
-            view.loadRecipeListFromDb(result);
-        }
-    }
-
-    @Override
-    public void onError(Exception throwable) {
+        return recipeListModelList;
     }
 }

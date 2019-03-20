@@ -57,7 +57,7 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
             popupMenu.show();
         }
 
-        public void setData(RecipeListModel item) {
+        private void setData(RecipeListModel item) {
             this.item = item;
             txtRecipeListTitle.setText(item.getRecipeName());
             Picasso.get().load(item.getRecipeImage()).into(imgCategories);
@@ -78,8 +78,8 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.setData((RecipeListModel) list.get(i));
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        viewHolder.setData((RecipeListModel) list.get(position));
     }
 
     @Override

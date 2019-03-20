@@ -1,19 +1,19 @@
 package com.example.pavelkovachev.recipes.presenters.homescreen;
 
-import android.net.NetworkInfo;
+import com.example.pavelkovachev.recipes.converter.RecipeConverter;
+import com.example.pavelkovachev.recipes.network.RecipeApiService;
+import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
+import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
+import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
+import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRecipeListResponse;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeDbService;
 
-import com.example.pavelkovachev.recipes.BuildConfig;
-import com.example.pavelkovachev.recipes.RecipesCallback;
-import com.example.pavelkovachev.recipes.network.LatestMealApiService;
-import com.example.pavelkovachev.recipes.network.RandomMealApiService;
-import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
-import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeService;
-
-public class HomeScreenPresenter implements HomeScreenContract.Presenter, RecipesCallback {
+public class HomeScreenPresenter implements HomeScreenContract.Presenter, RandomMealCallback, LatestMealCallback {
 
     private final HomeScreenContract.View view;
-    private String CURRENT_RANDOM_MEAL_ID;
-    private String CURRENT_LATEST_MEAL_ID;
+
+    private String currentRandomMealId;
+    private String currentLatestMealId;
 
     public HomeScreenPresenter(HomeScreenContract.View view) {
         this.view = view;
@@ -21,43 +21,43 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Recipe
     }
 
     @Override
-    public void showRandomMealResult(RecipeModel result) {
-        if (result != null) {
-            view.setRandomMeal(result);
-            RecipeService.saveToDatabase(result);
-            CURRENT_RANDOM_MEAL_ID = result.getId();
-        }
-    }
-
-    @Override
-    public NetworkInfo getActiveNetworkInfo() {
-        return null;
-    }
-
-    @Override
-    public void showLatestMealResult(RecipeModel result) {
-        if (result != null) {
-            view.setLatestMeal(result);
-            RecipeService.saveToDatabase(result);
-            CURRENT_LATEST_MEAL_ID = result.getId();
-        }
-    }
-
-    @Override
     public void loadRandomLatestMeals() {
-        RandomMealApiService randomMealApiService = new RandomMealApiService();
-        randomMealApiService.getRandomMeal(this, BuildConfig.RANDOM_MEAL_URL);
-        LatestMealApiService latestMealApiService = new LatestMealApiService();
-        latestMealApiService.getLatestMeal(this, BuildConfig.LATEST_MEAL_URL);
+        RecipeApiService recipeService = RecipeApiService.getRecipeApiService();
+        recipeService.getRandomRecipe(this);
+        recipeService.getLatestRecipe(this);
     }
 
     @Override
     public String onLatestCardViewClicked() {
-        return CURRENT_LATEST_MEAL_ID;
+        return currentLatestMealId;
     }
 
     @Override
     public String onRandomCardViewClicked() {
-        return CURRENT_RANDOM_MEAL_ID;
+        return currentRandomMealId;
+    }
+
+    @Override
+    public void onSuccessRandomRecipe(RandomRecipeListResponse randomRecipeResponse) {
+        view.setRandomMeal(RecipeConverter.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)));
+        RecipeDbService.saveToDatabase(RecipeConverter.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)));
+        currentRandomMealId = RecipeConverter.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)).getId();
+    }
+
+    @Override
+    public void onErrorRandomRecipe() {
+        view.onError();
+    }
+
+    @Override
+    public void onSuccessLatestRecipe(LatestRecipeListResponse recipesResponse) {
+        view.setLatestMeal(RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)));
+        RecipeDbService.saveToDatabase(RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)));
+        currentLatestMealId = RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)).getId();
+    }
+
+    @Override
+    public void onErrorLatestRecipe() {
+        view.onError();
     }
 }

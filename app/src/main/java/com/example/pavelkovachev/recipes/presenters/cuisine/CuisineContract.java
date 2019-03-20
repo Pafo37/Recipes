@@ -13,6 +13,8 @@ public interface CuisineContract {
         void loadCuisinesFromApi(List<CuisineModel> cuisineModel);
 
         void showCuisineTypesFromDb(List<CuisineModel> result);
+
+        void onError();
     }
 
     interface Presenter extends BasePresenter {
@@ -20,8 +22,6 @@ public interface CuisineContract {
         void loadCuisineFromApi();
 
         void loadCuisineFromDb();
-
-        void showCuisineResult(List<CuisineModel> cuisineModel);
 
         List<CuisineModel> getCuisineList();
     }

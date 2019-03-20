@@ -53,8 +53,8 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.setData(ingredientsList.get(i));
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        viewHolder.setData(ingredientsList.get(position));
     }
 
     @Override
