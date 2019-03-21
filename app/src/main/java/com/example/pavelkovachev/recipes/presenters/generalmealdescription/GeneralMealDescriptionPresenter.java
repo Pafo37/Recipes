@@ -1,32 +1,29 @@
 package com.example.pavelkovachev.recipes.presenters.generalmealdescription;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.RecipeConverter;
-import com.example.pavelkovachev.recipes.dagger.component.AppComponent;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
 import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
 import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
 import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRecipeListResponse;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
+import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
 import com.example.pavelkovachev.recipes.services.ApplicationDataService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import javax.inject.Inject;
 
-public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionContract.Presenter,
+public class GeneralMealDescriptionPresenter extends BasePresenter implements GeneralMealDescriptionContract.Presenter,
         AsyncTaskResult<RecipeModel>, RandomMealCallback, LatestMealCallback {
 
     @Inject
     ApplicationDataService dataService;
-    AppComponent appComponent;
+
     private GeneralMealDescriptionContract.View view;
 
     public GeneralMealDescriptionPresenter(GeneralMealDescriptionContract.View view) {
         this.view = view;
         view.setPresenter(this);
-        appComponent = App.getInstance().getAppComponent();
-        appComponent.inject(this);
     }
 
     @Override
@@ -79,4 +76,8 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
         view.onError();
     }
 
+    @Override
+    protected void inject() {
+        provideAppComponent().inject(this);
+    }
 }

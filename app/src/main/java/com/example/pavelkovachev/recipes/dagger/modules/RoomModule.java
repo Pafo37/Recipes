@@ -37,7 +37,7 @@ public class RoomModule {
 
     @Singleton
     @Provides
-    RecipeListModelDao provideRecipeListModeLdao() {
+    RecipeListModelDao provideRecipeListModelDao() {
         return recipeDatabase.recipeListModelDao();
     }
 

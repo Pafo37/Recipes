@@ -1,32 +1,29 @@
 package com.example.pavelkovachev.recipes.presenters.homescreen;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.RecipeConverter;
-import com.example.pavelkovachev.recipes.dagger.component.AppComponent;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
 import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
 import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
 import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRecipeListResponse;
+import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
 import com.example.pavelkovachev.recipes.services.ApplicationDataService;
 
 import javax.inject.Inject;
 
-public class HomeScreenPresenter implements HomeScreenContract.Presenter, RandomMealCallback, LatestMealCallback {
+public class HomeScreenPresenter extends BasePresenter implements HomeScreenContract.Presenter, RandomMealCallback, LatestMealCallback {
 
     private final HomeScreenContract.View view;
 
     @Inject
     ApplicationDataService dataService;
-    AppComponent appComponent;
+
     private String currentRandomMealId;
     private String currentLatestMealId;
 
     public HomeScreenPresenter(HomeScreenContract.View view) {
         this.view = view;
         view.setPresenter(this);
-        appComponent = App.getInstance().getAppComponent();
-        appComponent.inject(this);
     }
 
     @Override
@@ -68,5 +65,10 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Random
     @Override
     public void onErrorLatestRecipe() {
         view.onError();
+    }
+
+    @Override
+    protected void inject() {
+        provideAppComponent().inject(this);
     }
 }

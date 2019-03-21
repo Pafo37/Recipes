@@ -1,13 +1,12 @@
 package com.example.pavelkovachev.recipes.presenters.mealtype;
 
 import com.annimon.stream.Stream;
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.MealTypeConverter;
-import com.example.pavelkovachev.recipes.dagger.component.AppComponent;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.MealTypeCallback;
 import com.example.pavelkovachev.recipes.network.response.mealtype.MealTypeListResponses;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
+import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
 import com.example.pavelkovachev.recipes.services.ApplicationDataService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
@@ -16,20 +15,18 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class MealTypePresenter implements MealTypeContract.Presenter,
+public class MealTypePresenter extends BasePresenter implements MealTypeContract.Presenter,
         AsyncTaskResult<List<MealTypeModel>>, MealTypeCallback {
 
     @Inject
     ApplicationDataService dataService;
-    AppComponent appComponent;
+
     private final MealTypeContract.View view;
     private List<MealTypeModel> mealTypeModelList = new ArrayList<>();
 
     public MealTypePresenter(MealTypeContract.View view) {
         this.view = view;
         view.setPresenter(this);
-        appComponent = App.getInstance().getAppComponent();
-        appComponent.inject(this);
     }
 
     @Override
@@ -78,4 +75,8 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
         view.onError();
     }
 
+    @Override
+    protected void inject() {
+        provideAppComponent().inject(this);
+    }
 }
