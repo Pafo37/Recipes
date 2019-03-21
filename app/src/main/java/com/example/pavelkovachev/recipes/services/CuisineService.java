@@ -1,23 +1,29 @@
-package com.example.pavelkovachev.recipes.persistence.model.cuisine;
+package com.example.pavelkovachev.recipes.services;
 
 import android.os.AsyncTask;
 
-import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
+import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
+import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModelDao;
+import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineRepository;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class CuisineService implements CuisineRepository {
 
-    private CuisineModelDao cuisineModelDao;
-    private Executor appExecutor;
+    private final CuisineModelDao cuisineModelDao;
+    private final AppExecutor appExecutor;
 
-    public CuisineService(CuisineModelDao cuisineModelDao) {
+    @Inject
+    public CuisineService(final CuisineModelDao cuisineModelDao,
+                          final AppExecutor appExecutor) {
         this.cuisineModelDao = cuisineModelDao;
-        appExecutor = AppExecutor.getInstance();
+        this.appExecutor = appExecutor;
     }
 
     @Override
@@ -33,12 +39,6 @@ public class CuisineService implements CuisineRepository {
     @Override
     public void getAllCuisines(AsyncTaskResult result) {
         new GetAllCuisinesAsyncTask(result).execute();
-    }
-
-    public static void saveToDatabase(List<CuisineModel> cuisineModel) {
-        CuisineModelDao cuisineModelDao = DatabaseCreator
-                .getRecipeDatabase(App.getInstance().getApplicationContext()).cuisineModelDao();
-        AppExecutor.getInstance().execute(() -> cuisineModelDao.insertCuisine(cuisineModel));
     }
 
     private class GetAllCuisinesAsyncTask extends AsyncTask<Void, Void, List<CuisineModel>> {
@@ -58,7 +58,7 @@ public class CuisineService implements CuisineRepository {
         protected void onPostExecute(List<CuisineModel> cuisineModels) {
             super.onPostExecute(cuisineModels);
             if (asyncTaskResult != null) {
-                saveToDatabase(cuisineModels);
+                insertCuisine(cuisineModels);
                 asyncTaskResult.onSuccess(cuisineModels);
             }
         }

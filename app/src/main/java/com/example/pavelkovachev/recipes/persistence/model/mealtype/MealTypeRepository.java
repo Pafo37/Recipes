@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface MealTypeRepository {
 
-    void insertCuisine(List<MealTypeModel> mealTypeModel);
+    void insertMealType(List<MealTypeModel> mealTypeModel);
 
-    void deleteCuisine(MealTypeModel mealTypeModel);
+    void deleteMealType(MealTypeModel mealTypeModel);
 
     void getAllMealTypes(AsyncTaskResult result);
 }

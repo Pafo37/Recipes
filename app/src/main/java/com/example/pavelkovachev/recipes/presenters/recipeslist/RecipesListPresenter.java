@@ -6,7 +6,6 @@ import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.RecipesListCallback;
 import com.example.pavelkovachev.recipes.network.response.recipelist.RecipesListResponse;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
-import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,6 @@ public class RecipesListPresenter implements RecipesListContract.Presenter
         Stream.of(recipesListResponse.getRecipeListResponses()).forEach(
                 recipeList ->
                         recipeListModelList.add(RecipesListConverter.convertToRecipesList(recipeList)));
-        RecipeListService.saveToDatabase(recipeListModelList);
         getRecipeListArray().addAll(recipeListModelList);
         view.loadRecipeListFromApi(recipeListModelList);
     }

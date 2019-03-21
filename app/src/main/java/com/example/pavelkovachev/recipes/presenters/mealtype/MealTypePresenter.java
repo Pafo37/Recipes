@@ -3,27 +3,33 @@ package com.example.pavelkovachev.recipes.presenters.mealtype;
 import com.annimon.stream.Stream;
 import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.MealTypeConverter;
+import com.example.pavelkovachev.recipes.dagger.component.AppComponent;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.MealTypeCallback;
 import com.example.pavelkovachev.recipes.network.response.mealtype.MealTypeListResponses;
-import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
-import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModelDao;
-import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeService;
+import com.example.pavelkovachev.recipes.services.ApplicationDataService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MealTypePresenter implements MealTypeContract.Presenter,
         AsyncTaskResult<List<MealTypeModel>>, MealTypeCallback {
 
+    @Inject
+    ApplicationDataService dataService;
+    AppComponent appComponent;
     private final MealTypeContract.View view;
     private List<MealTypeModel> mealTypeModelList = new ArrayList<>();
 
     public MealTypePresenter(MealTypeContract.View view) {
         this.view = view;
         view.setPresenter(this);
+        appComponent = App.getInstance().getAppComponent();
+        appComponent.inject(this);
     }
 
     @Override
@@ -34,10 +40,7 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
 
     @Override
     public void loadMealTypeFromDb() {
-        MealTypeModelDao mealTypeModelDao = DatabaseCreator.
-                getRecipeDatabase(App.getInstance().getApplicationContext()).mealTypeModelDao();
-        MealTypeService mealTypeService = new MealTypeService(mealTypeModelDao);
-        mealTypeService.getAllMealTypes(this);
+        dataService.getMealTypeService().getAllMealTypes(this);
     }
 
     @Override
@@ -67,7 +70,6 @@ public class MealTypePresenter implements MealTypeContract.Presenter,
         Stream.of(mealTypesResponses.getCategories()).forEach(
                 mealTypeModel ->
                         mealTypeModelList.add(MealTypeConverter.convertToMealType(mealTypeModel)));
-        MealTypeService.saveToDatabase(mealTypeModelList);
         view.showMealTypesFromApi(mealTypeModelList);
     }
 
