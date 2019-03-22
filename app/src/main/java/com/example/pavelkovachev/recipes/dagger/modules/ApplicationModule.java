@@ -27,7 +27,7 @@ public class ApplicationModule {
 
     @Singleton
     @Provides
-    AppExecutor provideAppExector() {
+    AppExecutor provideAppExecutor() {
         return new AppExecutor(Executors.newSingleThreadExecutor());
     }
 }

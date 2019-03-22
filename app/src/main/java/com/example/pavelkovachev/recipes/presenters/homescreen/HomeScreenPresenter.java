@@ -17,6 +17,8 @@ public class HomeScreenPresenter extends BasePresenter implements HomeScreenCont
 
     @Inject
     ApplicationDataService dataService;
+    @Inject
+    RecipeApiService recipeService;
 
     private String currentRandomMealId;
     private String currentLatestMealId;
@@ -28,7 +30,6 @@ public class HomeScreenPresenter extends BasePresenter implements HomeScreenCont
 
     @Override
     public void loadRandomLatestMeals() {
-        RecipeApiService recipeService = RecipeApiService.getRecipeApiService();
         recipeService.getRandomRecipe(this);
         recipeService.getLatestRecipe(this);
     }

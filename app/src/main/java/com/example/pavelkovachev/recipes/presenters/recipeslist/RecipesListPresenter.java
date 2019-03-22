@@ -6,13 +6,19 @@ import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.RecipesListCallback;
 import com.example.pavelkovachev.recipes.network.response.recipelist.RecipesListResponse;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
+import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 
-public class RecipesListPresenter implements RecipesListContract.Presenter
+
+public class RecipesListPresenter extends BasePresenter implements RecipesListContract.Presenter
         , RecipesListCallback {
+
+    @Inject
+    RecipeApiService recipeService;
 
     private RecipesListContract.View view;
     private List<RecipeListModel> recipeListModelList = new ArrayList<>();
@@ -26,8 +32,7 @@ public class RecipesListPresenter implements RecipesListContract.Presenter
     public void loadRecipeList() {
         view.setProgressBarVisibility(true);
         if (view.getCategoryName() != null && view.getCategoryLetter() != null) {
-            RecipeApiService.getRecipeApiService()
-                    .getRecipesList(view.getCategoryLetter(), view.getCategoryName(), this);
+            recipeService.getRecipesList(view.getCategoryLetter(), view.getCategoryName(), this);
         } else {
             view.showErrorNoArguments();
         }
@@ -50,5 +55,10 @@ public class RecipesListPresenter implements RecipesListContract.Presenter
     @Override
     public List<RecipeListModel> getRecipeListArray() {
         return recipeListModelList;
+    }
+
+    @Override
+    protected void inject() {
+        provideAppComponent().inject(this);
     }
 }

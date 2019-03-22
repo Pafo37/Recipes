@@ -20,6 +20,8 @@ public class MealTypePresenter extends BasePresenter implements MealTypeContract
 
     @Inject
     ApplicationDataService dataService;
+    @Inject
+    RecipeApiService recipeService;
 
     private final MealTypeContract.View view;
     private List<MealTypeModel> mealTypeModelList = new ArrayList<>();
@@ -31,8 +33,7 @@ public class MealTypePresenter extends BasePresenter implements MealTypeContract
 
     @Override
     public void loadMealTypeFromApi() {
-        RecipeApiService recipeApiService = RecipeApiService.getRecipeApiService();
-        recipeApiService.getMealTypes(this);
+        recipeService.getMealTypes(this);
     }
 
     @Override

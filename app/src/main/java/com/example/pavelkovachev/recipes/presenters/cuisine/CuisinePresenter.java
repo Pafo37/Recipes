@@ -20,6 +20,8 @@ public class CuisinePresenter extends BasePresenter implements CuisineContract.P
 
     @Inject
     ApplicationDataService dataService;
+    @Inject
+    RecipeApiService recipeService;
 
     private final CuisineContract.View view;
     private List<CuisineModel> cuisineModelList = new ArrayList<>();
@@ -53,8 +55,7 @@ public class CuisinePresenter extends BasePresenter implements CuisineContract.P
 
     @Override
     public void loadCuisineFromApi() {
-        RecipeApiService recipesService = RecipeApiService.getRecipeApiService();
-        recipesService.getCuisine(this);
+        recipeService.getCuisine(this);
     }
 
     @Override

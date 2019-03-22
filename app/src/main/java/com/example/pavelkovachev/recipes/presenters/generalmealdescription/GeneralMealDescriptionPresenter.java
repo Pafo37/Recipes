@@ -18,6 +18,8 @@ public class GeneralMealDescriptionPresenter extends BasePresenter implements Ge
 
     @Inject
     ApplicationDataService dataService;
+    @Inject
+    RecipeApiService recipeService;
 
     private GeneralMealDescriptionContract.View view;
 
@@ -29,7 +31,6 @@ public class GeneralMealDescriptionPresenter extends BasePresenter implements Ge
     @Override
     public void getRecipeByIdFromApi() {
         if (view.getRecipeId() != null) {
-            RecipeApiService recipeService = RecipeApiService.getRecipeApiService();
             recipeService.getRecipeById(view.getRecipeId(), this);
         } else {
             view.showErrorNoArguments();
