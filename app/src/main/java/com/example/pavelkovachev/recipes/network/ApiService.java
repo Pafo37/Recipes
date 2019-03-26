@@ -18,7 +18,7 @@ import retrofit2.Retrofit;
 public class ApiService extends BaseService {
 
     private static final int DEFAULT_TIMEOUT = 60;
-
+    private static final Object LOCK = new Object();
     private RecipesApi recipesApi;
 
     @Inject
@@ -37,8 +37,10 @@ public class ApiService extends BaseService {
 
     RecipesApi getRecipesApi() {
         if (recipesApi == null) {
-            Retrofit retrofit = initRetrofit(BuildConfig.BASE_URL, createOkHttp());
-            recipesApi = retrofit.create(RecipesApi.class);
+            synchronized (LOCK) {
+                Retrofit retrofit = initRetrofit(BuildConfig.BASE_URL, createOkHttp());
+                recipesApi = retrofit.create(RecipesApi.class);
+            }
         }
         return recipesApi;
     }

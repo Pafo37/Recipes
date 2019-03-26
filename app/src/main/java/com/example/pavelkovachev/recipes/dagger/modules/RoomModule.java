@@ -9,8 +9,6 @@ import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeMode
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModelDao;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -23,31 +21,26 @@ public class RoomModule {
         recipeDatabase = Room.databaseBuilder(application, RecipeDatabase.class, "recipe_db").build();
     }
 
-    @Singleton
     @Provides
     RecipeDatabase providesRoomDatabase() {
         return recipeDatabase;
     }
 
-    @Singleton
     @Provides
     RecipeModelDao provideRecipeModelDao() {
         return recipeDatabase.recipeDao();
     }
 
-    @Singleton
     @Provides
     RecipeListModelDao provideRecipeListModelDao() {
         return recipeDatabase.recipeListModelDao();
     }
 
-    @Singleton
     @Provides
     MealTypeModelDao provideMealTypeModelDao() {
         return recipeDatabase.mealTypeModelDao();
     }
 
-    @Singleton
     @Provides
     CuisineModelDao provideCuisineModelDao() {
         return recipeDatabase.cuisineModelDao();

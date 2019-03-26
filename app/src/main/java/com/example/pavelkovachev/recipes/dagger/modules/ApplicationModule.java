@@ -6,8 +6,6 @@ import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
 
 import java.util.concurrent.Executors;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -25,7 +23,6 @@ public class ApplicationModule {
         return application;
     }
 
-    @Singleton
     @Provides
     AppExecutor provideAppExecutor() {
         return new AppExecutor(Executors.newSingleThreadExecutor());
