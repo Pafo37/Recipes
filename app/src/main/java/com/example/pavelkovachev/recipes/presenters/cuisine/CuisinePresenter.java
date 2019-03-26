@@ -1,22 +1,27 @@
 package com.example.pavelkovachev.recipes.presenters.cuisine;
 
 import com.annimon.stream.Stream;
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.CuisineConverter;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.CuisineCallback;
 import com.example.pavelkovachev.recipes.network.response.cuisine.CuisineListResponse;
-import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
-import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModelDao;
-import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineService;
+import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
+import com.example.pavelkovachev.recipes.services.ApplicationDataService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CuisinePresenter implements CuisineContract.Presenter,
+import javax.inject.Inject;
+
+public class CuisinePresenter extends BasePresenter implements CuisineContract.Presenter,
         AsyncTaskResult<List<CuisineModel>>, CuisineCallback {
+
+    @Inject
+    ApplicationDataService dataService;
+    @Inject
+    RecipeApiService recipeService;
 
     private final CuisineContract.View view;
     private List<CuisineModel> cuisineModelList = new ArrayList<>();
@@ -50,16 +55,12 @@ public class CuisinePresenter implements CuisineContract.Presenter,
 
     @Override
     public void loadCuisineFromApi() {
-        RecipeApiService recipesService = RecipeApiService.getRecipeApiService();
-        recipesService.getCuisine(this);
+        recipeService.getCuisine(this);
     }
 
     @Override
     public void loadCuisineFromDb() {
-        CuisineModelDao cuisineModelDao = DatabaseCreator
-                .getRecipeDatabase(App.getInstance().getApplicationContext()).cuisineModelDao();
-        CuisineService cuisineService = new CuisineService(cuisineModelDao);
-        cuisineService.getAllCuisines(this);
+        dataService.getCuisineService().getAllCuisines(this);
     }
 
     @Override
@@ -67,12 +68,16 @@ public class CuisinePresenter implements CuisineContract.Presenter,
         Stream.of(cuisineListResponse.getCuisinesResponseList()).forEach(
                 cuisineModel ->
                         cuisineModelList.add(CuisineConverter.convertToCuisine(cuisineModel)));
-        CuisineService.saveToDatabase(cuisineModelList);
         view.loadCuisinesFromApi(cuisineModelList);
     }
 
     @Override
     public void onErrorCuisine() {
         view.onError();
+    }
+
+    @Override
+    protected void inject() {
+        provideAppComponent().inject(this);
     }
 }

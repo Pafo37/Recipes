@@ -1,29 +1,39 @@
-package com.example.pavelkovachev.recipes.persistence.model.recipe;
+package com.example.pavelkovachev.recipes.services;
 
 import android.os.AsyncTask;
 
-import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeRepository;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 
-public class RecipeDbService implements RecipeRepository {
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
-    private RecipeModelDao recipeModelDao;
-    private Executor appExecutor;
+@Singleton
+public class RecipeService implements RecipeRepository {
 
-    public RecipeDbService(RecipeModelDao recipeModelDao) {
+    private final RecipeModelDao recipeModelDao;
+    private final AppExecutor appExecutor;
+
+    @Inject
+    public RecipeService(final RecipeModelDao recipeModelDao,
+                         final AppExecutor appExecutor) {
         this.recipeModelDao = recipeModelDao;
-
-        appExecutor = AppExecutor.getInstance();
+        this.appExecutor = appExecutor;
     }
 
     @Override
     public void insertRecipe(RecipeModel recipeModel) {
         appExecutor.execute(() -> recipeModelDao.insertRecipe(recipeModel));
+    }
+
+    @Override
+    public void insertRecipeList(List<RecipeModel> recipeModelList) {
+        appExecutor.execute(() -> recipeModelDao.insertRecipeList(recipeModelList));
     }
 
     @Override
@@ -39,20 +49,6 @@ public class RecipeDbService implements RecipeRepository {
     @Override
     public void getAllRecipes(AsyncTaskResult result) {
         new GetAllRecipesAsyncTask(result).execute();
-    }
-
-    public static void saveToDatabase(RecipeModel recipeModel) {
-        RecipeModelDao recipeModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).recipeDao();
-        AppExecutor.getInstance().execute(() -> recipeModelDao.insertRecipe(recipeModel));
-    }
-
-    private class InsertAsyncTask extends AsyncTask<RecipeModel, Void, Void> {
-
-        @Override
-        protected Void doInBackground(RecipeModel... recipeModels) {
-            recipeModelDao.insertRecipe(recipeModels[0]);
-            return null;
-        }
     }
 
     private class GetByIdAsyncTask extends AsyncTask<String, Void, RecipeModel> {
@@ -96,6 +92,7 @@ public class RecipeDbService implements RecipeRepository {
         protected void onPostExecute(List<RecipeModel> recipeModels) {
             super.onPostExecute(recipeModels);
             if (asyncTaskResult != null) {
+                insertRecipeList(recipeModels);
                 asyncTaskResult.onSuccess(recipeModels);
             }
         }

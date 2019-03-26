@@ -6,11 +6,19 @@ import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
 import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
 import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
 import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRecipeListResponse;
-import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeDbService;
+import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
+import com.example.pavelkovachev.recipes.services.ApplicationDataService;
 
-public class HomeScreenPresenter implements HomeScreenContract.Presenter, RandomMealCallback, LatestMealCallback {
+import javax.inject.Inject;
+
+public class HomeScreenPresenter extends BasePresenter implements HomeScreenContract.Presenter, RandomMealCallback, LatestMealCallback {
 
     private final HomeScreenContract.View view;
+
+    @Inject
+    ApplicationDataService dataService;
+    @Inject
+    RecipeApiService recipeService;
 
     private String currentRandomMealId;
     private String currentLatestMealId;
@@ -22,7 +30,6 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Random
 
     @Override
     public void loadRandomLatestMeals() {
-        RecipeApiService recipeService = RecipeApiService.getRecipeApiService();
         recipeService.getRandomRecipe(this);
         recipeService.getLatestRecipe(this);
     }
@@ -40,7 +47,7 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Random
     @Override
     public void onSuccessRandomRecipe(RandomRecipeListResponse randomRecipeResponse) {
         view.setRandomMeal(RecipeConverter.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)));
-        RecipeDbService.saveToDatabase(RecipeConverter.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)));
+        dataService.getRecipeService().insertRecipe(RecipeConverter.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)));
         currentRandomMealId = RecipeConverter.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)).getId();
     }
 
@@ -52,12 +59,17 @@ public class HomeScreenPresenter implements HomeScreenContract.Presenter, Random
     @Override
     public void onSuccessLatestRecipe(LatestRecipeListResponse recipesResponse) {
         view.setLatestMeal(RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)));
-        RecipeDbService.saveToDatabase(RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)));
+        dataService.getRecipeService().insertRecipe(RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)));
         currentLatestMealId = RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)).getId();
     }
 
     @Override
     public void onErrorLatestRecipe() {
         view.onError();
+    }
+
+    @Override
+    protected void inject() {
+        provideAppComponent().inject(this);
     }
 }

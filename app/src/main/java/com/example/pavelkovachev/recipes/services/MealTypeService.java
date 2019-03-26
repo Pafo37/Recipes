@@ -1,43 +1,44 @@
-package com.example.pavelkovachev.recipes.persistence.model.mealtype;
+package com.example.pavelkovachev.recipes.services;
 
 import android.os.AsyncTask;
 
-import com.example.pavelkovachev.recipes.App;
-import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
+import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
+import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModelDao;
+import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeRepository;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class MealTypeService implements MealTypeRepository {
 
-    private MealTypeModelDao mealTypeModelDao;
-    private Executor appExecutor;
+    private final MealTypeModelDao mealTypeModelDao;
+    private final AppExecutor appExecutor;
 
-    public MealTypeService(MealTypeModelDao mealTypeModelDao) {
+    @Inject
+    public MealTypeService(final MealTypeModelDao mealTypeModelDao,
+                           final AppExecutor appExecutor) {
         this.mealTypeModelDao = mealTypeModelDao;
-        appExecutor = AppExecutor.getInstance();
+        this.appExecutor = appExecutor;
     }
 
     @Override
-    public void insertCuisine(List<MealTypeModel> mealTypeModel) {
+    public void insertMealType(List<MealTypeModel> mealTypeModel) {
         appExecutor.execute(() -> mealTypeModelDao.insertCuisine(mealTypeModel));
     }
 
     @Override
-    public void deleteCuisine(MealTypeModel mealTypeModel) {
+    public void deleteMealType(MealTypeModel mealTypeModel) {
         appExecutor.execute(() -> mealTypeModelDao.deleteCuisine(mealTypeModel));
     }
 
     @Override
     public void getAllMealTypes(AsyncTaskResult result) {
         new GetAllMealTypesAsyncTask(result).execute();
-    }
-
-    public static void saveToDatabase(List<MealTypeModel> mealTypeModel) {
-        MealTypeModelDao mealTypeModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).mealTypeModelDao();
-        AppExecutor.getInstance().execute(() -> mealTypeModelDao.insertCuisine(mealTypeModel));
     }
 
     private class GetAllMealTypesAsyncTask extends AsyncTask<Void, Void, List<MealTypeModel>> {
@@ -57,6 +58,7 @@ public class MealTypeService implements MealTypeRepository {
         protected void onPostExecute(List<MealTypeModel> mealTypeModel) {
             super.onPostExecute(mealTypeModel);
             if (asyncTaskResult != null) {
+                insertMealType(mealTypeModel);
                 asyncTaskResult.onSuccess(mealTypeModel);
             }
         }

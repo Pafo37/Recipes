@@ -1,20 +1,25 @@
 package com.example.pavelkovachev.recipes.presenters.generalmealdescription;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.converter.RecipeConverter;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
 import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
 import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
 import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRecipeListResponse;
-import com.example.pavelkovachev.recipes.persistence.database.DatabaseCreator;
-import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeDbService;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
-import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao;
+import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
+import com.example.pavelkovachev.recipes.services.ApplicationDataService;
 import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
-public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionContract.Presenter,
+import javax.inject.Inject;
+
+public class GeneralMealDescriptionPresenter extends BasePresenter implements GeneralMealDescriptionContract.Presenter,
         AsyncTaskResult<RecipeModel>, RandomMealCallback, LatestMealCallback {
+
+    @Inject
+    ApplicationDataService dataService;
+    @Inject
+    RecipeApiService recipeService;
 
     private GeneralMealDescriptionContract.View view;
 
@@ -26,7 +31,6 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     @Override
     public void getRecipeByIdFromApi() {
         if (view.getRecipeId() != null) {
-            RecipeApiService recipeService = RecipeApiService.getRecipeApiService();
             recipeService.getRecipeById(view.getRecipeId(), this);
         } else {
             view.showErrorNoArguments();
@@ -36,9 +40,7 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
     @Override
     public void getRandomRecipeFromDb(String id) {
         view.setProgressBarVisibility(true);
-        RecipeModelDao recipeModelDao = DatabaseCreator.getRecipeDatabase(App.getInstance().getApplicationContext()).recipeDao();
-        RecipeDbService recipeService = new RecipeDbService(recipeModelDao);
-        recipeService.getById(id, this);
+        dataService.getRecipeService().getById(id, this);
     }
 
     @Override
@@ -75,4 +77,8 @@ public class GeneralMealDescriptionPresenter implements GeneralMealDescriptionCo
         view.onError();
     }
 
+    @Override
+    protected void inject() {
+        provideAppComponent().inject(this);
+    }
 }

@@ -14,27 +14,25 @@ import com.example.pavelkovachev.recipes.network.response.recipelist.RecipesList
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Singleton
 public class RecipeApiService {
 
-    private static RecipeApiService recipeApiService;
-    private static final Object LOCK = new Object();
+    private ApiService apiService;
 
-    public static RecipeApiService getRecipeApiService() {
-        if (recipeApiService == null) {
-            synchronized (LOCK) {
-                recipeApiService = new RecipeApiService();
-            }
-        }
-        return recipeApiService;
+    @Inject
+    public RecipeApiService(ApiService apiService) {
+        this.apiService = apiService;
     }
 
     public void getRandomRecipe(RandomMealCallback randomMealCallback) {
-        Call<RandomRecipeListResponse> recipesResponseCall = RecipesApiCreator.getRecipesApi().getRandomRecipeResponse();
-        recipesResponseCall.enqueue(new Callback<RandomRecipeListResponse>() {
+        apiService.getRecipesApi().getRandomRecipeResponse().enqueue(new Callback<RandomRecipeListResponse>() {
             @Override
             public void onResponse(Call<RandomRecipeListResponse> call, Response<RandomRecipeListResponse> response) {
                 if (response.isSuccessful()) {
@@ -53,8 +51,7 @@ public class RecipeApiService {
     }
 
     public void getRecipeById(String mealId, RandomMealCallback randomMealCallback) {
-        Call<RandomRecipeListResponse> recipesResponseCall = RecipesApiCreator.getRecipesApi().getRecipeByIdResponse(mealId);
-        recipesResponseCall.enqueue(new Callback<RandomRecipeListResponse>() {
+        apiService.getRecipesApi().getRecipeByIdResponse(mealId).enqueue(new Callback<RandomRecipeListResponse>() {
             @Override
             public void onResponse(Call<RandomRecipeListResponse> call, Response<RandomRecipeListResponse> response) {
                 if (response.isSuccessful()) {
@@ -73,8 +70,7 @@ public class RecipeApiService {
     }
 
     public void getLatestRecipe(LatestMealCallback latestMealCallback) {
-        Call<LatestRecipeListResponse> recipesResponseCall = RecipesApiCreator.getRecipesApi().getLatestRecipeResponse();
-        recipesResponseCall.enqueue(new Callback<LatestRecipeListResponse>() {
+        apiService.getRecipesApi().getLatestRecipeResponse().enqueue(new Callback<LatestRecipeListResponse>() {
             @Override
             public void onResponse(Call<LatestRecipeListResponse> call, Response<LatestRecipeListResponse> response) {
                 if (response.isSuccessful()) {
@@ -93,8 +89,7 @@ public class RecipeApiService {
     }
 
     public void getMealTypes(MealTypeCallback mealTypeCallback) {
-        Call<MealTypeListResponses> mealTypesResponsesCall = RecipesApiCreator.getRecipesApi().getMealTypesResponse();
-        mealTypesResponsesCall.enqueue(new Callback<MealTypeListResponses>() {
+        apiService.getRecipesApi().getMealTypesResponse().enqueue(new Callback<MealTypeListResponses>() {
             @Override
             public void onResponse(Call<MealTypeListResponses> call, Response<MealTypeListResponses> response) {
                 if (response.isSuccessful()) {
@@ -113,8 +108,7 @@ public class RecipeApiService {
     }
 
     public void getCuisine(CuisineCallback cuisineCallback) {
-        Call<CuisineListResponse> cuisineListResponseCall = RecipesApiCreator.getRecipesApi().getCuisineResponse();
-        cuisineListResponseCall.enqueue(new Callback<CuisineListResponse>() {
+        apiService.getRecipesApi().getCuisineResponse().enqueue(new Callback<CuisineListResponse>() {
             @Override
             public void onResponse(Call<CuisineListResponse> call, Response<CuisineListResponse> response) {
                 if (response.isSuccessful()) {
@@ -135,8 +129,7 @@ public class RecipeApiService {
     public void getRecipesList(String urlLetter, String category, RecipesListCallback recipesListCallback) {
         Map<String, String> queryData = new HashMap<>();
         queryData.put(urlLetter, category);
-        Call<RecipesListResponse> recipesListResponseCall = RecipesApiCreator.getRecipesApi().getRecipesListResponse(queryData);
-        recipesListResponseCall.enqueue(new Callback<RecipesListResponse>() {
+        apiService.getRecipesApi().getRecipesListResponse(queryData).enqueue(new Callback<RecipesListResponse>() {
             @Override
             public void onResponse(Call<RecipesListResponse> call, Response<RecipesListResponse> response) {
                 if (response.isSuccessful()) {
