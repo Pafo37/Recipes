@@ -2,7 +2,7 @@
 <resources>
 
     <dimen name="margin_between_elements_default">8dp</dimen>
-    <dimen name="activity_horizontal_margin">16sp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="no_dimens">0dp</dimen>
 
     <!--Material Design Typography Default sizes-->
@@ -24,5 +24,6 @@
     <dimen name="cardview_recipes_list_margin">4dp</dimen>
     <dimen name="general_meal_description_image_height">200dp</dimen>
     <dimen name="recipes_list_title_width">150dp</dimen>
+    <dimen name="mealtype_title_padding">16dp</dimen>
 
 </resources>
