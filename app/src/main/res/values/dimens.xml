@@ -25,5 +25,7 @@
     <dimen name="general_meal_description_image_height">200dp</dimen>
     <dimen name="recipes_list_title_width">150dp</dimen>
     <dimen name="mealtype_title_padding">16dp</dimen>
+    <dimen name="my_recipes_img_height">160dp</dimen>
+    <dimen name="img_dialog_fragment_height">180dp</dimen>
 
 </resources>

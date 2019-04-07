@@ -5,19 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="@dimen/no_dimens"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
-
     <ImageView
         android:id="@+id/img_meal_favorites"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/no_dimens"
+        android:layout_height="@dimen/img_dialog_fragment_height"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,7 +19,7 @@
         android:id="@+id/fab_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margin_between_elements_default"
+        android:layout_margin="@dimen/margin_between_elements_default"
         app:layout_constraintBottom_toBottomOf="@id/img_meal_favorites"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_meal_favorites"
@@ -54,7 +46,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txt_input_layout_meal_name"
         android:layout_width="@dimen/no_dimens"
@@ -62,7 +53,7 @@
         android:hint="@string/favorites_hint_recipe_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline">
+        app:layout_constraintTop_toBottomOf="@id/img_meal_favorites">
 
         <EditText
             android:id="@+id/txt_favorites_meal_title"
@@ -86,7 +77,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_between_elements_default"
-            android:layout_marginTop="@dimen/margin_between_elements_default"
             android:maxLines="3" />
 
     </android.support.design.widget.TextInputLayout>
