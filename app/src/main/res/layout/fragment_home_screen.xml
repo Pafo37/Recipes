@@ -8,7 +8,7 @@
 
     <android.support.design.card.MaterialCardView
         android:id="@+id/cardview_random_meal"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/no_dimens"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
