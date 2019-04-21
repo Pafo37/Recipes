@@ -23,7 +23,7 @@ import butterknife.BindView;
 
 public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.mealTypeItemListener, MealTypeContract.View {
 
-    @BindView(R.id.recyclerView_category_mealtype)
+    @BindView(R.id.recycler_view_category_mealtype)
     RecyclerView recyclerView;
 
     private String currentMealTypeName;
