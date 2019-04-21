@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.example.pavelkovachev.recipes.R;
@@ -17,7 +16,6 @@ import com.example.pavelkovachev.recipes.presenters.recipeslist.RecipesListContr
 import com.example.pavelkovachev.recipes.presenters.recipeslist.RecipesListPresenter;
 import com.example.pavelkovachev.recipes.ui.activity.base.BaseActivity;
 import com.example.pavelkovachev.recipes.ui.activity.generalmealdescription.GeneralMealDescriptionActivity;
-import com.example.pavelkovachev.recipes.ui.activity.personalpreferences.PersonalPreferencesActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 
 import java.util.List;
@@ -58,16 +56,6 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
         Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
         intent.putExtra(RECIPE_ID, item.getRecipeId());
         startActivity(intent);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.id_menu_favorites:
-                startActivity(new Intent(getActivity(), PersonalPreferencesActivity.class));
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     @Override

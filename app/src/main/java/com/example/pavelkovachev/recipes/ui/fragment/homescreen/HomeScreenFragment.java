@@ -14,6 +14,7 @@ import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenContrac
 import com.example.pavelkovachev.recipes.ui.activity.base.BaseActivity;
 import com.example.pavelkovachev.recipes.ui.activity.categories.CategoriesActivity;
 import com.example.pavelkovachev.recipes.ui.activity.generalmealdescription.GeneralMealDescriptionActivity;
+import com.example.pavelkovachev.recipes.ui.activity.personalpreferences.PersonalPreferencesActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 import com.squareup.picasso.Picasso;
 
@@ -76,6 +77,11 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
         Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
         intent.putExtra(INTENT_ID, presenter.onLatestCardViewClicked());
         startActivity(intent);
+    }
+
+    @OnClick(R.id.fab_homescreen_favorite)
+    void onFabClicked() {
+        startActivity(new Intent(getActivity(), PersonalPreferencesActivity.class));
     }
 
     @Override

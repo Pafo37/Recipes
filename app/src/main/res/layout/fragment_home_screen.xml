@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/margin_between_elements_default">
 
-    <android.support.v7.widget.CardView
+    <android.support.design.card.MaterialCardView
         android:id="@+id/cardview_random_meal"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/no_dimens"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -22,7 +21,7 @@
 
             <ImageView
                 android:id="@+id/img_general_meal"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/no_dimens"
                 android:layout_height="@dimen/home_screen_img_meals"
                 android:contentDescription="@string/homescreen_description_random_meal"
                 android:scaleType="centerCrop"
@@ -33,43 +32,44 @@
 
             <TextView
                 android:id="@+id/txt_random_meal_title"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/no_dimens"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_between_elements_default"
+                android:layout_marginTop="@dimen/margin_between_elements_default"
                 android:text="@string/homescreen_random_meal"
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/material_design_title_txt_size"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/img_general_meal" />
 
             <TextView
                 android:id="@+id/txt_random_meal_name"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/no_dimens"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_gray"
                 android:textSize="@dimen/material_design_body_txt_size"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_random_meal_title" />
 
         </android.support.constraint.ConstraintLayout>
 
-    </android.support.v7.widget.CardView>
+    </android.support.design.card.MaterialCardView>
 
-    <android.support.v7.widget.CardView
+    <android.support.design.card.MaterialCardView
         android:id="@+id/cardview_latest_meal"
         android:layout_width="@dimen/no_dimens"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/margin_between_elements_default"
         android:layout_marginRight="@dimen/margin_between_elements_default"
         app:layout_constraintEnd_toStartOf="@+id/cardview_categories"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardview_random_meal">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_between_elements_default">
+            android:layout_margin="@dimen/margin_between_elements_default">
 
             <ImageView
                 android:id="@+id/img_latest_meal"
@@ -85,7 +85,7 @@
                 android:id="@+id/txt_latest_meal_title"
                 android:layout_width="@dimen/no_dimens"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_between_elements_default"
+                android:layout_marginTop="@dimen/margin_between_elements_default"
                 android:text="@string/homescreen_latest_meal"
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/material_design_title_txt_size"
@@ -106,23 +106,20 @@
 
         </android.support.constraint.ConstraintLayout>
 
-    </android.support.v7.widget.CardView>
+    </android.support.design.card.MaterialCardView>
 
-    <android.support.v7.widget.CardView
+    <android.support.design.card.MaterialCardView
         android:id="@+id/cardview_categories"
         android:layout_width="@dimen/no_dimens"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_between_elements_default"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/margin_between_elements_default"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cardview_latest_meal"
         app:layout_constraintTop_toBottomOf="@id/cardview_random_meal">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_between_elements_default">
+            android:layout_margin="@dimen/margin_between_elements_default">
 
             <ImageView
                 android:id="@+id/img_category"
@@ -137,25 +134,37 @@
 
             <TextView
                 android:id="@+id/txt_category_title"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/no_dimens"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_between_elements_default"
+                android:layout_marginTop="@dimen/margin_between_elements_default"
                 android:text="@string/homescreen_category"
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/material_design_title_txt_size"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/img_category" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/no_dimens"
                 android:layout_height="wrap_content"
                 android:text="@string/homescreen_browse_by_category"
                 android:textColor="@color/color_gray"
                 android:textSize="@dimen/material_design_body_txt_size"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_category_title" />
 
         </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+
+    </android.support.design.card.MaterialCardView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_homescreen_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_between_elements_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_favorite_fab" />
 
 </android.support.constraint.ConstraintLayout>

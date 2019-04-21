@@ -1,70 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/general_meal_description"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardview_general_meal1"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/img_general_meal"
+            android:layout_width="@dimen/no_dimens"
+            android:layout_height="@dimen/general_meal_description_image_height"
+            android:layout_margin="@dimen/margin_between_elements_default"
+            android:contentDescription="@string/homescreen_description_random_meal"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/cardview_random_meal" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_general_meal_description_favorite"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/home_screen_random_meal_cardview_margin"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_margin="@dimen/mealtype_title_padding"
+            app:layout_constraintBottom_toBottomOf="@id/img_general_meal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_general_meal"
+            app:srcCompat="@drawable/ic_favorite_fab" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <TextView
+            android:id="@+id/txt_meal_title"
+            android:layout_width="@dimen/no_dimens"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_between_elements_default"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/material_design_title_txt_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_general_meal"
+            tools:text="Meal name" />
 
-                <ImageView
-                    android:id="@+id/img_general_meal"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/general_meal_description_image_height"
-                    android:contentDescription="@string/homescreen_description_random_meal"
-                    android:scaleType="centerCrop"
-                    tools:src="@drawable/cardview_random_meal" />
+        <TextView
+            android:id="@+id/txt_general_meal_type"
+            android:layout_width="@dimen/no_dimens"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_between_elements_default"
+            android:textColor="@color/color_gray"
+            android:textSize="@dimen/material_design_body_txt_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_meal_title"
+            tools:text="Meal category: lunch" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/margin_between_elements_default">
-
-                    <TextView
-                        android:id="@+id/txt_meal_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_between_elements_default"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/material_design_title_txt_size"
-                        tools:text="Meal name" />
-
-                    <TextView
-                        android:id="@+id/txt_general_meal_type"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/color_gray"
-                        android:textSize="@dimen/material_design_body_txt_size"
-                        tools:text="Meal category: lunch" />
-
-                    <TextView
-                        android:id="@+id/txt_general_meal_cuisine"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/color_gray"
-                        android:textSize="@dimen/material_design_body_txt_size"
-                        tools:text="Cuisine: Japanese" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/txt_general_meal_cuisine"
+            android:layout_width="@dimen/no_dimens"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_between_elements_default"
+            android:textColor="@color/color_gray"
+            android:textSize="@dimen/material_design_body_txt_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_general_meal_type"
+            tools:text="Cuisine: Japanese" />
 
         <TextView
             android:id="@+id/txt_general_meal_instructions"
@@ -72,12 +75,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_between_elements_default"
             android:text="@string/general_meal_default_title_instructions"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/material_design_title_txt_size"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardview_general_meal1" />
+            app:layout_constraintTop_toBottomOf="@id/txt_general_meal_cuisine" />
 
         <TextView
             android:id="@+id/txt_general_meal_instructions_body"
@@ -96,8 +99,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_between_elements_default"
             android:text="@string/general_meal_default_title_ingredients"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/material_design_title_txt_size"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_general_meal_instructions_body" />
@@ -116,4 +119,5 @@
         </android.support.v7.widget.RecyclerView>
 
     </android.support.constraint.ConstraintLayout>
-</android.support.v4.widget.NestedScrollView>
+
+</ScrollView>
