@@ -24,6 +24,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class GeneralMealDescriptionFragment extends BaseFragment implements GeneralMealDescriptionContract.View {
 
@@ -40,6 +41,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @BindView(R.id.recycler_view_general_meal_ingredients)
     RecyclerView recyclerView;
 
+    private RecipeModel recipeModel;
     private GeneralMealDescriptionContract.Presenter presenter;
     private IngredientsAdapter ingredientsAdapter;
     private String recipeId;
@@ -76,6 +78,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
             recipeInstructions.setText(recipeModel.getRecipeInstructions());
             Picasso.get().load(recipeModel.getRecipeImage()).placeholder(R.drawable.placeholder_recipe).into(imgMeal);
             initRecyclerView(recipeModel);
+            this.recipeModel = recipeModel;
         }
     }
 
@@ -102,6 +105,11 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         builder.show();
     }
 
+    @Override
+    public RecipeModel getRecipe() {
+        return this.recipeModel;
+    }
+
     private List<Ingredient> initIngredients(RecipeModel recipeModel) {
         return Ingredient.convertFromRecipeToList(recipeModel);
     }
@@ -122,5 +130,10 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+    }
+
+    @OnClick(R.id.fab_general_meal_description_favorite)
+    public void onFabGeneralMealDescriptionClicked() {
+        presenter.addToFavorites(getRecipe());
     }
 }
