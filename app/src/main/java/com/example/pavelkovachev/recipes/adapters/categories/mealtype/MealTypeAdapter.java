@@ -80,6 +80,8 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
     }
 
     public interface mealTypeItemListener {
+
         void onMealTypeClick(MealTypeModel mealTypeItem);
+
     }
 }

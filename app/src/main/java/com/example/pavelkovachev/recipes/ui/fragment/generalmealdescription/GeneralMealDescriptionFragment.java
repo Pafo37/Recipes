@@ -11,6 +11,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.ingredients.IngredientsAdapter;
@@ -41,11 +42,12 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @BindView(R.id.recycler_view_general_meal_ingredients)
     RecyclerView recyclerView;
 
-    private RecipeModel recipeModel;
-    private GeneralMealDescriptionContract.Presenter presenter;
-    private IngredientsAdapter ingredientsAdapter;
     private String recipeId;
+    private RecipeModel recipeModel;
+    private IngredientsAdapter ingredientsAdapter;
+    private GeneralMealDescriptionContract.Presenter presenter;
     private static final String RECIPE_ID = "id";
+    private boolean isAddBtnClicked = false;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -135,5 +137,14 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @OnClick(R.id.fab_general_meal_description_favorite)
     public void onFabGeneralMealDescriptionClicked() {
         presenter.addToFavorites(getRecipe());
+        if (isAddBtnClicked) {
+            Toast.makeText(getContext(), getResources().
+                    getString(R.string.recipe_already_added), Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(getContext(), getResources().
+                    getString(R.string.recipe_added_to_favorites), Toast.LENGTH_SHORT).show();
+            isAddBtnClicked = true;
+        }
     }
 }

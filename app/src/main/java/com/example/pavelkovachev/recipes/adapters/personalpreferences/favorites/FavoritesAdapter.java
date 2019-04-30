@@ -1,4 +1,4 @@
-package com.example.pavelkovachev.recipes.adapters.favorites;
+package com.example.pavelkovachev.recipes.adapters.personalpreferences.favorites;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.favorites.FavoritesModel;
+import com.example.pavelkovachev.recipes.presenters.favorites.FavoritesContract;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,13 +23,15 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
     private List list;
     private Context context;
+    private FavoritesItemListener favoritesItemListener;
 
-    public FavoritesAdapter(List list, Context context) {
-        this.list = list;
+    public FavoritesAdapter(FavoritesContract.Presenter presenter, Context context, FavoritesItemListener favoritesItemListener) {
+        this.list = presenter.getFavoritesList();
         this.context = context;
+        this.favoritesItemListener = favoritesItemListener;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.img_favorites)
         ImageView imgFavorites;
@@ -41,14 +44,21 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         public ViewHolder(@NonNull View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
         }
 
         private void setData(FavoritesModel item) {
             this.item = item;
             txtFavoriteRecipeName.setText(item.getFavoriteRecipeName());
-            Picasso.get().load(item.getFavoriteRecipeName());
+            Picasso.get().load(item.getFavoritesImage()).into(imgFavorites);
         }
 
+        @Override
+        public void onClick(View v) {
+            if (favoritesItemListener != null) {
+                favoritesItemListener.onFavoritesClicked(item);
+            }
+        }
     }
 
     @NonNull
@@ -65,5 +75,14 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    private void undoDelete() {
+
+    }
+
+    public interface FavoritesItemListener {
+
+        void onFavoritesClicked(FavoritesModel favoritesItem);
     }
 }

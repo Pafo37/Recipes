@@ -29,10 +29,9 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     RecyclerView recyclerView;
 
     private RecipesListAdapter recipesListAdapter;
-    public String categoryName;
     public String categoryLetter;
-    private static final String RECIPE_ID = "id";
     private RecipesListContract.Presenter presenter;
+    private static final String RECIPE_ID = "id";
     private static final String CATEGORY_NAME = "categoryName";
     private static final String CATEGORY_LETTER = "categoryLetter";
 

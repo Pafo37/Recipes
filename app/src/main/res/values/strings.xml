@@ -108,5 +108,10 @@
     <string name="not_found_message">Not Found!</string>
     <string name="no_arguments_found">No Arguments Found!</string>
     <string name="ok_message">OK</string>
+    <string name="favorites_recipes_toolbar">Favorite Recipes</string>
+    <string name="recipe_already_added">Recipe is already added</string>
+    <string name="recipe_added_to_favorites">Recipe added to favorites</string>
+    <string name="recipe_was_removed">Recipe was removed</string>
+    <string name="undo_button">UNDO</string>
 
 </resources>

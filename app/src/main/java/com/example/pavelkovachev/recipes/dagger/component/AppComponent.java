@@ -28,4 +28,5 @@ public interface AppComponent {
     void inject(RecipesListPresenter presenter);
 
     void inject(FavoritesPresenter presenter);
+
 }
