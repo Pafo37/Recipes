@@ -77,10 +77,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         return list.size();
     }
 
-    private void undoDelete() {
-
-    }
-
     public interface FavoritesItemListener {
 
         void onFavoritesClicked(FavoritesModel favoritesItem);

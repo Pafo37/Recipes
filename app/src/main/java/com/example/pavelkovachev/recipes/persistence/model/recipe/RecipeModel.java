@@ -574,6 +574,4 @@ public class RecipeModel {
     public void setRecipeMeasure5(String recipeMeasure5) {
         this.recipeMeasure5 = recipeMeasure5;
     }
-
-
 }
