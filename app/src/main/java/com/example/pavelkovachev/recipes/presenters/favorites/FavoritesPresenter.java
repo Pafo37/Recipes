@@ -48,7 +48,7 @@ public class FavoritesPresenter extends BasePresenter implements FavoritesContra
 
                     @Override
                     public void onError(Throwable e) {
-                        view.onErrorShown();
+                        view.showError();
                     }
                 });
     }
@@ -63,7 +63,7 @@ public class FavoritesPresenter extends BasePresenter implements FavoritesContra
         recentlyDeletedItemPosition = position;
         dataService.getFavoritesService().deleteFavorites(getFavoritesList().get(position));
         getFavoritesList().remove(position);
-        view.getFavoritesAdapter().notifyItemRemoved(position);
+        view.notifyItemDeleted();
         view.showSnackbar();
     }
 
@@ -71,6 +71,11 @@ public class FavoritesPresenter extends BasePresenter implements FavoritesContra
     public void undoDelete() {
         dataService.getFavoritesService().insertFavorites(recentlyDeletedItem);
         getFavoritesList().add(recentlyDeletedItemPosition, recentlyDeletedItem);
-        view.getFavoritesAdapter().notifyItemInserted(recentlyDeletedItemPosition);
+        view.notifyItemRestored();
+    }
+
+    @Override
+    public int getRecentlyDeletedItemPosition() {
+        return recentlyDeletedItemPosition;
     }
 }

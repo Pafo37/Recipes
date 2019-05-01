@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
+import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.SwipeToDeleteCallback;
 import com.example.pavelkovachev.recipes.adapters.personalpreferences.favorites.FavoritesAdapter;
@@ -32,7 +33,8 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
 
     private FavoritesContract.Presenter presenter;
     private FavoritesAdapter favoritesAdapter;
-    private static final String RECIPE_ID = "id";
+    private String alertDialogTitle = "Error";
+    private String alertDialogMessage = "Could not load favorite recipes!";
 
     public static FavoritesFragment newInstance() {
         return new FavoritesFragment();
@@ -43,7 +45,7 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
         super.onViewCreated(view, savedInstanceState);
         presenter = new FavoritesPresenter(this);
         presenter.getFavoriteRecipes();
-        initRecyclerView(presenter);
+        initRecyclerView();
         favoritesAdapter.notifyDataSetChanged();
     }
 
@@ -62,8 +64,8 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
         //NOT USED
     }
 
-    private void initRecyclerView(FavoritesContract.Presenter presenter) {
-        favoritesAdapter = new FavoritesAdapter(presenter, getContext(), this);
+    private void initRecyclerView() {
+        favoritesAdapter = new FavoritesAdapter(presenter, this);
         recyclerView.setAdapter(favoritesAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
@@ -74,7 +76,7 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
     @Override
     public void onFavoritesClicked(FavoritesModel favoritesItem) {
         Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
-        intent.putExtra(RECIPE_ID, favoritesItem.getFavoriteRecipeId());
+        intent.putExtra(Constants.RECIPE_ID, favoritesItem.getFavoriteRecipeId());
         startActivity(intent);
     }
 
@@ -87,12 +89,19 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
     }
 
     @Override
-    public void onErrorShown() {
-        showErrorDialog();
+    public void showError() {
+        showErrorDialog(alertDialogTitle, alertDialogMessage);
     }
 
     @Override
-    public FavoritesAdapter getFavoritesAdapter() {
-        return favoritesAdapter;
+    public void notifyItemDeleted() {
+        favoritesAdapter.notifyItemRemoved(presenter.getRecentlyDeletedItemPosition());
+    }
+
+    @Override
+    public void notifyItemRestored() {
+        favoritesAdapter.notifyItemInserted(
+                presenter.getRecentlyDeletedItemPosition());
+
     }
 }

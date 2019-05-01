@@ -1,6 +1,5 @@
 package com.example.pavelkovachev.recipes.adapters.personalpreferences.favorites;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,12 +21,10 @@ import butterknife.ButterKnife;
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
 
     private List list;
-    private Context context;
     private FavoritesItemListener favoritesItemListener;
 
-    public FavoritesAdapter(FavoritesContract.Presenter presenter, Context context, FavoritesItemListener favoritesItemListener) {
+    public FavoritesAdapter(FavoritesContract.Presenter presenter, FavoritesItemListener favoritesItemListener) {
         this.list = presenter.getFavoritesList();
-        this.context = context;
         this.favoritesItemListener = favoritesItemListener;
     }
 
@@ -50,7 +47,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         private void setData(FavoritesModel item) {
             this.item = item;
             txtFavoriteRecipeName.setText(item.getFavoriteRecipeName());
-            Picasso.get().load(item.getFavoritesImage()).into(imgFavorites);
+            Picasso.get().load(item.getFavoritesImage())
+                    .placeholder(R.drawable.placeholder_recipe).into(imgFavorites);
         }
 
         @Override
@@ -63,8 +61,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_favorites, viewGroup, false));
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_favorites, parent, false));
     }
 
     @Override

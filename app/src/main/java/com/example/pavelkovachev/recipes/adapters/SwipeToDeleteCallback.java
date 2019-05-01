@@ -8,10 +8,12 @@ import com.example.pavelkovachev.recipes.presenters.favorites.FavoritesContract;
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
+    private static final int DRAG_DIRS =0;
+
     private FavoritesContract.Presenter favoritesPresenter;
 
     public SwipeToDeleteCallback(FavoritesContract.Presenter favoritesPresenter) {
-        super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+        super(DRAG_DIRS, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.favoritesPresenter = favoritesPresenter;
     }
 
@@ -22,7 +24,6 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        int position = viewHolder.getAdapterPosition();
-        favoritesPresenter.deleteItem(position);
+        favoritesPresenter.deleteItem(viewHolder.getAdapterPosition());
     }
 }

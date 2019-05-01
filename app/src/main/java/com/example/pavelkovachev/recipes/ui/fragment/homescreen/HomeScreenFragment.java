@@ -23,9 +23,6 @@ import butterknife.OnClick;
 
 public class HomeScreenFragment extends BaseFragment implements HomeScreenContract.View {
 
-    private HomeScreenContract.Presenter presenter;
-    private final String INTENT_ID = "id";
-
     @BindView(R.id.txt_random_meal_name)
     TextView txtRandomMealName;
     @BindView(R.id.img_general_meal)
@@ -34,6 +31,11 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
     TextView txtLatestMealName;
     @BindView(R.id.img_latest_meal)
     ImageView imgLatestMeal;
+
+    private final String INTENT_ID = "id";
+    private HomeScreenContract.Presenter presenter;
+    private String alertDialogTitle = "Error";
+    private String alertDialogMessage = "Could not load recipes!";
 
     public static HomeScreenFragment newInstance() {
         return new HomeScreenFragment();
@@ -102,6 +104,6 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
 
     @Override
     public void onError() {
-        showErrorDialog();
+        showErrorDialog(alertDialogTitle, alertDialogMessage);
     }
 }

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.ingredients.IngredientsAdapter;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.Ingredient;
@@ -46,13 +47,14 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     private RecipeModel recipeModel;
     private IngredientsAdapter ingredientsAdapter;
     private GeneralMealDescriptionContract.Presenter presenter;
-    private static final String RECIPE_ID = "id";
+    private String alertDialogTitle = "Error";
+    private String alertDialogMessage = "Recipe not found!";
     private boolean isAddBtnClicked = false;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recipeId = getArguments().getString(RECIPE_ID);
+        recipeId = getArguments().getString(Constants.RECIPE_ID);
         presenter.getRandomRecipeFromDb(recipeId);
         setProgressBarVisibility(true);
     }
@@ -86,8 +88,8 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     @Override
     public String getRecipeId() {
-        if (getArguments() != null && getArguments().containsKey(RECIPE_ID)) {
-            return getArguments().getString(RECIPE_ID);
+        if (getArguments() != null && getArguments().containsKey(Constants.RECIPE_ID)) {
+            return getArguments().getString(Constants.RECIPE_ID);
         } else {
             return null;
         }
@@ -95,7 +97,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     @Override
     public void onError() {
-        showErrorDialog();
+        showErrorDialog(alertDialogTitle, alertDialogMessage);
     }
 
     @Override
@@ -136,6 +138,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     @OnClick(R.id.fab_general_meal_description_favorite)
     public void onFabGeneralMealDescriptionClicked() {
+        //TODO:check db if recipe exists
         presenter.addToFavorites(getRecipe());
         if (isAddBtnClicked) {
             Toast.makeText(getContext(), getResources().

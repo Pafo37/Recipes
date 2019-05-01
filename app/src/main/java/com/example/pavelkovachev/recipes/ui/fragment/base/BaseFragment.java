@@ -27,10 +27,10 @@ public abstract class BaseFragment extends Fragment {
     @LayoutRes
     protected abstract int getLayoutResId();
 
-    protected void showErrorDialog() {
+    protected void showErrorDialog(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
-                .setTitle(getString(R.string.error_message))
-                .setMessage(getString(R.string.not_found_message));
+                .setTitle(title)
+                .setMessage(message);
         builder.setNeutralButton(getString(R.string.ok_message), (dialog, which) -> dialog.dismiss());
         builder.show();
     }

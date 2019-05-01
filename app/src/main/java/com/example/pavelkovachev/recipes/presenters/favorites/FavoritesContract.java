@@ -1,6 +1,5 @@
 package com.example.pavelkovachev.recipes.presenters.favorites;
 
-import com.example.pavelkovachev.recipes.adapters.personalpreferences.favorites.FavoritesAdapter;
 import com.example.pavelkovachev.recipes.persistence.model.favorites.FavoritesModel;
 import com.example.pavelkovachev.recipes.presenters.BasePresenter;
 import com.example.pavelkovachev.recipes.presenters.BaseView;
@@ -11,11 +10,13 @@ public interface FavoritesContract {
 
     interface View extends BaseView<Presenter> {
 
-        FavoritesAdapter getFavoritesAdapter();
-
         void showSnackbar();
 
-        void onErrorShown();
+        void showError();
+
+        void notifyItemDeleted();
+
+        void notifyItemRestored();
 
     }
 
@@ -28,6 +29,8 @@ public interface FavoritesContract {
         void deleteItem(int position);
 
         void undoDelete();
+
+        int getRecentlyDeletedItemPosition();
 
     }
 }

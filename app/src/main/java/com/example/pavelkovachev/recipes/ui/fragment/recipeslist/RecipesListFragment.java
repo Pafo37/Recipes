@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.recipeslist.RecipesListAdapter;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModel;
@@ -28,12 +29,12 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     @BindView(R.id.recycler_view_recipes_list)
     RecyclerView recyclerView;
 
-    private RecipesListAdapter recipesListAdapter;
     public String categoryLetter;
+    private String alertDialogTitle = "Error";
+    private String alertDialogMessage = "Could not load recipes!";
+    private RecipesListAdapter recipesListAdapter;
     private RecipesListContract.Presenter presenter;
-    private static final String RECIPE_ID = "id";
-    private static final String CATEGORY_NAME = "categoryName";
-    private static final String CATEGORY_LETTER = "categoryLetter";
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     @Override
     public void onItemClick(RecipeListModel item) {
         Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
-        intent.putExtra(RECIPE_ID, item.getRecipeId());
+        intent.putExtra(Constants.RECIPE_ID, item.getRecipeId());
         startActivity(intent);
     }
 
@@ -76,23 +77,23 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
 
     @Override
     public String getCategoryName() {
-        if (getArguments() != null && getArguments().containsKey(CATEGORY_NAME)) {
-            return getArguments().getString(CATEGORY_NAME);
+        if (getArguments() != null && getArguments().containsKey(Constants.CATEGORY_NAME)) {
+            return getArguments().getString(Constants.CATEGORY_NAME);
         }
         return null;
     }
 
     @Override
     public String getCategoryLetter() {
-        if (getArguments() != null && getArguments().containsKey(CATEGORY_LETTER)) {
-            return categoryLetter = getArguments().getString(CATEGORY_LETTER);
+        if (getArguments() != null && getArguments().containsKey(Constants.CATEGORY_LETTER)) {
+            return categoryLetter = getArguments().getString(Constants.CATEGORY_LETTER);
         }
         return null;
     }
 
     @Override
     public void onError() {
-        showErrorDialog();
+        showErrorDialog(alertDialogTitle, alertDialogMessage);
     }
 
     @Override
