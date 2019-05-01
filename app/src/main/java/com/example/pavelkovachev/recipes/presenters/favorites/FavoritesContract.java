@@ -10,8 +10,6 @@ public interface FavoritesContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showSnackbar();
-
         void showError();
 
         void notifyItemDeleted();

@@ -96,6 +96,7 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
     @Override
     public void notifyItemDeleted() {
         favoritesAdapter.notifyItemRemoved(presenter.getRecentlyDeletedItemPosition());
+        showSnackbar();
     }
 
     @Override

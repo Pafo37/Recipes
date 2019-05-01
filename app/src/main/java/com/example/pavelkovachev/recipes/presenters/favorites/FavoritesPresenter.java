@@ -64,7 +64,6 @@ public class FavoritesPresenter extends BasePresenter implements FavoritesContra
         dataService.getFavoritesService().deleteFavorites(getFavoritesList().get(position));
         getFavoritesList().remove(position);
         view.notifyItemDeleted();
-        view.showSnackbar();
     }
 
     @Override
