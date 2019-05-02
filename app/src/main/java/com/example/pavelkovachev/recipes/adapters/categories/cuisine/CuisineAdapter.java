@@ -1,6 +1,5 @@
 package com.example.pavelkovachev.recipes.adapters.categories.cuisine;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,12 +19,10 @@ import butterknife.ButterKnife;
 public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHolderCuisine> {
 
     private List list;
-    private Context context;
     private CuisineItemListener cuisineItemListener;
 
-    public CuisineAdapter(CuisineContract.Presenter presenter, Context context, CuisineItemListener cuisineItemListener) {
+    public CuisineAdapter(CuisineContract.Presenter presenter, CuisineItemListener cuisineItemListener) {
         this.list = presenter.getCuisineList();
-        this.context = context;
         this.cuisineItemListener = cuisineItemListener;
     }
 
@@ -56,8 +53,9 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
     @NonNull
     @Override
-    public ViewHolderCuisine onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolderCuisine(LayoutInflater.from(context).inflate(R.layout.item_category_cuisine, viewGroup, false));
+    public ViewHolderCuisine onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        return new ViewHolderCuisine(LayoutInflater.from(parent.getContext()).
+                inflate(R.layout.item_category_cuisine, parent, false));
     }
 
     @Override

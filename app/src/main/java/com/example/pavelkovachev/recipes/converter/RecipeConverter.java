@@ -2,6 +2,7 @@ package com.example.pavelkovachev.recipes.converter;
 
 import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeResponse;
 import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRecipeResponse;
+import com.example.pavelkovachev.recipes.persistence.model.favorites.FavoritesModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 
 public class RecipeConverter {
@@ -58,5 +59,10 @@ public class RecipeConverter {
                 latestRecipeResponse.getStrMeasure15(), latestRecipeResponse.getStrMeasure16(),
                 latestRecipeResponse.getStrMeasure17(), latestRecipeResponse.getStrMeasure18(),
                 latestRecipeResponse.getStrMeasure19(), latestRecipeResponse.getStrMeasure20());
+    }
+
+    public static FavoritesModel convertToFavoriteRecipe(RecipeModel recipeModel) {
+
+        return new FavoritesModel(recipeModel.getRecipeName(), recipeModel.getId(), recipeModel.getRecipeImage());
     }
 }

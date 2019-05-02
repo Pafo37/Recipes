@@ -15,6 +15,8 @@ public interface GeneralMealDescriptionContract {
         void onError();
 
         void showErrorNoArguments();
+
+        RecipeModel getRecipe();
     }
 
     interface Presenter extends BasePresenter {
@@ -22,5 +24,7 @@ public interface GeneralMealDescriptionContract {
         void getRandomRecipeFromDb(String id);
 
         void getRecipeByIdFromApi();
+
+        void addToFavorites(RecipeModel recipeModel);
     }
 }

@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenContract;
@@ -23,9 +25,6 @@ import butterknife.OnClick;
 
 public class HomeScreenFragment extends BaseFragment implements HomeScreenContract.View {
 
-    private HomeScreenContract.Presenter presenter;
-    private final String INTENT_ID = "id";
-
     @BindView(R.id.txt_random_meal_name)
     TextView txtRandomMealName;
     @BindView(R.id.img_general_meal)
@@ -34,6 +33,8 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
     TextView txtLatestMealName;
     @BindView(R.id.img_latest_meal)
     ImageView imgLatestMeal;
+
+    private HomeScreenContract.Presenter presenter;
 
     public static HomeScreenFragment newInstance() {
         return new HomeScreenFragment();
@@ -68,14 +69,14 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
     @OnClick(R.id.cardview_random_meal)
     void onRandomMealClicked() {
         Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
-        intent.putExtra(INTENT_ID, presenter.onRandomCardViewClicked());
+        intent.putExtra(Constants.RECIPE_ID, presenter.onRandomCardViewClicked());
         startActivity(intent);
     }
 
     @OnClick(R.id.cardview_latest_meal)
     void onLatestMealClicked() {
         Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
-        intent.putExtra(INTENT_ID, presenter.onLatestCardViewClicked());
+        intent.putExtra(Constants.RECIPE_ID, presenter.onLatestCardViewClicked());
         startActivity(intent);
     }
 
@@ -102,6 +103,7 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
 
     @Override
     public void onError() {
-        showErrorDialog();
+        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_recipes_list_homescreen));
     }
 }

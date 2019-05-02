@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.categories.mealtype.MealTypeAdapter;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModel;
@@ -28,11 +30,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
 
     private String currentMealTypeName;
     private MealTypeAdapter mealTypeAdapter;
-
     private MealTypeContract.Presenter presenter;
-    private static final String CATEGORY_NAME = "categoryName";
-    private static final String CATEGORY_LETTER = "categoryLetter";
-    private static final String CATEGORY_LETTER_VALUE = "c";
 
     public static MealTypeFragment newInstance() {
         return new MealTypeFragment();
@@ -48,7 +46,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
         super.onViewCreated(view, savedInstanceState);
         presenter = new MealTypePresenter(this);
         presenter.loadMealTypeFromDb();
-        mealTypeAdapter = new MealTypeAdapter(presenter, getContext(), this);
+        mealTypeAdapter = new MealTypeAdapter(presenter, this);
         initRecyclerView(presenter);
     }
 
@@ -56,8 +54,8 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     public void onMealTypeClick(MealTypeModel mealTypeItem) {
         currentMealTypeName = mealTypeItem.getTitle();
         Intent intent = new Intent(getActivity(), RecipesListActivity.class);
-        intent.putExtra(CATEGORY_NAME, currentMealTypeName);
-        intent.putExtra(CATEGORY_LETTER, CATEGORY_LETTER_VALUE);
+        intent.putExtra(Constants.CATEGORY_NAME, currentMealTypeName);
+        intent.putExtra(Constants.CATEGORY_LETTER, Constants.MEALTYPE_CATEGORY_LETTER_VALUE);
         startActivity(intent);
     }
 
@@ -84,7 +82,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     }
 
     private void initRecyclerView(MealTypeContract.Presenter presenter) {
-        mealTypeAdapter = new MealTypeAdapter(presenter, getContext(), this);
+        mealTypeAdapter = new MealTypeAdapter(presenter, this);
         recyclerView.setAdapter(mealTypeAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
@@ -92,6 +90,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
 
     @Override
     public void onError() {
-        showErrorDialog();
+        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_mealtype));
     }
 }

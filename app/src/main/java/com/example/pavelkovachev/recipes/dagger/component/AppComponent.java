@@ -3,6 +3,7 @@ package com.example.pavelkovachev.recipes.dagger.component;
 import com.example.pavelkovachev.recipes.dagger.modules.ApplicationModule;
 import com.example.pavelkovachev.recipes.dagger.modules.RoomModule;
 import com.example.pavelkovachev.recipes.presenters.cuisine.CuisinePresenter;
+import com.example.pavelkovachev.recipes.presenters.favorites.FavoritesPresenter;
 import com.example.pavelkovachev.recipes.presenters.generalmealdescription.GeneralMealDescriptionPresenter;
 import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenPresenter;
 import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypePresenter;
@@ -25,4 +26,7 @@ public interface AppComponent {
     void inject(HomeScreenPresenter presenter);
 
     void inject(RecipesListPresenter presenter);
+
+    void inject(FavoritesPresenter presenter);
+
 }

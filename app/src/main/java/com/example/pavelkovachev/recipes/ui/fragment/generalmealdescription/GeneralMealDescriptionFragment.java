@@ -11,7 +11,10 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.ingredients.IngredientsAdapter;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.Ingredient;
@@ -24,6 +27,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class GeneralMealDescriptionFragment extends BaseFragment implements GeneralMealDescriptionContract.View {
 
@@ -40,15 +44,16 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     @BindView(R.id.recycler_view_general_meal_ingredients)
     RecyclerView recyclerView;
 
-    private GeneralMealDescriptionContract.Presenter presenter;
-    private IngredientsAdapter ingredientsAdapter;
     private String recipeId;
-    private static final String RECIPE_ID = "id";
+    private RecipeModel recipeModel;
+    private IngredientsAdapter ingredientsAdapter;
+    private GeneralMealDescriptionContract.Presenter presenter;
+    private boolean isAddBtnClicked = false;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recipeId = getArguments().getString(RECIPE_ID);
+        recipeId = getArguments().getString(Constants.RECIPE_ID);
         presenter.getRandomRecipeFromDb(recipeId);
         setProgressBarVisibility(true);
     }
@@ -76,13 +81,14 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
             recipeInstructions.setText(recipeModel.getRecipeInstructions());
             Picasso.get().load(recipeModel.getRecipeImage()).placeholder(R.drawable.placeholder_recipe).into(imgMeal);
             initRecyclerView(recipeModel);
+            this.recipeModel = recipeModel;
         }
     }
 
     @Override
     public String getRecipeId() {
-        if (getArguments() != null && getArguments().containsKey(RECIPE_ID)) {
-            return getArguments().getString(RECIPE_ID);
+        if (getArguments() != null && getArguments().containsKey(Constants.RECIPE_ID)) {
+            return getArguments().getString(Constants.RECIPE_ID);
         } else {
             return null;
         }
@@ -90,7 +96,8 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     @Override
     public void onError() {
-        showErrorDialog();
+        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_general_meal_description));
     }
 
     @Override
@@ -100,6 +107,11 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
                 .setMessage(getString(R.string.not_found_message));
         builder.setNeutralButton(getString(R.string.ok_message), (dialog, which) -> dialog.dismiss());
         builder.show();
+    }
+
+    @Override
+    public RecipeModel getRecipe() {
+        return this.recipeModel;
     }
 
     private List<Ingredient> initIngredients(RecipeModel recipeModel) {
@@ -122,5 +134,20 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+    }
+
+    @OnClick(R.id.fab_general_meal_description_favorite)
+    public void onFabGeneralMealDescriptionClicked() {
+        //TODO:check db if recipe exists
+        presenter.addToFavorites(getRecipe());
+        if (isAddBtnClicked) {
+            Toast.makeText(getContext(), getResources().
+                    getString(R.string.recipe_already_added), Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(getContext(), getResources().
+                    getString(R.string.recipe_added_to_favorites), Toast.LENGTH_SHORT).show();
+            isAddBtnClicked = true;
+        }
     }
 }

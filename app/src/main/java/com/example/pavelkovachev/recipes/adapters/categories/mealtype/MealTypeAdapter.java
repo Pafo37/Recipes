@@ -1,6 +1,5 @@
 package com.example.pavelkovachev.recipes.adapters.categories.mealtype;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,12 +21,10 @@ import butterknife.ButterKnife;
 public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHolderMealType> {
 
     private List list;
-    private Context context;
     private mealTypeItemListener mealTypeItemListener;
 
-    public MealTypeAdapter(MealTypeContract.Presenter presenter, Context context, MealTypeAdapter.mealTypeItemListener mealTypeItemListener) {
+    public MealTypeAdapter(MealTypeContract.Presenter presenter, MealTypeAdapter.mealTypeItemListener mealTypeItemListener) {
         this.list = presenter.getMealTypeList();
-        this.context = context;
         this.mealTypeItemListener = mealTypeItemListener;
     }
 
@@ -65,8 +62,9 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
 
     @NonNull
     @Override
-    public ViewHolderMealType onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolderMealType(LayoutInflater.from(context).inflate(R.layout.item_category_mealtype, viewGroup, false));
+    public ViewHolderMealType onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        return new ViewHolderMealType(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_category_mealtype, parent, false));
     }
 
     @Override
@@ -80,6 +78,8 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
     }
 
     public interface mealTypeItemListener {
+
         void onMealTypeClick(MealTypeModel mealTypeItem);
+
     }
 }

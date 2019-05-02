@@ -38,6 +38,11 @@ public class GeneralMealDescriptionPresenter extends BasePresenter implements Ge
     }
 
     @Override
+    public void addToFavorites(RecipeModel recipeModel) {
+        dataService.getFavoritesService().insertFavorites(RecipeConverter.convertToFavoriteRecipe(recipeModel));
+    }
+
+    @Override
     public void getRandomRecipeFromDb(String id) {
         view.setProgressBarVisibility(true);
         dataService.getRecipeService().getById(id, this);

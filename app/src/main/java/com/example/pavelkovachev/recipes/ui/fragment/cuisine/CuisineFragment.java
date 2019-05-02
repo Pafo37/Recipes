@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.categories.cuisine.CuisineAdapter;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModel;
@@ -26,9 +28,6 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     @BindView(R.id.recyclerview_category_cuisine)
     RecyclerView recyclerView;
 
-    private static final String CATEGORY_NAME = "categoryName";
-    private static final String CATEGORY_LETTER = "categoryLetter";
-    private static final String CATEGORY_LETTER_VALUE = "a";
     private CuisineContract.Presenter presenter;
     private CuisineAdapter cuisineAdapter;
 
@@ -46,15 +45,15 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
         super.onViewCreated(view, savedInstanceState);
         presenter = new CuisinePresenter(this);
         presenter.loadCuisineFromDb();
-        cuisineAdapter = new CuisineAdapter(presenter, getContext(), this);
+        cuisineAdapter = new CuisineAdapter(presenter, this);
         initRecyclerView(presenter);
     }
 
     @Override
     public void onItemClick(CuisineModel cuisineItem) {
         Intent intent = new Intent(getActivity(), RecipesListActivity.class);
-        intent.putExtra(CATEGORY_NAME, cuisineItem.getCountry());
-        intent.putExtra(CATEGORY_LETTER, CATEGORY_LETTER_VALUE);
+        intent.putExtra(Constants.CATEGORY_NAME, cuisineItem.getCountry());
+        intent.putExtra(Constants.CATEGORY_LETTER, Constants.CUISINE_CATEGORY_LETTER_VALUE);
         startActivity(intent);
     }
 
@@ -81,7 +80,7 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     }
 
     private void initRecyclerView(CuisineContract.Presenter presenter) {
-        cuisineAdapter = new CuisineAdapter(presenter, getContext(), this);
+        cuisineAdapter = new CuisineAdapter(presenter, this);
         recyclerView.setAdapter(cuisineAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
@@ -89,6 +88,7 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
 
     @Override
     public void onError() {
-        showErrorDialog();
+        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_cuisine));
     }
 }
