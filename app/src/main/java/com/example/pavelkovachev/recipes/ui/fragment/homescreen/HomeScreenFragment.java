@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
@@ -34,7 +35,6 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
     ImageView imgLatestMeal;
 
     private HomeScreenContract.Presenter presenter;
-    private static final String alertDialogMessage = "Could not load recipes!";
 
     public static HomeScreenFragment newInstance() {
         return new HomeScreenFragment();
@@ -103,6 +103,7 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
 
     @Override
     public void onError() {
-        showErrorDialog(Constants.ALERT_DIALOG_TITLE, alertDialogMessage);
+        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_recipes_list_homescreen));
     }
 }

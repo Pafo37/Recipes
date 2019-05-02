@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
+import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.SwipeToDeleteCallback;
@@ -33,7 +34,6 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
 
     private FavoritesContract.Presenter presenter;
     private FavoritesAdapter favoritesAdapter;
-    private static final String alertDialogMessage = "Could not load favorite recipes!";
 
     public static FavoritesFragment newInstance() {
         return new FavoritesFragment();
@@ -89,7 +89,8 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
 
     @Override
     public void showError() {
-        showErrorDialog(Constants.ALERT_DIALOG_TITLE, alertDialogMessage);
+        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_favorites));
     }
 
     @Override

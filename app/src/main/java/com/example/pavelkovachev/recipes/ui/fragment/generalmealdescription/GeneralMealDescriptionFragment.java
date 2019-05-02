@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.ingredients.IngredientsAdapter;
@@ -47,7 +48,6 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     private RecipeModel recipeModel;
     private IngredientsAdapter ingredientsAdapter;
     private GeneralMealDescriptionContract.Presenter presenter;
-    private static final String alertDialogMessage = "Recipe not found!";
     private boolean isAddBtnClicked = false;
 
     @Override
@@ -96,7 +96,8 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     @Override
     public void onError() {
-        showErrorDialog(Constants.ALERT_DIALOG_TITLE, alertDialogMessage);
+        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_general_meal_description));
     }
 
     @Override

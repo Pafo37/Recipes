@@ -7,6 +7,5 @@ public class Constants {
     public static final String CATEGORY_LETTER = "categoryLetter";
     public static final String MEALTYPE_CATEGORY_LETTER_VALUE = "c";
     public static final String CUISINE_CATEGORY_LETTER_VALUE = "a";
-    public static final String ALERT_DIALOG_TITLE = "Error";
 
 }

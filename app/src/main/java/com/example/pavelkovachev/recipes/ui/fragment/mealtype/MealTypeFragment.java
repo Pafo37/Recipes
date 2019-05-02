@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.categories.mealtype.MealTypeAdapter;
@@ -30,7 +31,6 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     private String currentMealTypeName;
     private MealTypeAdapter mealTypeAdapter;
     private MealTypeContract.Presenter presenter;
-    private static final String alertDialogMessage = "Could not load meal type categories!";
 
     public static MealTypeFragment newInstance() {
         return new MealTypeFragment();
@@ -90,6 +90,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
 
     @Override
     public void onError() {
-        showErrorDialog(Constants.ALERT_DIALOG_TITLE, alertDialogMessage);
+        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_mealtype));
     }
 }

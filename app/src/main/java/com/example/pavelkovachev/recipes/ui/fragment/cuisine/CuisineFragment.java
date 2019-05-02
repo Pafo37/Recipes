@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.categories.cuisine.CuisineAdapter;
@@ -29,7 +30,6 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
 
     private CuisineContract.Presenter presenter;
     private CuisineAdapter cuisineAdapter;
-    private static final String alertDialogMessage = "Could not load cuisine categories";
 
     public static CuisineFragment newInstance() {
         return new CuisineFragment();
@@ -88,6 +88,7 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
 
     @Override
     public void onError() {
-        showErrorDialog(Constants.ALERT_DIALOG_TITLE, alertDialogMessage);
+        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_cuisine));
     }
 }

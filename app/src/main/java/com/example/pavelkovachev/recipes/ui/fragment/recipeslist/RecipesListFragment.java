@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.recipeslist.RecipesListAdapter;
@@ -30,10 +31,8 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     RecyclerView recyclerView;
 
     public String categoryLetter;
-    private String alertDialogMessage = "Could not load recipes!";
     private RecipesListAdapter recipesListAdapter;
     private RecipesListContract.Presenter presenter;
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -92,7 +91,8 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
 
     @Override
     public void onError() {
-        showErrorDialog(Constants.ALERT_DIALOG_TITLE, alertDialogMessage);
+        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_recipes_list_homescreen));
     }
 
     @Override
