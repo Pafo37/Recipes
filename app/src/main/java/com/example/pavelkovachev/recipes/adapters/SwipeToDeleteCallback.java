@@ -8,7 +8,7 @@ import com.example.pavelkovachev.recipes.presenters.favorites.FavoritesContract;
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
-    private static final int DRAG_DIRS =0;
+    private static final int DRAG_DIRS = 0;
 
     private FavoritesContract.Presenter favoritesPresenter;
 

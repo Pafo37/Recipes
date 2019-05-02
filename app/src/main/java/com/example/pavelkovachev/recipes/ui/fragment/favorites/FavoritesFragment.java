@@ -33,8 +33,7 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
 
     private FavoritesContract.Presenter presenter;
     private FavoritesAdapter favoritesAdapter;
-    private String alertDialogTitle = "Error";
-    private String alertDialogMessage = "Could not load favorite recipes!";
+    private static final String alertDialogMessage = "Could not load favorite recipes!";
 
     public static FavoritesFragment newInstance() {
         return new FavoritesFragment();
@@ -90,7 +89,7 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
 
     @Override
     public void showError() {
-        showErrorDialog(alertDialogTitle, alertDialogMessage);
+        showErrorDialog(Constants.ALERT_DIALOG_TITLE, alertDialogMessage);
     }
 
     @Override

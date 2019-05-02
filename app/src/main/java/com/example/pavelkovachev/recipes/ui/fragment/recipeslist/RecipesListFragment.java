@@ -30,7 +30,6 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     RecyclerView recyclerView;
 
     public String categoryLetter;
-    private String alertDialogTitle = "Error";
     private String alertDialogMessage = "Could not load recipes!";
     private RecipesListAdapter recipesListAdapter;
     private RecipesListContract.Presenter presenter;
@@ -93,7 +92,7 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
 
     @Override
     public void onError() {
-        showErrorDialog(alertDialogTitle, alertDialogMessage);
+        showErrorDialog(Constants.ALERT_DIALOG_TITLE, alertDialogMessage);
     }
 
     @Override

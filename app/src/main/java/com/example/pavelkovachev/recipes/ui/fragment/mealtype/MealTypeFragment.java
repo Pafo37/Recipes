@@ -30,8 +30,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     private String currentMealTypeName;
     private MealTypeAdapter mealTypeAdapter;
     private MealTypeContract.Presenter presenter;
-    private String alertDialogTitle = "Error";
-    private String alertDialogMessage = "Could not load meal type categories!";
+    private static final String alertDialogMessage = "Could not load meal type categories!";
 
     public static MealTypeFragment newInstance() {
         return new MealTypeFragment();
@@ -91,6 +90,6 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
 
     @Override
     public void onError() {
-        showErrorDialog(alertDialogTitle, alertDialogMessage);
+        showErrorDialog(Constants.ALERT_DIALOG_TITLE, alertDialogMessage);
     }
 }

@@ -47,8 +47,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     private RecipeModel recipeModel;
     private IngredientsAdapter ingredientsAdapter;
     private GeneralMealDescriptionContract.Presenter presenter;
-    private String alertDialogTitle = "Error";
-    private String alertDialogMessage = "Recipe not found!";
+    private static final String alertDialogMessage = "Recipe not found!";
     private boolean isAddBtnClicked = false;
 
     @Override
@@ -97,7 +96,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     @Override
     public void onError() {
-        showErrorDialog(alertDialogTitle, alertDialogMessage);
+        showErrorDialog(Constants.ALERT_DIALOG_TITLE, alertDialogMessage);
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenContract;
@@ -32,10 +33,8 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
     @BindView(R.id.img_latest_meal)
     ImageView imgLatestMeal;
 
-    private final String INTENT_ID = "id";
     private HomeScreenContract.Presenter presenter;
-    private String alertDialogTitle = "Error";
-    private String alertDialogMessage = "Could not load recipes!";
+    private static final String alertDialogMessage = "Could not load recipes!";
 
     public static HomeScreenFragment newInstance() {
         return new HomeScreenFragment();
@@ -70,14 +69,14 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
     @OnClick(R.id.cardview_random_meal)
     void onRandomMealClicked() {
         Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
-        intent.putExtra(INTENT_ID, presenter.onRandomCardViewClicked());
+        intent.putExtra(Constants.RECIPE_ID, presenter.onRandomCardViewClicked());
         startActivity(intent);
     }
 
     @OnClick(R.id.cardview_latest_meal)
     void onLatestMealClicked() {
         Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
-        intent.putExtra(INTENT_ID, presenter.onLatestCardViewClicked());
+        intent.putExtra(Constants.RECIPE_ID, presenter.onLatestCardViewClicked());
         startActivity(intent);
     }
 
@@ -104,6 +103,6 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
 
     @Override
     public void onError() {
-        showErrorDialog(alertDialogTitle, alertDialogMessage);
+        showErrorDialog(Constants.ALERT_DIALOG_TITLE, alertDialogMessage);
     }
 }

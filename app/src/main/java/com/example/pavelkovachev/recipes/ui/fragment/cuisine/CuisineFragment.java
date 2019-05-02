@@ -29,8 +29,7 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
 
     private CuisineContract.Presenter presenter;
     private CuisineAdapter cuisineAdapter;
-    private String alertDialogTitle = "Error";
-    private String alertDialogMessage = "Could not load cuisine categories";
+    private static final String alertDialogMessage = "Could not load cuisine categories";
 
     public static CuisineFragment newInstance() {
         return new CuisineFragment();
@@ -89,6 +88,6 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
 
     @Override
     public void onError() {
-        showErrorDialog(alertDialogTitle, alertDialogMessage);
+        showErrorDialog(Constants.ALERT_DIALOG_TITLE, alertDialogMessage);
     }
 }
