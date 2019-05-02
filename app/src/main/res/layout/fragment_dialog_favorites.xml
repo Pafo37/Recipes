@@ -34,17 +34,19 @@
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:text="@string/button_cancel_favorites"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button_save" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <android.support.design.button.MaterialButton
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/margin_between_elements_default"
+        android:layout_marginRight="@dimen/margin_between_elements_default"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:text="@string/button_save_favorites"
         android:textSize="@dimen/material_design_btn_txt_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/button_cancel" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txt_input_layout_meal_name"
@@ -64,16 +66,16 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/txt_input_layout_description"
+        android:id="@+id/txt_input_layout_instructions"
         android:layout_width="@dimen/no_dimens"
         android:layout_height="wrap_content"
-        android:hint="@string/favorites_hint_recipe_description"
+        android:hint="@string/favorites_hint_recipe_instructions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_input_layout_meal_name">
 
         <EditText
-            android:id="@+id/edt_favorites_description_body"
+            android:id="@+id/edt_favorites_instructions_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_between_elements_default"
@@ -89,7 +91,7 @@
         app:layout_constraintBottom_toTopOf="@id/button_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_input_layout_description">
+        app:layout_constraintTop_toBottomOf="@id/txt_input_layout_instructions">
 
         <EditText
             android:id="@+id/edt_favorites_ingredients_body"
