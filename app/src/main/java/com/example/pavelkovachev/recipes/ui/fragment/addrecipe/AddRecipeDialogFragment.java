@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.pavelkovachev.recipes.R;
+import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
+import com.example.pavelkovachev.recipes.presenters.addrecipe.AddRecipeContract;
+import com.example.pavelkovachev.recipes.presenters.addrecipe.AddRecipePresenter;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
 
@@ -20,16 +23,23 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddRecipeDialogFragment extends DialogFragment {
+public class AddRecipeDialogFragment extends DialogFragment implements AddRecipeContract.View {
 
     @BindView(R.id.img_meal_favorites)
     ImageView imgPictureTaken;
     @BindView(R.id.edt_favorites_instructions_body)
-    EditText edtMealDescription;
+    EditText edtMealInstructions;
     @BindView(R.id.txt_favorites_meal_title)
     EditText edtMealTitle;
     @BindView(R.id.edt_favorites_ingredients_body)
     EditText edtMealIngredients;
+
+    private AddRecipeContract.Presenter presenter;
+    private String recipeName;
+    private String recipeInstructions;
+    private String recipeIngredients;
+    private String recipeImage;
+    MyRecipesModel recipeModel;
 
     public static AddRecipeDialogFragment newInstance() {
         return new AddRecipeDialogFragment();
@@ -46,6 +56,12 @@ public class AddRecipeDialogFragment extends DialogFragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter = new AddRecipePresenter(this);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         Dialog dialog = getDialog();
@@ -59,7 +75,40 @@ public class AddRecipeDialogFragment extends DialogFragment {
     @OnClick(R.id.fab_camera)
     public void onCameraClicked() {
         PickImageDialog.build(new PickSetup())
-                .setOnPickResult(pickResult -> imgPictureTaken.setImageBitmap(pickResult.getBitmap()))
+                .setOnPickResult(pickResult -> {
+                    recipeImage = pickResult.getPath();
+                    imgPictureTaken.setImageBitmap(pickResult.getBitmap());
+                })
                 .setOnPickCancel(() -> Log.d("TAG", "Cancel")).show(getFragmentManager());
+    }
+
+    @Override
+    public void setPresenter(AddRecipeContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void setProgressBarVisibility(boolean isVisible) {
+
+    }
+
+    @OnClick(R.id.button_save)
+    public void saveRecipe() {
+        recipeName = edtMealTitle.getText().toString();
+        recipeInstructions = edtMealInstructions.getText().toString();
+        recipeIngredients = edtMealIngredients.getText().toString();
+        recipeModel = new MyRecipesModel(recipeName, recipeInstructions, recipeIngredients, recipeImage);
+        presenter.addRecipeToDb();
+        dismiss();
+    }
+
+    @OnClick(R.id.button_cancel)
+    public void closeDialogFragment() {
+        dismiss();
+    }
+
+    @Override
+    public MyRecipesModel getRecipe() {
+        return recipeModel;
     }
 }

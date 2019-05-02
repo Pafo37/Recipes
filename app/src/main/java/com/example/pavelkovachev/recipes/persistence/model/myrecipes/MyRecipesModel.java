@@ -11,15 +11,24 @@ public class MyRecipesModel {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private String name;
-    private String instructions;
-    private String ingredients;
+    private String recipeName;
+    private String recipeInstructions;
+    private String recipeIngredients;
+    private String recipeImage;
 
-    public MyRecipesModel(int id, String name, String instructions, String ingredients) {
-        this.id = id;
-        this.name = name;
-        this.instructions = instructions;
-        this.ingredients = ingredients;
+    public String getRecipeImage() {
+        return recipeImage;
+    }
+
+    public void setRecipeImage(String recipeImage) {
+        this.recipeImage = recipeImage;
+    }
+
+    public MyRecipesModel(String recipeName, String recipeInstructions, String recipeIngredients, String recipeImage) {
+        this.recipeName = recipeName;
+        this.recipeInstructions = recipeInstructions;
+        this.recipeIngredients = recipeIngredients;
+        this.recipeImage = recipeImage;
     }
 
     public int getId() {
@@ -30,27 +39,27 @@ public class MyRecipesModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRecipeName() {
+        return recipeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
     }
 
-    public String getInstructions() {
-        return instructions;
+    public String getRecipeInstructions() {
+        return recipeInstructions;
     }
 
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
+    public void setRecipeInstructions(String recipeInstructions) {
+        this.recipeInstructions = recipeInstructions;
     }
 
-    public String getIngredients() {
-        return ingredients;
+    public String getRecipeIngredients() {
+        return recipeIngredients;
     }
 
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
+    public void setRecipeIngredients(String recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 }
