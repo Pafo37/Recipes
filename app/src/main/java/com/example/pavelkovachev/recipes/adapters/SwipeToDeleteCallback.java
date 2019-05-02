@@ -13,7 +13,7 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
     private FavoritesContract.Presenter favoritesPresenter;
 
     public SwipeToDeleteCallback(FavoritesContract.Presenter favoritesPresenter) {
-        super(DRAG_DIRS, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+        super(DRAG_DIRS, ItemTouchHelper.RIGHT);
         this.favoritesPresenter = favoritesPresenter;
     }
 
