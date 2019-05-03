@@ -92,7 +92,7 @@ public class AddRecipeDialogFragment extends DialogFragment implements AddRecipe
 
     }
 
-    @OnClick(R.id.button_save)
+    @OnClick(R.id.btn_save)
     public void saveRecipe() {
         recipeName = edtMealTitle.getText().toString();
         recipeInstructions = edtMealInstructions.getText().toString();
@@ -102,7 +102,7 @@ public class AddRecipeDialogFragment extends DialogFragment implements AddRecipe
         dismiss();
     }
 
-    @OnClick(R.id.button_cancel)
+    @OnClick(R.id.btn_cancel)
     public void closeDialogFragment() {
         dismiss();
     }
