@@ -19,6 +19,7 @@ import com.example.pavelkovachev.recipes.adapters.personalpreferences.myrecipes.
 import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
 import com.example.pavelkovachev.recipes.presenters.myrecipes.MyRecipesContract;
 import com.example.pavelkovachev.recipes.presenters.myrecipes.MyRecipesPresenter;
+import com.example.pavelkovachev.recipes.ui.activity.myrecipesdescription.MyRecipesDescriptionActivity;
 import com.example.pavelkovachev.recipes.ui.fragment.addrecipe.AddRecipeDialogFragment;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
 
@@ -48,7 +49,6 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
         initRecyclerView();
         recipesAdapter.notifyDataSetChanged();
     }
-
 
     @Override
     protected int getLayoutResId() {
@@ -96,7 +96,9 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
 
     @Override
     public void onMyRecipesClicked(MyRecipesModel myRecipesItem) {
-
+        Intent intent = new Intent(getActivity(), MyRecipesDescriptionActivity.class);
+        intent.putExtra(Constants.RECIPE_ID, myRecipesItem.getId());
+        startActivity(intent);
     }
 
     public void showSnackbar() {

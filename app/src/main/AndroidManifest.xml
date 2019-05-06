@@ -47,5 +47,8 @@
         <activity
             android:name=".ui.activity.personalpreferences.PersonalPreferencesActivity"
             android:parentActivityName=".ui.activity.homescreen.HomeScreenActivity" />
+        <activity
+            android:name=".ui.activity.myrecipesdescription.MyRecipesDescriptionActivity"
+            android:parentActivityName=".ui.activity.personalpreferences.PersonalPreferencesActivity" />
     </application>
 </manifest>

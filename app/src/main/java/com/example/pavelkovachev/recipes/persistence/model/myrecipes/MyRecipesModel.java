@@ -12,7 +12,7 @@ public class MyRecipesModel implements Parcelable {
 
     @NonNull
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private Integer id;
 
     private String recipeName;
     private String recipeInstructions;
@@ -42,11 +42,11 @@ public class MyRecipesModel implements Parcelable {
         this.recipeImage = parcel.readString();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

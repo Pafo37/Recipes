@@ -9,6 +9,7 @@ import com.example.pavelkovachev.recipes.presenters.generalmealdescription.Gener
 import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenPresenter;
 import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypePresenter;
 import com.example.pavelkovachev.recipes.presenters.myrecipes.MyRecipesPresenter;
+import com.example.pavelkovachev.recipes.presenters.myrecipesdescription.MyRecipesDescriptionPresenter;
 import com.example.pavelkovachev.recipes.presenters.recipeslist.RecipesListPresenter;
 
 import javax.inject.Singleton;
@@ -34,5 +35,7 @@ public interface AppComponent {
     void inject(AddRecipePresenter presenter);
 
     void inject(MyRecipesPresenter presenter);
+
+    void inject(MyRecipesDescriptionPresenter presenter);
 
 }
