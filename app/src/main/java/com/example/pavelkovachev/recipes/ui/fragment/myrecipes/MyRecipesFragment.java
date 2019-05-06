@@ -1,5 +1,6 @@
 package com.example.pavelkovachev.recipes.ui.fragment.myrecipes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
+import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.SwipeToDeleteCallBackMyRecipes;
 import com.example.pavelkovachev.recipes.adapters.personalpreferences.myrecipes.MyRecipesAdapter;
@@ -56,6 +58,7 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
     @OnClick(R.id.fab_add_recipes)
     public void onAddButtonClicked() {
         AddRecipeDialogFragment addRecipeDialogFragment = AddRecipeDialogFragment.newInstance();
+        addRecipeDialogFragment.setTargetFragment(this, 0);
         addRecipeDialogFragment.show(getFragmentManager(), "add_recipe");
     }
 
@@ -66,11 +69,24 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
 
     @Override
     public void setProgressBarVisibility(boolean isVisible) {
+        //NOT USED
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if (resultCode == 0) {
+                MyRecipesModel myRecipesModel;
+                myRecipesModel = data.getExtras().getParcelable(Constants.PARCELABLE_KEY);
+                presenter.getMyRecipesList().add(myRecipesModel);
+                notifyRecyclerView();
+            }
+        }
     }
 
     private void initRecyclerView() {
-        recipesAdapter = new MyRecipesAdapter(presenter, this);
+        recipesAdapter = new MyRecipesAdapter(this);
         recyclerView.setAdapter(recipesAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
@@ -93,17 +109,12 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
 
     @Override
     public void notifyRecyclerView() {
-        recipesAdapter.notifyDataSetChanged();
+        recipesAdapter.updateData(presenter.getMyRecipesList());
     }
 
     @Override
     public void notifyItemDeleted() {
-        recipesAdapter.notifyItemRemoved(presenter.getRecentlyDeletedItemPosition());
+        recipesAdapter.updateData(presenter.getMyRecipesList());
         showSnackbar();
-    }
-
-    @Override
-    public void notifyItemRestored() {
-        recipesAdapter.notifyItemInserted(presenter.getRecentlyDeletedItemPosition());
     }
 }

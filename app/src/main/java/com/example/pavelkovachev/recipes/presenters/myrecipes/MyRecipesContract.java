@@ -14,8 +14,6 @@ public interface MyRecipesContract {
 
         void notifyItemDeleted();
 
-        void notifyItemRestored();
-
     }
 
     interface Presenter extends BasePresenter {

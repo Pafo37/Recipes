@@ -1,11 +1,14 @@
 package com.example.pavelkovachev.recipes.persistence.model.myrecipes;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 @Entity
-public class MyRecipesModel {
+public class MyRecipesModel implements Parcelable {
 
     @NonNull
     @PrimaryKey(autoGenerate = true)
@@ -29,6 +32,14 @@ public class MyRecipesModel {
         this.recipeInstructions = recipeInstructions;
         this.recipeIngredients = recipeIngredients;
         this.recipeImage = recipeImage;
+    }
+
+    @Ignore
+    private MyRecipesModel(Parcel parcel) {
+        this.recipeName = parcel.readString();
+        this.recipeInstructions = parcel.readString();
+        this.recipeIngredients = parcel.readString();
+        this.recipeImage = parcel.readString();
     }
 
     public int getId() {
@@ -62,4 +73,35 @@ public class MyRecipesModel {
     public void setRecipeIngredients(String recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
     }
+
+    @Override
+    public int describeContents() {
+        int result = 1;
+        result ^= recipeName.hashCode();
+        result ^= recipeImage.hashCode();
+        result ^= recipeIngredients.hashCode();
+        result ^= recipeInstructions.hashCode();
+        return result;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(recipeName);
+        parcel.writeString(recipeImage);
+        parcel.writeString(recipeIngredients);
+        parcel.writeString(recipeInstructions);
+    }
+
+    public static final Parcelable.Creator<MyRecipesModel> CREATOR = new Parcelable.Creator<MyRecipesModel>() {
+
+        @Override
+        public MyRecipesModel createFromParcel(Parcel source) {
+            return new MyRecipesModel(source);
+        }
+
+        @Override
+        public MyRecipesModel[] newArray(int size) {
+            return new MyRecipesModel[0];
+        }
+    };
 }

@@ -40,11 +40,12 @@ public class MyRecipesPresenter extends BasePresenter implements MyRecipesContra
         subscribeSingle(dataService.getMyRecipesService().getMyRecipes(), new SingleObserver<List<MyRecipesModel>>() {
             @Override
             public void onSubscribe(Disposable d) {
-
+                //NOT USED
             }
 
             @Override
             public void onSuccess(List<MyRecipesModel> myRecipesModels) {
+                myRecipesModelList.clear();
                 myRecipesModelList.addAll(myRecipesModels);
                 view.notifyRecyclerView();
             }
@@ -68,17 +69,17 @@ public class MyRecipesPresenter extends BasePresenter implements MyRecipesContra
 
     @Override
     public void deleteItem(int position) {
-        recentlyDeletedItem = getMyRecipesList().get(position);
+        recentlyDeletedItem = myRecipesModelList.get(position);
         recentlyDeletedItemPosition = position;
-        dataService.getMyRecipesService().deleteMyRecipe(getMyRecipesList().get(position));
-        getMyRecipesList().remove(position);
+        dataService.getMyRecipesService().deleteMyRecipe(myRecipesModelList.get(position));
+        myRecipesModelList.remove(position);
         view.notifyItemDeleted();
     }
 
     @Override
     public void undoDelete() {
         dataService.getMyRecipesService().insertMyRecipe(recentlyDeletedItem);
-        getMyRecipesList().add(recentlyDeletedItemPosition, recentlyDeletedItem);
-        view.notifyItemRestored();
+        myRecipesModelList.add(recentlyDeletedItemPosition, recentlyDeletedItem);
+        view.notifyRecyclerView();
     }
 }

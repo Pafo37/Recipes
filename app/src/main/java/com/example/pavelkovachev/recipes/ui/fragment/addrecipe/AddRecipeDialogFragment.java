@@ -1,6 +1,7 @@
 package com.example.pavelkovachev.recipes.ui.fragment.addrecipe;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
 import com.example.pavelkovachev.recipes.presenters.addrecipe.AddRecipeContract;
@@ -89,7 +91,7 @@ public class AddRecipeDialogFragment extends DialogFragment implements AddRecipe
 
     @Override
     public void setProgressBarVisibility(boolean isVisible) {
-
+        //NOT USED
     }
 
     @OnClick(R.id.btn_save)
@@ -99,6 +101,9 @@ public class AddRecipeDialogFragment extends DialogFragment implements AddRecipe
         recipeIngredients = edtMealIngredients.getText().toString();
         recipeModel = new MyRecipesModel(recipeName, recipeInstructions, recipeIngredients, recipeImage);
         presenter.addRecipeToDb();
+        Intent intent = new Intent();
+        intent.putExtra(Constants.PARCELABLE_KEY, recipeModel);
+        getTargetFragment().onActivityResult(getTargetRequestCode(), 0, intent);
         dismiss();
     }
 
