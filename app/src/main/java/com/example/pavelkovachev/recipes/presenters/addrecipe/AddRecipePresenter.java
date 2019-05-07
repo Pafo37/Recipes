@@ -1,5 +1,6 @@
 package com.example.pavelkovachev.recipes.presenters.addrecipe;
 
+import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
 import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
 import com.example.pavelkovachev.recipes.services.ApplicationDataService;
 
@@ -23,7 +24,7 @@ public class AddRecipePresenter extends BasePresenter implements AddRecipeContra
     }
 
     @Override
-    public void addRecipeToDb() {
-        dataService.getMyRecipesService().insertMyRecipe(view.getRecipe());
+    public void addRecipeToDb(MyRecipesModel myRecipesModel) {
+        dataService.getMyRecipesService().insertMyRecipe(myRecipesModel);
     }
 }

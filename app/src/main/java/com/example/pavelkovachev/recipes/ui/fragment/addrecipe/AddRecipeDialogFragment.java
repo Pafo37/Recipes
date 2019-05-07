@@ -101,7 +101,7 @@ public class AddRecipeDialogFragment extends DialogFragment implements AddRecipe
         recipeInstructions = edtMealInstructions.getText().toString();
         recipeIngredients = edtMealIngredients.getText().toString();
         recipeModel = new MyRecipesModel(recipeName, recipeInstructions, recipeIngredients, recipeImage);
-        presenter.addRecipeToDb();
+        presenter.addRecipeToDb(recipeModel);
         Intent intent = new Intent();
         intent.putExtra(Constants.PARCELABLE_KEY_RECIPE, recipeModel);
         getTargetFragment().onActivityResult(getTargetRequestCode(), 0, intent);
@@ -113,8 +113,4 @@ public class AddRecipeDialogFragment extends DialogFragment implements AddRecipe
         dismiss();
     }
 
-    @Override
-    public MyRecipesModel getRecipe() {
-        return recipeModel;
-    }
 }

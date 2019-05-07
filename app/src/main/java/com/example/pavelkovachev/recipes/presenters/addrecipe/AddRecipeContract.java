@@ -7,12 +7,11 @@ import com.example.pavelkovachev.recipes.presenters.BaseView;
 public interface AddRecipeContract {
 
     interface View extends BaseView<Presenter> {
-
-        MyRecipesModel getRecipe();
+        
     }
 
     interface Presenter extends BasePresenter {
 
-        void addRecipeToDb();
+        void addRecipeToDb(MyRecipesModel myRecipesModel);
     }
 }
