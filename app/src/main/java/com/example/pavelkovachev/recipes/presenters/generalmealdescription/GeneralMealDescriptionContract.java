@@ -12,11 +12,7 @@ public interface GeneralMealDescriptionContract {
 
         String getRecipeId();
 
-        void onError();
-
-        void showErrorNoArguments();
-
-        RecipeModel getRecipe();
+        void showError(String title, String message);
     }
 
     interface Presenter extends BasePresenter {

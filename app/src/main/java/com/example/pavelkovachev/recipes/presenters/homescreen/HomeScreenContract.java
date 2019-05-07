@@ -12,7 +12,7 @@ public interface HomeScreenContract {
 
         void setLatestMeal(RecipeModel recipeModel);
 
-        void onError();
+        void showError(String title, String message);
     }
 
     interface Presenter extends BasePresenter {

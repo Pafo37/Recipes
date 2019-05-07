@@ -1,7 +1,5 @@
 package com.example.pavelkovachev.recipes.ui.fragment.myrecipesdescription;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,10 +12,12 @@ import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
 import com.example.pavelkovachev.recipes.presenters.myrecipesdescription.MyRecipesDescriptionContract;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 
-public class MyRecipesDescriptionFragment extends BaseFragment implements MyRecipesDescriptionContract.View {
+public class MyRecipesDescriptionFragment extends BaseFragment
+        implements MyRecipesDescriptionContract.View {
 
     @BindView(R.id.img_my_recipe_description)
     ImageView imgMyRecipe;
@@ -27,14 +27,15 @@ public class MyRecipesDescriptionFragment extends BaseFragment implements MyReci
     TextView txtMyRecipeIngredients;
 
     private int recipeId;
+    private MyRecipesDescriptionContract.Presenter presenter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (getArguments() != null) {
             recipeId = getArguments().getInt(Constants.RECIPE_ID);
+            presenter.getMyRecipeById(recipeId);
         }
-        presenter.getMyRecipeById(recipeId);
     }
 
     public static MyRecipesDescriptionFragment newInstance(Bundle bundle) {
@@ -42,8 +43,6 @@ public class MyRecipesDescriptionFragment extends BaseFragment implements MyReci
         fragment.setArguments(bundle);
         return fragment;
     }
-
-    private MyRecipesDescriptionContract.Presenter presenter;
 
     @Override
     protected int getLayoutResId() {
@@ -62,16 +61,14 @@ public class MyRecipesDescriptionFragment extends BaseFragment implements MyReci
 
     @Override
     public void showMyRecipe(MyRecipesModel myRecipesModel) {
-        Bitmap bitmap = BitmapFactory.decodeFile(myRecipesModel.getRecipeImage());
-        imgMyRecipe.setImageBitmap(bitmap);
+        Picasso.get().load(myRecipesModel.getRecipeImage()).into(imgMyRecipe);
         txtMyRecipeInstructions.setText(myRecipesModel.getRecipeInstructions());
         txtMyRecipeIngredients.setText(myRecipesModel.getRecipeIngredients());
         getActivity().setTitle(myRecipesModel.getRecipeName());
     }
 
     @Override
-    public void showError() {
-        showErrorDialog(getString(R.string.alert_dialog_error),
-                getString(R.string.alert_dialog_my_recipes_description));
+    public void showError(String title, String message) {
+        showErrorDialog(title, message);
     }
 }

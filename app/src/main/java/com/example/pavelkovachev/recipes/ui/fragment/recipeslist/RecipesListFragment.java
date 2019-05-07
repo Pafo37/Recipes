@@ -1,6 +1,5 @@
 package com.example.pavelkovachev.recipes.ui.fragment.recipeslist;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +8,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.recipeslist.RecipesListAdapter;
@@ -24,8 +22,8 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class RecipesListFragment extends BaseFragment implements RecipesListAdapter.ItemListener,
-        RecipesListContract.View {
+public class RecipesListFragment extends BaseFragment
+        implements RecipesListAdapter.ItemListener, RecipesListContract.View {
 
     @BindView(R.id.recycler_view_recipes_list)
     RecyclerView recyclerView;
@@ -54,10 +52,6 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
         Intent intent = new Intent(getActivity(), GeneralMealDescriptionActivity.class);
         intent.putExtra(Constants.RECIPE_ID, item.getRecipeId());
         startActivity(intent);
-    }
-
-    @Override
-    public void onTripleDotClicked(RecipeListModel model) {
     }
 
     @Override
@@ -90,18 +84,8 @@ public class RecipesListFragment extends BaseFragment implements RecipesListAdap
     }
 
     @Override
-    public void onError() {
-        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                App.getInstance().getResources().getString(R.string.alert_dialog_recipes_list_homescreen));
-    }
-
-    @Override
-    public void showErrorNoArguments() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
-                .setTitle(getString(R.string.error_message))
-                .setMessage(getString(R.string.not_found_message));
-        builder.setNeutralButton(getString(R.string.ok_message), (dialog, which) -> dialog.dismiss());
-        builder.show();
+    public void showError(String title, String message) {
+        showErrorDialog(title, message);
     }
 
     @Override

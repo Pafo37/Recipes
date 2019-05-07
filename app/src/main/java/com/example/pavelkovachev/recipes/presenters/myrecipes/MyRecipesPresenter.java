@@ -1,5 +1,7 @@
 package com.example.pavelkovachev.recipes.presenters.myrecipes;
 
+import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
 import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
 import com.example.pavelkovachev.recipes.services.ApplicationDataService;
@@ -35,24 +37,26 @@ public class MyRecipesPresenter extends BasePresenter implements MyRecipesContra
 
     @Override
     public void getRecipesFromDb() {
-        subscribeSingle(dataService.getMyRecipesService().getMyRecipes(), new SingleObserver<List<MyRecipesModel>>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                //NOT USED
-            }
+        subscribeSingle(dataService.getMyRecipesService().getMyRecipes(),
+                new SingleObserver<List<MyRecipesModel>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        //NOT USED
+                    }
 
-            @Override
-            public void onSuccess(List<MyRecipesModel> myRecipesModels) {
-                myRecipesModelList.clear();
-                myRecipesModelList.addAll(myRecipesModels);
-                view.notifyRecyclerView();
-            }
+                    @Override
+                    public void onSuccess(List<MyRecipesModel> myRecipesModels) {
+                        myRecipesModelList.clear();
+                        myRecipesModelList.addAll(myRecipesModels);
+                        view.notifyRecyclerView();
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-                view.showError();
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+                        view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                                App.getInstance().getResources().getString(R.string.alert_dialog_recipes_list_homescreen));
+                    }
+                });
     }
 
     @Override

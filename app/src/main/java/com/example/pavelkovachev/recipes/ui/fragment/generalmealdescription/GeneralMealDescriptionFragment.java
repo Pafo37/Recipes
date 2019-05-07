@@ -1,6 +1,5 @@
 package com.example.pavelkovachev.recipes.ui.fragment.generalmealdescription;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.ingredients.IngredientsAdapter;
@@ -95,23 +93,8 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     }
 
     @Override
-    public void onError() {
-        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                App.getInstance().getResources().getString(R.string.alert_dialog_general_meal_description));
-    }
-
-    @Override
-    public void showErrorNoArguments() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
-                .setTitle(getString(R.string.error_message))
-                .setMessage(getString(R.string.not_found_message));
-        builder.setNeutralButton(getString(R.string.ok_message), (dialog, which) -> dialog.dismiss());
-        builder.show();
-    }
-
-    @Override
-    public RecipeModel getRecipe() {
-        return this.recipeModel;
+    public void showError(String title, String message) {
+        showErrorDialog(title, message);
     }
 
     private List<Ingredient> initIngredients(RecipeModel recipeModel) {
@@ -138,8 +121,8 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     @OnClick(R.id.fab_general_meal_description_favorite)
     public void onFabGeneralMealDescriptionClicked() {
-        //TODO:check db if recipe exists
-        presenter.addToFavorites(getRecipe());
+        //TODO:check db if recipe exists and check for null recipe model
+        presenter.addToFavorites(recipeModel);
         if (isAddBtnClicked) {
             Toast.makeText(getContext(), getResources().
                     getString(R.string.recipe_already_added), Toast.LENGTH_SHORT).show();

@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.categories.cuisine.CuisineAdapter;
@@ -23,7 +22,8 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class CuisineFragment extends BaseFragment implements CuisineAdapter.CuisineItemListener, CuisineContract.View {
+public class CuisineFragment extends BaseFragment
+        implements CuisineAdapter.CuisineItemListener, CuisineContract.View {
 
     @BindView(R.id.recyclerview_category_cuisine)
     RecyclerView recyclerView;
@@ -68,7 +68,7 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     }
 
     @Override
-    public void loadCuisinesFromApi(List<CuisineModel> cuisineList) {
+    public void showCuisineFromApi(List<CuisineModel> cuisineList) {
         if (isAdded()) {
             cuisineAdapter.notifyDataSetChanged();
         }
@@ -87,8 +87,7 @@ public class CuisineFragment extends BaseFragment implements CuisineAdapter.Cuis
     }
 
     @Override
-    public void onError() {
-        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                App.getInstance().getResources().getString(R.string.alert_dialog_cuisine));
+    public void showError(String title, String message) {
+        showErrorDialog(title, message);
     }
 }

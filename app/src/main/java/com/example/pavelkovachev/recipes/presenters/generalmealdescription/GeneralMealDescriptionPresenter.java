@@ -1,6 +1,7 @@
 package com.example.pavelkovachev.recipes.presenters.generalmealdescription;
 
-import com.example.pavelkovachev.recipes.converter.RecipeConverter;
+import com.example.pavelkovachev.recipes.App;
+import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
 import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
@@ -33,13 +34,14 @@ public class GeneralMealDescriptionPresenter extends BasePresenter implements Ge
         if (view.getRecipeId() != null) {
             recipeService.getRecipeById(view.getRecipeId(), this);
         } else {
-            view.showErrorNoArguments();
+            view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                    App.getInstance().getResources().getString(R.string.alert_dialog_general_meal_description));
         }
     }
 
     @Override
     public void addToFavorites(RecipeModel recipeModel) {
-        dataService.getFavoritesService().insertFavorites(RecipeConverter.convertToFavoriteRecipe(recipeModel));
+        dataService.getFavoritesService().insertFavorites(RecipeModel.convertToFavoriteRecipe(recipeModel));
     }
 
     @Override
@@ -59,27 +61,31 @@ public class GeneralMealDescriptionPresenter extends BasePresenter implements Ge
 
     @Override
     public void onError() {
-        view.onError();
+        view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_general_meal_description));
     }
 
     @Override
     public void onSuccessRandomRecipe(RandomRecipeListResponse randomRecipesResponse) {
-        view.showRecipe(RecipeConverter.convertRandomRecipe(randomRecipesResponse.getMeals().get(0)));
+        view.showRecipe(RecipeModel.convertRandomRecipe(randomRecipesResponse.getMeals().get(0)));
     }
 
     @Override
     public void onErrorRandomRecipe() {
-        view.onError();
+        view.showError(
+                App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_general_meal_description));
     }
 
     @Override
     public void onSuccessLatestRecipe(LatestRecipeListResponse latestRecipesResponse) {
-        view.showRecipe(RecipeConverter.convertLatestRecipe(latestRecipesResponse.getLatestRecipeResponseList().get(0)));
+        view.showRecipe(RecipeModel.convertLatestRecipe(latestRecipesResponse.getLatestRecipeResponseList().get(0)));
     }
 
     @Override
     public void onErrorLatestRecipe() {
-        view.onError();
+        view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
+                App.getInstance().getResources().getString(R.string.alert_dialog_general_meal_description));
     }
 
     @Override

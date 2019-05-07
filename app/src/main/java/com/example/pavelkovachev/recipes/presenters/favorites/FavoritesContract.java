@@ -10,7 +10,7 @@ public interface FavoritesContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showError();
+        void showError(String title, String message);
 
         void notifyItemDeleted();
 

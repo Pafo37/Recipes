@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.SwipeToDeleteCallbackFavorites;
@@ -45,7 +44,6 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
         presenter = new FavoritesPresenter(this);
         presenter.getFavoriteRecipes();
         initRecyclerView();
-        favoritesAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -68,6 +66,7 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
         recyclerView.setAdapter(favoritesAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+        favoritesAdapter.notifyDataSetChanged();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallbackFavorites(presenter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
@@ -88,9 +87,8 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
     }
 
     @Override
-    public void showError() {
-        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                App.getInstance().getResources().getString(R.string.alert_dialog_favorites));
+    public void showError(String title, String message) {
+        showErrorDialog(title, message);
     }
 
     @Override

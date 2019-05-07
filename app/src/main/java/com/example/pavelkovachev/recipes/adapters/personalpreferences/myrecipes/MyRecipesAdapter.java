@@ -1,7 +1,5 @@
 package com.example.pavelkovachev.recipes.adapters.personalpreferences.myrecipes;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +32,9 @@ public class MyRecipesAdapter extends RecyclerView.Adapter<MyRecipesAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.img_my_recipe)
-        ImageView imageView;
+        ImageView imgMyRecipe;
         @BindView(R.id.txt_my_recipe_name)
-        TextView textView;
+        TextView txtMyRecipeName;
 
         private MyRecipesModel item;
 
@@ -47,9 +46,8 @@ public class MyRecipesAdapter extends RecyclerView.Adapter<MyRecipesAdapter.View
 
         private void setData(MyRecipesModel item) {
             this.item = item;
-            Bitmap bitmap = BitmapFactory.decodeFile(item.getRecipeImage());
-            imageView.setImageBitmap(bitmap);
-            textView.setText(item.getRecipeName());
+            Picasso.get().load(item.getRecipeImage()).into(imgMyRecipe);
+            txtMyRecipeName.setText(item.getRecipeName());
         }
 
         @Override

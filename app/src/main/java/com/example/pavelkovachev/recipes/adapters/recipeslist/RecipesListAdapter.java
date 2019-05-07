@@ -37,7 +37,6 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
         @BindView(R.id.txt_recipe_list_title)
         public TextView txtRecipeListTitle;
-
         @BindView(R.id.img_gridlayout_categories)
         public ImageView imgCategories;
 
@@ -74,7 +73,7 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_recipes_list, viewGroup, false));
+        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_recipes_list, viewGroup, false));
     }
 
     @Override
@@ -89,7 +88,5 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
     public interface ItemListener {
         void onItemClick(RecipeListModel item);
-
-        void onTripleDotClicked(RecipeListModel model);
     }
 }

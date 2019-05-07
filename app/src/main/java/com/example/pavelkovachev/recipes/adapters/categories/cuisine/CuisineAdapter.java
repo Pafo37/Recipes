@@ -30,6 +30,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
         @BindView(R.id.txt_cuisine_category_name)
         TextView txtCuisineCategoryName;
+
         private CuisineModel cuisineItem;
 
         private ViewHolderCuisine(@NonNull View itemView) {

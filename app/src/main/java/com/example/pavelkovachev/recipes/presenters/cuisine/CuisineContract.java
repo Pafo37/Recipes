@@ -10,11 +10,11 @@ public interface CuisineContract {
 
     interface View extends BaseView<Presenter> {
 
-        void loadCuisinesFromApi(List<CuisineModel> cuisineModel);
+        void showCuisineFromApi(List<CuisineModel> cuisineModel);
 
         void showCuisineTypesFromDb(List<CuisineModel> result);
 
-        void onError();
+        void showError(String title, String message);
     }
 
     interface Presenter extends BasePresenter {

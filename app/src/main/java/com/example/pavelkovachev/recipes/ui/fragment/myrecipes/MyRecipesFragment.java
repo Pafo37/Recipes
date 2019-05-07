@@ -76,7 +76,7 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0) {
             if (resultCode == 0) {
-                if (data.getExtras() != null) {
+                if (data != null && data.getExtras() != null) {
                     MyRecipesModel myRecipesModel;
                     myRecipesModel = data.getExtras().getParcelable(Constants.PARCELABLE_KEY_RECIPE);
                     presenter.getMyRecipesList().add(myRecipesModel);
@@ -118,13 +118,12 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
 
     @Override
     public void notifyItemDeleted() {
-        recipesAdapter.updateData(presenter.getMyRecipesList());
+        notifyRecyclerView();
         showSnackbar();
     }
 
     @Override
-    public void showError() {
-        showErrorDialog(getString(R.string.alert_dialog_error),
-                getString(R.string.alert_dialog_recipes_list_homescreen));
+    public void showError(String title, String message) {
+        showErrorDialog(title, message);
     }
 }

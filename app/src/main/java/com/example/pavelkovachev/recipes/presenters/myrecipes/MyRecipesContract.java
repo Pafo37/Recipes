@@ -14,7 +14,7 @@ public interface MyRecipesContract {
 
         void notifyItemDeleted();
 
-        void showError();
+        void showError(String title, String message);
 
     }
 
