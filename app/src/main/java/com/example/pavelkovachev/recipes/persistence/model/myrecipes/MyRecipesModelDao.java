@@ -19,7 +19,7 @@ public interface MyRecipesModelDao {
     Single<MyRecipesModel> getMyRecipeById(int id);
 
     @Insert
-    long insert(MyRecipesModel myRecipesModel);
+    void insert(MyRecipesModel myRecipesModel);
 
     @Delete
     void delete(MyRecipesModel myRecipesModel);
