@@ -117,8 +117,9 @@
     <string name="alert_dialog_error">Error</string>
     <string name="alert_dialog_recipes_list_homescreen">Could not load recipes!</string>
     <string name="alert_dialog_general_meal_description">Recipe not found!</string>
-    <string name="alert_dialog_cuisine">Could not load cuisine categories</string>
+    <string name="alert_dialog_cuisine">Could not load cuisine categories!</string>
     <string name="alert_dialog_favorites">Could not load favorite recipes!</string>
+    <string name="alert_dialog_my_recipes_description">Could not load the recipe!</string>
 
 
 </resources>

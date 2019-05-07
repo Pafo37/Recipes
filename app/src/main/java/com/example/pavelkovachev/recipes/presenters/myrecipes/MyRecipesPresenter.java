@@ -1,7 +1,5 @@
 package com.example.pavelkovachev.recipes.presenters.myrecipes;
 
-import android.util.Log;
-
 import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
 import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
 import com.example.pavelkovachev.recipes.services.ApplicationDataService;
@@ -52,7 +50,7 @@ public class MyRecipesPresenter extends BasePresenter implements MyRecipesContra
 
             @Override
             public void onError(Throwable e) {
-                Log.d("tag", "tag");
+                view.showError();
             }
         });
     }
@@ -71,7 +69,7 @@ public class MyRecipesPresenter extends BasePresenter implements MyRecipesContra
     public void deleteItem(int position) {
         recentlyDeletedItem = myRecipesModelList.get(position);
         recentlyDeletedItemPosition = position;
-        dataService.getMyRecipesService().deleteMyRecipe(myRecipesModelList.get(position));
+        dataService.getMyRecipesService().deleteMyRecipe(recentlyDeletedItem);
         myRecipesModelList.remove(position);
         view.notifyItemDeleted();
     }

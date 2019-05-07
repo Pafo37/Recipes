@@ -14,6 +14,8 @@ public interface MyRecipesContract {
 
         void notifyItemDeleted();
 
+        void showError();
+
     }
 
     interface Presenter extends BasePresenter {

@@ -47,7 +47,6 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
         presenter = new MyRecipesPresenter(this);
         presenter.getRecipesFromDb();
         initRecyclerView();
-        recipesAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -59,7 +58,7 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
     public void onAddButtonClicked() {
         AddRecipeDialogFragment addRecipeDialogFragment = AddRecipeDialogFragment.newInstance();
         addRecipeDialogFragment.setTargetFragment(this, 0);
-        addRecipeDialogFragment.show(getFragmentManager(), "add_recipe");
+        addRecipeDialogFragment.show(getFragmentManager(), Constants.DIALOG_FRAGMENT_TAG);
     }
 
     @Override
@@ -77,10 +76,12 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0) {
             if (resultCode == 0) {
-                MyRecipesModel myRecipesModel;
-                myRecipesModel = data.getExtras().getParcelable(Constants.PARCELABLE_KEY);
-                presenter.getMyRecipesList().add(myRecipesModel);
-                notifyRecyclerView();
+                if (data.getExtras() != null) {
+                    MyRecipesModel myRecipesModel;
+                    myRecipesModel = data.getExtras().getParcelable(Constants.PARCELABLE_KEY_RECIPE);
+                    presenter.getMyRecipesList().add(myRecipesModel);
+                    notifyRecyclerView();
+                }
             }
         }
     }
@@ -90,6 +91,7 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
         recyclerView.setAdapter(recipesAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+        recipesAdapter.notifyDataSetChanged();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallBackMyRecipes(presenter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
@@ -118,5 +120,11 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
     public void notifyItemDeleted() {
         recipesAdapter.updateData(presenter.getMyRecipesList());
         showSnackbar();
+    }
+
+    @Override
+    public void showError() {
+        showErrorDialog(getString(R.string.alert_dialog_error),
+                getString(R.string.alert_dialog_recipes_list_homescreen));
     }
 }

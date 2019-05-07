@@ -31,9 +31,10 @@ public class MyRecipesDescriptionFragment extends BaseFragment implements MyReci
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recipeId = getArguments().getInt(Constants.RECIPE_ID);
+        if (getArguments() != null) {
+            recipeId = getArguments().getInt(Constants.RECIPE_ID);
+        }
         presenter.getMyRecipeById(recipeId);
-
     }
 
     public static MyRecipesDescriptionFragment newInstance(Bundle bundle) {
@@ -66,5 +67,11 @@ public class MyRecipesDescriptionFragment extends BaseFragment implements MyReci
         txtMyRecipeInstructions.setText(myRecipesModel.getRecipeInstructions());
         txtMyRecipeIngredients.setText(myRecipesModel.getRecipeIngredients());
         getActivity().setTitle(myRecipesModel.getRecipeName());
+    }
+
+    @Override
+    public void showError() {
+        showErrorDialog(getString(R.string.alert_dialog_error),
+                getString(R.string.alert_dialog_my_recipes_description));
     }
 }

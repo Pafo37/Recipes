@@ -81,7 +81,8 @@ public class AddRecipeDialogFragment extends DialogFragment implements AddRecipe
                     recipeImage = pickResult.getPath();
                     imgPictureTaken.setImageBitmap(pickResult.getBitmap());
                 })
-                .setOnPickCancel(() -> Log.d("TAG", "Cancel")).show(getFragmentManager());
+                .setOnPickCancel(() -> Log.d("TAG", "Cancel"))
+                .show(getFragmentManager());
     }
 
     @Override
@@ -102,7 +103,7 @@ public class AddRecipeDialogFragment extends DialogFragment implements AddRecipe
         recipeModel = new MyRecipesModel(recipeName, recipeInstructions, recipeIngredients, recipeImage);
         presenter.addRecipeToDb();
         Intent intent = new Intent();
-        intent.putExtra(Constants.PARCELABLE_KEY, recipeModel);
+        intent.putExtra(Constants.PARCELABLE_KEY_RECIPE, recipeModel);
         getTargetFragment().onActivityResult(getTargetRequestCode(), 0, intent);
         dismiss();
     }

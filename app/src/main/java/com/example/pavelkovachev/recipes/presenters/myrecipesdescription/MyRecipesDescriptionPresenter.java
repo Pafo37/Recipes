@@ -32,7 +32,7 @@ public class MyRecipesDescriptionPresenter extends BasePresenter implements MyRe
         subscribeSingle(dataService.getMyRecipesService().getMyRecipeById(recipeId), new SingleObserver<MyRecipesModel>() {
             @Override
             public void onSubscribe(Disposable d) {
-
+                //NOT USED
             }
 
             @Override
@@ -42,7 +42,7 @@ public class MyRecipesDescriptionPresenter extends BasePresenter implements MyRe
 
             @Override
             public void onError(Throwable e) {
-
+                view.showError();
             }
         });
     }

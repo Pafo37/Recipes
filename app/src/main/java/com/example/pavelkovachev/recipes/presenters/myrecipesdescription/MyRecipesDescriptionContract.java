@@ -10,6 +10,8 @@ public interface MyRecipesDescriptionContract {
 
         void showMyRecipe(MyRecipesModel myRecipesModel);
 
+        void showError();
+
     }
 
     interface Presenter extends BasePresenter {
