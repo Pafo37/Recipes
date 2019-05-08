@@ -7,7 +7,7 @@ import com.example.pavelkovachev.recipes.presenters.BaseView;
 public interface AddRecipeContract {
 
     interface View extends BaseView<Presenter> {
-        
+
     }
 
     interface Presenter extends BasePresenter {

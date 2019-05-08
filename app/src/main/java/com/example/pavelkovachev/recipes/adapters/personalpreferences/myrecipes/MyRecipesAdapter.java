@@ -1,5 +1,7 @@
 package com.example.pavelkovachev.recipes.adapters.personalpreferences.myrecipes;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +13,6 @@ import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,8 @@ public class MyRecipesAdapter extends RecyclerView.Adapter<MyRecipesAdapter.View
 
         private void setData(MyRecipesModel item) {
             this.item = item;
-            Picasso.get().load(item.getRecipeImage()).into(imgMyRecipe);
+            Bitmap bitmap = BitmapFactory.decodeFile(item.getRecipeImage());
+            imgMyRecipe.setImageBitmap(bitmap);
             txtMyRecipeName.setText(item.getRecipeName());
         }
 

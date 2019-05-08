@@ -28,7 +28,7 @@ public class MyRecipesDiffUtilCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return newList.get(newItemPosition).getId() == oldList.get(oldItemPosition).getId();
+        return newList.get(newItemPosition).getRecipeName() == oldList.get(oldItemPosition).getRecipeName();
     }
 
     @Override

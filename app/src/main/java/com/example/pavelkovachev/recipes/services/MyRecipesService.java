@@ -1,8 +1,8 @@
 package com.example.pavelkovachev.recipes.services;
 
 import com.example.pavelkovachev.recipes.persistence.executors.AppExecutor;
-import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
+import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesRepository;
 
 import java.util.List;
@@ -17,6 +17,7 @@ public class MyRecipesService implements MyRecipesRepository {
 
     private final MyRecipesModelDao myRecipesModelDao;
     private final AppExecutor appExecutor;
+
 
     @Inject
     public MyRecipesService(final MyRecipesModelDao myRecipesModelDao,
@@ -41,7 +42,7 @@ public class MyRecipesService implements MyRecipesRepository {
     }
 
     @Override
-    public Single<MyRecipesModel> getMyRecipeById(int id) {
-        return myRecipesModelDao.getMyRecipeById(id);
+    public Single<MyRecipesModel> getMyRecipeByName(String recipeName) {
+        return myRecipesModelDao.getMyRecipeByName(recipeName);
     }
 }

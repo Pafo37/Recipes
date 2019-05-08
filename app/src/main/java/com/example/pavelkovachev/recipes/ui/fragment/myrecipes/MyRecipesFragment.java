@@ -99,7 +99,7 @@ public class MyRecipesFragment extends BaseFragment implements MyRecipesContract
     @Override
     public void onMyRecipesClicked(MyRecipesModel myRecipesItem) {
         Intent intent = new Intent(getActivity(), MyRecipesDescriptionActivity.class);
-        intent.putExtra(Constants.RECIPE_ID, myRecipesItem.getId());
+        intent.putExtra(Constants.RECIPE_NAME, myRecipesItem.getRecipeName());
         startActivity(intent);
     }
 

@@ -15,8 +15,8 @@ public interface MyRecipesModelDao {
     @Query("SELECT * FROM MyRecipesModel")
     Single<List<MyRecipesModel>> getMyRecipes();
 
-    @Query("SELECT * FROM MyRecipesModel WHERE id = :id")
-    Single<MyRecipesModel> getMyRecipeById(int id);
+    @Query("SELECT * FROM MyRecipesModel WHERE recipeName = :recipeName")
+    Single<MyRecipesModel> getMyRecipeByName(String recipeName );
 
     @Insert
     void insert(MyRecipesModel myRecipesModel);

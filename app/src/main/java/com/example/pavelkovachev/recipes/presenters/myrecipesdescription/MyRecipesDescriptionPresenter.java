@@ -18,7 +18,6 @@ public class MyRecipesDescriptionPresenter extends BasePresenter
     ApplicationDataService dataService;
 
     private MyRecipesDescriptionContract.View view;
-    private MyRecipesModel recipesModel;
 
     public MyRecipesDescriptionPresenter(MyRecipesDescriptionContract.View view) {
         this.view = view;
@@ -31,8 +30,8 @@ public class MyRecipesDescriptionPresenter extends BasePresenter
     }
 
     @Override
-    public void getMyRecipeById(int recipeId) {
-        subscribeSingle(dataService.getMyRecipesService().getMyRecipeById(recipeId),
+    public void getMyRecipeByName(String recipeName) {
+        subscribeSingle(dataService.getMyRecipesService().getMyRecipeByName(recipeName),
                 new SingleObserver<MyRecipesModel>() {
                     @Override
                     public void onSubscribe(Disposable d) {

@@ -1,5 +1,7 @@
 package com.example.pavelkovachev.recipes.ui.fragment.myrecipesdescription;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +14,6 @@ import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
 import com.example.pavelkovachev.recipes.presenters.myrecipesdescription.MyRecipesDescriptionContract;
 import com.example.pavelkovachev.recipes.ui.fragment.base.BaseFragment;
-import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 
@@ -26,15 +27,15 @@ public class MyRecipesDescriptionFragment extends BaseFragment
     @BindView(R.id.txt_my_recipe_ingredients_body)
     TextView txtMyRecipeIngredients;
 
-    private int recipeId;
+    private String recipeName;
     private MyRecipesDescriptionContract.Presenter presenter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (getArguments() != null) {
-            recipeId = getArguments().getInt(Constants.RECIPE_ID);
-            presenter.getMyRecipeById(recipeId);
+            recipeName = getArguments().getString(Constants.RECIPE_NAME);
+            presenter.getMyRecipeByName(recipeName);
         }
     }
 
@@ -61,7 +62,8 @@ public class MyRecipesDescriptionFragment extends BaseFragment
 
     @Override
     public void showMyRecipe(MyRecipesModel myRecipesModel) {
-        Picasso.get().load(myRecipesModel.getRecipeImage()).into(imgMyRecipe);
+        Bitmap bitmap = BitmapFactory.decodeFile(myRecipesModel.getRecipeImage());
+        imgMyRecipe.setImageBitmap(bitmap);
         txtMyRecipeInstructions.setText(myRecipesModel.getRecipeInstructions());
         txtMyRecipeIngredients.setText(myRecipesModel.getRecipeIngredients());
         getActivity().setTitle(myRecipesModel.getRecipeName());

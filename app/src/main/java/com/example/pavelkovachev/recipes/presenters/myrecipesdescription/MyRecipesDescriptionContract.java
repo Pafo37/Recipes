@@ -16,7 +16,7 @@ public interface MyRecipesDescriptionContract {
 
     interface Presenter extends BasePresenter {
 
-        void getMyRecipeById(int recipeId);
+        void getMyRecipeByName(String recipeName);
 
     }
 }

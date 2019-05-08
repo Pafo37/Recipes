@@ -11,10 +11,9 @@ import android.support.annotation.NonNull;
 public class MyRecipesModel implements Parcelable {
 
     @NonNull
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-
+    @PrimaryKey
     private String recipeName;
+
     private String recipeInstructions;
     private String recipeIngredients;
     private String recipeImage;
@@ -40,14 +39,6 @@ public class MyRecipesModel implements Parcelable {
         this.recipeInstructions = parcel.readString();
         this.recipeIngredients = parcel.readString();
         this.recipeImage = parcel.readString();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getRecipeName() {

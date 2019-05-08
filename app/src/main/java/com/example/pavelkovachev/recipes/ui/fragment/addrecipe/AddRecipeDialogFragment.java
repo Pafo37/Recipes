@@ -1,6 +1,5 @@
 package com.example.pavelkovachev.recipes.ui.fragment.addrecipe;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -63,14 +62,11 @@ public class AddRecipeDialogFragment extends DialogFragment implements AddRecipe
         presenter = new AddRecipePresenter(this);
     }
 
-    @Override
     public void onStart() {
         super.onStart();
-        Dialog dialog = getDialog();
-        if (dialog != null) {
-            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-            int height = ViewGroup.LayoutParams.MATCH_PARENT;
-            dialog.getWindow().setLayout(width, height);
+        if (getDialog() != null) {
+            getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
         }
     }
 
@@ -112,5 +108,4 @@ public class AddRecipeDialogFragment extends DialogFragment implements AddRecipe
     public void closeDialogFragment() {
         dismiss();
     }
-
 }

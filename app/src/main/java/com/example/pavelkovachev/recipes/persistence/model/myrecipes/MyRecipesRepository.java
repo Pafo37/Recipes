@@ -12,6 +12,6 @@ public interface MyRecipesRepository {
 
     Single<List<MyRecipesModel>> getMyRecipes();
 
-    Single<MyRecipesModel> getMyRecipeById(int id);
+    Single<MyRecipesModel> getMyRecipeByName(String recipeName);
 
 }
