@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
@@ -19,7 +18,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.ViewHolder> {
 
@@ -46,14 +44,6 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
             super(view);
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
-        }
-
-        @OnClick(R.id.img_triple_vertical_dots)
-        void onTripleDotsClicked() {
-            PopupMenu popupMenu = new PopupMenu(context, this.itemView);
-            popupMenu.getMenuInflater().inflate(R.menu.menu_recipes_dropdown, popupMenu.getMenu());
-            popupMenu.setOnMenuItemClickListener(item -> false);
-            popupMenu.show();
         }
 
         private void setData(RecipeListModel item) {
