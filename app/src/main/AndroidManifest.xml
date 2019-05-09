@@ -46,6 +46,7 @@
             android:parentActivityName=".ui.activity.categories.CategoriesActivity" />
         <activity
             android:name=".ui.activity.personalpreferences.PersonalPreferencesActivity"
+            android:launchMode="singleTop"
             android:parentActivityName=".ui.activity.homescreen.HomeScreenActivity" />
         <activity
             android:name=".ui.activity.myrecipesdescription.MyRecipesDescriptionActivity"
