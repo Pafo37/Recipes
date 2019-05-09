@@ -30,19 +30,27 @@
                 android:resource="@xml/picker_provider_paths" />
         </provider>
 
-        <activity android:name=".ui.activity.homescreen.HomeScreenActivity">
+        <activity
+            android:name=".ui.activity.homescreen.HomeScreenActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.settings.SettingsActivity" />
+        <activity
+            android:name=".ui.activity.settings.SettingsActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.activity.categories.CategoriesActivity"
+            android:launchMode="singleTop"
             android:parentActivityName=".ui.activity.homescreen.HomeScreenActivity" />
-        <activity android:name=".ui.activity.generalmealdescription.GeneralMealDescriptionActivity" />
+        <activity
+            android:name=".ui.activity.generalmealdescription.GeneralMealDescriptionActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.activity.recipeslist.RecipesListActivity"
+            android:launchMode="singleTop"
             android:parentActivityName=".ui.activity.categories.CategoriesActivity" />
         <activity
             android:name=".ui.activity.personalpreferences.PersonalPreferencesActivity"
@@ -50,6 +58,7 @@
             android:parentActivityName=".ui.activity.homescreen.HomeScreenActivity" />
         <activity
             android:name=".ui.activity.myrecipesdescription.MyRecipesDescriptionActivity"
+            android:launchMode="singleTop"
             android:parentActivityName=".ui.activity.personalpreferences.PersonalPreferencesActivity" />
     </application>
 </manifest>
