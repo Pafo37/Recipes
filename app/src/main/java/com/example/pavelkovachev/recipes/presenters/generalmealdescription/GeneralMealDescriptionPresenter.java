@@ -60,6 +60,9 @@ public class GeneralMealDescriptionPresenter extends BasePresenter implements Ge
 
             @Override
             public void onSuccess(List<FavoritesModel> favoritesModels) {
+                if (favoritesModels.size() == 0) {
+                    dataService.getFavoritesService().insertFavorites(favoritesModel);
+                }
                 for (FavoritesModel model : favoritesModels) {
                     if (model.getFavoriteRecipeId().equals(favoritesModel.getFavoriteRecipeId())) {
                         isRecipeAdded = true;
