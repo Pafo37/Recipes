@@ -120,6 +120,5 @@
     <string name="alert_dialog_cuisine">Could not load cuisine categories!</string>
     <string name="alert_dialog_favorites">Could not load favorite recipes!</string>
     <string name="alert_dialog_my_recipes_description">Could not load the recipe!</string>
-
-
+    <string name="alert_dialog_add_recipe_to_favorites">Could not add recipe to favorites</string>
 </resources>

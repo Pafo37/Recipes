@@ -14,7 +14,7 @@ public interface MyRecipesContract {
 
         void notifyItemDeleted();
 
-        void showError(String title, String message);
+        void showError(int title, int message);
 
     }
 
@@ -23,8 +23,6 @@ public interface MyRecipesContract {
         void getRecipesFromDb();
 
         List<MyRecipesModel> getMyRecipesList();
-
-        int getRecentlyDeletedItemPosition();
 
         void undoDelete();
 

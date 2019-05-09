@@ -14,7 +14,8 @@ public interface CuisineContract {
 
         void showCuisineTypesFromDb(List<CuisineModel> result);
 
-        void showError(String title, String message);
+        void showError(int title, int message);
+
     }
 
     interface Presenter extends BasePresenter {
@@ -24,5 +25,6 @@ public interface CuisineContract {
         void loadCuisineFromDb();
 
         List<CuisineModel> getCuisineList();
+
     }
 }

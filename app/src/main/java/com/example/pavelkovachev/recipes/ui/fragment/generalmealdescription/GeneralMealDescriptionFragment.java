@@ -46,7 +46,7 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     private RecipeModel recipeModel;
     private IngredientsAdapter ingredientsAdapter;
     private GeneralMealDescriptionContract.Presenter presenter;
-    private boolean isAddBtnClicked = false;
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -93,8 +93,13 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
     }
 
     @Override
-    public void showError(String title, String message) {
+    public void showError(int title, int message) {
         showErrorDialog(title, message);
+    }
+
+    @Override
+    public void showToast(int message) {
+        Toast.makeText(getContext(), getString(message), Toast.LENGTH_SHORT).show();
     }
 
     private List<Ingredient> initIngredients(RecipeModel recipeModel) {
@@ -121,16 +126,6 @@ public class GeneralMealDescriptionFragment extends BaseFragment implements Gene
 
     @OnClick(R.id.fab_general_meal_description_favorite)
     public void onFabGeneralMealDescriptionClicked() {
-        //TODO:check db if recipe exists and check for null recipe model
-        presenter.addToFavorites(recipeModel);
-        if (isAddBtnClicked) {
-            Toast.makeText(getContext(), getResources().
-                    getString(R.string.recipe_already_added), Toast.LENGTH_SHORT).show();
-
-        } else {
-            Toast.makeText(getContext(), getResources().
-                    getString(R.string.recipe_added_to_favorites), Toast.LENGTH_SHORT).show();
-            isAddBtnClicked = true;
-        }
+        presenter.addToFavorites(RecipeModel.convertToFavoriteRecipe(recipeModel));
     }
 }

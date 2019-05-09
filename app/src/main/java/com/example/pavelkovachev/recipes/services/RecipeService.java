@@ -13,6 +13,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Single;
+
 @Singleton
 public class RecipeService implements RecipeRepository {
 
@@ -47,8 +49,8 @@ public class RecipeService implements RecipeRepository {
     }
 
     @Override
-    public void getAllRecipes(AsyncTaskResult result) {
-        new GetAllRecipesAsyncTask(result).execute();
+    public Single<List<RecipeModel>> getAllRecipes() {
+        return recipeModelDao.getAllRecipes();
     }
 
     private class GetByIdAsyncTask extends AsyncTask<String, Void, RecipeModel> {
@@ -75,26 +77,5 @@ public class RecipeService implements RecipeRepository {
         }
     }
 
-    private class GetAllRecipesAsyncTask extends AsyncTask<Void, Void, List<RecipeModel>> {
 
-        private AsyncTaskResult<List<RecipeModel>> asyncTaskResult;
-
-        private GetAllRecipesAsyncTask(AsyncTaskResult<List<RecipeModel>> asyncTaskResult) {
-            this.asyncTaskResult = asyncTaskResult;
-        }
-
-        @Override
-        protected List<RecipeModel> doInBackground(Void... voids) {
-            return recipeModelDao.getAllRecipes();
-        }
-
-        @Override
-        protected void onPostExecute(List<RecipeModel> recipeModels) {
-            super.onPostExecute(recipeModels);
-            if (asyncTaskResult != null) {
-                insertRecipeList(recipeModels);
-                asyncTaskResult.onSuccess(recipeModels);
-            }
-        }
-    }
 }

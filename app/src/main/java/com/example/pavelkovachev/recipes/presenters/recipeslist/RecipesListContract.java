@@ -16,7 +16,7 @@ public interface RecipesListContract {
 
         String getCategoryLetter();
 
-        void showError(String title, String message);
+        void showError(int title, int message);
 
     }
 
@@ -25,5 +25,6 @@ public interface RecipesListContract {
         void loadRecipeList();
 
         List<RecipeListModel> getRecipeListArray();
+
     }
 }

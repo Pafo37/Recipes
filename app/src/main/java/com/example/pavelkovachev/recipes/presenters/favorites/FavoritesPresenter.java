@@ -1,6 +1,5 @@
 package com.example.pavelkovachev.recipes.presenters.favorites;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.favorites.FavoritesModel;
 import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
@@ -46,12 +45,12 @@ public class FavoritesPresenter extends BasePresenter implements FavoritesContra
                     @Override
                     public void onSuccess(List<FavoritesModel> favoritesModels) {
                         favoritesModelList.addAll(favoritesModels);
+                        view.notifyRecyclerView();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                                App.getInstance().getResources().getString(R.string.alert_dialog_favorites));
+                        view.showError(R.string.alert_dialog_error, R.string.alert_dialog_favorites);
                     }
                 });
     }

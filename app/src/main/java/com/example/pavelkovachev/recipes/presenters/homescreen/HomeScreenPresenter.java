@@ -1,6 +1,5 @@
 package com.example.pavelkovachev.recipes.presenters.homescreen;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
@@ -55,8 +54,7 @@ public class HomeScreenPresenter extends BasePresenter implements HomeScreenCont
 
     @Override
     public void onErrorRandomRecipe() {
-        view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                App.getInstance().getResources().getString(R.string.alert_dialog_recipes_list_homescreen));
+        view.showError(R.string.alert_dialog_error, R.string.alert_dialog_recipes_list_homescreen);
     }
 
     @Override
@@ -68,8 +66,7 @@ public class HomeScreenPresenter extends BasePresenter implements HomeScreenCont
 
     @Override
     public void onErrorLatestRecipe() {
-        view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                App.getInstance().getResources().getString(R.string.alert_dialog_recipes_list_homescreen));
+        view.showError(R.string.alert_dialog_error, R.string.alert_dialog_recipes_list_homescreen);
     }
 
     @Override

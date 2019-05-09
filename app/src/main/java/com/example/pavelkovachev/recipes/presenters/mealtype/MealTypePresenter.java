@@ -1,7 +1,6 @@
 package com.example.pavelkovachev.recipes.presenters.mealtype;
 
 import com.annimon.stream.Stream;
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.MealTypeCallback;
@@ -61,8 +60,7 @@ public class MealTypePresenter extends BasePresenter implements MealTypeContract
 
     @Override
     public void onError() {
-        view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                App.getInstance().getResources().getString(R.string.alert_dialog_mealtype));
+        view.showError(R.string.alert_dialog_error, R.string.alert_dialog_mealtype);
     }
 
     @Override
@@ -75,9 +73,7 @@ public class MealTypePresenter extends BasePresenter implements MealTypeContract
 
     @Override
     public void onErrorMealType() {
-        view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                App.getInstance().getResources().getString(R.string.alert_dialog_mealtype)
-        );
+        view.showError(R.string.alert_dialog_error, R.string.alert_dialog_mealtype);
     }
 
     @Override

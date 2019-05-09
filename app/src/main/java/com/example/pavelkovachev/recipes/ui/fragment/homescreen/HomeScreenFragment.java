@@ -101,7 +101,7 @@ public class HomeScreenFragment extends BaseFragment implements HomeScreenContra
     }
 
     @Override
-    public void showError(String title, String message) {
+    public void showError(int title, int message) {
         showErrorDialog(title, message);
     }
 }

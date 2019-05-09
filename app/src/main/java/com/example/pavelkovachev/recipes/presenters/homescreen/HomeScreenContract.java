@@ -12,7 +12,8 @@ public interface HomeScreenContract {
 
         void setLatestMeal(RecipeModel recipeModel);
 
-        void showError(String title, String message);
+        void showError(int title, int message);
+
     }
 
     interface Presenter extends BasePresenter {
@@ -22,5 +23,6 @@ public interface HomeScreenContract {
         String onLatestCardViewClicked();
 
         String onRandomCardViewClicked();
+
     }
 }

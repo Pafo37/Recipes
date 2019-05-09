@@ -1,6 +1,5 @@
 package com.example.pavelkovachev.recipes.presenters.myrecipesdescription;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
 import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
@@ -45,8 +44,8 @@ public class MyRecipesDescriptionPresenter extends BasePresenter
 
                     @Override
                     public void onError(Throwable e) {
-                        view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                                App.getInstance().getResources().getString(R.string.alert_dialog_my_recipes_description));
+                        view.showError(R.string.alert_dialog_error,
+                                R.string.alert_dialog_my_recipes_description);
                     }
                 });
     }

@@ -13,5 +13,6 @@ public interface AddRecipeContract {
     interface Presenter extends BasePresenter {
 
         void addRecipeToDb(MyRecipesModel myRecipesModel);
+
     }
 }

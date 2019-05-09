@@ -10,7 +10,7 @@ public interface MyRecipesDescriptionContract {
 
         void showMyRecipe(MyRecipesModel myRecipesModel);
 
-        void showError(String title, String message);
+        void showError(int title, int message);
 
     }
 

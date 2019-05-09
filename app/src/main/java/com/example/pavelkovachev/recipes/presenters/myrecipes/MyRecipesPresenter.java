@@ -1,6 +1,5 @@
 package com.example.pavelkovachev.recipes.presenters.myrecipes;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModel;
 import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
@@ -46,15 +45,17 @@ public class MyRecipesPresenter extends BasePresenter implements MyRecipesContra
 
                     @Override
                     public void onSuccess(List<MyRecipesModel> myRecipesModels) {
-                        myRecipesModelList.clear();
+                        if (!(myRecipesModelList.isEmpty())) {
+                            myRecipesModelList.clear();
+                        }
                         myRecipesModelList.addAll(myRecipesModels);
                         view.notifyRecyclerView();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                                App.getInstance().getResources().getString(R.string.alert_dialog_recipes_list_homescreen));
+                        view.showError(R.string.alert_dialog_error,
+                                R.string.alert_dialog_recipes_list_homescreen);
                     }
                 });
     }
@@ -62,11 +63,6 @@ public class MyRecipesPresenter extends BasePresenter implements MyRecipesContra
     @Override
     public List<MyRecipesModel> getMyRecipesList() {
         return myRecipesModelList;
-    }
-
-    @Override
-    public int getRecentlyDeletedItemPosition() {
-        return recentlyDeletedItemPosition;
     }
 
     @Override

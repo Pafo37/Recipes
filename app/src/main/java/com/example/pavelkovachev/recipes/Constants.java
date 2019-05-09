@@ -10,5 +10,7 @@ public class Constants {
     public static final String CUISINE_CATEGORY_LETTER_VALUE = "a";
     public static final String PARCELABLE_KEY_RECIPE = "my_recipe";
     public static final String DIALOG_FRAGMENT_TAG = "add_recipe";
+    public static final int REQUEST_CODE = 0;
+    public static final int RESULT_CODE = 0;
 
 }

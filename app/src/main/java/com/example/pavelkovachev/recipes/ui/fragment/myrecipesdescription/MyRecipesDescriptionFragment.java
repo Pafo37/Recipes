@@ -70,7 +70,7 @@ public class MyRecipesDescriptionFragment extends BaseFragment
     }
 
     @Override
-    public void showError(String title, String message) {
+    public void showError(int title, int message) {
         showErrorDialog(title, message);
     }
 }

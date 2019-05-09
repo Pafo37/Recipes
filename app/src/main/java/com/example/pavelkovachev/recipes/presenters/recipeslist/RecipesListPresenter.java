@@ -1,7 +1,6 @@
 package com.example.pavelkovachev.recipes.presenters.recipeslist;
 
 import com.annimon.stream.Stream;
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.RecipesListCallback;
@@ -34,8 +33,8 @@ public class RecipesListPresenter extends BasePresenter
         if (view.getCategoryName() != null && view.getCategoryLetter() != null) {
             recipeService.getRecipesList(view.getCategoryLetter(), view.getCategoryName(), this);
         } else {
-            view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                    App.getInstance().getResources().getString(R.string.alert_dialog_recipes_list_homescreen));
+            view.showError(R.string.alert_dialog_error,
+                    R.string.alert_dialog_recipes_list_homescreen);
         }
     }
 
@@ -50,8 +49,8 @@ public class RecipesListPresenter extends BasePresenter
 
     @Override
     public void onErrorRecipesList() {
-        view.showError(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                App.getInstance().getResources().getString(R.string.alert_dialog_recipes_list_homescreen));
+        view.showError(R.string.alert_dialog_error,
+                R.string.alert_dialog_recipes_list_homescreen);
     }
 
     @Override

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -78,29 +77,25 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
         startActivity(intent);
     }
 
-    public void showSnackbar() {
-        Snackbar snackbar = Snackbar.make(constraintLayout,
-                getResources().getString(R.string.recipe_was_removed), Snackbar.LENGTH_LONG);
-        snackbar.setAction(getResources().
-                getString(R.string.undo_button), view -> presenter.undoDelete());
-        snackbar.show();
-    }
-
     @Override
-    public void showError(String title, String message) {
+    public void showError(int title, int message) {
         showErrorDialog(title, message);
     }
 
     @Override
     public void notifyItemDeleted() {
         favoritesAdapter.notifyItemRemoved(presenter.getRecentlyDeletedItemPosition());
-        showSnackbar();
+        showSnackbar(constraintLayout, view -> presenter.undoDelete());
     }
 
     @Override
     public void notifyItemRestored() {
         favoritesAdapter.notifyItemInserted(
                 presenter.getRecentlyDeletedItemPosition());
+    }
 
+    @Override
+    public void notifyRecyclerView() {
+        favoritesAdapter.notifyDataSetChanged();
     }
 }
