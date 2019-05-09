@@ -1,5 +1,6 @@
 package com.example.pavelkovachev.recipes.presenters.generalmealdescription;
 
+import com.example.pavelkovachev.recipes.persistence.model.favorites.FavoritesModel;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.BasePresenter;
 import com.example.pavelkovachev.recipes.presenters.BaseView;
@@ -12,11 +13,10 @@ public interface GeneralMealDescriptionContract {
 
         String getRecipeId();
 
-        void onError();
+        void showError(int title, int message);
 
-        void showErrorNoArguments();
+        void showToast(int message);
 
-        RecipeModel getRecipe();
     }
 
     interface Presenter extends BasePresenter {
@@ -25,6 +25,9 @@ public interface GeneralMealDescriptionContract {
 
         void getRecipeByIdFromApi();
 
-        void addToFavorites(RecipeModel recipeModel);
+        void addToFavorites(FavoritesModel favoritesModel);
+
+        void getAllRecipes(FavoritesModel favoritesModel);
+
     }
 }

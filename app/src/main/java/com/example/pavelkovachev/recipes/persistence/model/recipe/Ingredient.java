@@ -96,10 +96,6 @@ public class Ingredient {
     }
 
     private static boolean isIngredientEmpty(String ingredient, String measure) {
-        if (ingredient != null && !ingredient.isEmpty() && measure != null && !measure.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        return ingredient != null && !ingredient.isEmpty() && measure != null && !measure.isEmpty();
     }
 }

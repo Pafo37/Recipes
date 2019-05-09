@@ -1,7 +1,7 @@
 package com.example.pavelkovachev.recipes.presenters.cuisine;
 
 import com.annimon.stream.Stream;
-import com.example.pavelkovachev.recipes.converter.CuisineConverter;
+import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.CuisineCallback;
 import com.example.pavelkovachev.recipes.network.response.cuisine.CuisineListResponse;
@@ -50,7 +50,7 @@ public class CuisinePresenter extends BasePresenter implements CuisineContract.P
 
     @Override
     public void onError() {
-        view.onError();
+        view.showError(R.string.alert_dialog_error, R.string.alert_dialog_cuisine);
     }
 
     @Override
@@ -67,13 +67,13 @@ public class CuisinePresenter extends BasePresenter implements CuisineContract.P
     public void onSuccessCuisine(CuisineListResponse cuisineListResponse) {
         Stream.of(cuisineListResponse.getCuisinesResponseList()).forEach(
                 cuisineModel ->
-                        cuisineModelList.add(CuisineConverter.convertToCuisine(cuisineModel)));
-        view.loadCuisinesFromApi(cuisineModelList);
+                        cuisineModelList.add(CuisineModel.convertToCuisine(cuisineModel)));
+        view.showCuisineFromApi(cuisineModelList);
     }
 
     @Override
     public void onErrorCuisine() {
-        view.onError();
+        view.showError(R.string.alert_dialog_error, R.string.alert_dialog_cuisine);
     }
 
     @Override

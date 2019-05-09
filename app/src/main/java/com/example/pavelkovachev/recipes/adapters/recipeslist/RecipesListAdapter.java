@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.pavelkovachev.recipes.R;
@@ -19,7 +18,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.ViewHolder> {
 
@@ -37,7 +35,6 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
         @BindView(R.id.txt_recipe_list_title)
         public TextView txtRecipeListTitle;
-
         @BindView(R.id.img_gridlayout_categories)
         public ImageView imgCategories;
 
@@ -47,14 +44,6 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
             super(view);
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
-        }
-
-        @OnClick(R.id.img_triple_vertical_dots)
-        void onTripleDotsClicked() {
-            PopupMenu popupMenu = new PopupMenu(context, this.itemView);
-            popupMenu.getMenuInflater().inflate(R.menu.menu_recipes_dropdown, popupMenu.getMenu());
-            popupMenu.setOnMenuItemClickListener(item -> false);
-            popupMenu.show();
         }
 
         private void setData(RecipeListModel item) {
@@ -74,7 +63,7 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_recipes_list, viewGroup, false));
+        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_recipes_list, viewGroup, false));
     }
 
     @Override
@@ -89,7 +78,5 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
 
     public interface ItemListener {
         void onItemClick(RecipeListModel item);
-
-        void onTripleDotClicked(RecipeListModel model);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.pavelkovachev.recipes.presenters.favorites;
 
+import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.persistence.model.favorites.FavoritesModel;
 import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
 import com.example.pavelkovachev.recipes.services.ApplicationDataService;
@@ -44,11 +45,12 @@ public class FavoritesPresenter extends BasePresenter implements FavoritesContra
                     @Override
                     public void onSuccess(List<FavoritesModel> favoritesModels) {
                         favoritesModelList.addAll(favoritesModels);
+                        view.notifyRecyclerView();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        view.showError();
+                        view.showError(R.string.alert_dialog_error, R.string.alert_dialog_favorites);
                     }
                 });
     }
@@ -59,17 +61,17 @@ public class FavoritesPresenter extends BasePresenter implements FavoritesContra
     }
 
     public void deleteItem(int position) {
-        recentlyDeletedItem = getFavoritesList().get(position);
+        recentlyDeletedItem = favoritesModelList.get(position);
         recentlyDeletedItemPosition = position;
-        dataService.getFavoritesService().deleteFavorites(getFavoritesList().get(position));
-        getFavoritesList().remove(position);
+        dataService.getFavoritesService().deleteFavorites(recentlyDeletedItem);
+        favoritesModelList.remove(position);
         view.notifyItemDeleted();
     }
 
     @Override
     public void undoDelete() {
         dataService.getFavoritesService().insertFavorites(recentlyDeletedItem);
-        getFavoritesList().add(recentlyDeletedItemPosition, recentlyDeletedItem);
+        favoritesModelList.add(recentlyDeletedItemPosition, recentlyDeletedItem);
         view.notifyItemRestored();
     }
 

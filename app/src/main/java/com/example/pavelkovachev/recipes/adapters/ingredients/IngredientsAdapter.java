@@ -30,7 +30,6 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         TextView txtGeneralMealMeasures;
         @BindView(R.id.txt_general_meal_ingredients)
         TextView txtGeneralMealIngredients;
-        private Ingredient ingredientItem;
 
         private ViewHolder(@NonNull View view) {
             super(view);
@@ -38,7 +37,6 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         }
 
         private void setData(Ingredient ingredientItem) {
-            this.ingredientItem = ingredientItem;
             txtGeneralMealMeasures.setText(ingredientItem.getMeasures());
             txtGeneralMealIngredients.setText(ingredientItem.getIngredient());
         }

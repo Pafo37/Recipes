@@ -7,6 +7,7 @@ import com.example.pavelkovachev.recipes.persistence.database.RecipeDatabase;
 import com.example.pavelkovachev.recipes.persistence.model.cuisine.CuisineModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.favorites.FavoritesModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.mealtype.MealTypeModelDao;
+import com.example.pavelkovachev.recipes.persistence.model.myrecipes.MyRecipesModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModelDao;
 import com.example.pavelkovachev.recipes.persistence.model.recipelist.RecipeListModelDao;
 
@@ -50,5 +51,10 @@ public class RoomModule {
     @Provides
     FavoritesModelDao provideFavoritesModelDao() {
         return recipeDatabase.favoritesModelDao();
+    }
+
+    @Provides
+    MyRecipesModelDao provideMyRecipesModelDao() {
+        return recipeDatabase.myRecipesModelDao();
     }
 }

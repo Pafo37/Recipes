@@ -2,11 +2,14 @@ package com.example.pavelkovachev.recipes.dagger.component;
 
 import com.example.pavelkovachev.recipes.dagger.modules.ApplicationModule;
 import com.example.pavelkovachev.recipes.dagger.modules.RoomModule;
+import com.example.pavelkovachev.recipes.presenters.addrecipe.AddRecipePresenter;
 import com.example.pavelkovachev.recipes.presenters.cuisine.CuisinePresenter;
 import com.example.pavelkovachev.recipes.presenters.favorites.FavoritesPresenter;
 import com.example.pavelkovachev.recipes.presenters.generalmealdescription.GeneralMealDescriptionPresenter;
 import com.example.pavelkovachev.recipes.presenters.homescreen.HomeScreenPresenter;
 import com.example.pavelkovachev.recipes.presenters.mealtype.MealTypePresenter;
+import com.example.pavelkovachev.recipes.presenters.myrecipes.MyRecipesPresenter;
+import com.example.pavelkovachev.recipes.presenters.myrecipesdescription.MyRecipesDescriptionPresenter;
 import com.example.pavelkovachev.recipes.presenters.recipeslist.RecipesListPresenter;
 
 import javax.inject.Singleton;
@@ -28,5 +31,11 @@ public interface AppComponent {
     void inject(RecipesListPresenter presenter);
 
     void inject(FavoritesPresenter presenter);
+
+    void inject(AddRecipePresenter presenter);
+
+    void inject(MyRecipesPresenter presenter);
+
+    void inject(MyRecipesDescriptionPresenter presenter);
 
 }

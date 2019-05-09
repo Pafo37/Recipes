@@ -1,11 +1,12 @@
 package com.example.pavelkovachev.recipes.presenters.homescreen;
 
-import com.example.pavelkovachev.recipes.converter.RecipeConverter;
+import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.LatestMealCallback;
 import com.example.pavelkovachev.recipes.network.callback.RandomMealCallback;
 import com.example.pavelkovachev.recipes.network.response.latestrecipe.LatestRecipeListResponse;
 import com.example.pavelkovachev.recipes.network.response.randomrecipe.RandomRecipeListResponse;
+import com.example.pavelkovachev.recipes.persistence.model.recipe.RecipeModel;
 import com.example.pavelkovachev.recipes.presenters.base.BasePresenter;
 import com.example.pavelkovachev.recipes.services.ApplicationDataService;
 
@@ -46,26 +47,26 @@ public class HomeScreenPresenter extends BasePresenter implements HomeScreenCont
 
     @Override
     public void onSuccessRandomRecipe(RandomRecipeListResponse randomRecipeResponse) {
-        view.setRandomMeal(RecipeConverter.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)));
-        dataService.getRecipeService().insertRecipe(RecipeConverter.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)));
-        currentRandomMealId = RecipeConverter.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)).getId();
+        view.setRandomMeal(RecipeModel.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)));
+        dataService.getRecipeService().insertRecipe(RecipeModel.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)));
+        currentRandomMealId = RecipeModel.convertRandomRecipe(randomRecipeResponse.getMeals().get(0)).getId();
     }
 
     @Override
     public void onErrorRandomRecipe() {
-        view.onError();
+        view.showError(R.string.alert_dialog_error, R.string.alert_dialog_recipes_list_homescreen);
     }
 
     @Override
     public void onSuccessLatestRecipe(LatestRecipeListResponse recipesResponse) {
-        view.setLatestMeal(RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)));
-        dataService.getRecipeService().insertRecipe(RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)));
-        currentLatestMealId = RecipeConverter.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)).getId();
+        view.setLatestMeal(RecipeModel.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)));
+        dataService.getRecipeService().insertRecipe(RecipeModel.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)));
+        currentLatestMealId = RecipeModel.convertLatestRecipe(recipesResponse.getLatestRecipeResponseList().get(0)).getId();
     }
 
     @Override
     public void onErrorLatestRecipe() {
-        view.onError();
+        view.showError(R.string.alert_dialog_error, R.string.alert_dialog_recipes_list_homescreen);
     }
 
     @Override

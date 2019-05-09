@@ -4,18 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
-import com.example.pavelkovachev.recipes.adapters.SwipeToDeleteCallback;
+import com.example.pavelkovachev.recipes.adapters.SwipeToDeleteCallbackFavorites;
 import com.example.pavelkovachev.recipes.adapters.personalpreferences.favorites.FavoritesAdapter;
 import com.example.pavelkovachev.recipes.persistence.model.favorites.FavoritesModel;
 import com.example.pavelkovachev.recipes.presenters.favorites.FavoritesContract;
@@ -29,8 +27,8 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
 
     @BindView(R.id.recycler_view_favorites)
     RecyclerView recyclerView;
-    @BindView(R.id.coordinator_favorites)
-    CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.constraint_layout_favorites)
+    ConstraintLayout constraintLayout;
 
     private FavoritesContract.Presenter presenter;
     private FavoritesAdapter favoritesAdapter;
@@ -45,7 +43,6 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
         presenter = new FavoritesPresenter(this);
         presenter.getFavoriteRecipes();
         initRecyclerView();
-        favoritesAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -68,7 +65,8 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
         recyclerView.setAdapter(favoritesAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(presenter));
+        favoritesAdapter.notifyDataSetChanged();
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallbackFavorites(presenter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
@@ -79,30 +77,25 @@ public class FavoritesFragment extends BaseFragment implements FavoritesContract
         startActivity(intent);
     }
 
-    public void showSnackbar() {
-        Snackbar snackbar = Snackbar.make(coordinatorLayout,
-                getResources().getString(R.string.recipe_was_removed), Snackbar.LENGTH_LONG);
-        snackbar.setAction(getResources().
-                getString(R.string.undo_button), view -> presenter.undoDelete());
-        snackbar.show();
-    }
-
     @Override
-    public void showError() {
-        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                App.getInstance().getResources().getString(R.string.alert_dialog_favorites));
+    public void showError(int title, int message) {
+        showErrorDialog(title, message);
     }
 
     @Override
     public void notifyItemDeleted() {
         favoritesAdapter.notifyItemRemoved(presenter.getRecentlyDeletedItemPosition());
-        showSnackbar();
+        showSnackbar(constraintLayout, view -> presenter.undoDelete());
     }
 
     @Override
     public void notifyItemRestored() {
         favoritesAdapter.notifyItemInserted(
                 presenter.getRecentlyDeletedItemPosition());
+    }
 
+    @Override
+    public void notifyRecyclerView() {
+        favoritesAdapter.notifyDataSetChanged();
     }
 }

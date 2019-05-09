@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_my_recipe_description"
+            android:layout_width="@dimen/no_dimens"
+            android:layout_height="@dimen/img_dialog_fragment_height"
+            android:layout_margin="@dimen/margin_between_elements_default"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/cardview_random_meal" />
+
+        <TextView
+            android:id="@+id/txt_my_recipe_instructions_title"
+            android:layout_width="@dimen/no_dimens"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_between_elements_default"
+            android:text="@string/txt_default_instructions_title"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/material_design_title_txt_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_my_recipe_description" />
+
+        <TextView
+            android:id="@+id/txt_my_recipe_instructions_body"
+            android:layout_width="@dimen/no_dimens"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_between_elements_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_my_recipe_instructions_title" />
+
+        <TextView
+            android:id="@+id/txt_my_recipe_ingredients_title"
+            android:layout_width="@dimen/no_dimens"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_between_elements_default"
+            android:text="@string/favorites_ingredients_title"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/material_design_title_txt_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_my_recipe_instructions_body" />
+
+        <TextView
+            android:id="@+id/txt_my_recipe_ingredients_body"
+            android:layout_width="@dimen/no_dimens"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_between_elements_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_my_recipe_ingredients_title" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -5,21 +5,18 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import com.google.gson.annotations.SerializedName;
+import com.example.pavelkovachev.recipes.network.response.recipelist.RecipeListResponse;
 
 @Entity
 public class RecipeListModel {
 
     @NonNull
     @PrimaryKey
-    @SerializedName("idMeal")
     private String recipeId;
 
-    @SerializedName("strMeal")
     @ColumnInfo(name = "recipe_name")
     private String recipeName;
 
-    @SerializedName("strMealThumb")
     @ColumnInfo(name = "recipe_image")
     private String recipeImage;
 
@@ -51,5 +48,11 @@ public class RecipeListModel {
 
     public void setRecipeImage(String recipeImage) {
         this.recipeImage = recipeImage;
+    }
+
+    public static RecipeListModel convertToRecipesList(RecipeListResponse recipeListResponse) {
+
+        return new RecipeListModel(recipeListResponse.getIdMeal(), recipeListResponse.getStrMeal(),
+                recipeListResponse.getStrMealThumb());
     }
 }

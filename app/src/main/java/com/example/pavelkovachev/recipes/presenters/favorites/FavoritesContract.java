@@ -10,11 +10,13 @@ public interface FavoritesContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showError();
+        void showError(int title, int message);
 
         void notifyItemDeleted();
 
         void notifyItemRestored();
+
+        void notifyRecyclerView();
 
     }
 

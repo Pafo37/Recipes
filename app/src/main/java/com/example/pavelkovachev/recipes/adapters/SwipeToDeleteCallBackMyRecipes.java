@@ -4,17 +4,16 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import com.example.pavelkovachev.recipes.presenters.favorites.FavoritesContract;
+import com.example.pavelkovachev.recipes.presenters.myrecipes.MyRecipesContract;
 
-public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
+public class SwipeToDeleteCallBackMyRecipes extends ItemTouchHelper.SimpleCallback {
 
     private static final int DRAG_DIRS = 0;
+    private MyRecipesContract.Presenter myRecipesPresenter;
 
-    private FavoritesContract.Presenter favoritesPresenter;
-
-    public SwipeToDeleteCallback(FavoritesContract.Presenter favoritesPresenter) {
-        super(DRAG_DIRS, ItemTouchHelper.RIGHT);
-        this.favoritesPresenter = favoritesPresenter;
+    public SwipeToDeleteCallBackMyRecipes(MyRecipesContract.Presenter myRecipesPresenter) {
+        super(DRAG_DIRS, ItemTouchHelper.LEFT);
+        this.myRecipesPresenter = myRecipesPresenter;
     }
 
     @Override
@@ -24,6 +23,6 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        favoritesPresenter.deleteItem(viewHolder.getAdapterPosition());
+        myRecipesPresenter.deleteItem(viewHolder.getAdapterPosition());
     }
 }

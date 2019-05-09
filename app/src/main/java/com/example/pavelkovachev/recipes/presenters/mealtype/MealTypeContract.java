@@ -14,7 +14,8 @@ public interface MealTypeContract {
 
         void showMealTypeFromDb(List<MealTypeModel> result);
 
-        void onError();
+        void showError(int title, int message);
+
     }
 
     interface Presenter extends BasePresenter {
@@ -24,5 +25,6 @@ public interface MealTypeContract {
         void loadMealTypeFromDb();
 
         List<MealTypeModel> getMealTypeList();
+
     }
 }

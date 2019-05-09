@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.pavelkovachev.recipes.App;
 import com.example.pavelkovachev.recipes.Constants;
 import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.adapters.categories.mealtype.MealTypeAdapter;
@@ -23,7 +22,8 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.mealTypeItemListener, MealTypeContract.View {
+public class MealTypeFragment extends BaseFragment
+        implements MealTypeAdapter.mealTypeItemListener, MealTypeContract.View {
 
     @BindView(R.id.recycler_view_category_mealtype)
     RecyclerView recyclerView;
@@ -89,8 +89,7 @@ public class MealTypeFragment extends BaseFragment implements MealTypeAdapter.me
     }
 
     @Override
-    public void onError() {
-        showErrorDialog(App.getInstance().getResources().getString(R.string.alert_dialog_error),
-                App.getInstance().getResources().getString(R.string.alert_dialog_mealtype));
+    public void showError(int title, int message) {
+        showErrorDialog(title, message);
     }
 }

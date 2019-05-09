@@ -1,7 +1,7 @@
 package com.example.pavelkovachev.recipes.presenters.mealtype;
 
 import com.annimon.stream.Stream;
-import com.example.pavelkovachev.recipes.converter.MealTypeConverter;
+import com.example.pavelkovachev.recipes.R;
 import com.example.pavelkovachev.recipes.network.RecipeApiService;
 import com.example.pavelkovachev.recipes.network.callback.MealTypeCallback;
 import com.example.pavelkovachev.recipes.network.response.mealtype.MealTypeListResponses;
@@ -60,20 +60,20 @@ public class MealTypePresenter extends BasePresenter implements MealTypeContract
 
     @Override
     public void onError() {
-        view.onError();
+        view.showError(R.string.alert_dialog_error, R.string.alert_dialog_mealtype);
     }
 
     @Override
     public void onSuccessMealTypes(MealTypeListResponses mealTypesResponses) {
         Stream.of(mealTypesResponses.getCategories()).forEach(
                 mealTypeModel ->
-                        mealTypeModelList.add(MealTypeConverter.convertToMealType(mealTypeModel)));
+                        mealTypeModelList.add(MealTypeModel.convertToMealType(mealTypeModel)));
         view.showMealTypesFromApi(mealTypeModelList);
     }
 
     @Override
     public void onErrorMealType() {
-        view.onError();
+        view.showError(R.string.alert_dialog_error, R.string.alert_dialog_mealtype);
     }
 
     @Override

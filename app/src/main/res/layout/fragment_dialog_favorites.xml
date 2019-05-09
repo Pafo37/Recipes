@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,71 +9,42 @@
         android:id="@+id/img_meal_favorites"
         android:layout_width="match_parent"
         android:layout_height="@dimen/img_dialog_fragment_height"
+        android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/cardview_random_meal" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/img_meal_favorites"
+        android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/margin_between_elements_default"
-        app:layout_constraintBottom_toBottomOf="@id/img_meal_favorites"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_meal_favorites"
         app:srcCompat="@drawable/ic_photo_camera" />
-
-    <android.support.design.button.MaterialButton
-        android:id="@+id/button_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_between_elements_default"
-        android:layout_marginRight="@dimen/margin_between_elements_default"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:text="@string/button_cancel_favorites"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button_save" />
-
-    <android.support.design.button.MaterialButton
-        android:id="@+id/button_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:text="@string/button_save_favorites"
-        android:textSize="@dimen/material_design_btn_txt_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txt_input_layout_meal_name"
-        android:layout_width="@dimen/no_dimens"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/favorites_hint_recipe_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_meal_favorites">
+        android:layout_below="@id/fab_camera"
+        android:hint="@string/favorites_hint_recipe_name">
 
         <EditText
             android:id="@+id/txt_favorites_meal_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_between_elements_default" />
-
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/txt_input_layout_description"
-        android:layout_width="@dimen/no_dimens"
+        android:id="@+id/txt_input_layout_instructions"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/favorites_hint_recipe_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_input_layout_meal_name">
+        android:layout_below="@id/txt_input_layout_meal_name"
+        android:hint="@string/favorites_hint_recipe_instructions">
 
         <EditText
-            android:id="@+id/edt_favorites_description_body"
+            android:id="@+id/edt_favorites_instructions_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_between_elements_default"
@@ -83,13 +54,10 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txt_input_layout_ingredietns"
-        android:layout_width="@dimen/no_dimens"
-        android:layout_height="@dimen/no_dimens"
-        android:hint="@string/enter_recipe_ingredients"
-        app:layout_constraintBottom_toTopOf="@id/button_cancel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_input_layout_description">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_input_layout_instructions"
+        android:hint="@string/enter_recipe_ingredients">
 
         <EditText
             android:id="@+id/edt_favorites_ingredients_body"
@@ -100,4 +68,29 @@
 
     </android.support.design.widget.TextInputLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.design.button.MaterialButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/margin_between_elements_default"
+        android:layout_marginRight="@dimen/margin_between_elements_default"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:text="@string/button_cancel_favorites" />
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/margin_between_elements_default"
+        android:layout_marginRight="@dimen/margin_between_elements_default"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_toStartOf="@id/btn_cancel"
+        android:layout_toLeftOf="@id/btn_cancel"
+        android:text="@string/button_save_favorites"
+        android:textSize="@dimen/material_design_btn_txt_size" />
+
+</RelativeLayout>

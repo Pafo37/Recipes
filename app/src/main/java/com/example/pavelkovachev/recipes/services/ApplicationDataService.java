@@ -10,16 +10,19 @@ public class ApplicationDataService {
     private final MealTypeService mealTypeService;
     private final RecipeService recipeService;
     private final FavoritesService favoritesService;
+    private final MyRecipesService myRecipesService;
 
     @Inject
     public ApplicationDataService(CuisineService cuisineService,
                                   MealTypeService mealTypeService,
                                   RecipeService recipeService,
-                                  FavoritesService favoritesService) {
+                                  FavoritesService favoritesService,
+                                  MyRecipesService myRecipesService) {
         this.cuisineService = cuisineService;
         this.mealTypeService = mealTypeService;
         this.recipeService = recipeService;
         this.favoritesService = favoritesService;
+        this.myRecipesService = myRecipesService;
     }
 
     public CuisineService getCuisineService() {
@@ -36,5 +39,9 @@ public class ApplicationDataService {
 
     public FavoritesService getFavoritesService() {
         return favoritesService;
+    }
+
+    public MyRecipesService getMyRecipesService() {
+        return myRecipesService;
     }
 }

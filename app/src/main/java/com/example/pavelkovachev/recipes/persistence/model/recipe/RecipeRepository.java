@@ -4,6 +4,8 @@ import com.example.pavelkovachev.recipes.ui.interfaces.AsyncTaskResult;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 public interface RecipeRepository {
 
     void insertRecipe(RecipeModel recipeModel);
@@ -14,5 +16,6 @@ public interface RecipeRepository {
 
     void getById(String recipeId, AsyncTaskResult result);
 
-    void getAllRecipes(AsyncTaskResult result);
+    Single<List<RecipeModel>> getAllRecipes();
+
 }
